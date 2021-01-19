@@ -8,6 +8,11 @@ export default function GoogleAPISearch() {
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
+  
+  const [selectedShow, setSelectedShow] = useState(false)
+  const [selectedTitle, setSelectedTitle] = useState("")
+  const [selectedAuthor, setSelectedAuthor] = useState("")
+  const [selectedImage, setSelectedImage] = useState("")
 
   function handleSubmit(e){
     e.preventDefault()
@@ -19,28 +24,53 @@ export default function GoogleAPISearch() {
 
   function handleChange(e){
       const book = e.target.value
-      setBook(book)
+      setBook(book.trim())
+
+      // axios.get("https://www.googleapis.com/books/v1/volumes?q="+e.target.value+ "&key="+apiKey+"&maxResults=40")
+      // .then(data => {
+      //   setResult(data.data.items)
+      // })
   }
 
+  function handleBook(Book){
+    console.log(Book)
+    setSelectedTitle(Book.volumeInfo.title)
+    setSelectedAuthor(Book.volumeInfo.authors)
+    setSelectedImage(Book.volumeInfo.imageLinks.thumbnail)
+    setSelectedShow(true)
+  }
 
   return (
     <div className="container">
-        <h1>Book Search - Use Google Books API</h1>
-        <form onSubmit={handleSubmit}>
-          <div className="form-group">
-            <input onChange={handleChange} type="text" className="form-control mt-10" placeholder="Serach for books" autoComplete="off"/>
+      <div className="row">
 
-          </div>
-          <button type="submit" className="btn btn-danger">Search</button>
-        </form>
+        <div className="col-md-6">
+          <h1>Book Search - Google Books API</h1>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <input onChange={handleChange} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
+            </div>
+            <button type="submit" className="btn btn-danger">Search</button>
+          </form>
+          {selectedShow && (
+          <div className="container">
+            <h2 className="d-inline-block">Book: </h2>
+            <h2 className="d-inline-block"> {selectedTitle}</h2>
+            <h2 className="d-inline-block">Author: </h2>
+            <h2 className="d-inline-block"> {selectedAuthor}</h2>
+            <img src={selectedImage} alt={selectedTitle}/>
+          </div>)}
+        </div>
 
-        {result.map(book => (
-          // Wrap this in a div, so that when it's clicked, it passes some book info to a function
-          <a target="_blank" href={book.volumeInfo.previewLink}>
-            <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.title}/>
-          </a>
-        ))}
-
+        <div className="col-md-6">
+          {result.map(book => (
+            // Wrap this in a div, so that when it's clicked, it passes some book info to a function
+            <div className="d-inline-block" onClick={() => handleBook(book)}>
+              <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
+            </div>
+          ))}
+        </div>
+      </div>
         
 
       </div>
