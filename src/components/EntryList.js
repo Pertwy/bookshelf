@@ -80,34 +80,38 @@ export default function EntryList(){
   )}
   
     return (
-      <div>
-        <h3>Logged Goals</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Milestones</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <GoalList/>
-          </tbody>
-        </table>
+      <div class="row">
+        <div class="col-md-7">
+          <h3>Logged Goals</h3>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Milestones</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <GoalList/>
+            </tbody>
+          </table>
+        </div>
 
-        <h3>Diary Entries</h3>
-        <table className="table">
-          <thead className="thead-light">
-            <tr>
-              <th>Description</th>
-              <th>Actions</th> 
-            </tr>
-          </thead>
-          <tbody>
-            <DiaryEnrtyList/>
-          </tbody>
-        </table>
+        <div class="col-md-5">
+          <h3>Diary Entries</h3>
+          <table className="table">
+            <thead className="thead-light">
+              <tr>
+                <th>Description</th>
+                <th>Actions</th> 
+              </tr>
+            </thead>
+            <tbody>
+              <DiaryEnrtyList/>
+            </tbody>
+          </table>
+        </div>
 
       </div>
     )
