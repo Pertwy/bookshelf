@@ -53,13 +53,18 @@ export default function GoogleAPISearch() {
             <button type="submit" className="btn btn-danger">Search</button>
           </form>
           {selectedShow && (
-          <div className="container">
-            <h2 className="d-inline-block">Book: </h2>
-            <h2 className="d-inline-block"> {selectedTitle}</h2>
-            <h2 className="d-inline-block">Author: </h2>
-            <h2 className="d-inline-block"> {selectedAuthor}</h2>
-            <img src={selectedImage} alt={selectedTitle}/>
-          </div>)}
+            <div className="card">
+              <img className="card-img-top" src={selectedImage} alt={selectedTitle}></img>
+              <div className="card-body">
+                <h4 className="card-title">{selectedTitle}</h4>
+                <p className="card-text">{selectedAuthor}</p>
+              </div>
+            </div>
+            //Add button 
+            //Sends book information to Mongo db
+          )}
+
+            
         </div>
 
         <div className="col-md-6">
@@ -78,3 +83,17 @@ export default function GoogleAPISearch() {
   );
 }
 
+// <div className="card" style="width:400px">
+            //   <img className="card-img-top" src="img_avatar1.png" alt="Card image">
+            //   <div className="card-body">
+            //     <h4 className="card-title">John Doe</h4>
+            //     <p className="card-text">Some example text.</p>
+            //   </div>
+            // </div>
+          //  <div className="container">
+          //   <h2 className="d-inline-block">Book: </h2>
+          //   <h2 className="d-inline-block"> {selectedTitle}</h2>
+          //   <h2 className="d-inline-block">Author: </h2>
+          //   <h2 className="d-inline-block"> {selectedAuthor}</h2>
+          //   <img src={selectedImage} alt={selectedTitle}/>
+          // </div>)
