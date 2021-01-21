@@ -2,6 +2,7 @@ import './GoogleAPISearch.css';
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from 'react';
+import defaultImage from '../assets/default-image.png';
 
 export default function GoogleAPISearch() {
 
@@ -10,35 +11,57 @@ export default function GoogleAPISearch() {
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   
   const [selectedShow, setSelectedShow] = useState(false)
-  const [selectedTitle, setSelectedTitle] = useState("")
-  const [selectedAuthor, setSelectedAuthor] = useState("")
-  const [selectedImage, setSelectedImage] = useState("")
+  const [selectedBook, setSelectedBook] = useState({
+    title:"",
+    author:"",
+    image:""
+  })
 
   function handleSubmit(e){
     e.preventDefault()
+
+    const book = e.target.value
+      setBook(book.trim())
+
     axios.get("https://www.googleapis.com/books/v1/volumes?q="+book+ "&key="+apiKey+"&maxResults=40")
       .then(data => {
         setResult(data.data.items)
       })
   }
 
-  function handleChange(e){
-      const book = e.target.value
-      setBook(book.trim())
-
-      // axios.get("https://www.googleapis.com/books/v1/volumes?q="+e.target.value+ "&key="+apiKey+"&maxResults=40")
-      // .then(data => {
-      //   setResult(data.data.items)
-      // })
-  }
+  // function handleChange(e){
+  //     const book = e.target.value
+  //     setBook(book.trim())
 
   function handleBook(Book){
-    console.log(Book)
-    setSelectedTitle(Book.volumeInfo.title)
-    setSelectedAuthor(Book.volumeInfo.authors)
-    setSelectedImage(Book.volumeInfo.imageLinks.thumbnail)
+    //console.log(Book)
+
+
+    const authorArray = Book.volumeInfo.authors
+    const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
+    setSelectedBook(newBook)
     setSelectedShow(true)
   }
+
+  function handleAddBook(){
+
+    axios.post('http://localhost:5000/books/add', selectedBook)
+      .then(res => console.log(res.data));
+
+    setSelectedShow(false)
+    window.location = '/'
+  }
+
+  const SearchedBook = ({book}) => {
+    const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
+
+    return(
+      <div className="d-inline-block" onClick={() => handleBook(book)}>
+        <img src={url || defaultImage} alt={book.volumeInfo.title}/>
+      </div>
+    )
+  }
+
 
   return (
     <div className="container">
@@ -48,19 +71,22 @@ export default function GoogleAPISearch() {
           <h1>Book Search - Google Books API</h1>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <input onChange={handleChange} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
+              <input onChange={handleSubmit} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
             </div>
             <button type="submit" className="btn btn-danger">Search</button>
           </form>
           {selectedShow && (
-            <div className="card">
-              <img className="card-img-top" src={selectedImage} alt={selectedTitle}></img>
-              <div className="card-body">
-                <h4 className="card-title">{selectedTitle}</h4>
-                <p className="card-text">{selectedAuthor}</p>
+            <section>
+              <div className="card">
+                <img className="card-img-top" src={selectedBook.image} alt={selectedBook.title}></img>
+                <div className="card-body">
+                  <h4 className="card-title">{selectedBook.title}</h4>
+                  <p className="card-text">{selectedBook.author}</p>
+                </div>
               </div>
-            </div>
-            //Add button 
+              <button onClick={handleAddBook} className="btn btn-danger">Add Book</button>
+            </section>
+
             //Sends book information to Mongo db
           )}
 
@@ -68,12 +94,11 @@ export default function GoogleAPISearch() {
         </div>
 
         <div className="col-md-6">
+          <div className="row">
           {result.map(book => (
-            // Wrap this in a div, so that when it's clicked, it passes some book info to a function
-            <div className="d-inline-block" onClick={() => handleBook(book)}>
-              <img src={book.volumeInfo.imageLinks.thumbnail} alt={book.volumeInfo.title}/>
-            </div>
-          ))}
+              <SearchedBook book={book}/>
+            ))}
+          </div>
         </div>
       </div>
         
@@ -82,18 +107,3 @@ export default function GoogleAPISearch() {
 
   );
 }
-
-// <div className="card" style="width:400px">
-            //   <img className="card-img-top" src="img_avatar1.png" alt="Card image">
-            //   <div className="card-body">
-            //     <h4 className="card-title">John Doe</h4>
-            //     <p className="card-text">Some example text.</p>
-            //   </div>
-            // </div>
-          //  <div className="container">
-          //   <h2 className="d-inline-block">Book: </h2>
-          //   <h2 className="d-inline-block"> {selectedTitle}</h2>
-          //   <h2 className="d-inline-block">Author: </h2>
-          //   <h2 className="d-inline-block"> {selectedAuthor}</h2>
-          //   <img src={selectedImage} alt={selectedTitle}/>
-          // </div>)

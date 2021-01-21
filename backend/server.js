@@ -21,9 +21,12 @@ connection.once('open', () => {
 const goalsRouter = require('./routes/goals')
 const diaryEntrysRouter = require('./routes/diaryEntrys')
 const testRouter = require('./routes/test')
+const booksRouter = require('./routes/books')
+
 app.use('/goals', goalsRouter)
 app.use('/diaryEntrys', diaryEntrysRouter)
 app.use('/test', testRouter)
+app.use('/books', booksRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
