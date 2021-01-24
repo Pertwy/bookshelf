@@ -1,5 +1,7 @@
+const auth = require("../middleware/auth")
 const router = require("express").Router();
-let Book = require("../models/book.model")
+const {Book, validate} = require("../models/book.model")
+const _ = require("lodash")
 
 router.route("/").get((req, res) => {
     Book.find()
@@ -7,50 +9,29 @@ router.route("/").get((req, res) => {
         .catch(err => res.status(400).json("Error " + err))
 })
 
-router.route('/add').post((req, res) => {
+
+//this shit works
+// router.route('/add').post((req, res) => {
  
-    const title = req.body.title;
-    const author = req.body.author;
-    const image = req.body.image;
-    //const endDate = Date.parse(req.body.date);
+//     const { error } = validate(req.body); 
+//     if (error) return res.status(400).send(error.details[0].message);
 
-    const newBook = new Book({
-        title,
-        author,
-        image
-        //endDate
-    });
+//     let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
 
+//     newBook.save()
+//       .then(() => res.json('Book complete!'))
+//       .catch(err => res.status(400).json('Error: ' + err));
+// });
 
-    newBook.save()
-      .then(() => res.json('Book complete!'))
-      .catch(err => res.status(400).json('Error: ' + err));
+router.post('/add', auth, async (req, res) => {
+    const { error } = validate(req.body); 
+    if (error) return res.status(400).send(error.details[0].message);
+  
+    let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
+    newBook = await newBook.save();
+    
+    res.send(newBook);
   });
 
-router.route('/:id').get((req, res) => {
-    Test.findById(req.params.id)
-        .then(books => res.json(books))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
 
-
-router.route('/:id').delete((req, res) => {
-    Test.findByIdAndDelete(req.params.id)
-        .then(() => res.json('Book deleted.'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-
-router.route('/update/:id').post((req, res) => {
-    Test.findById(req.params.id)
-        .then(book => {
-        book.description = req.body.description;
-
-        Test.save()
-            .then(() => res.json('Book updated!'))
-            .catch(err => res.status(400).json('Error: ' + err));
-        })
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-  module.exports = router;
+module.exports = router;

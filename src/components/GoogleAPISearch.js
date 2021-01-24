@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState} from 'react';
 import defaultImage from '../assets/default-image.png';
 
+import fire from '../fire';
+
 export default function GoogleAPISearch() {
 
   const [book, setBook] = useState("")
@@ -16,6 +18,27 @@ export default function GoogleAPISearch() {
     author:"",
     image:""
   })
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  fire.auth().onAuthStateChanged((user) => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+
+  const createToken = async () => {
+    const user = fire.auth().currentUser;
+    const token = user && (await user.getIdToken());
+    const payloadHeader = {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    };
+    return payloadHeader;
+  }
+
+
+
 
   function handleSubmit(e){
     e.preventDefault()
@@ -34,27 +57,30 @@ export default function GoogleAPISearch() {
   //     setBook(book.trim())
 
   function handleBook(Book){
-    //console.log(Book)
-
-
     const authorArray = Book.volumeInfo.authors
     const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
     setSelectedBook(newBook)
     setSelectedShow(true)
   }
 
-  function handleAddBook(){
+  async function handleAddBook(){
 
-    axios.post('http://localhost:5000/books/add', selectedBook)
+    const header = await createToken();
+
+    try{
+    axios.post('http://localhost:5000/books/add', selectedBook, header)
       .then(res => console.log(res.data));
+    }catch(e){
+      console.error(e)
+    }
 
     setSelectedShow(false)
-    window.location = '/'
+    console.log(isLoggedIn)
+    // window.location = '/'
   }
 
   const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
-
     return(
       <div className="d-inline-block" onClick={() => handleBook(book)}>
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
@@ -65,45 +91,42 @@ export default function GoogleAPISearch() {
 
   return (
     <div className="container">
-      <div className="row">
+        <div className="row">
 
-        <div className="col-md-6">
-          <h1>Book Search - Google Books API</h1>
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <input onChange={handleSubmit} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
-            </div>
-            <button type="submit" className="btn btn-danger">Search</button>
-          </form>
-          {selectedShow && (
-            <section>
-              <div className="card">
-                <img className="card-img-top" src={selectedBook.image} alt={selectedBook.title}></img>
-                <div className="card-body">
-                  <h4 className="card-title">{selectedBook.title}</h4>
-                  <p className="card-text">{selectedBook.author}</p>
-                </div>
+          <div className="col-md-6">
+            <h1>Book Search - Google Books API</h1>
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <input onChange={handleSubmit} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
               </div>
-              <button onClick={handleAddBook} className="btn btn-danger">Add Book</button>
-            </section>
+              <button type="submit" className="btn btn-danger">Search</button>
+            </form>
 
-            //Sends book information to Mongo db
-          )}
 
-            
-        </div>
-
-        <div className="col-md-6">
-          <div className="row">
-          {result.map(book => (
-              <SearchedBook book={book}/>
-            ))}
+            {selectedShow && (
+              <section>
+                <div className="card">
+                  <img className="card-img-top" src={selectedBook.image} alt={selectedBook.title}></img>
+                  <div className="card-body">
+                    <h4 className="card-title">{selectedBook.title}</h4>
+                    <p className="card-text">{selectedBook.author}</p>
+                  </div>
+                </div>
+                <button onClick={handleAddBook} className="btn btn-danger">Add Book</button>
+              </section>
+            )}
           </div>
+
+          <div className="col-md-6">
+            <div className="row">
+            {result.map(book => (
+                <SearchedBook book={book}/>
+              ))}
+            </div>
+          </div>
+
+
         </div>
       </div>
-        
-
-      </div>
-
   );
 }

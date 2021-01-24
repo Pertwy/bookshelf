@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Joi = require('joi');
 
 const Schema = mongoose.Schema;
 
@@ -12,4 +13,17 @@ const bookSchema = new Schema({
 
 const Book = mongoose.model('Book', bookSchema)
 
-module.exports = Book
+function validateBook(book) {
+    const schema = {
+      title: Joi.string().min(5).max(50).required(),
+      author: Joi.string().min(5).max(255).required(),
+      image: Joi.string().min(5).required()
+    };
+  
+    return Joi.validate(book, schema);
+  }
+  
+
+exports.validate = validateBook;
+exports.Book = Book;
+//module.exports = Book

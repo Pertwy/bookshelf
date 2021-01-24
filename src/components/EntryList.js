@@ -2,16 +2,22 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './GoogleAPISearch.css';
 import "bootstrap/dist/css/bootstrap.min.css";
+import fire from '../fire';
+import Login from "./Login"
 
 export default function EntryList(){
-  const [books, setBooks] = useState([])
-
+  const [books, setBooks] = useState([])    
+  const [cred, setCred] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
+  fire.auth().onAuthStateChanged((user) => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
 
   useEffect(() => {
     axios.get('http://localhost:5000/books/')
       .then(response => (setBooks(response.data)))
   },[books])
-
 
   // function deleteGoal(id){
   //   axios.delete('http://localhost:5000/goals/' + id)
@@ -27,29 +33,26 @@ export default function EntryList(){
       return (
 
         <section key={_id}>
-              <div className="card book-card">
-                <img className="card-img-top" src={image} alt={title}></img>
-                <div className="card-body">
-                  <h4 className="card-title">{title}</h4>
-                  <p className="card-text">{author}</p>
-                </div>
-              </div>
+          <div className="card book-card">
+            <img className="card-img-top" src={image} alt={title}></img>
+            <div className="card-body">
+              <h4 className="card-title">{title}</h4>
+              <p className="card-text">{author}</p>
+            </div>
+          </div>
         </section>
       )
     })
   )}
-
  
-    return (
-      <div>
-        <div >
-          <h3>Books I've read</h3>
-          <div className="row">
-            <BookList/>
-          </div>
-        </div>
+  return (
+    <div>
+      <Login setCred={setCred}/>
+      <h3>Books I've read</h3>
+      <h3>{cred}</h3>
+      <div className="row">
+        <BookList/>
       </div>
-    )
- 
+    </div>
+  )
 }
-

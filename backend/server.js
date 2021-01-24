@@ -1,10 +1,18 @@
+
 const express = require('express')
 const cors = require('cors')
+const config = require("config")
 const mongoose = require('mongoose')
 require('dotenv').config()
 
 const app = express()
 const port = process.env.PORT || 5000
+
+
+if (!config.get('jwtPrivateKey')){
+    console.error("FATAL ERROR: jwtPrivateKey is not defined")
+    process.exit(1)
+}
 
 app.use(cors())
 app.use(express.json())
@@ -18,15 +26,16 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 })
 
-const goalsRouter = require('./routes/goals')
-const diaryEntrysRouter = require('./routes/diaryEntrys')
+
 const testRouter = require('./routes/test')
 const booksRouter = require('./routes/books')
+const usersRouter = require('./routes/users')
+const authRouter = require('./routes/auth')
 
-app.use('/goals', goalsRouter)
-app.use('/diaryEntrys', diaryEntrysRouter)
 app.use('/test', testRouter)
 app.use('/books', booksRouter)
+app.use('/users', usersRouter)
+app.use('/auth', authRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

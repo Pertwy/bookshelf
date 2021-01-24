@@ -1,0 +1,73 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import './GoogleAPISearch.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import fire from '../fire';
+import Login from "./Login"
+
+export default function EntryListTest(){
+  const [books, setBooks] = useState([])    
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [cred, setCred] = useState("")
+
+  const signOut = () => {
+    fire.auth().signOut()
+  };
+
+
+  fire.auth().onAuthStateChanged((user) => {
+    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
+  });
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/books/')
+      .then(response => (setBooks(response.data)))
+  },[books])
+
+  // function deleteGoal(id){
+  //   axios.delete('http://localhost:5000/goals/' + id)
+  //     .then(response => { console.log(response.data)});
+
+  //   setGoals([...goals, goals.filter(el => el._id !== id)])
+  // }
+
+  function BookList() {
+    return (books.map(currentBook => {
+
+      const {title, author, image,  _id} = currentBook
+      return (
+
+        <section key={_id}>
+          <div className="card book-card">
+            <img className="card-img-top" src={image} alt={title}></img>
+            <div className="card-body">
+              <h4 className="card-title">{title}</h4>
+              <p className="card-text">{author}</p>
+            </div>
+          </div>
+        </section>
+      )
+    })
+  )}
+ 
+  return (
+    <div>
+      <h3>Specific person book test</h3>
+      {isLoggedIn && (
+        <div>
+          <h4>Logged In!!!</h4>
+          <h4>{cred}</h4>
+        </div>)}
+        <span onClick={signOut}>
+          <a href="#">Sign out</a>
+        </span>
+      <Login setCred={setCred}/>
+
+      <div className="row">
+        <BookList />
+        {/* <TransferButton number={4} title="No Transfer" setTransferMethod={setTransferMethod} currentTransfer={transferMethod} setNoTransfer={setNoTransfer}/>  */}
+
+      </div>
+    </div>
+  )
+}
