@@ -1,7 +1,12 @@
 const auth = require("../middleware/auth")
+const admin = require("../middleware/admin")
 const router = require("express").Router();
 const {Book, validate} = require("../models/book.model")
 const _ = require("lodash")
+const mongoose = require("mongoose")
+const Fawn = require("fawn")
+
+Fawn.init(mongoose)
 
 router.route("/").get((req, res) => {
     Book.find()
@@ -29,9 +34,43 @@ router.post('/add', auth, async (req, res) => {
   
     let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
     newBook = await newBook.save();
-    
+
+    //add to user here
+    //add as a transaction
+
     res.send(newBook);
-  });
+});
+
+//transaction
+// try{
+//     new Fawn.Task()
+//         .save('books', newBook) //books is the collection name
+//         .update("users", {id: userEvent._id},{
+//             $set add a book to books array
+//         })
+//         .run()
+// }catch(ex){
+//     res.status(500).send("Something failed.")
+// }
 
 
+
+// async function listBooks(){
+//     const books = await Book
+//         .find()
+//         .populate("users")
+//         .select("title author image users")
+//     console.log(books)
+// }
+
+//Admin example
+// router.delete('/:id', [auth, admin], async (req, res) => {
+//     const genre = await Genre.findByIdAndRemove(req.params.id);
+  
+//     if (!genre) return res.status(404).send('The genre with the given ID was not found.');
+  
+//     res.send(genre);
+// });
+
+// listBooks()
 module.exports = router;
