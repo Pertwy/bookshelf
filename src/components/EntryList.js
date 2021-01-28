@@ -2,17 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './GoogleAPISearch.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import fire from '../fire';
 import Login from "./Login"
 
 export default function EntryList(){
   const [books, setBooks] = useState([])    
   const [cred, setCred] = useState("")
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
-  fire.auth().onAuthStateChanged((user) => {
-    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
 
   useEffect(() => {
     axios.get('http://localhost:5000/books/')
@@ -47,9 +41,8 @@ export default function EntryList(){
  
   return (
     <div>
-      <Login setCred={setCred}/>
+      <Login />
       <h3>Books I've read</h3>
-      <h3>{cred}</h3>
       <div className="row">
         <BookList/>
       </div>

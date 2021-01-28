@@ -1,44 +1,24 @@
 import './GoogleAPISearch.css';
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 
-import fire from '../fire';
 
 export default function GoogleAPISearch() {
 
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
-  
+  const [users, setUsers] = useState([])
+  const [user, setUser] = useState("")
   const [selectedShow, setSelectedShow] = useState(false)
   const [selectedBook, setSelectedBook] = useState({
     title:"",
     author:"",
     image:""
   })
-
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   
-  fire.auth().onAuthStateChanged((user) => {
-    return user ? setIsLoggedIn(true) : setIsLoggedIn(false);
-  });
-
-  const createToken = async () => {
-    const user = fire.auth().currentUser;
-    const token = user && (await user.getIdToken());
-    const payloadHeader = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    };
-    return payloadHeader;
-  }
-
-
-
 
   function handleSubmit(e){
     e.preventDefault()
@@ -64,21 +44,28 @@ export default function GoogleAPISearch() {
   }
 
   async function handleAddBook(){
-
-    const header = await createToken();
-
     try{
-    axios.post('http://localhost:5000/books/add', selectedBook, header)
-      .then(res => console.log(res.data));
+    axios.post('http://localhost:5000/books/add', selectedBook)
+      .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
     }
-
     setSelectedShow(false)
-    console.log(isLoggedIn)
-    // window.location = '/'
   }
 
+
+  useEffect(() => {
+    axios.get('http://localhost:5000/testusers/')
+      .then(response => 
+          {setUsers(response.data)})
+      //.then(console.log(users))
+      .catch((error) => {
+        console.log(error);
+      })
+  },[])
+
+
+ 
   const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
     return(
@@ -94,6 +81,25 @@ export default function GoogleAPISearch() {
         <div className="row">
 
           <div className="col-md-6">
+
+          <label>Choose a user</label>
+          <select 
+              required
+              className="form-control"
+              value={user}
+              onChange={({ target}) => 
+                      setUser(target.value)}>
+              {
+                users.map((user) => {
+                  return( 
+                    <option 
+                   
+                      value={user.email}>{user.email}
+                    </option>);
+                })
+              }
+          </select>
+
             <h1>Book Search - Google Books API</h1>
             <form onSubmit={handleSubmit}>
               <div className="form-group">

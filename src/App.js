@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import Navbar from "./components/Navbar"
 import EntryList from "./components/EntryList"
-import EntryListTest from "./components/EntryListTest"
+import Adduser from "./components/Adduser"
 import GoogleAPISearch from "./components/GoogleAPISearch"
 // import FireAuth from "./components/fireAuth"
 
@@ -18,9 +18,8 @@ function App() {
       <div className="container">
       <br/>
         <Route path="/" exact component={EntryList} />
-        <Route path="/test" exact component={EntryListTest} />
+        <Route path="/test" exact component={Adduser} />
         <Route path="/booksearch" component={GoogleAPISearch} />
-        {/* <Route path="/auth" component={GoogleAPISearch} /> */}
       </div>
     </Router>
   );

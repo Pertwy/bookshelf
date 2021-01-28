@@ -3,13 +3,6 @@ let User = require("../models/user.model")
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
 
-
-// router.route("/").get((req, res) => {
-//     User.find()
-//         .then(users => res.json(users))
-//         .catch(err => res.status(400).json("Error " + err))
-// })
-
 router.post('/', async (req, res) => {
  
     let user = await User.findOne({email: req.body.email})

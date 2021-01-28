@@ -30,11 +30,13 @@ connection.once('open', () => {
 const testRouter = require('./routes/test')
 const booksRouter = require('./routes/books')
 const usersRouter = require('./routes/users')
+const testusersRouter = require('./routes/testusers')
 const authRouter = require('./routes/auth')
 
 app.use('/test', testRouter)
 app.use('/books', booksRouter)
 app.use('/users', usersRouter)
+app.use('/testusers', testusersRouter)
 app.use('/auth', authRouter)
 
 app.listen(port, () => {

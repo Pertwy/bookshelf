@@ -18,7 +18,7 @@ export default function Navbar() {
             </li> */}
             
             <li className="navbar-item">
-            <Link to="/test" className="nav-link">Test</Link>
+            <Link to="/test" className="nav-link">Add a user</Link>
             </li>
 
             <li className="navbar-item">

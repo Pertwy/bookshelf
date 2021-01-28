@@ -1,21 +1,17 @@
 // components/session/Login.jsx
 import React, { useState } from 'react';
-import fire from '../fire';
 import axios from "axios"
 
-export default function Login(props){
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+export default function Login(){
     const [signUpEmail, setSignUpEmail] = useState("");
     const [signUpPassword, setSignUpPassword] = useState("");
-    const [userCred, setUserCred] = useState("")
+    const [name, setName] = useState("");
     
 
     function newUserInDB(){
-      const newUser = {
-        email:signUpEmail, cred:userCred
+      let newUser = {
+        "email":signUpEmail, "password":signUpPassword, "name":name
       }
-      console.log(newUser)
 
       try{
         axios.post('http://localhost:5000/users/add', newUser)
@@ -34,60 +30,19 @@ export default function Login(props){
         alert("Please enter more than 6 characters for a password");
         return;
       }
-      fire.auth().createUserWithEmailAndPassword(signUpEmail, signUpPassword)
-      .then(console.log("you've signed up mate"))
-      .then(cred =>{
-        setUserCred(cred.user.uid)
-        props.setCred(cred.user.uid)
-      })
-      .then(console.log(userCred))
-      .then(newUserInDB())
-      .then(
-        setSignUpEmail("")
-      )
-      .then(
-        setSignUpPassword("")
-      )
-      .catch(err => {
-        console.log(err.message)
-      })
-      
+      newUserInDB()      
     } 
-
-    const handleSignIn = (e) => {
-        e.preventDefault();
-        fire.auth().signInWithEmailAndPassword(email, password)
-        .then(console.log("all good mate"))
-          .catch((error) => {
-            console.error('Incorrect username or password');
-          });}
 
     return (
         <div>    
-        <h2>Login</h2>
-            <form onSubmit={handleSignIn}>
+            <form onSubmit={handleSignUp}>
                 <input
                     type="text"
                     onChange={({ target }) =>     
-                      setEmail(target.value)}
-                    placeholder="Email"
+                      setName(target.value)}
+                    placeholder="Name"
                 />
                 <br />
-                <input
-                    type="password"
-                    onChange={({ target}) => 
-                      setPassword(target.value)}
-                    placeholder="Password"
-                />
-                <br />
-                <button type="submit">
-                    Sign in
-                </button>
-                
-            </form>
-
-            <h2>Sign Up</h2>
-            <form onSubmit={handleSignUp}>
                 <input
                     type="text"
                     onChange={({ target }) =>     

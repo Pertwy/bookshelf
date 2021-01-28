@@ -15,6 +15,22 @@ router.route("/").get((req, res) => {
 })
 
 
+router.post('/add', async (req, res) => {
+    // const { error } = validate(req.body); 
+    // if (error) return res.status(400).send(error.details[0].message);
+  
+    let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
+    newBook = await newBook.save();
+
+    //add to user here
+    //add as a transaction
+
+    res.send(newBook._id);
+});
+
+
+
+
 //this shit works
 // router.route('/add').post((req, res) => {
  
@@ -28,18 +44,7 @@ router.route("/").get((req, res) => {
 //       .catch(err => res.status(400).json('Error: ' + err));
 // });
 
-router.post('/add', auth, async (req, res) => {
-    const { error } = validate(req.body); 
-    if (error) return res.status(400).send(error.details[0].message);
-  
-    let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
-    newBook = await newBook.save();
 
-    //add to user here
-    //add as a transaction
-
-    res.send(newBook);
-});
 
 //transaction
 // try{

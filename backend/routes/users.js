@@ -1,16 +1,19 @@
 const router = require("express").Router();
-let {User, validate} = require("../models/user.model")
+let {User} = require("../models/user.model")
 const _ = require("lodash")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const config = require("config")
 const auth = require("../middleware/auth")
 const express = require('express');
+const {Book, validate} = require("../models/book.model")
+
 
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
     res.send(user);
-  });
+});
+
 
 router.get('/userbooks', auth, async (req, res) => {
     const user = await User
@@ -22,26 +25,26 @@ router.get('/userbooks', auth, async (req, res) => {
     res.send(user);
 });
 
+
+
 router.post('/add', async (req, res) => {
  
     let user = await User.findOne({email: req.body.email})
     if (user) return res.status(400).send("User already registered")
 
-    const newUser = new User(_.pick(req.body, ["name", "email", "password", "isAdmin", "books"]));
+    let newUser = new User(_.pick(req.body, ["email", "password", "name"]));
 
-    const salt = await bcrypt.genSalt(10)
+    let salt = await bcrypt.genSalt(10)
     newUser.password = await bcrypt.hash(newUser.password, salt)
     
-    const token = newUser.generateAuthToken();
+    let token = newUser.generateAuthToken();
     
     await newUser.save()
-        .then(() => res.header("x-auth-token", token).send(_.pick(newUser, ["_id", "name", "email", "isAdmin", "books"])))
+        .then(() => res.header("x-auth-token", token).send(_.pick(newUser, ["_id", "email", "name"])))
 
     // res.header("x-auth-token", token).send(_.pick(user, ["_id", "name", "email"]))
     //res.send(user)
   });
-
-
 
 
 router.route('/:id').delete((req, res) => {
@@ -51,17 +54,32 @@ router.route('/:id').delete((req, res) => {
 });
 
 
-router.route('/updatebooks/').put((req, res) => {
-    User.find({"cred": req.params.cred})
-        .then(user => {
-        user.books = [ ...user.books, req.body.book];
+router.put('/createBookAndAddToUser', auth, async (req, res) => {
+    let user = await User.findById(req.user._id)
+    user.books.push(req.body.book)
 
-        User.save()
-            .then(() => res.json('User updated!'))
-            .catch(err => res.status(400).json('Error: ' + err));
-        })
+    user.save()
+        .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
+   
+
+        
 });
+
+
+//router.route('/updatebooks/').put((req, res) => {
+    //     User.find({"cred": req.params.cred})
+    //         .then(user => {
+    //         user.books = [ ...user.books, req.body.book];
+    
+    //         User.save()
+    //             .then(() => res.json('User updated!'))
+    //             .catch(err => res.status(400).json('Error: ' + err));
+    //         })
+    //         .catch(err => res.status(400).json('Error: ' + err));
+    // });
+    
+
 
 //updating
 // async function updateAuthor(courseId){

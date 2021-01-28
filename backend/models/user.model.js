@@ -23,11 +23,11 @@ const userSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 1024
   },
-  isAdmin: Boolean,
-  books:{
+  //isAdmin: Boolean,
+  books:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
-}
+  }]
 });
 
 userSchema.methods.generateAuthToken = function() { 
@@ -48,4 +48,4 @@ function validateUser(user) {
 }
 
 exports.User = User; 
-exports.validate = validateUser;
+//exports.validate = validateUser;
