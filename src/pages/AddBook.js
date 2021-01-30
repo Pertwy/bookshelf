@@ -1,17 +1,16 @@
-import './GoogleAPISearch.css';
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
+import UserDropDown from "../components/UserDropDown"
 
-
-export default function GoogleAPISearch() {
+export default function AddBooks() {
 
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   const [users, setUsers] = useState([])
-  const [user, setUser] = useState("")
+  const [currentUser, setCurrentUser] = useState("")
   const [selectedShow, setSelectedShow] = useState(false)
   const [selectedBook, setSelectedBook] = useState({
     title:"",
@@ -32,10 +31,6 @@ export default function GoogleAPISearch() {
       })
   }
 
-  // function handleChange(e){
-  //     const book = e.target.value
-  //     setBook(book.trim())
-
   function handleBook(Book){
     const authorArray = Book.volumeInfo.authors
     const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
@@ -43,27 +38,18 @@ export default function GoogleAPISearch() {
     setSelectedShow(true)
   }
 
+
   async function handleAddBook(){
+    
+    let info = {"book":selectedBook, "email":currentUser}
     try{
-    axios.post('http://localhost:5000/books/add', selectedBook)
+    axios.put('http://localhost:5000/testusers/addBookToUser', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
     }
     setSelectedShow(false)
   }
-
-
-  useEffect(() => {
-    axios.get('http://localhost:5000/testusers/')
-      .then(response => 
-          {setUsers(response.data)})
-      //.then(console.log(users))
-      .catch((error) => {
-        console.log(error);
-      })
-  },[])
-
 
  
   const SearchedBook = ({book}) => {
@@ -82,23 +68,7 @@ export default function GoogleAPISearch() {
 
           <div className="col-md-6">
 
-          <label>Choose a user</label>
-          <select 
-              required
-              className="form-control"
-              value={user}
-              onChange={({ target}) => 
-                      setUser(target.value)}>
-              {
-                users.map((user) => {
-                  return( 
-                    <option 
-                   
-                      value={user.email}>{user.email}
-                    </option>);
-                })
-              }
-          </select>
+          <UserDropDown setEmail={setCurrentUser}/>
 
             <h1>Book Search - Google Books API</h1>
             <form onSubmit={handleSubmit}>

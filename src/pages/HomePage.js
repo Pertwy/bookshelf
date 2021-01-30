@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './GoogleAPISearch.css';
+import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "./Login"
+import Login from "../components/Login"
+import UserDropDown from "../components/UserDropDown"
 
-export default function EntryList(){
-  const [books, setBooks] = useState([])    
-  const [cred, setCred] = useState("")
+export default function HomePage(){
+  const [books, setBooks] = useState([])  
+  const [currentUser, setCurrentUser] = useState("john@gmail.com")
 
   useEffect(() => {
-    axios.get('http://localhost:5000/books/')
-      .then(response => (setBooks(response.data)))
-  },[books])
+    console.log(currentUser)
+    if(currentUser){
+      let email = {"email":currentUser}
+      axios.post('http://localhost:5000/testusers/books',email)
+        .then(response => (setBooks(response.data.books)))
+      
+      console.log(books)
+    }
+    else{
+      axios.get('http://localhost:5000/books/')
+        .then(response => (setBooks(response.data)))
+    }
 
-  // function deleteGoal(id){
-  //   axios.delete('http://localhost:5000/goals/' + id)
-  //     .then(response => { console.log(response.data)});
+  },[currentUser])
 
-  //   setGoals([...goals, goals.filter(el => el._id !== id)])
-  // }
 
   function BookList() {
     return (books.map(currentBook => {
@@ -41,7 +47,7 @@ export default function EntryList(){
  
   return (
     <div>
-      <Login />
+      <UserDropDown setEmail={setCurrentUser}/>
       <h3>Books I've read</h3>
       <div className="row">
         <BookList/>

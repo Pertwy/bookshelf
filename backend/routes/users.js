@@ -15,6 +15,7 @@ router.get('/me', auth, async (req, res) => {
 });
 
 
+
 router.get('/userbooks', auth, async (req, res) => {
     const user = await User
         .findById(req.body._id)
@@ -61,9 +62,6 @@ router.put('/createBookAndAddToUser', auth, async (req, res) => {
     user.save()
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
-   
-
-        
 });
 
 
