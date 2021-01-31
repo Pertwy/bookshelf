@@ -1,40 +1,102 @@
 const router = require("express").Router();
 let {Testuser} = require("../models/testuser.model")
 let {Book} = require("../models/book.model")
+let {List} = require("../models/list.model")
 const _ = require("lodash")
 const config = require("config")
 const auth = require("../middleware/auth")
 const express = require('express');
 
-router.route("/").get((req, res) => {
+
+router.post('/', async (req, res) => {
+    const user = await Testuser.findOne({email: req.body.email})
+        .populate("books")
+        .populate("favorites")
+        .populate("readList")
+        .populate("lists") //This is the field name
+        // .select("books");
+    res.send(user);
+//{email:req.body.user}
+});
+
+
+
+router.route("/all").get((req, res) => {
     Testuser.find()
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
 
-router.post('/books', async (req, res) => {
+
+
+
+router.post('/grablists', async (req, res) => {
     const user = await Testuser.findOne({email: req.body.email})
-        .populate("books") //This is the mongo db collect name
+        .populate("lists") //This is the field name
         .select("books");
     res.send(user);
 //{email:req.body.user}
 });
 
+
+
 router.put('/addBookToUser', async (req, res) => {
     let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
     newBook = await newBook.save();
     
-    console.log(newBook)
-    
     let user = await Testuser.findOne({email: req.body.email})
     user.books.push(newBook._id)
-
-    console.log(user.books)
 
     await user.save()
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+router.put('/addListToUser', async (req, res) => {
+
+    let user = await Testuser.findOne({email: req.body.email})
+    console.log(user)
+
+    let newList = new List({title:req.body.title, books:req.body.books, creator:user._id})
+    newList = await newList.save();
+    
+    user.lists.push(newList._id)
+
+    await user.save()
+        .then(() => res.json('User updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
+router.put('/addFavorite', async (req, res) => {
+    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+    newBook = await newBook.save();
+    
+    let user = await Testuser.findOne({email: req.body.email})
+    user.favorites.push(newBook._id)
+
+    await user.save()
+        .then(() => res.json('User updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+router.put('/addReadList', async (req, res) => {
+    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+    newBook = await newBook.save();
+    
+    let user = await Testuser.findOne({email: req.body.email})
+    user.readList.push(newBook._id)
+
+    await user.save()
+        .then(() => res.json('User updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
 
 
 router.put('/addFriendToUser', async (req, res) => {

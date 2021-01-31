@@ -49,6 +49,7 @@ export default function Adduser(){
                 Sign up
             </button>
         </form>
+
       </div>
     </div>
   )

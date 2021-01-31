@@ -13,7 +13,7 @@ export default function HomePage(){
     console.log(currentUser)
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('http://localhost:5000/testusers/books',email)
+      axios.post('http://localhost:5000/testusers/',email)
         .then(response => (setBooks(response.data.books)))
       
       console.log(books)

@@ -21,13 +21,17 @@ const testuserSchema = new mongoose.Schema({
   photo:{
     type: String,
   },
+  followers:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User" //This is the Schema name
+  }],
+  following:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User" //This is the Schema name
+  }],
   books:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
-  }],
-  friends:[{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User" //This is the Schema name
   }],
   readList:[{
     type: mongoose.Schema.Types.ObjectId,
@@ -36,7 +40,15 @@ const testuserSchema = new mongoose.Schema({
   favorites:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
-  }]
+  }],
+  bookshelf:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Book" //This is the Schema name
+  }],
+  lists:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "List" //This is the Schema name
+  }],
 
 });
 

@@ -6,6 +6,8 @@ import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import Adduser from "./pages/Adduser"
 import AddBook from "./pages/AddBook"
+import User from "./pages/User"
+import AddList from "./pages/AddList"
 // import FireAuth from "./components/fireAuth"
 
 function App() {
@@ -15,11 +17,13 @@ function App() {
         <Navbar />
       </div>
 
-      <div className="container">
+      <div>
       <br/>
         <Route path="/" exact component={HomePage} />
         <Route path="/test" exact component={Adduser} />
         <Route path="/booksearch" component={AddBook} />
+        <Route path="/lists" component={AddList} />
+        <Route path="/user" component={User} />
       </div>
     </Router>
   );

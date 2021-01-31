@@ -23,6 +23,14 @@ export default function Navbar() {
             <li className="navbar-item">
             <Link to="/booksearch" className="nav-link">Book Search</Link>
             </li>
+
+            <li className="navbar-item">
+            <Link to="/lists" className="nav-link">Lists</Link>
+            </li>
+
+            <li className="navbar-item">
+            <Link to="/user" className="nav-link">User</Link>
+            </li>
           </ul>
         </div>
    

@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
+import "./AddList.css"
 
-export default function AddBooks() {
+export default function AddBook() {
 
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
@@ -40,10 +41,31 @@ export default function AddBooks() {
 
 
   async function handleAddBook(){
-    
     let info = {"book":selectedBook, "email":currentUser}
     try{
     axios.put('http://localhost:5000/testusers/addBookToUser', info)
+      .then(res => { console.log(res)});
+    }catch(e){
+      console.error(e)
+    }
+    setSelectedShow(false)
+  }
+
+  async function handleAddFavorite(){
+    let info = {"book":selectedBook, "email":currentUser}
+    try{
+    axios.put('http://localhost:5000/testusers/addFavorite', info)
+      .then(res => { console.log(res)});
+    }catch(e){
+      console.error(e)
+    }
+    setSelectedShow(false)
+  }
+
+  async function handleAddReadList(){
+    let info = {"book":selectedBook, "email":currentUser}
+    try{
+    axios.put('http://localhost:5000/testusers/addReadList', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -57,6 +79,12 @@ export default function AddBooks() {
     return(
       <div className="d-inline-block" onClick={() => handleBook(book)}>
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
+        <div className="button">
+          {/* <button onClick={() => handleBook(book)}>Favorite</button>
+          <button onClick={() => handleBook(book)}>Read</button>
+          <button onClick={() => handleBook(book)}>Read List</button>
+          <button onClick={() => handleBook(book)}>Add to Bookshelf</button> */}
+        </div> 
       </div>
     )
   }
@@ -68,7 +96,7 @@ export default function AddBooks() {
 
           <div className="col-md-6">
 
-          <UserDropDown setEmail={setCurrentUser}/>
+            <UserDropDown setEmail={setCurrentUser}/>
 
             <h1>Book Search - Google Books API</h1>
             <form onSubmit={handleSubmit}>
@@ -89,8 +117,14 @@ export default function AddBooks() {
                   </div>
                 </div>
                 <button onClick={handleAddBook} className="btn btn-danger">Add Book</button>
+                <button onClick={handleAddFavorite} className="btn btn-danger">Add to Favorites</button>
+                <button onClick={handleAddReadList} className="btn btn-danger">Add to Read List</button>
               </section>
             )}
+
+
+
+
           </div>
 
           <div className="col-md-6">

@@ -4,13 +4,13 @@ import React, {useState, useEffect} from 'react';
 
 
 export default function UserDropDown(props) {
-  const [users, setUsers] = useState([])
-  const [user, setUser] = useState("")
+  const [lists, setLists] = useState([])
+  const [list, setList] = useState("")
 
   useEffect(() => {
-    axios.get('http://localhost:5000/testusers/all')
+    axios.get('http://localhost:5000/testusers/lists')
       .then(response => 
-          {setUsers(response.data)})
+          {setLists(response.data)})
       //.then(console.log(users))
       .catch((error) => {
         console.log(error);
@@ -20,25 +20,24 @@ export default function UserDropDown(props) {
 
   function handleChange(target){
     props.setEmail(target)
-    setUser(target)
+    setList(target)
   }
 
  
   return (
     <div>
-        <label>Choose a user</label>
+        <label>Choose a list</label>
         <select 
             required
             className="form-control"
-            value={user}
+            value={list}
             onChange={(({target}) => 
                     handleChange(target.value))}>
             {
-            users.map((user) => {
+            lists.map((list) => {
                 return( 
                 <option 
-                
-                    value={user.email}>{user.email}
+                    value={list.name}>{list.name}
                 </option>);
             })
             }
