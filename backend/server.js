@@ -32,12 +32,14 @@ const booksRouter = require('./routes/books')
 const usersRouter = require('./routes/users')
 const testusersRouter = require('./routes/testusers')
 const authRouter = require('./routes/auth')
+const listRouter = require('./routes/lists')
 
 app.use('/test', testRouter)
 app.use('/books', booksRouter)
 app.use('/users', usersRouter)
 app.use('/testusers', testusersRouter)
 app.use('/auth', authRouter)
+app.use('/lists', listRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

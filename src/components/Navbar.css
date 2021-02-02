@@ -1,0 +1,8 @@
+.Bookshelf {
+    color:"white"
+}
+
+.space-between{
+    display: flex;
+    justify-content: space-between;
+}

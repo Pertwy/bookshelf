@@ -21,18 +21,33 @@ const testuserSchema = new mongoose.Schema({
   photo:{
     type: String,
   },
+
+
   followers:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User" //This is the Schema name
+    ref: "Testuser" //This is the Schema name
   }],
+
+
   following:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User" //This is the Schema name
+    ref: "Testuser" //This is the Schema name
   }],
+
+
+  // books:[{book:{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "Book" //This is the Schema name
+  //   },
+  //   rating:{type:Number},
+  //   review:{type:String}
+  // }],
+
   books:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
   }],
+
   readList:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
@@ -48,8 +63,7 @@ const testuserSchema = new mongoose.Schema({
   lists:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "List" //This is the Schema name
-  }],
-
+  }]
 });
 
 const Testuser = mongoose.model('Testuser', testuserSchema);

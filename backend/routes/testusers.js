@@ -9,12 +9,14 @@ const express = require('express');
 
 
 router.post('/', async (req, res) => {
-    const user = await Testuser.findOne({email: req.body.email})
+    let user = await Testuser.findOne({email: req.body.email})
         .populate("books")
         .populate("favorites")
         .populate("readList")
-        .populate("lists") //This is the field name
+        .populate("lists") 
+        .populate("following") //This is the field name
         // .select("books");
+
     res.send(user);
 //{email:req.body.user}
 });
@@ -41,12 +43,15 @@ router.post('/grablists', async (req, res) => {
 
 
 router.put('/addBookToUser', async (req, res) => {
+    //console.log(req.body)
+    
     let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
     newBook = await newBook.save();
     
     let user = await Testuser.findOne({email: req.body.email})
     user.books.push(newBook._id)
 
+    console.log(user)
     await user.save()
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
@@ -99,11 +104,11 @@ router.put('/addReadList', async (req, res) => {
 
 
 
-router.put('/addFriendToUser', async (req, res) => {
-    let friend = await Testuser.findOne({email: req.body.friend})
+router.post('/follow', async (req, res) => {
+    let follow = await Testuser.findOne({email: req.body.follow})
     
-    let user = await Testuser.findOne({email: req.body.currentuser})
-    user.books.push(friend._id)
+    let user = await Testuser.findOne({email: req.body.currentUser})
+    user.following.push({_id:follow._id, name:follow.name})
 
     await user.save()
         .then(() => res.json('User updated!'))
@@ -111,6 +116,39 @@ router.put('/addFriendToUser', async (req, res) => {
 });
 
 
+
+router.post('/removefavorite', async (req, res) => {
+    let user = await Testuser.findOne({email: req.body.currentUser})
+
+    index = user.favorites.indexOf(req.body.book)
+    user.favorites.splice(index, 1)
+
+    await user.save()
+        .then(() => res.json('fave deleted!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/removebook', async (req, res) => {
+    let user = await Testuser.findOne({email: req.body.currentUser})
+
+    index = user.books.indexOf(req.body.book)
+    user.books.splice(index, 1)
+
+    await user.save()
+        .then(() => res.json('fave deleted!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+router.post('/removereadlist', async (req, res) => {
+    let user = await Testuser.findOne({email: req.body.currentUser})
+
+    index = user.readList.indexOf(req.body.book)
+    user.readList.splice(index, 1)
+
+    await user.save()
+        .then(() => res.json('fave deleted!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 

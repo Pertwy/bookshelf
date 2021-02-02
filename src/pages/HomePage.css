@@ -1,3 +1,7 @@
+*{
+  margin:0px;
+}
+
 .App {
   text-align: center;
 }
@@ -39,4 +43,40 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.content{
+  margin-left:3%;
+  margin-right:3%;
+  padding:0;
+}
+
+.hero-image{
+  background-image: url('https://miro.medium.com/max/7750/0*Q_aOmiYtvNe9wQnx');
+  background-repeat: no-repeat;
+  /* background-attachment: fixed; */
+  background-size: cover;
+  height: 400px;
+}
+
+.book{
+  padding-left: 15px;
+  padding-right:10px;
+}
+
+.book-card{
+  margin: 0;
+  border: 0;
+}
+
+.card-img-top{
+  border-radius: 8px;
+}
+
+.book-row{
+  padding-top: 20px;
+}
+
+.book-row-title{
+  padding-bottom: 10px;
 }
