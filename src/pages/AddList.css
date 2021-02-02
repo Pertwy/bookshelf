@@ -7,9 +7,14 @@
   /* right:100px; */
   left:20px;
   z-index:100;
+  
 }
 
 img:hover + .button, .button:hover {
   /* display: inline-block; */
   visibility: visible;
+}
+
+button{
+  display: block;
 }
