@@ -1,40 +1,31 @@
 const auth = require("../middleware/auth")
 const admin = require("../middleware/admin")
 const router = require("express").Router();
-const {Book, validate} = require("../models/book.model")
-const _ = require("lodash")
+const {List} = require("../models/list.model")
+
 const mongoose = require("mongoose")
-const Fawn = require("fawn");
-const { truncate } = require("lodash");
-
-Fawn.init(mongoose)
-
-router.route("/").get((req, res) => {
-    Book.find()
-        .then(books => res.json(books))
-        .catch(err => res.status(400).json("Error " + err))
-})
 
 
 router.route("/admin").get((req, res) => {
-    Book.find({isAdmin:true})
-        .then(books => console.log(books))
+    List.find({isAdmin:true})
+        .populate("creator")
+        .then(lists => res.json(lists))
         .catch(err => res.status(400).json("Error " + err))
 })
 
 
-router.post('/add', async (req, res) => {
-    // const { error } = validate(req.body); 
-    // if (error) return res.status(400).send(error.details[0].message);
+// router.post('/add', async (req, res) => {
+//     // const { error } = validate(req.body); 
+//     // if (error) return res.status(400).send(error.details[0].message);
   
-    let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
-    newBook = await newBook.save();
+//     let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
+//     newBook = await newBook.save();
 
-    //add to user here
-    //add as a transaction
+//     //add to user here
+//     //add as a transaction
 
-    res.send(newBook._id);
-});
+//     res.send(newBook._id);
+// });
 
 
 

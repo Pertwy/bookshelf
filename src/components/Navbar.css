@@ -1,4 +1,8 @@
-.navrow {
-    flex:1;
-    flex-direction: row;
+.Bookshelf {
+    color:"white"
+}
+
+.space-between{
+    display: flex;
+    justify-content: space-between;
 }

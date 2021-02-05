@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
-import './GoogleAPISearch.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function Adduser(){
@@ -50,6 +49,7 @@ export default function Adduser(){
                 Sign up
             </button>
         </form>
+
       </div>
     </div>
   )
