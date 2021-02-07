@@ -8,6 +8,7 @@ import Adduser from "./pages/Adduser"
 import AddBook from "./pages/AddBook"
 import User from "./pages/User"
 import AddList from "./pages/AddList"
+import ViewBook from "./idPages/ViewBook"
 // import FireAuth from "./components/fireAuth"
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/booksearch" component={AddBook} />
         <Route path="/lists" component={AddList} />
         <Route path="/user" component={User} />
+        <Route path="/book/:id" component={ViewBook} />
       </div>
     </Router>
   );

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -40,7 +41,9 @@ export default function HomePage(){
 
         <section key={_id} className="book">
           <div className="card book-card">
-            <img className="card-img-top" src={image} alt={title}></img>
+            <Link to={"/book/"+_id}>
+              <img className="card-img-top" src={image} alt={title}></img>
+            </Link>
             <div className="card-body">
               <h5 className="card-title">{title}</h5>
               <p className="card-text">{author}</p>
