@@ -35,12 +35,12 @@ export default function Navbar() {
             </li>
 
             <li className="navbar-item">
-            <Link to="/user" >User</Link>
+            <Link to="/profile" className="nav-link">Profile</Link>
             </li>
 
-            {/* <li className="navbar-item">
-            <Link to={"/book/"+"6016f2308710bd08b885d2b2"} className="nav-link">book</Link>
-            </li> */}
+            <li className="navbar-item" >
+            <Link to={"/user/"+"6016f1e48710bd08b885d2b0"} className="nav-link">User</Link>
+            </li>
 
           </ul>
         </div>

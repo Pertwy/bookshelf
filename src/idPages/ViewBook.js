@@ -12,29 +12,38 @@ export default function ViewBook(props){
     axios.get("http://localhost:5000/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
       
-
-    // console.log(props.location.pathname.replace("/book/", ""))
   },[])
 
-  // function Log(){
-  //   console.log(book)
-  // }
+
+  function Reviews(){
+    return (book.reviews.map(review => {
+      return(
+        <h4>{review}</h4>
+      )
+    }))
+  }
 
 
   return (
     <div>
 
       <div className="content">
-        <h1>Hello books</h1>
         <h2>{book.title}</h2>
         <h3>{book.author}</h3>
+        <h4>Number of times read {book.numberOfTimesRead}</h4>
+        <h4>Number of times favorited {book.numberOfTimesFavorited}</h4>
+        <h4>Number of reviews {book.reviews.length}</h4>
         <img src={book.image} alt={book.title}></img>
-        {/* <Log></Log> */}
-        {/* <UserDropDown setEmail={setCurrentUser}/> */}
+        
+        {book.reviews > 0 &&(
+          <div>
+            <h2>Reviews</h2>
+            <Reviews/>
+          </div>
+        )}
 
-        {/* <div className="book-row">
-          <h2>{props}</h2>
-        </div> */}
+{/* //numberOfTimesRead
+//rating */}
 
       </div>
     </div>

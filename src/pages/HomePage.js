@@ -114,7 +114,7 @@ export default function HomePage(){
         <div className="book-row">
           <h2 className="book-row-title">Latest From Friends</h2>
           <div className="row">
-            {/* <FriendBookList/> */}
+            <FriendBookList/>
           </div>
         </div>
 

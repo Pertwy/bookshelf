@@ -6,9 +6,10 @@ import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
 import Adduser from "./pages/Adduser"
 import AddBook from "./pages/AddBook"
-import User from "./pages/User"
+import Profile from "./pages/Profile"
 import AddList from "./pages/AddList"
 import ViewBook from "./idPages/ViewBook"
+import ViewUser from "./idPages/ViewUser"
 // import FireAuth from "./components/fireAuth"
 
 function App() {
@@ -24,8 +25,9 @@ function App() {
         <Route path="/test" exact component={Adduser} />
         <Route path="/booksearch" component={AddBook} />
         <Route path="/lists" component={AddList} />
-        <Route path="/user" component={User} />
+        <Route path="/profile" component={Profile} />
         <Route path="/book/:id" component={ViewBook} />
+        <Route path="/user/:id" component={ViewUser} />
       </div>
     </Router>
   );
