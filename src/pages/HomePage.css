@@ -62,11 +62,20 @@
 .book{
   padding-left: 15px;
   padding-right:10px;
+ 
+}
+
+.frame {
+  height: 250px;
+  background: transparent no-repeat center;
+  background-size: cover;
 }
 
 .book-card{
   margin: 0;
   border: 0;
+  
+  
 }
 
 .card-img-top{
