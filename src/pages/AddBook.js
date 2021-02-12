@@ -91,23 +91,23 @@ export default function AddBook() {
 
   return (
     <div className="container">
-        <div className="row">
+        <div>
 
-          <div className="col-md-6">
-
+          <div>
+            <h1>Log books you've read, add books to your favorites, or add them to your reading list</h1>
             <UserDropDown setEmail={setCurrentUser}/>
 
-            <h1>Book Search - Google Books API</h1>
+            
             <form onSubmit={handleSubmit}>
               <div className="form-group">
                 <input onChange={handleSubmit} type="text" className="form-control mt-10" placeholder="Search for books" autoComplete="off"/>
               </div>
-              <button type="submit" className="btn btn-danger">Search</button>
+              {/* <button type="submit" className="btn btn-danger">Search</button> */}
             </form>
           </div>
 
 
-          <div className="col-md-6">
+          <div>
             <div className="row">
             {result.map(book => (
                 <SearchedBook book={book}/>

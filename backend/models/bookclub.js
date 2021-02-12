@@ -2,24 +2,22 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const bookclubSchema = new Schema({
     title:{type: String, required: true},
-    description:String,
-    isAdmin:{type:Boolean, default:false},
+    description:{type: String},
     books:[],
-    creator: {
+    users: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Testuser" //This is the Schema name
     },
-    likes:{type:Boolean, default:0},
-    comments:[{
+    discussion:[{
       author: String,
-      comment:String
+      comment: String
     }]
 },{
     timestamps: true
 })
 
-const List = mongoose.model('List', bookSchema)
+const Bookclub = mongoose.model('Bookclub', bookclubSchema)
 
-exports.List = List;
+exports.Bookclub = Bookclub;

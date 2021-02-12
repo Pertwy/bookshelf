@@ -26,7 +26,7 @@ export default function UserDropDown(props) {
  
   return (
     <div>
-        <label>Choose a user</label>
+        {/* <label>Choose a user</label> */}
         <select 
             required
             className="form-control"

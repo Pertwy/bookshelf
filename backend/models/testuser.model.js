@@ -63,6 +63,10 @@ const testuserSchema = new mongoose.Schema({
   lists:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "List" //This is the Schema name
+  }],
+  bookclubs:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Bookclub" //This is the Schema name
   }]
 });
 

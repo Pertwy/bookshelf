@@ -8,6 +8,7 @@ const bookSchema = new Schema({
     author:{type: String, required: true},
     image:{type: String, required: true},
     numberOfTimesRead:{type:Number, default:0},
+    numberOfTimesFavorited:{type:Number, default:0},
     reviews:[{
       author: {
         type: mongoose.Schema.Types.ObjectId,

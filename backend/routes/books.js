@@ -15,6 +15,12 @@ router.route("/").get((req, res) => {
         .catch(err => res.status(400).json("Error " + err))
 })
 
+router.route("/:_id").get((req, res) => {
+    Book.findById(req.params._id)
+        .then(book => res.json(book))
+        .catch(err => res.status(400).json("Error " + err))
+})
+
 
 router.route("/admin").get((req, res) => {
     Book.find({isAdmin:true})

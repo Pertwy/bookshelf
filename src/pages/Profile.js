@@ -7,7 +7,7 @@ import "react-alice-carousel/lib/alice-carousel.css"
 import DisplayList from '../components/DisplayLists';
 import "./AddList.css"
 
-export default function User(){
+export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})

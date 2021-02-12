@@ -14,22 +14,37 @@ router.post('/', async (req, res) => {
         .populate("favorites")
         .populate("readList")
         .populate("lists") 
-        .populate("following") //This is the field name
-        // .select("books");
+        .populate({
+            path: 'following',
+            populate: { path: 'books' }
+          });; 
+
+    // console.log(user.following)
 
     res.send(user);
-//{email:req.body.user}
+
 });
 
 
 
-router.route("/all").get((req, res) => {
+
+
+router.get("/all", async (req, res) => {
     Testuser.find()
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
 
-
+router.get("/:_id", async (req, res) => {
+    Testuser.findById(req.params._id)
+        .populate("books")
+        .populate("favorites")
+        .populate("readList")
+        .populate("lists") 
+        .populate("following")
+        .then(user => res.json(user))
+        .catch(err => res.status(400).json("Error " + err))
+})
 
 
 router.post('/grablists', async (req, res) => {
@@ -41,24 +56,8 @@ router.post('/grablists', async (req, res) => {
 });
 
 
-
-router.put('/addBookToUser', async (req, res) => {
-    //console.log(req.body)
-    
-    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
-    newBook = await newBook.save();
-    
-    let user = await Testuser.findOne({email: req.body.email})
-    user.books.push(newBook._id)
-
-    console.log(user)
-    await user.save()
-        .then(() => res.json('User updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
-
-
 router.put('/addListToUser', async (req, res) => {
+
 
     let user = await Testuser.findOne({email: req.body.email})
     console.log(user)
@@ -74,19 +73,31 @@ router.put('/addListToUser', async (req, res) => {
 });
 
 
-
-
 router.put('/addFavorite', async (req, res) => {
-    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
-    newBook = await newBook.save();
     
     let user = await Testuser.findOne({email: req.body.email})
-    user.favorites.push(newBook._id)
-
-    await user.save()
-        .then(() => res.json('User updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+    
+    if(book) {
+        user.favorites.push(book._id)
+        book.numberOfTimesFavorited += 1
+        await user.save()
+        await book.save()
+            .then(() => res.json('User updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        newBook = await newBook.save();
+        
+        user.favorites.push(newBook._id)
+    
+        await user.save()
+            .then(() => res.json('User updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
 });
+
 
 
 
@@ -102,6 +113,32 @@ router.put('/addReadList', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+
+router.put('/addBookToUser', async (req, res) => {
+    //console.log(req.body)
+    
+    let user = await Testuser.findOne({email: req.body.email})
+    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+    
+    if(book) {
+        user.books.push(book._id)
+        book.numberOfTimesRead += 1
+        await user.save()
+        await book.save()
+            .then(() => res.json('User updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
+    else{
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        newBook = await newBook.save();
+        
+        user.books.push(newBook._id)
+    
+        await user.save()
+            .then(() => res.json('User updated!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
+});
 
 
 router.post('/follow', async (req, res) => {
