@@ -77,9 +77,9 @@ export default function HomePage(){
     return (userData.following.map(following => {
       if(following.books[0]){
       return (
-        <section key={following.books[0]._id} >
-            <Link to={"/book/"+following.books[0]._id}>
-              <img className="card-img-top" src={following.books[0].image} alt={following.books[0].title}></img>
+        <section key={following.books[following.books.length - 1]._id} >
+            <Link to={"/book/"+following.books[following.books.length - 1]._id}>
+              <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
             </Link>
         </section>
       )}
@@ -95,6 +95,12 @@ export default function HomePage(){
       <div className="content">
         <UserDropDown setEmail={setCurrentUser}/>
 
+        <div className="book-row">
+          <h2 className="book-row-title">Latest From Friends</h2>
+          <div className="row">
+            <FriendBookList/>
+          </div>
+        </div>
 
         <div className="book-row">
           <h2 className="book-row-title">Books I've read</h2>
@@ -112,12 +118,7 @@ export default function HomePage(){
           
         </div>
 
-        <div className="book-row">
-          <h2 className="book-row-title">Latest From Friends</h2>
-          <div className="row">
-            <FriendBookList/>
-          </div>
-        </div>
+        
 
       </div>
     </div>
