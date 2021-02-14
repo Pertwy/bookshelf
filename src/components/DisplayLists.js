@@ -18,7 +18,11 @@ export default function DisplayList(props) {
 
 
   return (
+
+    
+
     <div>
+      {console.log(props)}
         {props.lists.map(list => (
             <UsersExistingLists list={list}/>
           ))}

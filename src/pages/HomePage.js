@@ -12,6 +12,7 @@ export default function HomePage(){
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [adminLists, setAdminLists] = useState([])
+  const [listSize, setListSize] = useState(6)
 
   useEffect(() => {
 
@@ -34,7 +35,8 @@ export default function HomePage(){
 
 
   function BookList() {
-    return (userData.books.map(currentBook => {
+
+    return (userData.books.slice(0, listSize).map(currentBook => {
 
       const {title, author, image,  _id} = currentBook
       return (

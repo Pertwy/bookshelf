@@ -44,6 +44,17 @@ router.post('/add', async (req, res) => {
 
 
 
+router.post('/addreview', async (req, res) => {
+
+    let CurrentBook =  await Book.findById(req.body._id)
+    CurrentBook.reviews.push({"author":"6016f1e48710bd08b885d2b0", "review":req.body.review})
+    await CurrentBook.save();
+
+    res.send(CurrentBook.reviews);
+});
+
+
+
 
 //this shit works
 // router.route('/add').post((req, res) => {

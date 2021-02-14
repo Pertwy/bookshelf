@@ -125,17 +125,17 @@ router.put('/addBookToUser', async (req, res) => {
         book.numberOfTimesRead += 1
         await user.save()
         await book.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Book updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
         let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        newBook.numberOfTimesRead += 1
         newBook = await newBook.save();
         
         user.books.push(newBook._id)
-    
         await user.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Book! updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
