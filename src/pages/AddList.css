@@ -10,7 +10,7 @@
   
 }
 
-img:hover + .button, .button:hover {
+.link:hover + .button, .button:hover {
   /* display: inline-block; */
   visibility: visible;
 }

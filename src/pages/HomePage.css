@@ -60,8 +60,9 @@
 }
 
 .book{
-  padding-left: 15px;
+  /* padding-left: 15px; */
   padding-right:10px;
+  padding-top:10px;
  
 }
 
@@ -74,8 +75,6 @@
 .book-card{
   margin: 0;
   border: 0;
-  
-  
 }
 
 .card-img-top{
@@ -83,9 +82,17 @@
 }
 
 .book-row{
-  padding-top: 20px;
+  
+  border-top-style: solid;
+  border-width: 3px
+ }
+
+.book-row-section{
+  padding-top: 40px;
 }
 
 .book-row-title{
-  padding-bottom: 10px;
+  font-size:medium;
+ 
+  /* padding-bottom: 10px; */
 }

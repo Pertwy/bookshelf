@@ -38,9 +38,9 @@ export default function Navbar() {
             <Link to="/profile" className="nav-link">Profile</Link>
             </li>
 
-            <li className="navbar-item" >
+            {/* <li className="navbar-item" >
             <Link to={"/user/"+"6016f1e48710bd08b885d2b0"} className="nav-link">User</Link>
-            </li>
+            </li> */}
 
           </ul>
         </div>

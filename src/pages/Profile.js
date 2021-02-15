@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -39,11 +40,10 @@ export default function Profile(){
 
   function handleDeleteBook(_id){
     let info = {"book":_id, "currentUser":currentUser}
-
     
       axios.post('http://localhost:5000/testusers/removefavorite', info)
           .then(response => (console.log(response.data)))
-      setUpdate(update+1)    // .then(console.log(userData))
+    
     
     // if(type == "books"){
     //   axios.post('http://localhost:5000/testusers/removebook', info)
@@ -67,21 +67,30 @@ export default function Profile(){
       const {title, author, image,  _id} = currentBook
       return (
 
-        <section key={_id} >
-          <div className="card book-card">
+        <section className="book" key={_id} >
+          <Link className="link" to={"/book/"+_id}>
             <img className="card-img-top" src={image} alt={title}></img>
-            <div className="button">
-              <button onClick={() => handleDeleteBook(_id)}>Remove</button>
-            </div> 
-            
-            <div className="card-body">
-              <h4 className="card-title">{title}</h4>
-              <p className="card-text">{author}</p>
-            </div>
-            
-            
-          </div>
+          </Link>
+
+          <div className="button">
+            <button onClick={() => handleDeleteBook(_id)}>Remove</button>
+          </div> 
         </section>
+
+        // <section key={_id} >
+        //   <div className="card book-card">
+        //     <img className="card-img-top" src={image} alt={title}></img>
+            // <div className="button">
+            //   <button onClick={() => handleDeleteBook(_id)}>Remove</button>
+            // </div> 
+            
+        //     <div className="card-body">
+        //       <h4 className="card-title">{title}</h4>
+        //       <p className="card-text">{author}</p>
+        //     </div>
+                       
+        //   </div>
+        // </section>
       )
     })
   )}
@@ -133,25 +142,33 @@ export default function Profile(){
       </div>
 
       
-
-      <h3>Favorites</h3>
-      <div className="row">
-        <BookList books={userData.favorites} type="favorites"/>
+        
+      <div className="book-row-section">
+        <h3 className="book-row-title" >Favorites</h3>
+        <div className="row book-row">
+          <BookList books={userData.favorites} type="favorites"/>
+        </div>
       </div>
 
-      <h3>Books I've read</h3>
-      <div className="row">
-        <BookList books={userData.books} type="books"/>
+      <div className="book-row-section">
+        <h3 className="book-row-title" >Books I've read</h3>
+        <div className="row book-row">
+          <BookList books={userData.books} type="books"/>
+        </div>
       </div>
 
-      <h3>Reading List</h3>
-      <div className="row">
-        <BookList books={userData.readList} type="readList"/>
+      <div className="book-row-section">
+        <h3 className="book-row-title">Reading List</h3>
+        <div className="row book-row">
+          <BookList books={userData.readList} type="readList"/>
+        </div>
       </div>
 
-      <h3>Lists</h3>
-      <div className="row">
-        <DisplayList lists={userData.lists}/>
+      <div className="book-row-section">
+        <h3 className="book-row-title" >Lists</h3>
+        <div className="row book-row">
+          <DisplayList lists={userData.lists}/>
+        </div>
       </div>
 
     
