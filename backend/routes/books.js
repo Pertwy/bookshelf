@@ -17,6 +17,11 @@ router.route("/").get((req, res) => {
 
 router.route("/:_id").get((req, res) => {
     Book.findById(req.params._id)
+        // .populate("reviews")
+        .populate({
+            path: 'reviews',
+            populate: { path: 'author' }
+        })
         .then(book => res.json(book))
         .catch(err => res.status(400).json("Error " + err))
 })
@@ -44,14 +49,14 @@ router.post('/add', async (req, res) => {
 
 
 
-router.post('/addreview', async (req, res) => {
+// router.post('/addreview', async (req, res) => {
 
-    let CurrentBook =  await Book.findById(req.body._id)
-    CurrentBook.reviews.push({"author":"6016f1e48710bd08b885d2b0", "review":req.body.review})
-    await CurrentBook.save();
+//     let CurrentBook =  await Book.findById(req.body._id)
+//     CurrentBook.reviews.push({"author":"6016f1e48710bd08b885d2b0", "review":req.body.review})
+//     await CurrentBook.save();
 
-    res.send(CurrentBook.reviews);
-});
+//     res.send(CurrentBook.reviews);
+// });
 
 
 

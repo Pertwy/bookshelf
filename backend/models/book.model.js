@@ -9,51 +9,48 @@ const bookSchema = new Schema({
     image:{type: String, required: true},
     numberOfTimesRead:{type:Number, default:0},
     numberOfTimesFavorited:{type:Number, default:0},
-    reviews:[{
-      author: {
+    reviews:[ {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
-      },
-      review: String
+        ref: "Review" //This is the Schema name
     }],
     rating:{
-      1:[{
+      one:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      2:[{
+      two:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      3:[{
+      three:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      4:[{
+      four:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      5:[{
+      five:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      6:[{
+      six:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      7:[{
+      seven:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      8:[{
+      eight:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      9:[{
+      nine:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }],
-      10:[{
+      ten:[{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Testuser" //This is the Schema name
       }]

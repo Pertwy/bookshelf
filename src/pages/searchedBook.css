@@ -1,0 +1,18 @@
+
+.buttonDiv {
+  /* visibility: hidden; */
+  position: relative;
+  bottom: 80px;
+  left:20px;
+  z-index:100;
+  
+}
+
+/* .img:hover + .buttonDiv, .buttonDiv:hover {
+   display: inline-block; 
+  visibility: visible;
+} */
+
+button{
+  display: block;
+}

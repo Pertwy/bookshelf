@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
-import "./AddList.css"
+import "./searchedBook.css"
 
 export default function AddBook() {
 
@@ -79,7 +79,8 @@ export default function AddBook() {
     return(
       <div className="d-inline-block" >
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
-        <div className="button">
+        
+        <div className="buttonDiv">
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
           <button onClick={() => handleAddBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
