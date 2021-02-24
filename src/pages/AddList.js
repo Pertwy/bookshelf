@@ -4,7 +4,8 @@ import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 import DisplayList from "../components/DisplayLists"
-import "./AddList.css"
+// import "./AddList.css"
+import "./searchedBook.css"
 
 export default function AddList() {
 
@@ -135,7 +136,7 @@ const UsersExistingLists = ({list}) => {
     return(
       <div className="d-inline-block">
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
-          <div className="button">
+          <div className="buttonDiv">
             <button onClick={() => handleBook(book)}>Add To List</button>
             {/* <button onClick={handleAddBook}>Add To List</button> */}
           </div>  
