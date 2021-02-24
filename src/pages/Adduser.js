@@ -1,10 +1,18 @@
 import React, { useState} from 'react';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
+import { makeStyles } from '@material-ui/core/styles';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 export default function Adduser(){
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
+  const [bio, setBio] = useState("");
+  const [userName, setUserName] = useState("");
+  const [givenName, setGivenName] = useState("");
+  const [surname, setSurname] = useState("")
+  const [pronoun, setPronoun] = useState("")
   
 
   function newUserInDB(){
@@ -25,29 +33,46 @@ export default function Adduser(){
     newUserInDB()      
   } 
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      '& > *': {
+        margin: theme.spacing(1),
+        width: '50ch',
+      },
+    },
+    input:{
+      display:"block"
+    }
+  }));
+
+  const classes = useStyles();
 
   return (
     <div>
-      <h3>Add a user</h3>
-      <div>    
-        <form onSubmit={handleSignUp}>
-            <input
-                type="text"
-                onChange={({ target }) =>     
-                  setName(target.value)}
-                placeholder="Name"
-            />
-            <br />
-            <input
-                type="text"
-                onChange={({ target }) =>     
-                  setEmail(target.value)}
-                placeholder="Email"
-            />
-            <br />
-            <button type="submit">
+      
+      <div className="d-flex container justify-content-center">  
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSignUp}>
+            <h3 className={classes.input}>Create an account</h3>  
+            <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
+                  setName(target.value)} id="standard-basic" label="Name" />
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setEmail(target.value)} id="standard-basic" label="Email" />
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setBio(target.value)} id="standard-basic" label="Bio" />
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setUserName(target.value)} id="standard-basic" label="User Name" />
+            {/* <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setGivenName(target.value)} id="standard-basic" label="Given Name" />
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setSurname(target.value)} id="standard-basic" label="Surname" /> */}
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setPronoun(target.value)} id="standard-basic" label="Pronoun" />
+            {/* <button type="submit">
                 Sign up
-            </button>
+            </button> */}
+            <Button type="submit" variant="outlined">
+              Sign Up
+            </Button>
         </form>
 
       </div>

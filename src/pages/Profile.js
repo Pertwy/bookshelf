@@ -144,28 +144,28 @@ export default function Profile(){
       
         
       <div className="book-row-section">
-        <h3 className="book-row-title" >Favorites</h3>
+        <h3 className="book-row-title" >FAVORITES</h3>
         <div className="row book-row">
           <BookList books={userData.favorites} type="favorites"/>
         </div>
       </div>
 
       <div className="book-row-section">
-        <h3 className="book-row-title" >Books I've read</h3>
+        <h3 className="book-row-title" >BOOKS I'VE READ</h3>
         <div className="row book-row">
           <BookList books={userData.books} type="books"/>
         </div>
       </div>
 
       <div className="book-row-section">
-        <h3 className="book-row-title">Reading List</h3>
+        <h3 className="book-row-title">READING LIST</h3>
         <div className="row book-row">
           <BookList books={userData.readList} type="readList"/>
         </div>
       </div>
 
       <div className="book-row-section">
-        <h3 className="book-row-title" >Lists</h3>
+        <h3 className="book-row-title" >LISTS</h3>
         <div className="row book-row">
           <DisplayList lists={userData.lists}/>
         </div>

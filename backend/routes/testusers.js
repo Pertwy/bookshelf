@@ -2,6 +2,7 @@ const router = require("express").Router();
 let {Testuser} = require("../models/testuser.model")
 let {Book} = require("../models/book.model")
 let {List} = require("../models/list.model")
+const {Review} = require("../models/review.model")
 const _ = require("lodash")
 const config = require("config")
 const auth = require("../middleware/auth")
@@ -42,6 +43,7 @@ router.get("/:_id", async (req, res) => {
         .populate("readList")
         .populate("lists") 
         .populate("following")
+        
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
@@ -222,5 +224,76 @@ router.put('/createBookAndAddToUser', auth, async (req, res) => {
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));        
 });
+
+
+router.post('/addreview', async (req, res) => {
+
+
+    //Find user
+    let user = await Testuser.findOne({email: req.body.email})
+    
+    //Find book
+    let CurrentBook =  await Book.findById(req.body._id)
+    
+    //New Review
+    const book = req.body._id;
+    const author = user._id;
+    const review = req.body.review;
+    const rating = req.body.rating;
+
+    const newReview = new Review({
+        book,
+        author,
+        review,
+        rating
+    });
+    await newReview.save()
+
+    
+    //Push review ID to user and book
+    CurrentBook.reviews.push(newReview._id)
+    user.reviews.push(newReview._id)
+
+    if(rating === "1"){
+        CurrentBook.rating.one.push(author)
+    }
+    if(rating === "2"){
+        CurrentBook.rating.two.push(author)
+    }
+    if(rating === "3"){
+        CurrentBook.rating.three.push(author)
+    }
+    if(rating === "4"){
+        CurrentBook.rating.four.push(author)
+    }
+    if(rating === "5"){
+        CurrentBook.rating.five.push(author)
+    }
+    if(rating === "6"){
+        CurrentBook.rating.six.push(author)
+    }
+    if(rating === "7"){
+        CurrentBook.rating.seven.push(author)
+    }
+    if(rating === "8"){
+        CurrentBook.rating.eight.push(author)
+    }
+    if(rating === "9"){
+        CurrentBook.rating.nine.push(author)
+    }
+    if(rating === "10"){
+        CurrentBook.rating.ten.push(author)
+    }
+
+
+
+    await CurrentBook.save()
+    await user.save()
+        .then(() => res.json('review added'))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+
 
   module.exports = router;

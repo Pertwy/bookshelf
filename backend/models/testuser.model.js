@@ -1,4 +1,5 @@
 const config = require('config');
+const { string } = require('joi');
 const mongoose = require('mongoose');
 
 const testuserSchema = new mongoose.Schema({
@@ -23,31 +24,33 @@ const testuserSchema = new mongoose.Schema({
   },
 
 
+
   followers:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Testuser" //This is the Schema name
   }],
-
-
   following:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Testuser" //This is the Schema name
   }],
 
 
-  // books:[{book:{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "Book" //This is the Schema name
-  //   },
-  //   rating:{type:Number},
-  //   review:{type:String}
-  // }],
+
+  reviews:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Review" //This is the Schema name
+  }],
+  likes:[{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Book" //This is the Schema name
+  }],
+
+
 
   books:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
   }],
-
   readList:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
@@ -60,6 +63,8 @@ const testuserSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "Book" //This is the Schema name
   }],
+
+
   lists:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "List" //This is the Schema name
