@@ -9,6 +9,10 @@ const bookSchema = new Schema({
     image:{type: String, required: true},
     numberOfTimesRead:{type:Number, default:0},
     numberOfTimesFavorited:{type:Number, default:0},
+    bookshelf:[ {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Testuser" //This is the Schema name
+    }],
     reviews:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review" //This is the Schema name

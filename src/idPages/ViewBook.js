@@ -65,7 +65,7 @@ export default function ViewBook(props){
             type="text"
             onChange={({ target }) =>     
               setReview(target.value)}
-            placeholder="Name"
+            placeholder="Add a Review"
           />
           <FormControl className="row" component="fieldset">
             <FormLabel component="legend">Rating</FormLabel>

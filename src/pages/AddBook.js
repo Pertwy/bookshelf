@@ -84,6 +84,7 @@ export default function AddBook() {
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
           <button onClick={() => handleAddBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
+          <button onClick={() => handleAddReadList(book)}>Bookshelf</button>
         </div> 
       </div>
     )
