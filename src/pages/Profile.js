@@ -7,6 +7,7 @@ import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
 import DisplayList from '../components/DisplayLists';
 import "./AddList.css"
+import {produce} from "immer"
 
 export default function Profile(){
   const [books, setBooks] = useState([])  
@@ -44,7 +45,31 @@ export default function Profile(){
       axios.post('http://localhost:5000/testusers/removefavorite', info)
           .then(response => (console.log(response.data)))
     
-    
+
+      // setUserData(userData.favorites.filter(function(element){
+      //   return element._id !== _id
+      // }))
+
+      const fave = userData.favorites.filter(fave => fave._id !== _id);
+
+      const data = userData
+      data.favorites = fave
+      
+      console.log(data)
+      setUserData(data)
+      console.log(userData)
+      //console.log(userData.favorites.indexOf(fave))
+      //console.log(userData.favorites.indexOf())
+
+      // return produce(state, draftState => {
+      //   const index = draftState.redux.savers.findIndex(saver => saver.id === action.payload.id)
+      //   delete draftState.redux.savers[index]
+      //   draftState.redux.savers = draftState.redux.savers.filter(function( element ) {
+      //       return element !== undefined;
+      //     });
+      // })
+
+
     // if(type == "books"){
     //   axios.post('http://localhost:5000/testusers/removebook', info)
     //       .then(response => (console.log(response.data)))

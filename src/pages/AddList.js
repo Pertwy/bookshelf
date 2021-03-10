@@ -32,7 +32,6 @@ export default function AddList() {
       let email = {"email":currentUser}
       axios.post('http://localhost:5000/testusers/grablists',email)
         .then(response => (setLists(response.data.lists)))
-        .then(console.log(lists))
     }
   },[currentUser, addModal])
   
@@ -65,7 +64,7 @@ export default function AddList() {
     const authorArray = Book.volumeInfo.authors
     const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
     setListBooks([...listBooks, newBook])
-    console.log(listBooks)
+    // console.log(listBooks)
   }
 
 
@@ -73,6 +72,7 @@ export default function AddList() {
   //Adds a new Book to the Book schema
   async function handleAddBook(){
     let info = {"book":selectedBook, "email":currentUser}
+    
     try{
     axios.put('http://localhost:5000/testusers/addBookToUser', info)
       .then(res => { console.log(res)});
@@ -87,8 +87,11 @@ export default function AddList() {
   //Adds a new List to the Book schema
   async function handleAddList(e){
     e.preventDefault()
-
     let info = {"books":listBooks, "email":currentUser, "title":listName}
+    let test = {"books":listBooks, "title":listName}
+    setLists([...lists, test])
+    console.log(lists)
+    
     try{
     axios.put('http://localhost:5000/testusers/addListToUser', info)
       .then(res => { console.log(res)});
@@ -216,8 +219,6 @@ const UsersExistingLists = ({list}) => {
                 {result.map(book => (
                   <SearchedBook book={book}/>
                 ))}
-
-
 
             </div>
           </div>{/*End of Right Div*/}
