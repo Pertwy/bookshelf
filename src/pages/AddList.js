@@ -5,7 +5,6 @@ import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 import DisplayList from "../components/DisplayLists"
 import "./AddList.css"
-// import "./searchedBook.css"
 
 export default function AddList() {
 
