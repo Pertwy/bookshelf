@@ -5,11 +5,8 @@ import "./Navbar.css"
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
 
 export default function Navbar() {
 
@@ -39,18 +36,10 @@ export default function Navbar() {
       <div className= "container-fullwidth">
       <nav className= "space-between navrow navbar navbar-dark bg-dark navbar-expand-lg">
 
-        {/* <div>
-          <h3 className="Bookshelf">Bookshelf</h3>
-        </div> */}
-
         
         <div className="collpase navbar-collapse">
           <Link to="/" className="navbar-brand">Bookshelf</Link>
           <ul className="navbar-nav mr-auto">
-
-            {/* <li className="navbar-item">
-            <Link to="/auth" className="nav-link">Auth</Link>
-            </li> */}
             
             <li className="navbar-item">
             <Link to="/test" className="nav-link">Add a user</Link>
@@ -67,10 +56,6 @@ export default function Navbar() {
             <li className="navbar-item">
             <Link to="/profile" className="nav-link">Profile</Link>
             </li>
-
-            {/* <li className="navbar-item" >
-            <Link to={"/user/"+"6016f1e48710bd08b885d2b0"} className="nav-link">User</Link>
-            </li> */}
 
           <Paper component="form" className={classes.root}>
             
