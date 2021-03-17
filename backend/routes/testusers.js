@@ -75,6 +75,7 @@ router.put('/addListToUser', async (req, res) => {
 });
 
 
+//Add book to favorites
 router.put('/addFavorite', async (req, res) => {
     
     let user = await Testuser.findOne({email: req.body.email})
@@ -101,6 +102,7 @@ router.put('/addFavorite', async (req, res) => {
 });
 
 
+//Add book to bookshelf
 router.put('/addBookshelf', async (req, res) => {
     
     let user = await Testuser.findOne({email: req.body.email})
@@ -126,7 +128,7 @@ router.put('/addBookshelf', async (req, res) => {
     }
 });
 
-
+//Add a book to ReadList
 router.put('/addReadList', async (req, res) => {
     let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
     newBook = await newBook.save();
@@ -140,6 +142,7 @@ router.put('/addReadList', async (req, res) => {
 });
 
 
+//Add book to books read
 router.put('/addBookToUser', async (req, res) => {
     //console.log(req.body)
     
@@ -167,6 +170,7 @@ router.put('/addBookToUser', async (req, res) => {
 });
 
 
+//Follow another user
 router.post('/follow', async (req, res) => {
     let follow = await Testuser.findOne({email: req.body.follow})
     
@@ -179,7 +183,7 @@ router.post('/follow', async (req, res) => {
 });
 
 
-
+//REmove favorite book from user
 router.post('/removefavorite', async (req, res) => {
     let user = await Testuser.findOne({email: req.body.currentUser})
 
@@ -191,6 +195,7 @@ router.post('/removefavorite', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Remove book from Read
 router.post('/removebook', async (req, res) => {
     let user = await Testuser.findOne({email: req.body.currentUser})
 
@@ -202,6 +207,7 @@ router.post('/removebook', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
+//Remove book from readList 
 router.post('/removereadlist', async (req, res) => {
     let user = await Testuser.findOne({email: req.body.currentUser})
 
@@ -214,7 +220,7 @@ router.post('/removereadlist', async (req, res) => {
 });
 
 
-
+//Delete user by ID
 router.route('/:id').delete((req, res) => {
     User.findByIdAndDelete(req.params.id)
         .then(() => res.json('User deleted.'))
@@ -250,6 +256,7 @@ router.put('/createBookAndAddToUser', auth, async (req, res) => {
 });
 
 
+//Add a review. Includes rating
 router.post('/addreview', async (req, res) => {
 
 
