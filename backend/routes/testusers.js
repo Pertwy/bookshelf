@@ -9,6 +9,7 @@ const auth = require("../middleware/auth")
 const express = require('express');
 
 
+//Return user data with fields populated
 router.post('/', async (req, res) => {
     let user = await Testuser.findOne({email: req.body.email})
         .populate("books")
@@ -27,15 +28,14 @@ router.post('/', async (req, res) => {
 });
 
 
-
-
-
+//Find all test users - For drop down
 router.get("/all", async (req, res) => {
     Testuser.find()
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
 
+//Get Test user info by id
 router.get("/:_id", async (req, res) => {
     Testuser.findById(req.params._id)
         .populate("books")
@@ -48,7 +48,7 @@ router.get("/:_id", async (req, res) => {
         .catch(err => res.status(400).json("Error " + err))
 })
 
-
+//Find a users lists
 router.post('/grablists', async (req, res) => {
     const user = await Testuser.findOne({email: req.body.email})
         .populate("lists") //This is the field name
@@ -58,8 +58,8 @@ router.post('/grablists', async (req, res) => {
 });
 
 
+//Add a list 
 router.put('/addListToUser', async (req, res) => {
-
 
     let user = await Testuser.findOne({email: req.body.email})
     console.log(user)
