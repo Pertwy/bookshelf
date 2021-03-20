@@ -38,14 +38,79 @@ router.post('/add', async (req, res) => {
     let salt = await bcrypt.genSalt(10)
     newUser.password = await bcrypt.hash(newUser.password, salt)
     
+    //const token = jwt.sign({_id: newUser._id}, config.get('jwtPrivateKey'))
     let token = newUser.generateAuthToken();
     
     await newUser.save()
-        .then(() => res.header("x-auth-token", token).send(_.pick(newUser, ["_id", "email", "name"])))
+        .then(() => res.cookie("token", token, {httpOnly: true}).send(_.pick(newUser, ["_id", "email", "name"])))
 
     // res.header("x-auth-token", token).send(_.pick(user, ["_id", "name", "email"]))
     //res.send(user)
   });
+
+
+
+// log in
+
+router.post("/login", async (req, res) => {
+    try {
+      const { email, password } = req.body;
+  
+      // validate
+  
+      if (!email || !password)
+        return res
+          .status(400)
+          .json({ errorMessage: "Please enter all required fields." });
+  
+      const existingUser = await User.findOne({ email });
+      if (!existingUser)
+        return res.status(401).json({ errorMessage: "Wrong email or password." });
+  
+      const passwordCorrect = await bcrypt.compare(
+        password,
+        existingUser.passwordHash
+      );
+      if (!passwordCorrect)
+        return res.status(401).json({ errorMessage: "Wrong email or password." });
+  
+      // sign the token
+  
+      const token = jwt.sign(
+        {
+          user: existingUser._id,
+        },
+        process.env.JWT_SECRET
+      );
+  
+      // send the token in a HTTP-only cookie
+  
+      res
+        .cookie("token", token, {
+          httpOnly: true,
+          secure: true,
+          sameSite: "none",
+        })
+        .send();
+    } catch (err) {
+      console.error(err);
+      res.status(500).send();
+    }
+  });
+  
+  router.get("/logout", (req, res) => {
+    res
+      .cookie("token", "", {
+        httpOnly: true,
+        expires: new Date(0),
+        secure: true,
+        sameSite: "none",
+      })
+      .send();
+  });
+
+
+
 
 
 router.route('/:id').delete((req, res) => {

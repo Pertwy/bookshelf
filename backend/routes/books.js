@@ -49,6 +49,22 @@ router.post('/add', async (req, res) => {
 
 
 
+router.post('/addd', auth, async (req, res) => {
+    // const { error } = validate(req.body); 
+    // if (error) return res.status(400).send(error.details[0].message);
+  
+    let newBook = new Book(_.pick(req.body, ["title", "author", "image"]))
+    newBook = await newBook.save();
+
+    //add to user here
+    //add as a transaction
+    console.log(req.user.email)
+
+    res.send(newBook._id);
+});
+
+
+
 // router.post('/addreview', async (req, res) => {
 
 //     let CurrentBook =  await Book.findById(req.body._id)

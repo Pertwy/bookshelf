@@ -3,6 +3,7 @@ const express = require('express')
 const cors = require('cors')
 const config = require("config")
 const mongoose = require('mongoose')
+const cookieParser = require('cookie-parser')
 require('dotenv').config()
 
 const app = express()
@@ -16,6 +17,7 @@ if (!config.get('jwtPrivateKey')){
 
 app.use(cors())
 app.use(express.json())
+app.use(cookieParser())
 
 
 const uri = process.env.ATLAS_URI
