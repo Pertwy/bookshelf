@@ -16,7 +16,16 @@ router.post('/', async (req, res) => {
     //const token = jwt.sign({_id: user._id}, config.get('jwtPrivateKey'))
 
     const token = user.generateAuthToken();
-    res.send(token)
+    try{
+        res
+        .cookie("token", token, {
+        httpOnly: true
+        })
+        .send();
+    } catch (err) {
+    console.error(err);
+    res.status(500).send();
+    }
 });
 
 module.exports = router;

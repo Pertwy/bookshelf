@@ -13,6 +13,7 @@ export default function Adduser(){
   const [givenName, setGivenName] = useState("");
   const [surname, setSurname] = useState("")
   const [pronoun, setPronoun] = useState("")
+  const [password, setPassword] = useState("")
   
 
   function newUserInDB(){
@@ -27,6 +28,20 @@ export default function Adduser(){
         console.error(e)
       }
   }
+
+  function handleLogin(){
+
+    let user = {"email":email, "password":password}
+
+    try{
+      axios.post('http://localhost:5000/auth/', user, {withCredentials: true, credentials: 'include'})
+        .then(res => console.log(res.data));
+      }catch(e){
+        console.error(e)
+      }
+  }
+
+
 
   function handleSignUp(e) {
     e.preventDefault();
@@ -72,6 +87,20 @@ export default function Adduser(){
             </button> */}
             <Button type="submit" variant="outlined">
               Sign Up
+            </Button>
+        </form>
+
+        <form className={classes.root} noValidate autoComplete="off" onSubmit={handleSignUp}>
+            <h3 className={classes.input}>Login</h3>  
+
+            <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
+                  setEmail(target.value)} id="standard-basic" label="Email" />
+
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setPassword(target.value)} id="standard-basic" label="Password" />
+
+            <Button onClick={() => handleLogin()} variant="outlined">
+              Log in
             </Button>
         </form>
 

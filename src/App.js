@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import axios from "axios"
 
 import Navbar from "./components/Navbar"
 import HomePage from "./pages/HomePage"
@@ -11,6 +12,8 @@ import AddList from "./pages/AddList"
 import ViewBook from "./idPages/ViewBook"
 import ViewUser from "./idPages/ViewUser"
 // import FireAuth from "./components/fireAuth"
+
+axios.defaults.withCredentials = true
 
 function App() {
   return (
