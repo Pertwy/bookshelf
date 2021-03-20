@@ -42,6 +42,22 @@ export default function AddBook() {
     }
   }
 
+
+  async function handleAddAuthBook(book){
+
+    const authorArray = book.volumeInfo.authors
+    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+
+    let info = {"book":newBook}
+    try{
+    axios.post('http://localhost:5000/books/addd', info)
+      .then(res => { console.log(res)});
+    }catch(e){
+      console.error(e)
+    }
+  }
+
+
   
   async function handleAddFavorite(book){
 
@@ -82,7 +98,7 @@ export default function AddBook() {
         
         <div className="buttonDiv">
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
-          <button onClick={() => handleAddBook(book)}>Read</button>
+          <button onClick={() => handleAddAuthBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
           <button onClick={() => handleAddReadList(book)}>Bookshelf</button>
         </div> 
