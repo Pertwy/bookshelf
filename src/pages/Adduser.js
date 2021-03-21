@@ -18,8 +18,9 @@ export default function Adduser(){
 
   function newUserInDB(){
     let newUser = {
-      "email":email, "name":name
+      "email":email, "name":name, "password":password
     }
+    console.log(newUser)
 
     try{
       axios.post('http://localhost:5000/testusers/add', newUser)
@@ -70,16 +71,24 @@ export default function Adduser(){
             <h3 className={classes.input}>Create an account</h3>  
             <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
                   setName(target.value)} id="standard-basic" label="Name" />
+
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setEmail(target.value)} id="standard-basic" label="Email" />
+
+            <TextField fullWidth className={classes.input} onChange={({ target }) =>     
+                  setPassword(target.value)} id="standard-basic" label="Password" />
+
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setBio(target.value)} id="standard-basic" label="Bio" />
+
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setUserName(target.value)} id="standard-basic" label="User Name" />
+
             {/* <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setGivenName(target.value)} id="standard-basic" label="Given Name" />
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setSurname(target.value)} id="standard-basic" label="Surname" /> */}
+
             <TextField fullWidth className={classes.input} onChange={({ target }) =>     
                   setPronoun(target.value)} id="standard-basic" label="Pronoun" />
             {/* <button type="submit">
