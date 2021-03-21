@@ -5,10 +5,10 @@ let {List} = require("../models/list.model")
 const {Review} = require("../models/review.model")
 const _ = require("lodash")
 const config = require("config")
-const auth = require("../middleware/auth")
 const express = require('express');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
+const auth = require("../middleware/auth")
 
 //Add user
 router.post('/add', async (req, res) => {
@@ -95,10 +95,14 @@ router.put('/addListToUser', async (req, res) => {
 });
 
 
-//Add book to favorites
-router.put('/addFavorite', async (req, res) => {
+//Add book to favorites///////////////////////////////////////////////////////////////////////////////////
+router.put('/addFavorite', auth, async (req, res) => {
     
-    let user = await Testuser.findOne({email: req.body.email})
+    //console.log(req.user)
+
+    let user = await Testuser.findOne({email: req.user.email})
+
+    //let user = await Testuser.findOne({email: req.body.email})
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
     
     if(book) {
