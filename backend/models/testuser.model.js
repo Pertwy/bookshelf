@@ -1,6 +1,7 @@
-const config = require('config');
 const { string } = require('joi');
 const mongoose = require('mongoose');
+const config = require('config');
+const jwt = require('jsonwebtoken');
 
 const testuserSchema = new mongoose.Schema({
   name: {
@@ -15,6 +16,12 @@ const testuserSchema = new mongoose.Schema({
     minlength: 5,
     maxlength: 255,
     unique: true
+  },
+  password:{
+    type: String,
+    required: true,
+    minlength: 5,
+    maxlength: 255
   },
   bio:{
     type: String,
@@ -74,6 +81,11 @@ const testuserSchema = new mongoose.Schema({
     ref: "Bookclub" //This is the Schema name
   }]
 });
+
+testuserSchema.methods.generateAuthToken = function() { 
+  const token = jwt.sign({ _id: this._id, email: this.email }, config.get('jwtPrivateKey'));
+  return token;
+}
 
 const Testuser = mongoose.model('Testuser', testuserSchema);
 
