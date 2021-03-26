@@ -12,7 +12,7 @@ import {produce} from "immer"
 export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
-  const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
+  const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [follow, setFollow] = useState("")
   const [update, setUpdate] = useState(0)
 
@@ -137,67 +137,88 @@ export default function Profile(){
     <div className="container">
       <UserDropDown setEmail={setCurrentUser}/>
 
-      <div className="py-5 row container-fluid">
-        
-        <div className="col-sm-5 row">
-          <h1 className="pr-5">Photo</h1>
 
-          <div>
-            <h4>Name: {userData.name}</h4>
-            <h4>Email: {userData.email}</h4>
-            <h4>Bio: {userData.bio}</h4>
+        
+        <div className="profile-container pt-5 pb-5 container-fluid row">
+          <div className="col-sm-2">
+            <h1 className="pr-5">Photo</h1>
+          </div>
+
+          <div className="col-sm-8">
+            <h4>{userData.name}</h4>
+            <p>{userData.bio}</p>
+          </div>
+
+          <div className="col-sm-2">
+            <p>Bookshelf {userData.bookshelf.length}</p>
+            <p>Read {userData.books.length}</p>
+            <p>Followers {userData.followers.length}</p>
+            <p>Following {userData.following.length}</p>
           </div>
         </div>
 
-
-        <div className="col-sm-5">
-          <h4>Follow another user</h4>
-          <UserDropDown setEmail={setFollow}/>
-          <button onClick={() => handleFollow()}>Follow</button>
-        </div>
-
-
-        <div className="col-sm-2">
-          <h4>Following</h4>
-          <ul>
-            <FollowingList following={userData.following}/>
-          </ul>
-        </div>
-
-      </div>
-
       
-        
-      <div className="book-row-section">
-        <h3 className="book-row-title" >FAVORITES</h3>
-        <div className="row book-row">
-          <BookList books={userData.favorites} type="favorites"/>
+
+      <div className="content-container pt-5 pb-5 container-fluid row">
+
+      <div className="col-sm-8">
+        <div className="book-row-section">
+          <h3 className="book-row-title" >FAVORITES</h3>
+          <div className="row book-row">
+            <BookList books={userData.favorites} type="favorites"/>
+          </div>
+        </div>
+
+        <div className="book-row-section">
+          <h3 className="book-row-title" >BOOKS I'VE READ</h3>
+          <div className="row book-row">
+            <BookList books={userData.books} type="books"/>
+          </div>
+        </div>
+
+        <div className="book-row-section">
+          <h3 className="book-row-title">READING LIST</h3>
+          <div className="row book-row">
+            <BookList books={userData.readList} type="readList"/>
+          </div>
+        </div>
+
+        <div className="book-row-section">
+          <h3 className="book-row-title" >LISTS</h3>
+          <div className="row book-row">
+            <DisplayList lists={userData.lists}/>
+          </div>
         </div>
       </div>
 
-      <div className="book-row-section">
-        <h3 className="book-row-title" >BOOKS I'VE READ</h3>
-        <div className="row book-row">
-          <BookList books={userData.books} type="books"/>
-        </div>
-      </div>
 
-      <div className="book-row-section">
-        <h3 className="book-row-title">READING LIST</h3>
-        <div className="row book-row">
-          <BookList books={userData.readList} type="readList"/>
-        </div>
-      </div>
+      <div className="col-sm-4">
+        <div >
+            <h4>Follow another user</h4>
+            <UserDropDown setEmail={setFollow}/>
+            <button onClick={() => handleFollow()}>Follow</button>
+          </div>
 
-      <div className="book-row-section">
-        <h3 className="book-row-title" >LISTS</h3>
-        <div className="row book-row">
-          <DisplayList lists={userData.lists}/>
-        </div>
-      </div>
 
+          <div >
+            <h4>Following</h4>
+            <ul>
+              <FollowingList following={userData.following}/>
+            </ul>
+          </div>
+
+          <div className="border border-left-0 border-right-0 border-top-0">
+            <h4>Read List</h4>
+          </div>
+          <div className="border border-left-0 border-right-0 border-top-0">
+            <h4>Diary</h4>
+          </div>
+          <div className="border border-left-0 border-right-0 border-top-0">
+            <h4>Lists</h4>
+          </div>
+      </div>
     
-      
+      </div>
       {/* {userData.books.map((currentBook) => {
                 const {title, author, image,  _id} = currentBook
                 return (
