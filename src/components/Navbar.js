@@ -47,15 +47,15 @@ export default function Navbar() {
         
         <div className="collpase navbar-collapse">
           <Link to="/" className="navbar-brand">Bookshelf</Link>
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav ml-auto">
             
             <li className="navbar-item">
-            <Link to="/test" className="nav-link">Add a user</Link>
+            <Link to="/test" className="nav-link">Sign In/Up</Link>
             </li>
 
-            <li className="navbar-item">
+            {/* <li className="navbar-item">
             <Link to="/booksearch" className="nav-link">Book Search</Link>
-            </li>
+            </li> */}
 
             <li className="navbar-item">
             <Link to="/lists" className="nav-link">Lists</Link>
@@ -67,8 +67,9 @@ export default function Navbar() {
 
             <Link to={"/searchresults/"+search}>Search</Link>
 
+
+
           <Paper component="form" className={classes.root} onSubmit={()=> handleSearch()} >
-          
             <InputBase
               className={classes.input}
               placeholder="Search"
