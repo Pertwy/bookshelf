@@ -8,11 +8,14 @@ import "react-alice-carousel/lib/alice-carousel.css"
 import DisplayList from '../components/DisplayLists';
 import "./AddList.css"
 import {produce} from "immer"
+import Avatar from '@material-ui/core/Avatar';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
-  const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
+  const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [follow, setFollow] = useState("")
   const [update, setUpdate] = useState(0)
 
@@ -120,15 +123,30 @@ export default function Profile(){
     })
   )}
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
+
+  const classes = useStyles();
+
   function FollowingList(input) {
     return (input.following.map(person => {
 
-      //const {name,  _id} = person
-      return (
-
-        <li className="ml-5">
-          <h5>{person.name}</h5>
-        </li>
+      return (  
+        <Avatar className={classes.small} id={person._id} alt={person.name} src={person.photo} />
       )
     })
   )}
@@ -164,7 +182,7 @@ export default function Profile(){
 
       <div className="col-sm-12 col-md-8">
 
-        <div className="book-row-section">
+        <div >
           <div className="row space-between">
             <h3 className="book-row-title" >FAVORITES</h3>
             <h6>VIEW ALL</h6>
@@ -194,7 +212,7 @@ export default function Profile(){
           </div>
         </div>
 
-        <div className="book-row-section">
+        <div className="book-row-section pb-5">
           <div className="row space-between">
             <h3 className="book-row-title" >LISTS</h3>
             <h6>VIEW ALL</h6>
@@ -203,53 +221,41 @@ export default function Profile(){
             <DisplayList lists={userData.lists}/>
           </div>
         </div>
+
       </div>
 
 
       <div className="col-sm-12 col-md-4">
-        <div >
+        
+          <div >
+
+            <div className="row space-between book-row-div">
+              <h3 className="book-row-title" >FOLLOWING</h3>
+              <h6>VIEW ALL</h6>
+            </div>
+
+            <div>
+              <AvatarGroup className="pt-2 pb-2">
+                <FollowingList following={userData.following}/>
+              </AvatarGroup>
+            </div>
+          </div>
+
+          <div >
             <h4>Follow another user</h4>
             <UserDropDown setEmail={setFollow}/>
             <button onClick={() => handleFollow()}>Follow</button>
           </div>
 
 
-          <div >
-            <h4>Following</h4>
-            <ul>
-              <FollowingList following={userData.following}/>
-            </ul>
-          </div>
-
-          <div className="border border-left-0 border-right-0 border-top-0">
-            <h4>Read List</h4>
-          </div>
           <div className="border border-left-0 border-right-0 border-top-0">
             <h4>Diary</h4>
           </div>
-          <div className="border border-left-0 border-right-0 border-top-0">
-            <h4>Lists</h4>
-          </div>
-      </div>
-    
-      </div>
-      </div>
-      {/* {userData.books.map((currentBook) => {
-                const {title, author, image,  _id} = currentBook
-                return (
-                    <div key={_id}>
-                      <img  src={image} alt={title}></img>
-                    </div>
-                    // <div>
-                    //   <img
-                    //     alt=''
-                    //     src='https://shadycharacters.co.uk/wp/wp-content/uploads/2016/12/Book_IMG_1754-1-e1481474081467.jpg'
-                    //   />
-                    // </div>
-                )
-              })} */}
 
-    
+      </div>
+      </div>
+      </div>
+      
 
     </div>
   )

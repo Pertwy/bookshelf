@@ -93,6 +93,9 @@
 
 .book-row-title{
   font-size:medium;
- 
-  /* padding-bottom: 10px; */
+}
+
+.book-row-div{
+  border-bottom-style: solid;
+  border-width: 3px
 }

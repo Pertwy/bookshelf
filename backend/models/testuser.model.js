@@ -28,6 +28,7 @@ const testuserSchema = new mongoose.Schema({
   },
   photo:{
     type: String,
+    default: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg"
   },
 
 
