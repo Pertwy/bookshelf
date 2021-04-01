@@ -8,11 +8,14 @@ import "react-alice-carousel/lib/alice-carousel.css"
 import DisplayList from '../components/DisplayLists';
 import "./AddList.css"
 import {produce} from "immer"
+import Avatar from '@material-ui/core/Avatar';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
-  const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
+  const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [follow, setFollow] = useState("")
   const [update, setUpdate] = useState(0)
 
@@ -120,100 +123,139 @@ export default function Profile(){
     })
   )}
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(1),
+      },
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
+
+  const classes = useStyles();
+
   function FollowingList(input) {
     return (input.following.map(person => {
 
-      //const {name,  _id} = person
-      return (
-
-        <li className="ml-5">
-          <h5>{person.name}</h5>
-        </li>
+      return (  
+        <Avatar className={classes.small} id={person._id} alt={person.name} src={person.photo} />
       )
     })
   )}
  
   return (
-    <div className="container">
+    <div className="container shadow-lg p-4 mb-4 bg-white">
       <UserDropDown setEmail={setCurrentUser}/>
 
-      <div className="py-5 row container-fluid">
-        
-        <div className="col-sm-5 row">
-          <h1 className="pr-5">Photo</h1>
 
-          <div>
-            <h4>Name: {userData.name}</h4>
-            <h4>Email: {userData.email}</h4>
-            <h4>Bio: {userData.bio}</h4>
+        
+        <div className="profile-container pt-5 pb-5 container-fluid row">
+          <div className="col-sm-2">
+            <h1 className="pr-5">Photo</h1>
+          </div>
+
+          <div className="col-sm-8">
+            <h4>{userData.name}</h4>
+            <p>{userData.bio}</p>
+          </div>
+
+          <div className="col-sm-2">
+            <p>Bookshelf {userData.bookshelf.length}</p>
+            <p>Read {userData.books.length}</p>
+            <p>Followers {userData.followers.length}</p>
+            <p>Following {userData.following.length}</p>
           </div>
         </div>
 
+      
 
-        <div className="col-sm-5">
-          <h4>Follow another user</h4>
-          <UserDropDown setEmail={setFollow}/>
-          <button onClick={() => handleFollow()}>Follow</button>
+    <div className="content-container pt-5 pb-5 container-fluid">
+    <div className="row">
+
+      <div className="col-sm-12 col-md-8">
+
+        <div >
+          <div className="row space-between">
+            <h3 className="book-row-title" >FAVORITES</h3>
+            <h6>VIEW ALL</h6>
+          </div>
+          <div className="row book-row">
+            <BookList books={userData.favorites} type="favorites"/>
+          </div>
         </div>
 
+        <div className="book-row-section">
+          <div className="row space-between">
+            <h3 className="book-row-title" >BOOKS I'VE READ</h3>
+            <h6>VIEW ALL</h6>
+          </div>
+          <div className="row book-row">
+            <BookList books={userData.books} type="books"/>
+          </div>
+        </div>
 
-        <div className="col-sm-2">
-          <h4>Following</h4>
-          <ul>
-            <FollowingList following={userData.following}/>
-          </ul>
+        <div className="book-row-section">
+          <div className="row space-between">
+            <h3 className="book-row-title">READING LIST</h3>
+            <h6>VIEW ALL</h6>
+          </div>
+          <div className="row book-row">
+            <BookList books={userData.readList} type="readList"/>
+          </div>
+        </div>
+
+        <div className="book-row-section pb-5">
+          <div className="row space-between">
+            <h3 className="book-row-title" >LISTS</h3>
+            <h6>VIEW ALL</h6>
+          </div>
+          <div className="row book-row">
+            <DisplayList lists={userData.lists}/>
+          </div>
         </div>
 
       </div>
 
-      
+
+      <div className="col-sm-12 col-md-4">
         
-      <div className="book-row-section">
-        <h3 className="book-row-title" >FAVORITES</h3>
-        <div className="row book-row">
-          <BookList books={userData.favorites} type="favorites"/>
-        </div>
-      </div>
+          <div >
 
-      <div className="book-row-section">
-        <h3 className="book-row-title" >BOOKS I'VE READ</h3>
-        <div className="row book-row">
-          <BookList books={userData.books} type="books"/>
-        </div>
-      </div>
+            <div className="row space-between book-row-div">
+              <h3 className="book-row-title" >FOLLOWING</h3>
+              <h6>VIEW ALL</h6>
+            </div>
 
-      <div className="book-row-section">
-        <h3 className="book-row-title">READING LIST</h3>
-        <div className="row book-row">
-          <BookList books={userData.readList} type="readList"/>
-        </div>
-      </div>
+            <div>
+              <AvatarGroup className="pt-2 pb-2">
+                <FollowingList following={userData.following}/>
+              </AvatarGroup>
+            </div>
+          </div>
 
-      <div className="book-row-section">
-        <h3 className="book-row-title" >LISTS</h3>
-        <div className="row book-row">
-          <DisplayList lists={userData.lists}/>
-        </div>
-      </div>
+          <div >
+            <h4>Follow another user</h4>
+            <UserDropDown setEmail={setFollow}/>
+            <button onClick={() => handleFollow()}>Follow</button>
+          </div>
 
-    
+
+          <div className="border border-left-0 border-right-0 border-top-0">
+            <h4>Diary</h4>
+          </div>
+
+      </div>
+      </div>
+      </div>
       
-      {/* {userData.books.map((currentBook) => {
-                const {title, author, image,  _id} = currentBook
-                return (
-                    <div key={_id}>
-                      <img  src={image} alt={title}></img>
-                    </div>
-                    // <div>
-                    //   <img
-                    //     alt=''
-                    //     src='https://shadycharacters.co.uk/wp/wp-content/uploads/2016/12/Book_IMG_1754-1-e1481474081467.jpg'
-                    //   />
-                    // </div>
-                )
-              })} */}
-
-    
 
     </div>
   )

@@ -1,3 +1,8 @@
+
+//The dropdown, user select, menus are going to stay from now as they work extremely well for testing 
+//When this is complete. Auth middleware needs to be added to most of these funstions
+
+
 const router = require("express").Router();
 let {Testuser} = require("../models/testuser.model")
 let {Book} = require("../models/book.model")

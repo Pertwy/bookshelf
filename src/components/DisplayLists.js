@@ -10,7 +10,15 @@ export default function DisplayList(props) {
     return(
       <div >
         
-          <h3>{list.title}</h3>
+          <div className="row space-between pl-4 pr-4 pt-4">
+            <h3>{list.title}</h3>
+
+            <div className="row">
+              <button>Edit</button>
+              <button>Delete</button>
+            </div>
+          </div>
+
           {list.books.map((book) => (
             <span className="listDiv">
               <img className="listBook" src={book.image} alt={book.title}/>
@@ -28,7 +36,7 @@ export default function DisplayList(props) {
 
     <div>
       {/* {console.log(props)} */}
-        {props.lists.map(list => (
+        {props.lists.slice(0, 3).map(list => (
             <UsersExistingLists list={list}/>
           ))}
     </div>

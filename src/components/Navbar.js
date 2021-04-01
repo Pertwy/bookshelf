@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useState, useCallback} from 'react';
+import {withRouter, useHistory} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css"
@@ -9,6 +10,8 @@ import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
 
 export default function Navbar() {
+
+  const [search, setSearch] = useState("")
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +35,11 @@ export default function Navbar() {
 
   const classes = useStyles();
 
+
+
+  const history = useHistory();
+  const handleSearch = useCallback(() => history.push("/searchresults/"+search), [history]);
+
     return (
       <div className= "container-fullwidth">
       <nav className= "space-between navrow navbar navbar-dark bg-dark navbar-expand-lg">
@@ -39,15 +47,15 @@ export default function Navbar() {
         
         <div className="collpase navbar-collapse">
           <Link to="/" className="navbar-brand">Bookshelf</Link>
-          <ul className="navbar-nav mr-auto">
+          <ul className="navbar-nav ml-auto">
             
             <li className="navbar-item">
-            <Link to="/test" className="nav-link">Add a user</Link>
+            <Link to="/test" className="nav-link">Sign In/Up</Link>
             </li>
 
-            <li className="navbar-item">
+            {/* <li className="navbar-item">
             <Link to="/booksearch" className="nav-link">Book Search</Link>
-            </li>
+            </li> */}
 
             <li className="navbar-item">
             <Link to="/lists" className="nav-link">Lists</Link>
@@ -57,12 +65,17 @@ export default function Navbar() {
             <Link to="/profile" className="nav-link">Profile</Link>
             </li>
 
-          <Paper component="form" className={classes.root}>
-            
+            <Link to={"/searchresults/"+search}>Search</Link>
+
+
+
+          <Paper component="form" className={classes.root} onSubmit={()=> handleSearch()} >
             <InputBase
               className={classes.input}
               placeholder="Search"
               inputProps={{ 'aria-label': 'search' }}
+              onChange={({ target }) =>     
+                  setSearch(target.value)}
             />
             <IconButton type="submit" className={classes.iconButton} aria-label="search">
               <SearchIcon />
