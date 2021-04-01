@@ -159,32 +159,46 @@ export default function Profile(){
 
       
 
-      <div className="content-container pt-5 pb-5 container-fluid row">
+    <div className="content-container pt-5 pb-5 container-fluid">
+    <div className="row">
 
-      <div className="col-sm-8">
+      <div className="col-sm-12 col-md-8">
+
         <div className="book-row-section">
-          <h3 className="book-row-title" >FAVORITES</h3>
+          <div className="row space-between">
+            <h3 className="book-row-title" >FAVORITES</h3>
+            <h6>VIEW ALL</h6>
+          </div>
           <div className="row book-row">
             <BookList books={userData.favorites} type="favorites"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h3 className="book-row-title" >BOOKS I'VE READ</h3>
+          <div className="row space-between">
+            <h3 className="book-row-title" >BOOKS I'VE READ</h3>
+            <h6>VIEW ALL</h6>
+          </div>
           <div className="row book-row">
             <BookList books={userData.books} type="books"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h3 className="book-row-title">READING LIST</h3>
+          <div className="row space-between">
+            <h3 className="book-row-title">READING LIST</h3>
+            <h6>VIEW ALL</h6>
+          </div>
           <div className="row book-row">
             <BookList books={userData.readList} type="readList"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h3 className="book-row-title" >LISTS</h3>
+          <div className="row space-between">
+            <h3 className="book-row-title" >LISTS</h3>
+            <h6>VIEW ALL</h6>
+          </div>
           <div className="row book-row">
             <DisplayList lists={userData.lists}/>
           </div>
@@ -192,7 +206,7 @@ export default function Profile(){
       </div>
 
 
-      <div className="col-sm-4">
+      <div className="col-sm-12 col-md-4">
         <div >
             <h4>Follow another user</h4>
             <UserDropDown setEmail={setFollow}/>
@@ -218,6 +232,7 @@ export default function Profile(){
           </div>
       </div>
     
+      </div>
       </div>
       {/* {userData.books.map((currentBook) => {
                 const {title, author, image,  _id} = currentBook
