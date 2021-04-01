@@ -66,8 +66,10 @@ export default function Adduser(){
   return (
     <div>
       
-      <div className="d-flex container justify-content-center">  
-        <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" onSubmit={handleSignUp}>
+      <div className="container ">
+        <div className="row justify-content-center">
+        <div className={"col-sm-12 col-md-6"}>
+        <form  noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Create an account</h3>  
             <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
                   setName(target.value)} id="standard-basic" label="Name" />
@@ -98,8 +100,11 @@ export default function Adduser(){
               Sign Up
             </Button>
         </form>
+        </div >  
 
-        <form className={classes.root, "col-sm-6"} noValidate autoComplete="off" onSubmit={handleSignUp}>
+        {/* classes.root,  */}
+        <div className={"col-sm-12 col-md-6"}>
+        <form  noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Login</h3>  
 
             <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
@@ -112,6 +117,8 @@ export default function Adduser(){
               Log in
             </Button>
         </form>
+        </div>
+        </div>
 
       </div>
     </div>

@@ -134,7 +134,7 @@ export default function Profile(){
   )}
  
   return (
-    <div className="container">
+    <div className="container shadow-lg p-4 mb-4 bg-white">
       <UserDropDown setEmail={setCurrentUser}/>
 
 

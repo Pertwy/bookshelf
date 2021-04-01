@@ -23,7 +23,7 @@ function App() {
         <Navbar />
       </div>
 
-      <div>
+      <div style={{backgroundColor: "#EBECF2"}}>
       <br/>
         <Route path="/" exact component={HomePage} />
         <Route path="/test" exact component={Adduser} />
