@@ -44,6 +44,7 @@ export default function HomePage(){
         <section className="book" key={_id} >
             <Link to={"/book/"+_id}>
               <img className="card-img-top" src={image} alt={title}></img>
+              <div className="hiddenBlock">alright mate</div>
             </Link>
         </section>
       )
@@ -82,6 +83,7 @@ export default function HomePage(){
         <section className="book" key={following.books[following.books.length - 1]._id} >
             <Link to={"/book/"+following.books[following.books.length - 1]._id}>
               <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
+              <div className="hiddenBlock">{following.name}</div>
             </Link>
         </section>
       )}

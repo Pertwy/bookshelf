@@ -63,8 +63,18 @@
   /* padding-left: 15px; */
   padding-right:10px;
   padding-top:10px;
- 
 }
+
+/* .card-img-top:hover {
+  border-color: #61dafb;
+  border-width: thick;
+  /* background-color: yellow; */
+/* }
+
+section:hover{
+  border-color: #61dafb;
+  border-width: thick;
+}  */
 
 .frame {
   height: 250px;
@@ -81,6 +91,27 @@
   border-radius: 8px;
 }
 
+/* .card-img-top:hover{
+  border-width:medium;
+  border-style:solid;
+  border-color: purple;
+} */
+
+
+.hiddenBlock {
+  background-color: yellow;
+  padding: 5px;
+  display: none;
+}
+  
+.card-img-top:hover + .hiddenBlock {
+  display: block;
+}
+
+
+
+
+
 .book-row{
   
   border-top-style: solid;
@@ -94,6 +125,8 @@
 .book-row-title{
   font-size:medium;
 }
+
+
 
 .book-row-div{
   border-bottom-style: solid;
