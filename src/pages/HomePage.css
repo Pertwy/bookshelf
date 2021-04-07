@@ -98,10 +98,9 @@ section:hover{
 } */
 
 
-.hiddenBlock {
+.photo-div {
   background-color: yellow;
-  padding: 5px;
-  display: none;
+  height: 100px;
 }
   
 .card-img-top:hover + .hiddenBlock {

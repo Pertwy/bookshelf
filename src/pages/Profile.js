@@ -158,16 +158,17 @@ export default function Profile(){
 
         
         <div className="profile-container pt-5 pb-5 container-fluid row">
-          <div className="col-sm-2">
-            <h1 className="pr-5">Photo</h1>
+          <div className="photo-div col-sm-2 col-md-2">
+            
+            {/* <h1 className="pr-5">Photo</h1> */}
           </div>
 
-          <div className="col-sm-8">
+          <div className="col-sm-10 col-md-12">
             <h4>{userData.name}</h4>
             <p>{userData.bio}</p>
           </div>
 
-          <div className="col-sm-2">
+          <div className="col-sm-12 col-md-2">
             <p>Bookshelf {userData.bookshelf.length}</p>
             <p>Read {userData.books.length}</p>
             <p>Followers {userData.followers.length}</p>
