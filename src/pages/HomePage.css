@@ -98,12 +98,22 @@ section:hover{
 } */
 
 
-.hiddenBlock {
+.photo-div {
   background-color: yellow;
-  padding: 5px;
-  display: none;
+  height: 100px;
 }
   
+.bio{
+  font-size: small;
+}
+.name{
+  font-size: medium;
+}
+
+.stats{
+  font-size: small;
+}
+
 .card-img-top:hover + .hiddenBlock {
   display: block;
 }

@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
 
 
-export default function ViewUser(props){
+export default function Favorites(props){
   const [user, setUser] = useState({})  
 
   useEffect(() => {
