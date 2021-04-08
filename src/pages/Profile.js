@@ -47,44 +47,11 @@ export default function Profile(){
     
       axios.post('http://localhost:5000/testusers/removefavorite', info)
           .then(response => (console.log(response.data)))
-    
-
-      // setUserData(userData.favorites.filter(function(element){
-      //   return element._id !== _id
-      // }))
 
       const fave = userData.favorites.filter(fave => fave._id !== _id);
-
       const data = userData
       data.favorites = fave
-      
-      console.log(data)
       setUserData(data)
-      console.log(userData)
-      //console.log(userData.favorites.indexOf(fave))
-      //console.log(userData.favorites.indexOf())
-
-      // return produce(state, draftState => {
-      //   const index = draftState.redux.savers.findIndex(saver => saver.id === action.payload.id)
-      //   delete draftState.redux.savers[index]
-      //   draftState.redux.savers = draftState.redux.savers.filter(function( element ) {
-      //       return element !== undefined;
-      //     });
-      // })
-
-
-    // if(type == "books"){
-    //   axios.post('http://localhost:5000/testusers/removebook', info)
-    //       .then(response => (console.log(response.data)))
-    //   setUpdate(update+1) 
-    //       // .then(console.log(userData))
-    // }
-    // if(type == "readList"){
-    //   axios.post('http://localhost:5000/testusers/removereadlist', info)
-    //       .then(response => (console.log(response.data)))
-    //       // .then(console.log(userData))
-    //   setUpdate(update+1) 
-    // }
   }
 
 
@@ -104,21 +71,6 @@ export default function Profile(){
             <button onClick={() => handleDeleteBook(_id)}>Remove</button>
           </div> 
         </section>
-
-        // <section key={_id} >
-        //   <div className="card book-card">
-        //     <img className="card-img-top" src={image} alt={title}></img>
-            // <div className="button">
-            //   <button onClick={() => handleDeleteBook(_id)}>Remove</button>
-            // </div> 
-            
-        //     <div className="card-body">
-        //       <h4 className="card-title">{title}</h4>
-        //       <p className="card-text">{author}</p>
-        //     </div>
-                       
-        //   </div>
-        // </section>
       )
     })
   )}
@@ -158,22 +110,30 @@ export default function Profile(){
 
         
         <div className="profile-container pt-5 pb-5 container-fluid row">
+          
           <div className="photo-div col-sm-2 col-md-2">
-            
-            {/* <h1 className="pr-5">Photo</h1> */}
           </div>
 
-          <div className="col-sm-10 col-md-12">
-            <h4>{userData.name}</h4>
-            <p>{userData.bio}</p>
+          <div className="col-sm-10 col-md-8">
+            <h4 className="name">{userData.name}</h4>
+            <p className="bio">{userData.bio}</p>
           </div>
 
           <div className="col-sm-12 col-md-2">
-            <p>Bookshelf {userData.bookshelf.length}</p>
-            <p>Read {userData.books.length}</p>
-            <p>Followers {userData.followers.length}</p>
-            <p>Following {userData.following.length}</p>
+            <section>
+              <p className="stats">Bookshelf {userData.bookshelf.length}</p>
+            </section>
+            <section>
+              <p className="stats">Read {userData.books.length}</p>
+            </section>
+            <section>
+              <p className="stats">Followers {userData.followers.length}</p>
+            </section>
+            <section>
+              <p className="stats">Following {userData.following.length}</p>
+            </section>
           </div>
+
         </div>
 
       

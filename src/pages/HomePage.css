@@ -103,6 +103,17 @@ section:hover{
   height: 100px;
 }
   
+.bio{
+  font-size: small;
+}
+.name{
+  font-size: medium;
+}
+
+.stats{
+  font-size: small;
+}
+
 .card-img-top:hover + .hiddenBlock {
   display: block;
 }
