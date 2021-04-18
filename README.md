@@ -13,8 +13,6 @@ Project is created with:
 
 	
 ## Setup
-The mongo DB database is currently setup to only work with IP addresses that are authorised
-First clone the repo, and then:
 
 ```
 $ cd bookshelf
