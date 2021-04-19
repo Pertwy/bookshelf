@@ -11,7 +11,7 @@ const bookSchema = new Schema({
     numberOfTimesFavorited:{type:Number, default:0},
     bookshelf:[ {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Testuser" //This is the Schema name
+      ref: "User" //This is the Schema name
     }],
     reviews:[ {
         type: mongoose.Schema.Types.ObjectId,
@@ -20,43 +20,43 @@ const bookSchema = new Schema({
     rating:{
       one:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       two:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       three:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       four:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       five:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       six:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       seven:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       eight:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       nine:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }],
       ten:[{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       }]
     }
 },{

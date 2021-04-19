@@ -10,7 +10,7 @@ export default function Favorites(){
   const [user, setUser] = useState({})  
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/users/"+props.location.pathname.replace("/user/", ""))
+    axios.get("http://localhost:5000/api/users/"+props.location.pathname.replace("/api/user/", ""))
       .then(response => (setUser(response.data)))
   },[])
 

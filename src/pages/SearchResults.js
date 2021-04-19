@@ -51,7 +51,7 @@ export default function SearchResults(props) {
 
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addBookToUser', info)
+    axios.put('http://localhost:5000/api/users/addBookToUser', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -66,7 +66,7 @@ export default function SearchResults(props) {
 
     let info = {"book":newBook}
     try{
-    axios.post('http://localhost:5000/books/addd', info)
+    axios.post('http://localhost:5000/api/books/addd', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -82,7 +82,7 @@ export default function SearchResults(props) {
 
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addFavorite', info)
+    axios.put('http://localhost:5000/api/users/addFavorite', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -98,7 +98,7 @@ export default function SearchResults(props) {
     
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addReadList', info)
+    axios.put('http://localhost:5000/api/users/addReadList', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)

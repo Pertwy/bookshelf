@@ -12,6 +12,7 @@ import AddList from "./pages/AddList"
 import ViewBook from "./idPages/ViewBook"
 import ViewUser from "./idPages/ViewUser"
 import SearchResults from "./pages/SearchResults"
+import AllLists from './idPages/AllLists';
 // import FireAuth from "./components/fireAuth"
 
 axios.defaults.withCredentials = true
@@ -32,6 +33,8 @@ function App() {
         <Route path="/profile" component={Profile} />
         <Route path="/book/:id" component={ViewBook} />
         <Route path="/user/:id" component={ViewUser} />
+        <Route path="/alllists" component={AllLists} />
+
         {/* <Route path="/searchresults/" component={SearchResults} /> */}
         <Route
         path="/searchresults/:name"

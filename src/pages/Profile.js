@@ -34,7 +34,7 @@ export default function Profile(){
       axios.get('http://localhost:5000/api/books/')
         .then(response => (setBooks(response.data)))
     }
-  },[currentUser, update])
+  },[currentUser, update, userData])
 
 
 
@@ -210,6 +210,7 @@ export default function Profile(){
         <div className="book-row-section pb-5">
           <div className="row space-between">
             <h3 className="book-row-title" >LISTS</h3>
+            <Link to="/alllists" className="navbar-brand">Bookshelf</Link>
             <h6>VIEW ALL</h6>
           </div>
           <div className="row book-row">
