@@ -19,41 +19,73 @@ export default function Profile(){
   const [follow, setFollow] = useState("")
   const [update, setUpdate] = useState(0)
 
+
+
   useEffect(() => {
-    console.log(currentUser)
+    //console.log(currentUser)
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('http://localhost:5000/testusers/',email)
+      axios.post('http://localhost:5000/api/users/',email)
         .then(response => (setUserData(response.data)))
-        .then(console.log(userData))
+        //.then(response => (console.log(response.data)))
+        //.then(console.log(userData))
     }
     else{
-      axios.get('http://localhost:5000/books/')
+      axios.get('http://localhost:5000/api/books/')
         .then(response => (setBooks(response.data)))
     }
   },[currentUser, update])
 
 
 
+
+
   function handleFollow(){
       let info = {"currentUser":currentUser, "follow":follow}
-      axios.post('http://localhost:5000/testusers/follow',info)
+      axios.post('http://localhost:5000/api/users/follow',info)
         .then(response => console.log(response))
   }
 
 
-  function handleDeleteBook(_id){
+
+
+  function handleDeleteBook(_id, listtype){
     let info = {"book":_id, "currentUser":currentUser}
-    
-      axios.post('http://localhost:5000/testusers/removefavorite', info)
+    console.log(info)
+
+    if(listtype === "favorites"){
+      axios.post('http://localhost:5000/api/users/removefavorite', info)
           .then(response => (console.log(response.data)))
 
       const fave = userData.favorites.filter(fave => fave._id !== _id);
       const data = userData
       data.favorites = fave
       setUserData(data)
-  }
+    }
 
+    if(listtype === "read"){
+      axios.post('http://localhost:5000/api/users/removebook', info)
+          .then(response => (console.log(response.data)))
+
+      const fave = userData.books.filter(fave => fave._id !== _id);
+      const data = userData
+      data.books = fave
+      setUserData(data)
+    }
+
+    if(listtype === "readingList"){
+      axios.post('http://localhost:5000/api/users/removereadlist', info)
+          .then(response => (console.log(response.data)))
+
+      const fave = userData.readList.filter(fave => fave._id !== _id);
+      const data = userData
+      data.readList = fave
+      setUserData(data)
+    }
+
+
+
+  }
 
 
   function BookList(books) {
@@ -63,17 +95,19 @@ export default function Profile(){
       return (
 
         <section className="book" key={_id} >
-          <Link className="link" to={"/book/"+_id}>
+          <Link className="link" to={"api/book/"+_id}>
             <img className="card-img-top" src={image} alt={title}></img>
           </Link>
 
           <div className="button">
-            <button onClick={() => handleDeleteBook(_id)}>Remove</button>
+            <button onClick={() => handleDeleteBook(_id, books.type)}>Remove</button>
           </div> 
         </section>
       )
     })
   )}
+
+
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -159,7 +193,7 @@ export default function Profile(){
             <h6>VIEW ALL</h6>
           </div>
           <div className="row book-row">
-            <BookList books={userData.books} type="books"/>
+            <BookList books={userData.books} type="read"/>
           </div>
         </div>
 
@@ -169,7 +203,7 @@ export default function Profile(){
             <h6>VIEW ALL</h6>
           </div>
           <div className="row book-row">
-            <BookList books={userData.readList} type="readList"/>
+            <BookList books={userData.readList} type="readingList"/>
           </div>
         </div>
 

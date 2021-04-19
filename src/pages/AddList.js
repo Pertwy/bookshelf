@@ -29,7 +29,7 @@ export default function AddList() {
     console.log(currentUser)
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('http://localhost:5000/testusers/grablists',email)
+      axios.post('http://localhost:5000/api/users/grablists',email)
         .then(response => (setLists(response.data.lists)))
     }
   },[currentUser, addModal])
@@ -73,7 +73,7 @@ export default function AddList() {
     let info = {"book":selectedBook, "email":currentUser}
     
     try{
-    axios.put('http://localhost:5000/testusers/addBookToUser', info)
+    axios.put('http://localhost:5000/api/users/addBookToUser', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -92,7 +92,7 @@ export default function AddList() {
     console.log(lists)
     
     try{
-    axios.put('http://localhost:5000/testusers/addListToUser', info)
+    axios.put('http://localhost:5000/api/users/addListToUser', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)

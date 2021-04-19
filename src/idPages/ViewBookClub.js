@@ -9,7 +9,7 @@ export default function ViewBookClub(props){
   const [bookclub, setBookclub] = useState({})  
 
   useEffect(() => {
-    axios.get("http://localhost:5000/bookclub/"+props.location.pathname.replace("/book/", ""))
+    axios.get("http://localhost:5000/api/bookclub/"+props.location.pathname.replace("/api/bookclub/", ""))
       .then(response => (setBookclub(response.data)))
   },[])
 
