@@ -11,6 +11,7 @@ import {produce} from "immer"
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import { makeStyles } from '@material-ui/core/styles';
+import TabPanel from "../idPages/TabPanel"
 
 export default function Profile(){
   const [books, setBooks] = useState([])  
@@ -169,6 +170,8 @@ export default function Profile(){
           </div>
 
         </div>
+
+        <TabPanel/>
 
       
 
