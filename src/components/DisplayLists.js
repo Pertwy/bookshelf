@@ -3,7 +3,7 @@ import React from 'react';
 import "./Navbar.css"
 
 //Feed me your lists aand i'll show them for you
-export default function DisplayList(props) {
+export default function DisplayBooks(props) {
   
 
   const UsersExistingLists = ({list}) => {

@@ -147,6 +147,21 @@ export default function CustomizedTabs() {
         <TabPanel value={value} index={2} dir={theme.direction}>
           Item Three
         </TabPanel>
+        <TabPanel value={value} index={3} dir={theme.direction}>
+          Item Four
+        </TabPanel>
+        <TabPanel value={value} index={4} dir={theme.direction}>
+          Item Four
+        </TabPanel>
+        <TabPanel value={value} index={5} dir={theme.direction}>
+          Item Five
+        </TabPanel>
+        <TabPanel value={value} index={6} dir={theme.direction}>
+          Item 6
+        </TabPanel>
+        <TabPanel value={value} index={7} dir={theme.direction}>
+          Item 7
+        </TabPanel>
       </SwipeableViews>
       </div>
     </div>
