@@ -17,7 +17,7 @@ export default function ViewBook(props){
   const [value, setValue] = useState("");
 
   useEffect(() => {
-    axios.get("http://localhost:5000/books/"+props.location.pathname.replace("/book/", ""))
+    axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
       
   },[])
@@ -36,8 +36,8 @@ export default function ViewBook(props){
 
   function handleAddReview(e){
     e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":value}
-      axios.post('http://localhost:5000/testusers/addreview',info)
+    let info = {"email":currentUser, "_id":props.location.pathname.replace("api/books/", ""), "review":review, "rating":value}
+      axios.post('http://localhost:5000/api/users/addreview',info)
         .then(response => (console.log(response.data)))
   }
 

@@ -35,7 +35,7 @@ export default function AddBook() {
 
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addBookToUser', info)
+    axios.put('http://localhost:5000/api/users/addBookToUser', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -66,7 +66,7 @@ export default function AddBook() {
 
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addFavorite', info)
+    axios.put('http://localhost:5000/api/users/addFavorite', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -82,7 +82,7 @@ export default function AddBook() {
     
     let info = {"book":newBook, "email":currentUser}
     try{
-    axios.put('http://localhost:5000/testusers/addReadList', info)
+    axios.put('http://localhost:5000/api/users/addReadList', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
@@ -98,7 +98,7 @@ export default function AddBook() {
         
         <div className="buttonDiv">
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
-          <button onClick={() => handleAddAuthBook(book)}>Read</button>
+          <button onClick={() => handleAddBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
           <button onClick={() => handleAddReadList(book)}>Bookshelf</button>
         </div> 

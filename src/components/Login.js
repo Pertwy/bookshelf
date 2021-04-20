@@ -14,7 +14,7 @@ export default function Login(){
       }
 
       try{
-        axios.post('http://localhost:5000/users/add', newUser)
+        axios.post('http://localhost:5000/api/users/add', newUser)
           .then(res => console.log(res.data));
         }catch(e){
           console.error(e)

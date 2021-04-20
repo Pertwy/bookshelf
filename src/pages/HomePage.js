@@ -16,18 +16,18 @@ export default function HomePage(){
 
   useEffect(() => {
 
-    axios.get("http://localhost:5000/lists/admin")
+    axios.get("http://localhost:5000/api/lists/admin")
       .then(response => (setAdminLists(response.data)))
 
     if(currentUser){
       let email = {"email":currentUser}
-      axios.post('http://localhost:5000/testusers/',email)
+      axios.post('http://localhost:5000/api/users/',email)
         .then(response => (setUserData(response.data)))
       
       // console.log(userData.following)
     }
     else{
-      axios.get('http://localhost:5000/books/')
+      axios.get('http://localhost:5000/api/books/')
         .then(response => (setUserData(response.data)))
     }
 
@@ -83,7 +83,9 @@ export default function HomePage(){
         <section className="book" key={following.books[following.books.length - 1]._id} >
             <Link to={"/book/"+following.books[following.books.length - 1]._id}>
               <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
-              <div >{following.name}</div>
+              
+              
+              <div ><Link to={"/user/"+following._id} className="nav-link">{following.name}</Link></div>
             </Link>
         </section>
       )}

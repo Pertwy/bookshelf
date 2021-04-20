@@ -3,7 +3,7 @@ import React from 'react';
 import "./Navbar.css"
 
 //Feed me your lists aand i'll show them for you
-export default function DisplayList(props) {
+export default function DisplayAllLists(props) {
   
 
   const UsersExistingLists = ({list}) => {
@@ -33,7 +33,7 @@ export default function DisplayList(props) {
   return (
 
     <div>
-        {props.lists.slice(0, 3).map(list => (
+        {props.lists.map(list => (
             <UsersExistingLists list={list}/>
           ))}
     </div>

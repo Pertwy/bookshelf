@@ -23,7 +23,7 @@ export default function Adduser(){
     console.log(newUser)
 
     try{
-      axios.post('http://localhost:5000/testusers/add', newUser)
+      axios.post('http://localhost:5000/api/users/add', newUser)
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -35,7 +35,7 @@ export default function Adduser(){
     let user = {"email":email, "password":password}
 
     try{
-      axios.post('http://localhost:5000/auth/', user, {withCredentials: true, credentials: 'include'})
+      axios.post('http://localhost:5000/api/auth/', user, {withCredentials: true, credentials: 'include'})
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)

@@ -10,18 +10,18 @@ const reviewSchema = new Schema({
     },
     author:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Testuser" //This is the Schema name
+      ref: "User" //This is the Schema name
     },  
     review:String,
     rating:Number,
     likes:{
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Testuser" //This is the Schema name
+      ref: "User" //This is the Schema name
     },
     comments:[{
       author: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Testuser" //This is the Schema name
+        ref: "User" //This is the Schema name
       },
       comment: String
     }]

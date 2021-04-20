@@ -8,7 +8,7 @@ const bookclubSchema = new Schema({
     books:[],
     users: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Testuser" //This is the Schema name
+      ref: "User" //This is the Schema name
     },
     discussion:[{
       author: String,
