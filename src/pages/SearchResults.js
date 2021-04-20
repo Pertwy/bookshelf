@@ -108,11 +108,20 @@ export default function SearchResults(props) {
  
   const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
+    const authorArray = book.volumeInfo.authors
+    
     return(
-      <div className="d-inline-block" >
+      <div className="row space-between">
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
+
+        <div>
+          <h5>{book.volumeInfo.title}</h5>
+          {authorArray && (
+          <p>{authorArray.join()}</p>
+          )}
+        </div>
         
-        <div className="buttonDiv">
+        <div>
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
           <button onClick={() => handleAddAuthBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
@@ -142,11 +151,9 @@ export default function SearchResults(props) {
 
 
           <div>
-            <div className="row">
             {result.map(book => (
                 <SearchedBook book={book}/>
               ))}
-            </div>
           </div>
 
 
