@@ -9,6 +9,7 @@ import SwipeableViews from 'react-swipeable-views';
 import Box from '@material-ui/core/Box';
 import DisplayBooks from "./DisplayBooks"
 import DisplayAllLists from "./DisplayAllLists"
+import Following from "../components/Following"
 
 
 const AntTabs = withStyles({
@@ -178,9 +179,11 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={5} dir={theme.direction}>
           Item Five
         </TabPanel>
+
         <TabPanel value={value} index={6} dir={theme.direction}>
-          Item 6
+          <Following userData={props.userData} />
         </TabPanel>
+
         <TabPanel value={value} index={7} dir={theme.direction}>
           Item 7
         </TabPanel>
