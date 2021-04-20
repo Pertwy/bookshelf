@@ -103,44 +103,14 @@ export default function Profile(){
 
         </div>
 
-        <TabPanel/>
+        <TabPanel setUserData={setUserData} userData={userData}/>
 
       
 
     <div className="content-container pt-5 pb-5 container-fluid">
     <div className="row">
 
-      <div className="col-sm-12 col-md-8">
-
-        <div >
-          <div className="row space-between">
-            <h3 className="book-row-title" >FAVORITES</h3>
-            <h6>VIEW ALL</h6>
-          </div>
-          <div className="row book-row">
-            <DisplayBooks books={userData.favorites} type="favorites" editBooks={setUserData} userData={userData}/>
-          </div>
-        </div>
-
-        <div className="book-row-section">
-          <div className="row space-between">
-            <h3 className="book-row-title" >BOOKS I'VE READ</h3>
-            <h6>VIEW ALL</h6>
-          </div>
-          <div className="row book-row">
-            <DisplayBooks books={userData.books} type="read" editBooks={setUserData} userData={userData}/>
-          </div>
-        </div>
-
-        <div className="book-row-section">
-          <div className="row space-between">
-            <h3 className="book-row-title">READING LIST</h3>
-            <h6>VIEW ALL</h6>
-          </div>
-          <div className="row book-row">
-            <DisplayBooks books={userData.readList} type="readingList" editBooks={setUserData} userData={userData}/>
-          </div>
-        </div>
+      <div className="col-sm-12 col-md-8">       
 
         <div className="book-row-section pb-5">
           <div className="row space-between">
@@ -159,7 +129,6 @@ export default function Profile(){
       <div className="col-sm-12 col-md-4">
         
           <div >
-
             <div className="row space-between book-row-div">
               <h3 className="book-row-title" >FOLLOWING</h3>
               <h6>VIEW ALL</h6>
@@ -178,10 +147,6 @@ export default function Profile(){
             <button onClick={() => handleFollow()}>Follow</button>
           </div>
 
-
-          <div className="border border-left-0 border-right-0 border-top-0">
-            <h4>Diary</h4>
-          </div>
 
       </div>
       </div>

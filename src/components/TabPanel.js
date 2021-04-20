@@ -7,6 +7,8 @@ import Typography from '@material-ui/core/Typography';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
 import Box from '@material-ui/core/Box';
+import DisplayBooks from "./DisplayBooks"
+import DisplayAllLists from "./DisplayAllLists"
 
 
 const AntTabs = withStyles({
@@ -69,7 +71,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function CustomizedTabs() {
+export default function CustomizedTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
@@ -139,20 +141,40 @@ export default function CustomizedTabs() {
         onChangeIndex={handleChangeIndex}
       >
         <TabPanel value={value} index={0} dir={theme.direction}>
-          Item One
+          <div className="row book-row">
+            <DisplayBooks books={props.userData.favorites} type="favorites" userData={props.userData}/>
+          </div>
         </TabPanel>
+
+
         <TabPanel value={value} index={1} dir={theme.direction}>
-          Item Two
+          <div className="row book-row">
+            <DisplayBooks books={props.userData.readList} type="readingList" userData={props.userData}/>
+          </div>
         </TabPanel>
+
+
         <TabPanel value={value} index={2} dir={theme.direction}>
-          Item Three
+          <div className="row book-row">
+            <DisplayBooks books={props.userData.books} type="read" userData={props.userData}/>
+          </div>
         </TabPanel>
+
+
         <TabPanel value={value} index={3} dir={theme.direction}>
-          Item Four
+          <div className="row book-row">
+            <DisplayBooks books={props.userData.bookshelf} type="read" userData={props.userData}/>
+          </div>
         </TabPanel>
+
+
         <TabPanel value={value} index={4} dir={theme.direction}>
-          Item Four
+          <div className="row book-row">
+            <DisplayAllLists lists={props.userData.lists}/>
+          </div>
         </TabPanel>
+
+
         <TabPanel value={value} index={5} dir={theme.direction}>
           Item Five
         </TabPanel>
