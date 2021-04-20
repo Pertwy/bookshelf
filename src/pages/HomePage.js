@@ -81,9 +81,11 @@ export default function HomePage(){
       if(following.books[0]){
       return (
         <section className="book" key={following.books[following.books.length - 1]._id} >
-            <Link to={"api/book/"+following.books[following.books.length - 1]._id}>
+            <Link to={"/book/"+following.books[following.books.length - 1]._id}>
               <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
-              <div >{following.name}</div>
+              
+              
+              <div ><Link to={"/user/"+following._id} className="nav-link">{following.name}</Link></div>
             </Link>
         </section>
       )}

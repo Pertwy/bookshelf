@@ -10,7 +10,7 @@ import AddBook from "./pages/AddBook"
 import Profile from "./pages/Profile"
 import AddList from "./pages/AddList"
 import ViewBook from "./idPages/ViewBook"
-import ViewUser from "./idPages/ViewUser"
+import User from "./idPages/User"
 import SearchResults from "./pages/SearchResults"
 import AllLists from './idPages/AllLists';
 // import FireAuth from "./components/fireAuth"
@@ -32,7 +32,7 @@ function App() {
         <Route path="/lists" component={AddList} />
         <Route path="/profile" component={Profile} />
         <Route path="/book/:id" component={ViewBook} />
-        <Route path="/user/:id" component={ViewUser} />
+        <Route path="/user/:id" component={User} />
         <Route path="/alllists" component={AllLists} />
 
         {/* <Route path="/searchresults/" component={SearchResults} /> */}
