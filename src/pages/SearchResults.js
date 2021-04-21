@@ -94,7 +94,19 @@ export default function SearchResults(props) {
   async function handleAddReadList(book){
     
     const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+    const newBook = { title: book.volumeInfo.title, 
+      author: authorArray.join(), 
+      image: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+      categories: book.volumeInfo.categories, 
+      industryIdentifiers: book.volumeInfo.industryIdentifiers,
+      infoLink: book.volumeInfo.infoLink,
+      language: book.volumeInfo.language,
+      maturityRating: book.volumeInfo.maturityRating,
+      pageCount: book.volumeInfo.pageCount,
+      publishedDate: book.volumeInfo.publishedDate,
+      publisher: book.volumeInfo.publisher,
+      };
     
     let info = {"book":newBook, "email":currentUser}
     try{
@@ -103,6 +115,22 @@ export default function SearchResults(props) {
     }catch(e){
       console.error(e)
     }
+  }
+
+  async function handleAddBookshelf(book){
+
+    console.log(book)
+    
+    // const authorArray = book.volumeInfo.authors
+    // const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+    
+    // let info = {"book":newBook, "email":currentUser}
+    // try{
+    // axios.put('http://localhost:5000/api/users/addBookshelf', info)
+    //   .then(res => { console.log(res)});
+    // }catch(e){
+    //   console.error(e)
+    // }
   }
 
  
@@ -123,9 +151,9 @@ export default function SearchResults(props) {
         
         <div>
           <button onClick={() => handleAddFavorite(book)}>Favorite</button>
-          <button onClick={() => handleAddAuthBook(book)}>Read</button>
+          <button onClick={() => handleAddBook(book)}>Read</button>
           <button onClick={() => handleAddReadList(book)}>Read List</button>
-          <button onClick={() => handleAddReadList(book)}>Bookshelf</button>
+          <button onClick={() => handleAddBookshelf(book)}>Bookshelf</button>
         </div> 
       </div>
     )

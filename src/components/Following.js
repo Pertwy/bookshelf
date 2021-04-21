@@ -59,18 +59,14 @@ export default function Following(props) {
     <div className="row">
       <div className="col-sm-12 col-md-4">
         
-          <div >
-            <div className="row space-between book-row-div">
-              <h3 className="book-row-title" >FOLLOWING</h3>
-              <h6>VIEW ALL</h6>
-            </div>
+        
 
             <div>
               <AvatarGroup className="pt-2 pb-2">
                 <FollowingList following={props.userData.following}/>
               </AvatarGroup>
             </div>
-          </div>
+         
 
           <div >
             <h4>Follow another user</h4>

@@ -46,18 +46,62 @@ export default function ViewBook(props){
     };
   
 
-  return (
-    <div>
+    function InfoBox(props){
+      if(props){
+        return(
+        <div className="col-sm-2">
+          <div className="p1 infoBox text-center">
+            <p className="infoText">{props.title}</p>
+            <p className="infoText">10</p>
+            {/* <p>{props.info}</p> */}
+          </div>
+        </div>
+        )
+      }
+      else{
+        return(<></>)
+      }
+    }
 
-      <UserDropDown setEmail={setCurrentUser}/>
+
+  return (
+    <div className="container shadow-lg p-4 mb-4 bg-white">
 
       <div className="content">
-        <h2>{book.title}</h2>
-        <h3>{book.author}</h3>
+        <div className="row">
+          <div className = "col-sm-6 col-md-3">
+            <img className="book-image" src={book.image} alt={book.title}></img>
+          </div>
+
+          <div className = "col-sm-6 col-md-6">
+            <h2>{book.title}</h2>
+            <h3>By {book.author}</h3>
+            <h5>Description</h5>
+          </div>
+
+          <div className = "col-sm-6 col-md-3">
+            <h3>Bookshelves</h3>
+            <p>On X friend's bookshelves</p>
+            <p>On X bookshelves</p>
+          </div>
+        </div>
+        {/* <h4>Number of reviews {book.reviews.length}</h4> */}
+        
+        <div className="container">
+          <div className="row">
+            <InfoBox title="PAGE COUNT" info={book.pageCount}/>
+            <InfoBox title="LANGUAGE" info={book.language}/>
+            <InfoBox title="DATE PUBLISHED" info={book.publishedDate}/>
+            <InfoBox title="PUBLISHER" info={book.publisher}/>
+            <InfoBox title="MATURITY" info={book.maturityRating}/>
+            <InfoBox title="ISBN" info={book.industryIdentifiers}/>
+          </div>
+        </div>
+
         <h4>Number of times read {book.numberOfTimesRead}</h4>
         <h4>Number of times favorited {book.numberOfTimesFavorited}</h4>
-        {/* <h4>Number of reviews {book.reviews.length}</h4> */}
-        <img src={book.image} alt={book.title}></img>
+        <h4>Read Lists </h4>
+        <h4>Lists </h4>
 
         <form onSubmit={handleAddReview}>
           <label>Add a review</label>
@@ -92,7 +136,10 @@ export default function ViewBook(props){
 
         {book.reviews &&(
           <div>
-            <h2>Reviews</h2>
+            <div className="row">
+              <h2> Reviews</h2>
+              <h5> View All </h5>
+            </div>
             <Reviews/>
           </div>
         )}
