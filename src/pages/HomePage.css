@@ -119,15 +119,6 @@ section:hover{
 }
 
 
-
-
-
-.book-row{
-  
-  border-top-style: solid;
-  border-width: 3px
- }
-
 .book-row-section{
   padding-top: 40px;
 }
@@ -141,4 +132,18 @@ section:hover{
 .book-row-div{
   border-bottom-style: solid;
   border-width: 3px
+}
+
+/* .infoBox{
+
+} */
+
+.infoText{
+  font-size: 0.7em;
+}
+
+.book-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
 }

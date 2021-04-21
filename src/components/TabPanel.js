@@ -126,14 +126,15 @@ export default function CustomizedTabs(props) {
     <div className={classes.root}>
       <div className={classes.demo1}>
         <AntTabs value={value} onChange={handleChange} aria-label="ant example">
-          <AntTab label="Favorites" {...a11yProps(0)} />
-          <AntTab label="Read list" {...a11yProps(1)}/>
-          <AntTab label="Read" {...a11yProps(2)}/>
-          <AntTab label="Bookshelf" {...a11yProps(3)}/>
-          <AntTab label="Lists" {...a11yProps(4)}/>
-          <AntTab label="Reviews" {...a11yProps(5)}/>
-          <AntTab label="Follow" {...a11yProps(6)}/>
-          <AntTab label="Dairy" {...a11yProps(7)}/>
+          <AntTab label="Profile" {...a11yProps(0)} />
+          <AntTab label="Favorites" {...a11yProps(1)} />
+          <AntTab label="Read list" {...a11yProps(2)}/>
+          <AntTab label="Read" {...a11yProps(3)}/>
+          <AntTab label="Bookshelf" {...a11yProps(4)}/>
+          <AntTab label="Lists" {...a11yProps(5)}/>
+          <AntTab label="Reviews" {...a11yProps(6)}/>
+          <AntTab label="Follow" {...a11yProps(7)}/>
+          <AntTab label="Dairy" {...a11yProps(8)}/>
         </AntTabs>
         <Typography className={classes.padding} />
         <SwipeableViews
@@ -141,52 +142,59 @@ export default function CustomizedTabs(props) {
         index={value}
         onChangeIndex={handleChangeIndex}
       >
+
         <TabPanel value={value} index={0} dir={theme.direction}>
+          <div className="row book-row">
+            <h1>Profile</h1>
+          </div>
+        </TabPanel>
+
+        <TabPanel value={value} index={1} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks books={props.userData.favorites} type="favorites" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={value} index={2} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks books={props.userData.readList} type="readingList" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={2} dir={theme.direction}>
+        <TabPanel value={value} index={3} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks books={props.userData.books} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={3} dir={theme.direction}>
+        <TabPanel value={value} index={4} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks books={props.userData.bookshelf} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={4} dir={theme.direction}>
+        <TabPanel value={value} index={5} dir={theme.direction}>
           <div className="row book-row">
             <DisplayAllLists lists={props.userData.lists}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={5} dir={theme.direction}>
+        <TabPanel value={value} index={6} dir={theme.direction}>
           Item Five
         </TabPanel>
 
-        <TabPanel value={value} index={6} dir={theme.direction}>
+        <TabPanel value={value} index={7} dir={theme.direction}>
           <Following userData={props.userData} />
         </TabPanel>
 
-        <TabPanel value={value} index={7} dir={theme.direction}>
-          Item 7
-        </TabPanel>
+        {/* <TabPanel value={value} index={8} dir={theme.direction}>
+          Diary
+        </TabPanel> */}
       </SwipeableViews>
       </div>
     </div>

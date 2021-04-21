@@ -146,7 +146,7 @@ router.put('/addBookshelf', async (req, res) => {
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
         newBook = await newBook.save();
         
         user.bookshelf.push(newBook._id)
@@ -159,14 +159,14 @@ router.put('/addBookshelf', async (req, res) => {
 
 //Add a book to ReadList
 router.put('/addReadList', async (req, res) => {
-    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
     newBook = await newBook.save();
     
     let user = await User.findOne({email: req.body.email})
     user.readList.push(newBook._id)
 
     await user.save()
-        .then(() => res.json('User updated!'))
+        .then(() => res.send(newBook))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

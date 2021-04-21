@@ -24,7 +24,7 @@ export default function Profile(){
       axios.get('http://localhost:5000/api/books/')
         .then(response => (setBooks(response.data)))
     }
-  },[currentUser, userData])
+  },[currentUser])
 
 
 
