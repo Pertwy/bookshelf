@@ -76,7 +76,7 @@ export default function HomePage(){
 }
 
 
-  function FriendBookList() {
+  function FriendReadList() {
     return (userData.following.map(following => {
       if(following.books[0]){
       return (
@@ -92,6 +92,23 @@ export default function HomePage(){
     })
   )}
 
+  function FriendBookshelfList() {
+    return (userData.following.map(following => {
+      if(following.bookshelf[0]){
+      return (
+        <section className="book" key={following.bookshelf[following.bookshelf.length - 1]._id} >
+            <Link to={"/book/"+following.bookshelf[following.bookshelf.length - 1]._id}>
+              <img className="card-img-top" src={following.bookshelf[following.bookshelf.length - 1].image} alt={following.bookshelf[following.bookshelf.length - 1].title}></img>
+              
+              
+              <div ><Link to={"/user/"+following._id} className="nav-link">{following.name}</Link></div>
+            </Link>
+        </section>
+      )}
+    })
+  )}
+
+
 
 
 
@@ -103,18 +120,18 @@ export default function HomePage(){
 
         <div className="book-row-section">
           <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
-        
           <div className="row book-row">
-            <FriendBookList/>
+            <FriendReadList/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h2 className="book-row-title">BOOKS I'VE READ</h2>
+          <h2 className="book-row-title">BOOKSHELVES</h2>
           <div className="row book-row">
-            <BookList/>
+            <FriendBookshelfList/>
           </div>
         </div>
+
 
         <div className="book-row-section">
           <h2 className="book-row-title">POPULAR LISTS</h2>
