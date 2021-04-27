@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
-import "./searchedBook.css"
+
 
 export default function SearchResults(props) {
 
@@ -121,16 +121,28 @@ export default function SearchResults(props) {
 
     console.log(book)
     
-    // const authorArray = book.volumeInfo.authors
-    // const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+    const authorArray = book.volumeInfo.authors
+    const newBook = { title: book.volumeInfo.title, 
+      author: authorArray.join(), 
+      image: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+      categories: book.volumeInfo.categories, 
+      industryIdentifiers: book.volumeInfo.industryIdentifiers,
+      infoLink: book.volumeInfo.infoLink,
+      language: book.volumeInfo.language,
+      maturityRating: book.volumeInfo.maturityRating,
+      pageCount: book.volumeInfo.pageCount,
+      publishedDate: book.volumeInfo.publishedDate,
+      publisher: book.volumeInfo.publisher,
+      };
     
-    // let info = {"book":newBook, "email":currentUser}
-    // try{
-    // axios.put('http://localhost:5000/api/users/addBookshelf', info)
-    //   .then(res => { console.log(res)});
-    // }catch(e){
-    //   console.error(e)
-    // }
+    let info = {"book":newBook, "email":currentUser}
+    try{
+    axios.put('http://localhost:5000/api/users/addBookshelf', info)
+      .then(res => { console.log(res)});
+    }catch(e){
+      console.error(e)
+    }
   }
 
  

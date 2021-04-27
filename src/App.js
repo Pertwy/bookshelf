@@ -14,17 +14,22 @@ import User from "./idPages/User"
 import SearchResults from "./pages/SearchResults"
 import AllLists from './idPages/AllLists';
 // import FireAuth from "./components/fireAuth"
+import Nav2 from "./components/Nav2"
 
 axios.defaults.withCredentials = true
 
 function App() {
   return (
     <Router>
-      <div >
+      {/* <div >
         <Navbar />
+      </div> */}
+
+      <div >
+        <Nav2 />
       </div>
 
-      <div style={{backgroundColor: "#EBECF2"}}>
+      <div style={{backgroundColor: "#2f3031"}}>
       <br/>
         <Route path="/" exact component={HomePage} />
         <Route path="/test" exact component={Adduser} />

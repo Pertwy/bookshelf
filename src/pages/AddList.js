@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 import DisplayList from "../components/DisplayLists"
-import "./AddList.css"
+
 
 export default function AddList() {
 

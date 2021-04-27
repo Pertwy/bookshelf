@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './HomePage.css';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
-import "./AddList.css"
 import TabPanel from "../components/TabPanel"
 
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './HomePage.css';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../components/Login"
 import UserDropDown from "../components/UserDropDown"
@@ -76,17 +76,52 @@ export default function HomePage(){
 }
 
 
-  function FriendBookList() {
+  function FriendReadList(props) {
+
     return (userData.following.map(following => {
       if(following.books[0]){
       return (
-        <section className="book" key={following.books[following.books.length - 1]._id} >
-            <Link to={"/book/"+following.books[following.books.length - 1]._id}>
-              <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
+        <section className="d-flex flex-column" key={following.books[following.books.length - 1]._id} >
+          <div className="mt-auto p-2">
+            <div className="">
               
+              <Link to={"/book/"+following.books[following.books.length - 1]._id}>
+                <img className="card-img-top" src={following.books[following.books.length - 1].image} alt={following.books[following.books.length - 1].title}></img>
+              </Link>
+
+              <div className="under-card">
+                <Link to={"/user/"+following._id} className="">
+                  <p className="under-card-text">{following.name}</p>
+                </Link>
+              </div>
+        
+            </div>
+          </div>
+        </section>
+      )}
+    })
+  )}
+
+  function FriendBookshelfList() {
+    return (userData.following.map(following => {
+      if(following.bookshelf[0]){
+      return (
+        <section className="d-flex flex-column" key={following.bookshelf[following.bookshelf.length - 1]._id} >
+          <div className="mt-auto p-2">
+            <div className="">
               
-              <div ><Link to={"/user/"+following._id} className="nav-link">{following.name}</Link></div>
-            </Link>
+              <Link to={"/book/"+following.bookshelf[following.bookshelf.length - 1]._id}>
+                <img className="card-img-top" src={following.bookshelf[following.bookshelf.length - 1].image} alt={following.bookshelf[following.bookshelf.length - 1].title}></img>
+              </Link>
+
+              <div className="under-card">
+                <Link to={"/user/"+following._id} className="">
+                  <p className="under-card-text">{following.name}</p>
+                </Link>
+              </div>
+        
+            </div>
+          </div>
         </section>
       )}
     })
@@ -95,26 +130,28 @@ export default function HomePage(){
 
 
 
+
   return (
     <div>
 
-      <div className="container shadow-lg p-4 mb-4 bg-white">
+      <div className="container ">
+      {/* shadow-lg p-4 mb-4 bg-white */}
         <UserDropDown setEmail={setCurrentUser}/>
 
         <div className="book-row-section">
           <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
-        
           <div className="row book-row">
-            <FriendBookList/>
+            <FriendReadList type="readlist"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h2 className="book-row-title">BOOKS I'VE READ</h2>
+          <h2 className="book-row-title">BOOKSHELVES</h2>
           <div className="row book-row">
-            <BookList/>
+            <FriendBookshelfList/>
           </div>
         </div>
+
 
         <div className="book-row-section">
           <h2 className="book-row-title">POPULAR LISTS</h2>

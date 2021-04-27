@@ -43,8 +43,12 @@ router.post('/', async (req, res) => {
         .populate("lists") 
         .populate({
             path: 'following',
-            populate: { path: 'books' }
-          });; 
+            populate: { path: 'books'}
+          })
+        .populate({
+            path: 'following',
+            populate: { path: 'bookshelf'}
+            });
 
     // console.log(user.following)
 
@@ -136,24 +140,28 @@ router.put('/addBookshelf', async (req, res) => {
     
     let user = await User.findOne({email: req.body.email})
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+
+    console.log(user)
+    console.log(book)
     
-    if(book) {
+    if(book != null) {
         user.bookshelf.push(book._id)
         book.bookshelf.push(user._id)
         await user.save()
         await book.save()
             .then(() => res.json('User updated!'))
-            .catch(err => res.status(400).json('Error: ' + err));
+        
     }
     else{
         let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        // let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
         newBook = await newBook.save();
         
         user.bookshelf.push(newBook._id)
     
         await user.save()
             .then(() => res.json('User updated!'))
-            .catch(err => res.status(400).json('Error: ' + err));
+           
     }
 });
 
