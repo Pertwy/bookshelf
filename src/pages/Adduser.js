@@ -68,7 +68,8 @@ export default function Adduser(){
       
       <div className="container ">
         <div className="row justify-content-center">
-        <div className={"col-sm-12 col-md-6"}>
+        <div className={" col-sm-12 col-md-6"}>
+        <div className={"login-background "}>
         <form  noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Create an account</h3>  
             <TextField  fullWidth className={classes.input} onChange={({ target }) =>     
@@ -100,10 +101,12 @@ export default function Adduser(){
               Sign Up
             </Button>
         </form>
-        </div >  
+        </div >
+        </div>  
 
         {/* classes.root,  */}
-        <div className={"col-sm-12 col-md-6"}>
+        <div className={" col-sm-12 col-md-6"}>
+        <div className={"login-background "}>
         <form  noValidate autoComplete="off" onSubmit={handleSignUp}>
             <h3 className={classes.input}>Login</h3>  
 
@@ -117,6 +120,7 @@ export default function Adduser(){
               Log in
             </Button>
         </form>
+        </div>
         </div>
         </div>
 

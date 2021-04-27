@@ -3,8 +3,7 @@ import axios from 'axios';
 // import '../components/HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
-import "./AddList.css"
-import './HomePage.css';
+
 
 export default function Favorites(){
   const [user, setUser] = useState({})  

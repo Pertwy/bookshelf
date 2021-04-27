@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import './HomePage.css';
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../components/Login"
 import UserDropDown from "../components/UserDropDown"
