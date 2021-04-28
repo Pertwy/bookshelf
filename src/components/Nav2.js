@@ -3,6 +3,7 @@ import {withRouter, useHistory} from 'react-router-dom';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
+import "./Navbar.css"
 
 export default function Nav2() {
 
@@ -12,8 +13,8 @@ export default function Nav2() {
 
     return (
         <>
-           <Navbar className="container" bg="light" expand="lg">
-            <Link to="/" className="navbar-brand">Bookshelf</Link>
+           <Navbar className="nav-background container"  expand="lg">
+            <Link to="/" className="nav-text navbar-brand">Bookshelf</Link>
               
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -22,11 +23,11 @@ export default function Nav2() {
                 <ul className="navbar-nav ">
                   
                   <li className="navbar-item">
-                    <Link to="/test" className="nav-link">Sign In/Up</Link>
+                    <Link to="/test" className="nav-text nav-link">Sign In/Up</Link>
                   </li>
 
-                  <li className="navbar-item">
-                    <Link to="/profile" className="nav-link">Profile</Link>
+                  <li className="navbar-item ">
+                    <Link to="/profile" className="nav-text nav-link">Profile</Link>
                   </li>
 
                   <li className="navbar-item">

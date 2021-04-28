@@ -177,11 +177,12 @@ section:hover{
   font-size:small;
   color: rgb(169, 174, 179);
   border-bottom: 1px solid rgb(160, 160, 161);
-  /* border-bottom: aliceblue;
-  border-width: 2px; */
 }
 
-
+.list-row-title{
+  color: rgb(169, 174, 179);
+  font-size: medium;
+}
 
 .book-row-div{
   border-bottom-style: solid;
@@ -237,4 +238,9 @@ img:hover + .buttonDiv, .buttonDiv:hover {
 
 button{
   display: block;
+}
+
+
+.list-title{
+  color: rgb(169, 174, 179);
 }

@@ -1,0 +1,23 @@
+.sign-header{
+    font-size: x-large;
+}
+
+.background-colour{
+    background-color: #434547;
+}
+
+.sign-text{
+    color: rgb(169, 174, 179);
+}
+
+.text-align{
+text-align: center;
+}
+
+.sign-input{
+    color: rgb(169, 174, 179);
+}
+
+.sign-container{
+    width:50%;
+}

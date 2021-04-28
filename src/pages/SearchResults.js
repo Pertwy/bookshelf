@@ -16,12 +16,6 @@ export default function SearchResults(props) {
 
   useEffect(() => {
     
-    //console.log(props.location.pathname.replace("/searchresults/", ""))
-    // 
-    
-    // const search = props.location.pathname.replace("/searchresults/", "")
-    // setBook(search.trim())
-
     axios.get("https://www.googleapis.com/books/v1/volumes?q="+props.location.pathname.replace("/searchresults/", "")+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
       .then(data => {
         setResult(data.data.items)
