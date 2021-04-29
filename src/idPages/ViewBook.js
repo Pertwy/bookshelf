@@ -40,13 +40,12 @@ export default function ViewBook(props){
 
 
     function InfoBox(props){
-      if(props){
+      if(props.info){
         return(
         <div className="col-sm-2">
           <div className="p1 infoBox text-center">
             <p className="infoText">{props.title}</p>
-            <p className="infoText">10</p>
-            {/* <p>{props.info}</p> */}
+            <p className="infoText">{props.info}</p>
           </div>
         </div>
         )
@@ -55,6 +54,33 @@ export default function ViewBook(props){
         return(<></>)
       }
     }
+
+
+    function ISBNInfoBox(props){
+      
+
+      if(props.info){
+        return(
+        <div className="col-sm-2">
+          <div className="p1 infoBox text-center">
+            {props.info.map( info =>(
+              <>
+                  <p>{info.type}</p>
+                  <p>{info.identifier}</p>
+                  </>
+              ))}
+          </div>
+        </div>
+        )
+      }
+      else{
+        return(<></>)
+      }
+    }
+
+
+    
+
 
 
   return (
@@ -107,7 +133,7 @@ export default function ViewBook(props){
             <InfoBox title="DATE PUBLISHED" info={book.publishedDate}/>
             <InfoBox title="PUBLISHER" info={book.publisher}/>
             <InfoBox title="MATURITY" info={book.maturityRating}/>
-            <InfoBox title="ISBN" info={book.industryIdentifiers}/>
+            <ISBNInfoBox title="ISBN" info={book.industryIdentifiers}/>
           </div>
         </div>
 
