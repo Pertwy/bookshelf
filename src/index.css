@@ -266,6 +266,15 @@ button{
   
 }
 
+.seacrh-image{
+  max-height: 150px;
+}
+
+.searched-row{
+
+  border-bottom: 1px solid rgb(169, 174, 179);
+}
+
 /* .left-search{
   max-width: 50%;
 } */
