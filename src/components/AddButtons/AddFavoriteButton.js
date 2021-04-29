@@ -1,6 +1,6 @@
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 
 export default function AdditionButton(props) {
@@ -57,94 +57,6 @@ export default function AdditionButton(props) {
             console.error(e)
         }}
 
-  }
-
-  
-  async function handleAddFavorite(book){
-
-    console.log(book)
-
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, 
-      author: authorArray.join(), 
-      image: book.volumeInfo.imageLinks.thumbnail,
-      description: book.volumeInfo.description,
-      categories: book.volumeInfo.categories, 
-      industryIdentifiers: book.volumeInfo.industryIdentifiers,
-      infoLink: book.volumeInfo.infoLink,
-      language: book.volumeInfo.language,
-      maturityRating: book.volumeInfo.maturityRating,
-      pageCount: book.volumeInfo.pageCount,
-      publishedDate: book.volumeInfo.publishedDate,
-      publisher: book.volumeInfo.publisher,
-      };
-
-      let info = {"book":newBook, "email":props.currentUser}
-
-      console.log(info)
-
-    try{
-    axios.put('http://localhost:5000/api/users/addFavorite', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
-    
-  }
-
-
-  async function handleAddReadList(book){
-    
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, 
-      author: authorArray.join(), 
-      image: book.volumeInfo.imageLinks.thumbnail,
-      description: book.volumeInfo.description,
-      categories: book.volumeInfo.categories, 
-      industryIdentifiers: book.volumeInfo.industryIdentifiers,
-      infoLink: book.volumeInfo.infoLink,
-      language: book.volumeInfo.language,
-      maturityRating: book.volumeInfo.maturityRating,
-      pageCount: book.volumeInfo.pageCount,
-      publishedDate: book.volumeInfo.publishedDate,
-      publisher: book.volumeInfo.publisher,
-      };
-    
-    let info = {"book":newBook, "email":props.currentUser}
-    try{
-    axios.put('http://localhost:5000/api/users/addReadList', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
-  }
-
-  async function handleAddBookshelf(book){
-
-    console.log(book)
-    
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, 
-      author: authorArray.join(), 
-      image: book.volumeInfo.imageLinks.thumbnail,
-      description: book.volumeInfo.description,
-      categories: book.volumeInfo.categories, 
-      industryIdentifiers: book.volumeInfo.industryIdentifiers,
-      infoLink: book.volumeInfo.infoLink,
-      language: book.volumeInfo.language,
-      maturityRating: book.volumeInfo.maturityRating,
-      pageCount: book.volumeInfo.pageCount,
-      publishedDate: book.volumeInfo.publishedDate,
-      publisher: book.volumeInfo.publisher,
-      };
-    
-    let info = {"book":newBook, "email":props.currentUser}
-    try{
-    axios.put('http://localhost:5000/api/users/addBookshelf', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
   }
 
     let but
