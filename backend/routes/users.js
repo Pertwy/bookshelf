@@ -110,8 +110,6 @@ router.put('/addFavorite', async (req, res) => {
     //console.log(req.user)
 
     let user = await User.findOne({email: req.user.email})
-
-    //let user = await User.findOne({email: req.body.email})
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
     
     if(book) {
@@ -123,7 +121,7 @@ router.put('/addFavorite', async (req, res) => {
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
         newBook = await newBook.save();
         
         user.favorites.push(newBook._id)
@@ -195,7 +193,7 @@ router.put('/addBookToUser', async (req, res) => {
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
         newBook.numberOfTimesRead += 1
         newBook = await newBook.save();
         
