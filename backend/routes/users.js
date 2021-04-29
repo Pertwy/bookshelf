@@ -106,10 +106,8 @@ router.put('/addListToUser', async (req, res) => {
 
 //Add book to favorites///////////////////////////////////////////////////////////////////////////////////
 router.put('/addFavorite', async (req, res) => {
-    
-    //console.log(req.user)
 
-    let user = await User.findOne({email: req.user.email})
+    let user = await User.findOne({email: req.body.email})
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
     
     if(book) {
@@ -117,7 +115,7 @@ router.put('/addFavorite', async (req, res) => {
         book.numberOfTimesFavorited += 1
         await user.save()
         await book.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Fave updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
@@ -127,7 +125,7 @@ router.put('/addFavorite', async (req, res) => {
         user.favorites.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Fave updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
@@ -147,7 +145,7 @@ router.put('/addBookshelf', async (req, res) => {
         book.bookshelf.push(user._id)
         await user.save()
         await book.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Bookshelf updated!'))
         
     }
     else{
@@ -158,7 +156,7 @@ router.put('/addBookshelf', async (req, res) => {
         user.bookshelf.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('User updated!'))
+            .then(() => res.json('Bookshelf updated!'))
            
     }
 });
