@@ -134,7 +134,7 @@ export default function CustomizedTabs(props) {
           <AntTab label="Lists" {...a11yProps(5)}/>
           <AntTab label="Reviews" {...a11yProps(6)}/>
           <AntTab label="Follow" {...a11yProps(7)}/>
-          <AntTab label="Dairy" {...a11yProps(8)}/>
+          {/* <AntTab label="Dairy" {...a11yProps(8)}/> */}
         </AntTabs>
         <Typography className={classes.padding} />
         <SwipeableViews
@@ -188,9 +188,9 @@ export default function CustomizedTabs(props) {
           Item Five
         </TabPanel>
 
-        <TabPanel value={value} index={7} dir={theme.direction}>
+        {/* <TabPanel value={value} index={7} dir={theme.direction}>
           <Following userData={props.userData} />
-        </TabPanel>
+        </TabPanel> */}
 
         {/* <TabPanel value={value} index={8} dir={theme.direction}>
           Diary

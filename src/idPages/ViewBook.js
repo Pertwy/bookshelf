@@ -1,25 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import '../components/HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
-import Radio from '@material-ui/core/Radio';
-  import RadioGroup from '@material-ui/core/RadioGroup';
-  import FormControlLabel from '@material-ui/core/FormControlLabel';
-  import FormControl from '@material-ui/core/FormControl';
-  import FormLabel from '@material-ui/core/FormLabel';
+import HalfRating from "../components/Stars"
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 
 export default function ViewBook(props){
-  const [book, setBook] = useState({})  
+  const [book, setBook] = useState({bookshelf:[], reviews:[]})  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [review, setReview] = useState("")
-  const [value, setValue] = useState("");
+  const [rating, setRating] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
       
+     console.log(book) 
   },[])
 
 
@@ -36,15 +33,11 @@ export default function ViewBook(props){
 
   function handleAddReview(e){
     e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("api/books/", ""), "review":review, "rating":value}
+    let info = {"email":currentUser, "_id":props.location.pathname.replace("api/books/", ""), "review":review, "rating":rating}
       axios.post('http://localhost:5000/api/users/addreview',info)
         .then(response => (console.log(response.data)))
   }
 
-    const handleChange = (event) => {
-      setValue(event.target.value);
-    };
-  
 
     function InfoBox(props){
       if(props){
@@ -69,25 +62,43 @@ export default function ViewBook(props){
 
       <div className="content">
         <div className="row">
-          <div className = "col-sm-6 col-md-3">
+          <div className = "col-xs-6 col-sm-6 col-md-3">
             <img className="book-image" src={book.image} alt={book.title}></img>
           </div>
 
-          <div className = "col-sm-6 col-md-6">
+          <div className = "col-xs-6 col-sm-6 col-md-6">
             <h2>{book.title}</h2>
             <h3>By {book.author}</h3>
             <h5>Description</h5>
+            
           </div>
 
-          <div className = "col-sm-6 col-md-3">
+          <div className = "col-xs-6 col-sm-6 col-md-3">
             <h3>Bookshelves</h3>
-            <p>On X friend's bookshelves</p>
-            <p>On X bookshelves</p>
+            <p>On {book.bookshelf.length} friend's bookshelves</p>
+            <p>On {book.bookshelf.length} bookshelves</p>
+
+            <form onSubmit={handleAddReview}>
+              {/* <label>Add a review</label> */}
+              <TextField
+              id="outlined-multiline-static"
+              label="Add A Review"
+              multiline
+              rows={4}
+              defaultValue=""
+              variant="outlined"
+              fullwidth
+              onChange={({ target }) =>     
+                  setReview(target.value)}
+            />
+              <HalfRating setRating={setRating}/>
+              <Button type="submit">Submit</Button>
+            </form>
           </div>
         </div>
         {/* <h4>Number of reviews {book.reviews.length}</h4> */}
         
-        <div className="container">
+        <div className="container pt-5 pb-5">
           <div className="row">
             <InfoBox title="PAGE COUNT" info={book.pageCount}/>
             <InfoBox title="LANGUAGE" info={book.language}/>
@@ -98,54 +109,23 @@ export default function ViewBook(props){
           </div>
         </div>
 
-        <h4>Number of times read {book.numberOfTimesRead}</h4>
+        {/* <h4>Number of times read {book.numberOfTimesRead}</h4>
         <h4>Number of times favorited {book.numberOfTimesFavorited}</h4>
         <h4>Read Lists </h4>
-        <h4>Lists </h4>
+        <h4>Lists </h4> */}
 
-        <form onSubmit={handleAddReview}>
-          <label>Add a review</label>
-          <input
-            type="text"
-            onChange={({ target }) =>     
-              setReview(target.value)}
-            placeholder="Add a Review"
-          />
-          <FormControl className="row" component="fieldset">
-            <FormLabel component="legend">Rating</FormLabel>
-            <RadioGroup row aria-label="rating" name="rating" value={value} onChange={handleChange}>
-              <FormControlLabel value= "1" labelPlacement="top" control={<Radio />} label= "1" />
-              <FormControlLabel value= "2" labelPlacement="top" control={<Radio />} label= "2" />
-              <FormControlLabel value= "3" labelPlacement="top" control={<Radio />} label= "3" />
-              <FormControlLabel value= "4" labelPlacement="top" control={<Radio />} label= "4" />
-              <FormControlLabel value= "5" labelPlacement="top" control={<Radio />} label= "5" />
-              <FormControlLabel value= "6" labelPlacement="top" control={<Radio />} label= "6" />
-              <FormControlLabel value= "7" labelPlacement="top" control={<Radio />} label= "7" />
-              <FormControlLabel value= "8" labelPlacement="top" control={<Radio />} label= "8" />
-              <FormControlLabel value= "9" labelPlacement="top" control={<Radio />} label= "9" />
-              <FormControlLabel value= "10" labelPlacement="top" control={<Radio />} label= "10" />
-
-            </RadioGroup>
-          </FormControl>
-
-          <button type="submit">submit</button>
-        </form>
-
-        {console.log(book)}
         
 
-        {book.reviews &&(
+
+        {book.reviews.length > 0 &&(
           <div>
             <div className="row">
-              <h2> Reviews</h2>
-              <h5> View All </h5>
+              <h4> Reviews</h4>
+              {/* <h5> View All </h5> */}
             </div>
             <Reviews/>
           </div>
         )}
-
-{/* //numberOfTimesRead
-//rating */}
 
       </div>
     </div>
