@@ -244,3 +244,28 @@ button{
 .list-title{
   color: rgb(169, 174, 179);
 }
+
+
+
+/* Search result  /////////////////*/
+.result-width{
+  width: 70%;
+}
+
+.center-all{
+  text-align: center;
+  margin: auto;
+}
+
+.all-text{
+  color: rgb(169, 174, 179);
+}
+
+.description{
+  text-align: left;
+  
+}
+
+/* .left-search{
+  max-width: 50%;
+} */

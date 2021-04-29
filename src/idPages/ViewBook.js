@@ -68,8 +68,10 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-6 col-md-6">
             <h2>{book.title}</h2>
-            <h3>By {book.author}</h3>
-            <h5>Description</h5>
+            <h4 className="mt-3">By {book.author}</h4>
+
+            {book.description  &&(
+            <p className="mt-3" >{book.description}</p>)}
             
           </div>
 
@@ -82,7 +84,7 @@ export default function ViewBook(props){
               {/* <label>Add a review</label> */}
               <TextField
               id="outlined-multiline-static"
-              label="Add A Review"
+              label="Add a review"
               multiline
               rows={4}
               defaultValue=""

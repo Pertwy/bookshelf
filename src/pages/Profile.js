@@ -31,8 +31,6 @@ export default function Profile(){
     <div className="container shadow-lg p-4 mb-4 bg-white">
       <UserDropDown setEmail={setCurrentUser}/>
 
-
-        
         <div className="profile-container pt-5 pb-5 container-fluid row">
           
           <div className="photo-div col-sm-2 col-md-2">

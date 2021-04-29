@@ -7,10 +7,13 @@ import "./Navbar.css"
 
 export default function Nav2() {
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("cats")
   const history = useHistory();
-  const handleSearch = useCallback(() => history.push("/searchresults/"+search), [history]);
 
+  function test(e){
+    
+    history.push("/searchresults/"+search)
+  }
     return (
         <>
            <Navbar className="nav-background container"  expand="lg">
@@ -31,10 +34,11 @@ export default function Nav2() {
                   </li>
 
                   <li className="navbar-item">
-                    <Form inline>
+                    <Form inline onSubmit={test}>
                       {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={({ target }) => setSearch(target.value)}/> */}
                       <TextField onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
-                      <Button onClick={()=> handleSearch()} variant="outline-success">Search</Button>
+                      <Button type="submit" variant="outline-success">Search</Button>
+                      {/* <button onClick={console.log(search)} ></button> */}
                     </Form>
                   </li>
 

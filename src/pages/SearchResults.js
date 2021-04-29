@@ -41,7 +41,19 @@ export default function SearchResults(props) {
   async function handleAddBook(book){
 
     const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+    const newBook = { title: book.volumeInfo.title, 
+      author: authorArray.join(), 
+      image: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+      categories: book.volumeInfo.categories, 
+      industryIdentifiers: book.volumeInfo.industryIdentifiers,
+      infoLink: book.volumeInfo.infoLink,
+      language: book.volumeInfo.language,
+      maturityRating: book.volumeInfo.maturityRating,
+      pageCount: book.volumeInfo.pageCount,
+      publishedDate: book.volumeInfo.publishedDate,
+      publisher: book.volumeInfo.publisher,
+      };
 
     let info = {"book":newBook, "email":currentUser}
     try{
@@ -53,28 +65,27 @@ export default function SearchResults(props) {
   }
 
 
-  async function handleAddAuthBook(book){
-
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
-
-    let info = {"book":newBook}
-    try{
-    axios.post('http://localhost:5000/api/books/addd', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
-  }
-
+ 
 
   
   async function handleAddFavorite(book){
 
     const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
+    const newBook = { title: book.volumeInfo.title, 
+      author: authorArray.join(), 
+      image: book.volumeInfo.imageLinks.thumbnail,
+      description: book.volumeInfo.description,
+      categories: book.volumeInfo.categories, 
+      industryIdentifiers: book.volumeInfo.industryIdentifiers,
+      infoLink: book.volumeInfo.infoLink,
+      language: book.volumeInfo.language,
+      maturityRating: book.volumeInfo.maturityRating,
+      pageCount: book.volumeInfo.pageCount,
+      publishedDate: book.volumeInfo.publishedDate,
+      publisher: book.volumeInfo.publisher,
+      };
 
-    let info = {"book":newBook, "email":currentUser}
+      let info = {"book":newBook, "email":currentUser}
     try{
     axios.put('http://localhost:5000/api/users/addFavorite', info)
       .then(res => { console.log(res)});
@@ -145,14 +156,18 @@ export default function SearchResults(props) {
     const authorArray = book.volumeInfo.authors
     
     return(
-      <div className="row space-between">
-        <img src={url || defaultImage} alt={book.volumeInfo.title}/>
+      <div className="row space-between mb-4">
+        <div className="row">
+          <img className="mr-2" src={url || defaultImage} alt={book.volumeInfo.title}/>
 
-        <div>
-          <h5>{book.volumeInfo.title}</h5>
-          {authorArray && (
-          <p>{authorArray.join()}</p>
-          )}
+          <div className={"description"}>
+            <h5 className={"all-text"}>{book.volumeInfo.title}</h5>
+            {authorArray && (
+            <p className={"all-text"}>{authorArray.join()}</p>
+            )}
+            {/* <p className={"all-text"}>{book.volumeInfo.description}</p> */}
+          </div>
+
         </div>
         
         <div>
@@ -168,9 +183,9 @@ export default function SearchResults(props) {
 
   return (
     <div className="container">
-        <div>
+        <div className="container center-all">
 
-          <div>
+          <div className="result-width center-all" >
             <h1>Search Results</h1>
             <UserDropDown setEmail={setCurrentUser}/>
 
@@ -184,7 +199,7 @@ export default function SearchResults(props) {
           </div>
 
 
-          <div>
+          <div className="result-width center-all"> 
             {result.map(book => (
                 <SearchedBook book={book}/>
               ))}
@@ -195,3 +210,30 @@ export default function SearchResults(props) {
       </div>
   );
 }
+
+
+// async function handleAddAuthBook(book){
+
+//   const authorArray = book.volumeInfo.authors
+//   const newBook = { title: book.volumeInfo.title, 
+//     author: authorArray.join(), 
+//     image: book.volumeInfo.imageLinks.thumbnail,
+//     description: book.volumeInfo.description,
+//     categories: book.volumeInfo.categories, 
+//     industryIdentifiers: book.volumeInfo.industryIdentifiers,
+//     infoLink: book.volumeInfo.infoLink,
+//     language: book.volumeInfo.language,
+//     maturityRating: book.volumeInfo.maturityRating,
+//     pageCount: book.volumeInfo.pageCount,
+//     publishedDate: book.volumeInfo.publishedDate,
+//     publisher: book.volumeInfo.publisher,
+//     };
+
+//   let info = {"book":newBook}
+//   try{
+//   axios.post('http://localhost:5000/api/books/addd', info)
+//     .then(res => { console.log(res)});
+//   }catch(e){
+//     console.error(e)
+//   }
+// }
