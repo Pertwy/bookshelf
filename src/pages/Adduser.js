@@ -62,10 +62,11 @@ export default function Adduser(){
     input:{
       '& > *': {
       display:"block",
-      color: "#9e9e9e", 
+      color: "#cacbcc", 
       width:"90%",
-      marginTop:"5%",
-      marginLeft:"5%",     
+      marginTop:"10px",
+      marginLeft:"5%",
+      height:"50px"     
       }
     }
   }));
@@ -137,7 +138,7 @@ export default function Adduser(){
                 Sign up
             </button> */}
             <div className={"text-align"}>
-              <Button type="submit" variant="outlined">
+              <Button className="mt-2" type="submit" variant="outlined">
                 Sign Up
               </Button>
             </div>
