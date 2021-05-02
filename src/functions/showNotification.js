@@ -1,13 +1,8 @@
-import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from 'react';
-import Button from '@material-ui/core/Button';
-
-import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
 
-export function showNotification(title){
+export default function showNotification(title){
     store.addNotification({
         title: title,
         message: "teodosii@react-notifications-component",
