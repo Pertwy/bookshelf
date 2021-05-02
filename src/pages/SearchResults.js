@@ -6,6 +6,10 @@ import UserDropDown from "../components/UserDropDown"
 import Button from '@material-ui/core/Button';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+
 export default function SearchResults(props) {
 
   const [book, setBook] = useState("")
@@ -66,6 +70,7 @@ export default function SearchResults(props) {
           <div className="result-width center-all mb-3" >
             <div className="space-between">
             <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
+            
             <UserDropDown setEmail={setCurrentUser}/>
             </div>
 

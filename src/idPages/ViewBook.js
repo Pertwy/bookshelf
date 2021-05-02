@@ -4,18 +4,24 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HalfRating from "../components/Stars"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import { InsertDriveFileOutlined } from '@material-ui/icons';
 
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
+  const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [review, setReview] = useState("")
   const [rating, setRating] = useState(0);
 
   useEffect(() => {
     axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
-      
+     
+    let email = {"email":currentUser}
+    axios.post('http://localhost:5000/api/users/',email)
+      .then(response => (setUserData(response.data)))
+
      console.log(book) 
   },[])
 
@@ -33,8 +39,10 @@ export default function ViewBook(props){
 
   function handleAddReview(e){
     e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("api/books/", ""), "review":review, "rating":rating}
-      axios.post('http://localhost:5000/api/users/addreview',info)
+    let info = {"email":currentUser, "_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
+    //console.log(info)  
+    
+    axios.post('http://localhost:5000/api/users/addreview',info)
         .then(response => (console.log(response.data)))
   }
 
@@ -57,8 +65,6 @@ export default function ViewBook(props){
 
 
     function ISBNInfoBox(props){
-      
-
       if(props.info){
         return(
         <div className="col-sm-2">
@@ -80,7 +86,9 @@ export default function ViewBook(props){
 
 
     
-
+  //   let success = book.bookshelf.every(function(val) {
+  //     return userData.following.indexOf(val) !== -1;
+  // });
 
 
   return (
@@ -104,7 +112,7 @@ export default function ViewBook(props){
           <div className = "col-xs-6 col-sm-6 col-md-3">
             <h3>Bookshelves</h3>
             <p>On {book.bookshelf.length} friend's bookshelves</p>
-            <p>On {book.bookshelf.length} bookshelves</p>
+            {/* <p>On {success} bookshelves</p> */}
 
             <form onSubmit={handleAddReview}>
               {/* <label>Add a review</label> */}

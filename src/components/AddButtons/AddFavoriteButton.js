@@ -3,6 +3,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
 import Button from '@material-ui/core/Button';
 
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+
 export default function AdditionButton(props) {
 
   async function handleAddBook(book){
@@ -28,7 +32,7 @@ export default function AdditionButton(props) {
     if (props.type === "favorite"){
         try{
             axios.put('http://localhost:5000/api/users/addFavorite', info)
-              .then(res => { console.log(res)});
+              .then(res => { showNotification(res.data)});
             }catch(e){
               console.error(e)
             }}
@@ -36,15 +40,15 @@ export default function AdditionButton(props) {
     if (props.type === "read"){
         try{
         axios.put('http://localhost:5000/api/users/addBookToUser', info)
-          .then(res => { console.log(res)});
+          .then(res => { showNotification(res.data)});
         }catch(e){
           console.error(e)
         }}
 
-    if (props.type === "readList"){
+    if (props.type === "readlist"){
         try{
             axios.put('http://localhost:5000/api/users/addReadList', info)
-              .then(res => { console.log(res)});
+              .then(res => { showNotification(res.data)});
             }catch(e){
               console.error(e)
             }}
@@ -52,12 +56,29 @@ export default function AdditionButton(props) {
     if (props.type === "bookshelf"){
         try{
         axios.put('http://localhost:5000/api/users/addBookshelf', info)
-            .then(res => { console.log(res)});
+            .then(res => { showNotification(res.data)});
         }catch(e){
             console.error(e)
         }}
 
   }
+
+  function showNotification(title){
+    store.addNotification({
+        title: title,
+        message: "teodosii@react-notifications-component",
+        type: "success",
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 5000,
+          onScreen: true
+        }
+      })}
+
+
 
     let but
     if (props.type === "favorite"){but = <div><Button onClick={() => handleAddBook(props.book)}>+ Favorite</Button></div>}

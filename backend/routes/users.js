@@ -115,7 +115,7 @@ router.put('/addFavorite', async (req, res) => {
         book.numberOfTimesFavorited += 1
         await user.save()
         await book.save()
-            .then(() => res.json('Fave updated!'))
+            .then(() => res.json('Favourite Added!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
@@ -125,7 +125,7 @@ router.put('/addFavorite', async (req, res) => {
         user.favorites.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('Fave updated!'))
+            .then(() => res.json('Favourite Added!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
@@ -145,7 +145,7 @@ router.put('/addBookshelf', async (req, res) => {
         book.bookshelf.push(user._id)
         await user.save()
         await book.save()
-            .then(() => res.json('Bookshelf updated!'))
+            .then(() => res.json('Added to Bookshelf!'))
         
     }
     else{
@@ -156,13 +156,14 @@ router.put('/addBookshelf', async (req, res) => {
         user.bookshelf.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('Bookshelf updated!'))
+            .then(() => res.json('Added to Bookshelf!'))
            
     }
 });
 
 //Add a book to ReadList
 router.put('/addReadList', async (req, res) => {
+    console.log("hello")
     let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
     newBook = await newBook.save();
     
@@ -170,7 +171,7 @@ router.put('/addReadList', async (req, res) => {
     user.readList.push(newBook._id)
 
     await user.save()
-        .then(() => res.send(newBook))
+    .then(() => res.json('Added to Read List'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -197,7 +198,7 @@ router.put('/addBookToUser', async (req, res) => {
         
         user.books.push(newBook._id)
         await user.save()
-            .then(() => res.json('Book! updated!'))
+            .then(() => res.json('Book updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
@@ -305,34 +306,34 @@ router.post('/addreview', async (req, res) => {
     CurrentBook.reviews.push(newReview._id)
     user.reviews.push(newReview._id)
 
-    if(rating === "1"){
+    if(rating === "0.5"){
         CurrentBook.rating.one.push(author)
     }
-    if(rating === "2"){
+    if(rating === "1"){
         CurrentBook.rating.two.push(author)
     }
-    if(rating === "3"){
+    if(rating === "1.5"){
         CurrentBook.rating.three.push(author)
     }
-    if(rating === "4"){
+    if(rating === "2"){
         CurrentBook.rating.four.push(author)
     }
-    if(rating === "5"){
+    if(rating === "2.5"){
         CurrentBook.rating.five.push(author)
     }
-    if(rating === "6"){
+    if(rating === "3"){
         CurrentBook.rating.six.push(author)
     }
-    if(rating === "7"){
+    if(rating === "3.5"){
         CurrentBook.rating.seven.push(author)
     }
-    if(rating === "8"){
+    if(rating === "4"){
         CurrentBook.rating.eight.push(author)
     }
-    if(rating === "9"){
+    if(rating === "4.5"){
         CurrentBook.rating.nine.push(author)
     }
-    if(rating === "10"){
+    if(rating === "5"){
         CurrentBook.rating.ten.push(author)
     }
 

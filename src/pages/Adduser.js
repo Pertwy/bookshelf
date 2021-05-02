@@ -7,6 +7,10 @@ import Button from '@material-ui/core/Button';
 import "./addUser.css"
 import { red } from '@material-ui/core/colors';
 
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
+import { store } from 'react-notifications-component';
+
 export default function Adduser(){
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -73,11 +77,18 @@ export default function Adduser(){
 
   const classes = useStyles();
 
+  
+
+
+
+
   return (
     <div>
       
       <div className=" container ">
+
         <div className="row justify-content-center">
+          
         
         {/* classes.root,  */}
         <div className={" col-sm-12 col-md-6"}>

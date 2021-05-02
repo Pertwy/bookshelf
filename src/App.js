@@ -40,6 +40,7 @@ function App() {
         <Route path="/user/:id" component={User} />
         <Route path="/alllists" component={AllLists} />
 
+
         {/* <Route path="/searchresults/" component={SearchResults} /> */}
         <Route
         path="/searchresults/:name"
