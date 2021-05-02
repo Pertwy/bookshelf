@@ -11,7 +11,7 @@ export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
-
+  const [owner, setOwner] = useState(true)
 
   useEffect(() => {
     if(currentUser){
@@ -58,7 +58,7 @@ export default function Profile(){
 
         </div>
 
-        <TabPanel setUserData={setUserData} userData={userData} owner="true"/>
+        <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>
       
     </div>
   )
