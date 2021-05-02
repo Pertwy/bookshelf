@@ -15,6 +15,7 @@ import SearchResults from "./pages/SearchResults"
 import AllLists from './idPages/AllLists';
 // import FireAuth from "./components/fireAuth"
 import Nav2 from "./components/Nav2"
+import Footer from './components/Footer';
 
 axios.defaults.withCredentials = true
 
@@ -46,6 +47,13 @@ function App() {
         path="/searchresults/:name"
         render={props => <SearchResults {...props} />}
       />
+
+      <div>
+        <Footer/>
+      </div>
+
+
+
       </div>
     </Router>
   );

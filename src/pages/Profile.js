@@ -58,9 +58,8 @@ export default function Profile(){
 
         </div>
 
-        <TabPanel setUserData={setUserData} userData={userData}/>
+        <TabPanel setUserData={setUserData} userData={userData} owner="true"/>
       
-
     </div>
   )
 }
