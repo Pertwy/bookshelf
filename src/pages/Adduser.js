@@ -27,10 +27,9 @@ export default function Adduser(){
     let newUser = {
       "email":email, "userName":userName, "givenName":givenName, "surname":surname, "password":password, "bio":bio
     }
-    console.log(newUser)
 
     try{
-      axios.post('http://localhost:5000/api/users/add', newUser)
+      axios.post('http://localhost:5000/api/users/add', newUser )
         .then(res => console.log(res.data));
       }catch(e){
         console.error(e)
@@ -142,8 +141,17 @@ export default function Adduser(){
             <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setSecondPassword(target.value)} label="Re-enter Password" />
 
-            <TextField variant="outlined" fullWidth className={classes.input} variant="outlined" onChange={({ target }) =>     
-                  setBio(target.value)} label="Bio" />
+            <TextField 
+              variant="outlined" 
+              fullWidth 
+              multiline 
+              id="outlined-multiline-static"
+              rows={4} 
+              className={classes.input} 
+              variant="outlined" 
+              onChange={({ target }) =>     
+                  setBio(target.value)} 
+              label="Bio" />
 
             
 

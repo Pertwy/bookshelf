@@ -29,8 +29,8 @@ router.post('/add', async (req, res) => {
     let token = newUser.generateAuthToken();
     
     await newUser.save()
-        .then(() => res.cookie("token", token, {httpOnly: true}).send(_.pick(newUser, ["_id", "email", "name"])))
-        .catch(err => res.status(400).json('Error: ' + err));
+        .then(() => res.cookie("token", token, {httpOnly: true}).send(_.pick(newUser, ["_id", "email", "userName"])))
+        .catch(err => res.status(400).json("Error " + err))
   });
 
 
