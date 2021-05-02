@@ -20,11 +20,12 @@ export default function Adduser(){
   const [surname, setSurname] = useState("")
   const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
+  const [secondPassword, setSecondPassword] = useState("")
   
 
   function newUserInDB(){
     let newUser = {
-      "email":email, "name":name, "password":password
+      "email":email, "userName":userName, "givenName":givenName, "surname":surname, "password":password, "bio":bio
     }
     console.log(newUser)
 
@@ -124,7 +125,13 @@ export default function Adduser(){
               <h3 className="sign-text">Create Your Account</h3>  
             </div>
             <TextField  variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
-                  setName(target.value)} label="Name" />
+                  setGivenName(target.value)} label="Given Name" />
+
+            <TextField  variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
+                  setSurname(target.value)} label="Surname" />
+
+            <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
+                  setUserName(target.value)} label="User Name" />
 
             <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setEmail(target.value)} label="Email" />
@@ -132,19 +139,21 @@ export default function Adduser(){
             <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setPassword(target.value)} label="Password" />
 
+            <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
+                  setSecondPassword(target.value)} label="Re-enter Password" />
+
             <TextField variant="outlined" fullWidth className={classes.input} variant="outlined" onChange={({ target }) =>     
                   setBio(target.value)} label="Bio" />
 
-            <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
-                  setUserName(target.value)} label="User Name" />
+            
 
             {/* <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setGivenName(target.value)} label="Given Name" />
             <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setSurname(target.value)} label="Surname" /> */}
 
-            <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
-                  setPronoun(target.value)} label="Pronoun" />
+            {/* <TextField variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
+                  setPronoun(target.value)} label="Pronoun" /> */}
             {/* <button type="submit">
                 Sign up
             </button> */}
