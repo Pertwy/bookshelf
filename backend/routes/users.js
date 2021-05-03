@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
         .populate("books")
         .populate("favorites")
         .populate("readList")
+        .populate("bookshelf")
         .populate("lists") 
         .populate({
             path: 'following',
