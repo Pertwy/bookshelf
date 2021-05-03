@@ -258,7 +258,7 @@ button{
 }
 
 .all-text{
-  color: rgb(169, 174, 179);
+  color: #e4e5e6;
 }
 
 .description{
@@ -271,10 +271,76 @@ button{
 }
 
 .searched-row{
-
   border-bottom: 1px solid rgb(169, 174, 179);
 }
 
 /* .left-search{
   max-width: 50%;
 } */
+
+.main-container{
+  background-color: #2f3031;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.mainer-container{
+  background-color: #2f3031;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .main-container{
+    width: 95%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .main-container{
+    width: 95%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .main-container{
+    width: 800px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .main-container{
+    width: 800px;
+  }
+}
+
+.footer-backgroud{
+  background-color: rgb(29, 29, 29);
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap');
+
+
+.home-page-heading{
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 4em;
+  text-align: center;
+}
+.home-page-heading-div{
+  text-align: center;
+}
+
+.home-page-bullets{
+  line-height: 0.6;
+}
+
+.nav-background{
+  background-color: rgb(29, 29, 29);
+}

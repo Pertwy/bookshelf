@@ -24,9 +24,10 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
-    minWidth: 72,
+    minWidth: 22,
     fontWeight: theme.typography.fontWeightRegular,
-    marginRight: theme.spacing(4),
+    marginRight: theme.spacing(3),
+    fontSize: "13px",
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -62,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   padding: {
-    padding: theme.spacing(3),
+    padding: theme.spacing(1),
   },
   demo1: {
     backgroundColor: theme.palette.background.paper,
@@ -96,8 +97,10 @@ export default function CustomizedTabs(props) {
       <div
         role="tabpanel"
         hidden={value !== index}
-        id={`full-width-tabpanel-${index}`}
-        aria-labelledby={`full-width-tab-${index}`}
+        // id={`full-width-tabpanel-${index}`}
+        // aria-labelledby={`full-width-tab-${index}`}
+        id={`scrollable-auto-tabpanel-${index}`}
+         aria-labelledby={`scrollable-auto-tab-${index}`}
         {...other}
       >
         {value === index && (
@@ -124,9 +127,13 @@ export default function CustomizedTabs(props) {
 
 
   return (
-    <div className={classes.root}>
-      <div className={classes.demo1}>
-        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+    <div className={classes.root, "pb-4"}>
+      <div>
+        <AntTabs variant="scrollable"
+          scrollButtons="auto"
+          aria-label="scrollable auto tabs example" 
+          value={value} onChange={handleChange} 
+         >
           <AntTab label="Profile" {...a11yProps(0)} />
           <AntTab label="Favorites" {...a11yProps(1)} />
           <AntTab label="Read list" {...a11yProps(2)}/>

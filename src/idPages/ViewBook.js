@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { InsertDriveFileOutlined } from '@material-ui/icons';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
+import showNotification from "../functions/showNotification"
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -43,7 +44,7 @@ export default function ViewBook(props){
     //console.log(info)  
     
     axios.post('http://localhost:5000/api/users/addreview',info)
-        .then(response => (console.log(response.data)))
+      .then(res => { showNotification(res.data, res.data)})
   }
 
 
@@ -131,14 +132,22 @@ export default function ViewBook(props){
               <Button type="submit">Submit</Button>
             </form>
 
-            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
+            
           </div>
         </div>
         {/* <h4>Number of reviews {book.reviews.length}</h4> */}
-        
+
+        <span className="row">
+          <div>
+            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
+          </div>
+          <div>
+            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
+          </div>
+        </span>
+
         <div className="container pt-5 pb-5">
           <div className="row">
             <InfoBox title="PAGE COUNT" info={book.pageCount}/>

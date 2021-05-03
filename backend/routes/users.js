@@ -341,7 +341,7 @@ router.post('/addreview', async (req, res) => {
 
     await CurrentBook.save()
     await user.save()
-        .then(() => res.json('review added'))
+        .then(() => res.json('Review added'))
         .catch(err => res.status(400).json('Error: ' + err));
 
 });

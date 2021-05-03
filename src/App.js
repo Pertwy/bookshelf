@@ -26,27 +26,31 @@ function App() {
         <Navbar />
       </div> */}
 
-      <div >
+      <div className={"nav-background"}>
         <Nav2 />
       </div>
 
-      <div style={{backgroundColor: "#2f3031"}}>
-      <br/>
-        <Route path="/" exact component={HomePage} />
-        <Route path="/test" exact component={Adduser} />
-        <Route path="/booksearch" component={AddBook} />
-        <Route path="/lists" component={AddList} />
-        <Route path="/profile" component={Profile} />
-        <Route path="/book/:id" component={ViewBook} />
-        <Route path="/user/:id" component={User} />
-        <Route path="/alllists" component={AllLists} />
+      <div className={"mainer-container"}>
+        <div className={"main-container"}>
+          <br/>
+            <Route path="/" exact component={HomePage} />
+            <Route path="/test" exact component={Adduser} />
+            <Route path="/booksearch" component={AddBook} />
+            <Route path="/lists" component={AddList} />
+            <Route path="/profile" component={Profile} />
+            <Route path="/book/:id" component={ViewBook} />
+            <Route path="/user/:id" component={User} />
+            <Route path="/alllists" component={AllLists} />
 
 
-        {/* <Route path="/searchresults/" component={SearchResults} /> */}
-        <Route
-        path="/searchresults/:name"
-        render={props => <SearchResults {...props} />}
-      />
+            {/* <Route path="/searchresults/" component={SearchResults} /> */}
+            <Route
+            path="/searchresults/:name"
+            render={props => <SearchResults {...props} />}
+          />
+        </div>
+      </div>
+
 
       <div>
         <Footer/>
@@ -54,7 +58,7 @@ function App() {
 
 
 
-      </div>
+      
     </Router>
   );
 }
