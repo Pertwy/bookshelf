@@ -122,6 +122,7 @@ export default function CustomizedTabs(props) {
     };
   }
 
+
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
@@ -151,28 +152,28 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks books={props.userData.favorites} type="favorites" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.favorites} type="favorites" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
         <TabPanel value={value} index={2} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks books={props.userData.readList} type="readingList" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.readList} type="readingList" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
         <TabPanel value={value} index={3} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks books={props.userData.books} type="read" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.books} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
         <TabPanel value={value} index={4} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks books={props.userData.bookshelf} type="read" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
@@ -188,9 +189,9 @@ export default function CustomizedTabs(props) {
           Item Five
         </TabPanel>
 
-        {/* <TabPanel value={value} index={7} dir={theme.direction}>
+        <TabPanel value={value} index={7} dir={theme.direction}>
           <Following userData={props.userData} />
-        </TabPanel> */}
+        </TabPanel>
 
         {/* <TabPanel value={value} index={8} dir={theme.direction}>
           Diary

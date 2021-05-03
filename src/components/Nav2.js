@@ -33,6 +33,7 @@ export default function Nav2() {
                     <Link to="/profile" className="nav-text nav-link">Profile</Link>
                   </li>
 
+
                   <li className="navbar-item">
                     <Form inline onSubmit={test}>
                       {/* <FormControl type="text" placeholder="Search" className="mr-sm-2" onChange={({ target }) => setSearch(target.value)}/> */}

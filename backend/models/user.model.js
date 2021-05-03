@@ -6,7 +6,6 @@ const jwt = require('jsonwebtoken');
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
     minlength: 5,
     maxlength: 50
   },
@@ -29,6 +28,24 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-portrait-176256935.jpg"
   },
+  givenName: {
+    type: String,
+    required: true,
+    default: "default"
+  },
+  surname: {
+    type: String,
+    required: true,
+    default: "default"
+  },
+  // userName: {
+  //   type: String,
+  //   required: true,
+  //   minlength: 2,
+  //   maxlength: 255,
+  //   unique: true
+  // },
+
 
 
 

@@ -12,6 +12,7 @@ export default function User(props){
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [update, setUpdate] = useState(0)
+  const [owner, setOwner] = useState(false)
 
 
 
@@ -31,6 +32,14 @@ export default function User(props){
   },[currentUser, update, userData])
  
   
+  function handleFollow(){
+    let info = {"currentUser":currentUser, "follow":userData.email}
+    axios.post('http://localhost:5000/api/users/follow',info)
+      .then(response => console.log(response))
+}
+
+
+
   
     return (
       <div className="container shadow-lg p-4 mb-4 bg-white">
@@ -42,7 +51,7 @@ export default function User(props){
             </div>
   
             <div className="col-sm-10 col-md-8">
-              <h4 className="name">{userData.name}</h4>
+              <h4 className="name">{userData.name}</h4> <button onClick={()=>handleFollow()}>Follow</button>
               <p className="bio">{userData.bio}</p>
             </div>
   
@@ -63,7 +72,7 @@ export default function User(props){
   
           </div>
   
-          <TabPanel setUserData={setUserData} userData={userData}/>
+          <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>
         
   
       </div>

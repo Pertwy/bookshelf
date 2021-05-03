@@ -40,9 +40,14 @@ export default function DisplayBooks(props) {
           <img className="card-img-top" src={image} alt={title}></img>
         </Link>
 
+
+      {props.owner &&(
         <div className="button">
           <button onClick={() => handleDeleteBook(_id, props.type)}>Remove</button>
-        </div> 
+        </div> )}
+
+
+
       </section>
     )
   }))
