@@ -52,10 +52,10 @@ export default function SearchResults(props) {
         </div>
         
         <div >
-            <AdditionButton type="favorite" currentUser={currentUser} book={book}/>
-            <AdditionButton type="read" currentUser={currentUser} book={book}/>
-            <AdditionButton type="readlist" currentUser={currentUser} book={book}/>
-            <AdditionButton type="bookshelf" currentUser={currentUser} book={book}/>
+            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton type="read" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="SearchResults"/>
         </div> 
 
       </div>

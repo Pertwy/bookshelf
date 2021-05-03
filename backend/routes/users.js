@@ -125,7 +125,7 @@ router.put('/addFavorite', async (req, res) => {
         user.favorites.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('Favourite Added!'))
+            .then(() => res.json('New Favourite Added!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });
@@ -156,7 +156,7 @@ router.put('/addBookshelf', async (req, res) => {
         user.bookshelf.push(newBook._id)
     
         await user.save()
-            .then(() => res.json('Added to Bookshelf!'))
+            .then(() => res.json('New Added to Bookshelf!'))
            
     }
 });
@@ -198,7 +198,7 @@ router.put('/addBookToUser', async (req, res) => {
         
         user.books.push(newBook._id)
         await user.save()
-            .then(() => res.json('Book updated!'))
+            .then(() => res.json('New Book updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
 });

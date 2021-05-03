@@ -189,9 +189,9 @@ export default function CustomizedTabs(props) {
           Item Five
         </TabPanel>
 
-        {/* <TabPanel value={value} index={7} dir={theme.direction}>
+        <TabPanel value={value} index={7} dir={theme.direction}>
           <Following userData={props.userData} />
-        </TabPanel> */}
+        </TabPanel>
 
         {/* <TabPanel value={value} index={8} dir={theme.direction}>
           Diary

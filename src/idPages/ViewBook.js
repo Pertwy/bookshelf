@@ -5,7 +5,7 @@ import HalfRating from "../components/Stars"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { InsertDriveFileOutlined } from '@material-ui/icons';
-
+import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -130,6 +130,11 @@ export default function ViewBook(props){
               <HalfRating setRating={setRating}/>
               <Button type="submit">Submit</Button>
             </form>
+
+            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
           </div>
         </div>
         {/* <h4>Number of reviews {book.reviews.length}</h4> */}

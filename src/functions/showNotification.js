@@ -2,10 +2,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
 
-export default function showNotification(title){
+export default function showNotification(title, message){
     store.addNotification({
         title: title,
-        message: "teodosii@react-notifications-component",
+        message: message,
         type: "success",
         insert: "top",
         container: "top-right",

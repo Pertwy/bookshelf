@@ -3,7 +3,7 @@ import React from 'react';
 import "./Navbar.css"
 
 //Feed me your lists aand i'll show them for you
-export default function DisplayBooks(props) {
+export default function DisplayList(props) {
   
 
   const UsersExistingLists = ({list}) => {
@@ -11,7 +11,7 @@ export default function DisplayBooks(props) {
       <div >
         
           <div className="row space-between pl-4 pr-4 pt-4">
-            <h3 className="list-row-title">{list.title}</h3>
+            <h4 className="list-row-title">{list.title}</h4>
 
             {/* <div className="row">
               <button>Edit</button>

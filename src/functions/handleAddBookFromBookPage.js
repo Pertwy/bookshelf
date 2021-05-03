@@ -3,21 +3,21 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import showNotification from "./showNotification"
 
 
-export async function handleAddBook(book, type, user){
+export async function handleAddBookFromBookPage(book, type, user){
 
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, 
-      author: authorArray.join(), 
-      image: book.volumeInfo.imageLinks.thumbnail,
-      description: book.volumeInfo.description,
-      categories: book.volumeInfo.categories, 
-      industryIdentifiers: book.volumeInfo.industryIdentifiers,
-      infoLink: book.volumeInfo.infoLink,
-      language: book.volumeInfo.language,
-      maturityRating: book.volumeInfo.maturityRating,
-      pageCount: book.volumeInfo.pageCount,
-      publishedDate: book.volumeInfo.publishedDate,
-      publisher: book.volumeInfo.publisher,
+    const newBook = { 
+      title: book.title, 
+      author: book.author, 
+      image: book.image,
+      description: book.description,
+      categories: book.categories, 
+      industryIdentifiers: book.industryIdentifiers,
+      infoLink: book.infoLink,
+      language: book.language,
+      maturityRating: book.maturityRating,
+      pageCount: book.pageCount,
+      publishedDate: book.publishedDate,
+      publisher: book.publisher
       };
 
     let info = {"book":newBook, "email":user}
