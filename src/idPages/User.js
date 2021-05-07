@@ -10,6 +10,7 @@ import TabPanel from "../components/TabPanel"
 export default function User(props){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
+  const [myUserData, setMyUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [update, setUpdate] = useState(0)
   const [owner, setOwner] = useState(false)
@@ -17,30 +18,47 @@ export default function User(props){
 
 
   useEffect(() => {
-    //console.log(currentUser)
-    if(currentUser){
 
       axios.get("http://localhost:5000/api/users/"+props.location.pathname.replace("/user/", ""))
       .then(response => (setUserData(response.data)))
       //.then(response => (console.log(response.data)))
 
-    }
-    else{
-      axios.get('http://localhost:5000/api/books/')
-        .then(response => (setBooks(response.data)))
-    }
+      let email = {"email":currentUser}
+      axios.post('http://localhost:5000/api/users/',email)
+        .then(response => (setMyUserData(response.data)))
+
   },[currentUser, update, userData])
  
+
+
   
   function handleFollow(){
-    let info = {"currentUser":currentUser, "follow":userData.email}
+    let info = {"currentUser":currentUser, "follow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/follow',info)
       .then(response => console.log(response))
 }
 
+  function handleUnfollow(){
+    let info = {"currentUser":currentUser, "unfollow":props.location.pathname.replace("/user/", "")}
+    axios.post('http://localhost:5000/api/users/unfollow',info)
+      .then(response => console.log(response))
+  }
 
 
-  
+
+  let doesFollow = myUserData.following.some((follower) => {
+    return follower._id === props.location.pathname.replace("/user/", "")
+  })
+  let followButton
+  if(!doesFollow){
+    followButton = <><button onClick={()=>handleFollow()}>Follow</button> </>
+  }else {
+    followButton = <><button onClick={()=>handleUnfollow()}>Unfollow</button> </>
+  }
+
+
+
+
     return (
       <div className="container shadow-lg p-4 mb-4 bg-white">
         <UserDropDown setEmail={setCurrentUser}/>
@@ -51,7 +69,13 @@ export default function User(props){
             </div>
   
             <div className="col-sm-10 col-md-8">
-              <h4 className="name">{userData.name}</h4> <button onClick={()=>handleFollow()}>Follow</button>
+   
+
+              <h4 className="name">{userData.name}</h4> 
+              {followButton}
+              {/* <button onClick={()=>doesFollow()}>test</button> */}
+
+
               <p className="bio">{userData.bio}</p>
             </div>
   

@@ -33,8 +33,8 @@ export default function Profile(){
 
         <div className="profile-container pt-5 pb-5 container-fluid row">
           
-          <div className="photo-div col-sm-2 col-md-2">
-          </div>
+          {/* <div className="photo-div col-sm-2 col-md-2">
+          </div> */}
 
           <div className="col-sm-10 col-md-8">
             <h4 className="name">{userData.name}</h4>
