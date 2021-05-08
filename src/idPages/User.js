@@ -5,6 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
 import TabPanel from "../components/TabPanel"
+import showNotification from '../functions/showNotification';
 
 
 export default function User(props){
@@ -35,13 +36,13 @@ export default function User(props){
   function handleFollow(){
     let info = {"currentUser":currentUser, "follow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/follow',info)
-      .then(response => console.log(response))
+      .then(res => { showNotification(res.data, res.data)});
 }
 
   function handleUnfollow(){
     let info = {"currentUser":currentUser, "unfollow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/unfollow',info)
-      .then(response => console.log(response))
+      .then(res => { showNotification(res.data, res.data)});
   }
 
 

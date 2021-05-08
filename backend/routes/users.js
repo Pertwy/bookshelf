@@ -212,12 +212,16 @@ router.put('/addBookToUser', async (req, res) => {
 //Follow another user
 router.post('/follow', async (req, res) => {
     let user = await User.findOne({email: req.body.currentUser})
-    
     user.following.push(req.body.follow)
 
+    let otherUser = await User.findById(req.body.follow)
+    otherUser.followers.push(user._id)
+
+    await otherUser.save()
     await user.save()
-        .then(() => res.json('User updated!'))
+        .then(() => res.json('Followed'))
         .catch(err => res.status(400).json('Error: ' + err));
+
 });
 
 //Unfollow another user
@@ -227,8 +231,15 @@ router.post('/unfollow', async (req, res) => {
     index = user.following.indexOf(req.body.unfollow)
     user.following.splice(index, 1)
 
+
+    let otherUser = await User.findById(req.body.unfollow)
+    otherindex = otherUser.followers.indexOf(req.body.unfollow)
+    otherUser.followers.splice(otherindex, 1)
+    await otherUser.save()
+
+
     await user.save()
-        .then(() => res.send(user))
+    .then(() => res.json('Unfollowed'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

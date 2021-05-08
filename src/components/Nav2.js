@@ -44,6 +44,10 @@ export default function Nav2() {
               <Nav className="ml-auto">
                 
                 <ul className="navbar-nav ">
+
+                  <li className="navbar-item">
+                    <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">TestSign</h6></Link>
+                  </li>
                   
                   <li className="navbar-item">
                     <Link to="/test" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>

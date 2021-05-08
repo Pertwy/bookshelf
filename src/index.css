@@ -258,6 +258,9 @@ button{
 .all-text{
   color: #e4e5e6;
 }
+.all-back{
+  background-color: #e4e5e6;
+}
 
 .description{
   text-align: left;
