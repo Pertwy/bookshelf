@@ -16,6 +16,7 @@ import AllLists from './idPages/AllLists';
 // import FireAuth from "./components/fireAuth"
 import Nav2 from "./components/Nav2"
 import Footer from './components/Footer';
+import FollowingBookshelves from './pages/FollowingBookshelves';
 
 axios.defaults.withCredentials = true
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/book/:id" component={ViewBook} />
             <Route path="/user/:id" component={User} />
             <Route path="/alllists" component={AllLists} />
+            <Route path="/followingBookshelves" component={FollowingBookshelves} />
 
 
             {/* <Route path="/searchresults/" component={SearchResults} /> */}

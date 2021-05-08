@@ -176,7 +176,6 @@ section:hover{
 .book-row-title{
   font-size:small;
   color: rgb(169, 174, 179);
-  border-bottom: 1px solid rgb(160, 160, 161);
 }
 
 .list-row-title{
@@ -185,8 +184,7 @@ section:hover{
 }
 
 .book-row-div{
-  border-bottom-style: solid;
-  border-width: 3px
+  border-bottom: 1px solid rgb(160, 160, 161);
 }
 
 /* .infoBox{
@@ -346,3 +344,6 @@ button{
   background-color: rgb(29, 29, 29);
 }
 
+.full-width{
+  width:100%
+}

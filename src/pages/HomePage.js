@@ -34,47 +34,6 @@ export default function HomePage(){
   },[currentUser])
 
 
-  function BookList() {
-
-    return (userData.books.slice(0, listSize).map(currentBook => {
-
-      const {title, author, image,  _id} = currentBook
-      return (
-
-        <section className="book" key={_id} >
-            <Link to={"/book/"+_id}>
-              <img className="card-img-top" src={image} alt={title}></img>
-              {/* <div className="hiddenBlock">alright mate</div> */}
-            </Link>
-        </section>
-      )
-    })
-  )}
-
-
-
-  function AdminLists() {
-    
-      return (userData.books.map(currentBook => {
-
-        const {title, author, image,  _id} = currentBook
-        return (
-
-          <section key={_id} className="book">
-            <div >
-              <img className="card-img-top" src={image} alt={title}></img>
-              <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                {/* <p className="card-text">{author}</p> */}
-              </div>
-            </div>
-          </section>
-        )
-      })    
-  )
- 
-}
-
 
   function FriendReadList(props) {
 
@@ -151,14 +110,19 @@ export default function HomePage(){
         </div>
 
         <div className="book-row-section">
-          <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
+          <div className="book-row-div">
+            <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
+          </div>
           <div className="row book-row">
             <FriendReadList type="readlist"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h2 className="book-row-title">BOOKSHELVES</h2>
+          <div className="book-row-div row space-between">
+            <h2 className="book-row-title">BOOKSHELVES</h2>
+            <Link to={"/followingBookshelves"}><h2 className="book-row-title">ALL</h2></Link>
+          </div>
           <div className="row book-row">
             <FriendBookshelfList/>
           </div>
@@ -166,7 +130,9 @@ export default function HomePage(){
 
 
         <div className="book-row-section">
-          <h2 className="book-row-title">POPULAR LISTS</h2>
+          <div className="book-row-div">
+            <h2 className="book-row-title">POPULAR LISTS</h2>
+          </div>
           
           <div className="row book-row">
             <DisplayList lists={adminLists}/>
