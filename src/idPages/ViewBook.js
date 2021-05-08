@@ -86,10 +86,20 @@ export default function ViewBook(props){
     }
 
 
-    
-  //   let success = book.bookshelf.every(function(val) {
-  //     return userData.following.indexOf(val) !== -1;
-  // });
+
+
+
+  let numberOfFollowingBookshelves = 0
+  var i;
+
+  for (i = 0; i < userData.following.length; i++) {
+
+    let check = userData.following[i].bookshelf.some((book) => {
+      return book._id === props.location.pathname.replace("/book/", "")
+    }) 
+    if(check){numberOfFollowingBookshelves+=1}
+
+  }
 
 
   return (
@@ -103,6 +113,8 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-6 col-md-6">
             <h2>{book.title}</h2>
+            <button onClick={()=>console.log(numberOfFollowingBookshelves)}>test</button>
+            <button onClick={()=>console.log(book)}>test</button>
             <h4 className="mt-3">By {book.author}</h4>
 
             {book.description  &&(
@@ -112,7 +124,8 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-6 col-md-3">
             <h3>Bookshelves</h3>
-            <p>On {book.bookshelf.length} friend's bookshelves</p>
+            <p>On {numberOfFollowingBookshelves} friend's bookshelves</p>
+            <p>On {book.bookshelf.length} bookshelves</p>
             {/* <p>On {success} bookshelves</p> */}
 
             <form onSubmit={handleAddReview}>

@@ -152,8 +152,11 @@ router.put('/addBookshelf', async (req, res) => {
     }
     else{
         let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
-        // let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
         newBook = await newBook.save();
+
+        let bookupdate = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+        bookupdate.bookshelf.push(user._id)
+        bookupdate = await bookupdate.save();
         
         user.bookshelf.push(newBook._id)
     
