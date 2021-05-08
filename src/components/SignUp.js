@@ -24,7 +24,7 @@ export default function Signup(){
       .oneOf([Yup.ref('password'), null], 'Password must match')
       .required('Confirm password is required'),
     bio: Yup.string()
-        .max(255, 'Must be 255 characters or less')
+        .max(145, 'Must be 255 characters or less')
   })
 
 
@@ -42,7 +42,7 @@ export default function Signup(){
       }}
 
       validationSchema={validate}
-      
+
       onSubmit={values => {
         console.log(values)
       }}

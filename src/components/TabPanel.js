@@ -10,11 +10,13 @@ import Box from '@material-ui/core/Box';
 import DisplayBooks from "./DisplayBooks"
 import DisplayAllLists from "./DisplayAllLists"
 import Following from "../components/Following"
+import { AutoComplete } from 'material-ui';
 
 
 const AntTabs = withStyles({
   root: {
     borderBottom: '1px solid #e8e8e8',
+
   },
   indicator: {
     backgroundColor: '#1890ff',
@@ -24,10 +26,12 @@ const AntTabs = withStyles({
 const AntTab = withStyles((theme) => ({
   root: {
     textTransform: 'none',
+    margin: "auto",
     minWidth: 22,
     fontWeight: theme.typography.fontWeightRegular,
     marginRight: theme.spacing(3),
     fontSize: "13px",
+    color: '#e4e5e6',
     fontFamily: [
       '-apple-system',
       'BlinkMacSystemFont',
@@ -61,6 +65,8 @@ const AntTab = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    alignContent:'center',
+    alignItems: 'center',
   },
   padding: {
     padding: theme.spacing(1),
@@ -97,11 +103,10 @@ export default function CustomizedTabs(props) {
       <div
         role="tabpanel"
         hidden={value !== index}
-        // id={`full-width-tabpanel-${index}`}
-        // aria-labelledby={`full-width-tab-${index}`}
         id={`scrollable-auto-tabpanel-${index}`}
          aria-labelledby={`scrollable-auto-tab-${index}`}
         {...other}
+        
       >
         {value === index && (
           <Box p={3}>
@@ -133,27 +138,29 @@ export default function CustomizedTabs(props) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example" 
           value={value} onChange={handleChange} 
+          centered
          >
           <AntTab label="Profile" {...a11yProps(0)} />
           <AntTab label="Favorites" {...a11yProps(1)} />
           <AntTab label="Read list" {...a11yProps(2)}/>
           <AntTab label="Read" {...a11yProps(3)}/>
           <AntTab label="Bookshelf" {...a11yProps(4)}/>
-          <AntTab label="Lists" {...a11yProps(5)}/>
-          <AntTab label="Reviews" {...a11yProps(6)}/>
-          <AntTab label="Follow" {...a11yProps(7)}/>
-          {/* <AntTab label="Dairy" {...a11yProps(8)}/> */}
+          <AntTab label="Follow" {...a11yProps(5)}/>
+          {/* <AntTab label="Lists" {...a11yProps(6)}/>
+          <AntTab label="Reviews" {...a11yProps(7)}/>
+          <AntTab label="Dairy" {...a11yProps(8)}/> */}
         </AntTabs>
         <Typography className={classes.padding} />
         <SwipeableViews
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
+       
       >
 
         <TabPanel value={value} index={0} dir={theme.direction}>
           <div className="row book-row">
-            <h1>Profile</h1>
+            <h1 className="all-text" >Profile</h1>
           </div>
         </TabPanel>
 
@@ -184,22 +191,23 @@ export default function CustomizedTabs(props) {
           </div>
         </TabPanel>
 
-
         <TabPanel value={value} index={5} dir={theme.direction}>
+          <Following userData={props.userData} />
+        </TabPanel>
+
+
+        {/* <TabPanel value={value} index={6} dir={theme.direction}>
           <div className="row book-row">
             <DisplayAllLists lists={props.userData.lists}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={6} dir={theme.direction}>
-          Item Five
-        </TabPanel>
-
         <TabPanel value={value} index={7} dir={theme.direction}>
-          <Following userData={props.userData} />
-        </TabPanel>
+          Item Five
+        </TabPanel> */}
 
+    
         {/* <TabPanel value={value} index={8} dir={theme.direction}>
           Diary
         </TabPanel> */}

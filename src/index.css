@@ -161,8 +161,22 @@ section:hover{
 }
 
 .stats{
-  font-size: small;
+  margin: auto;
 }
+.stats-div{
+  margin-left: 10px;
+  align-items: center;
+  text-align: center;
+}
+.stats-title{
+  font-size: x-small;
+  line-height: 0em;
+}
+.stats-num{
+  font-size: medium;
+  line-height: 0.4em;
+}
+
 
 .card-img-top:hover + .hiddenBlock {
   display: block;
