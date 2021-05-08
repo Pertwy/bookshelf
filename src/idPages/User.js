@@ -6,7 +6,7 @@ import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
 import TabPanel from "../components/TabPanel"
 import showNotification from '../functions/showNotification';
-
+import Button from '@material-ui/core/Button';
 
 export default function User(props){
   const [books, setBooks] = useState([])  
@@ -61,35 +61,43 @@ export default function User(props){
 
 
     return (
-      <div className="container shadow-lg p-4 mb-4 bg-white">
+      <div className="shadow-lg px-4 pb-4">
         {/* <UserDropDown setEmail={setCurrentUser}/> */}
   
-          <div className="profile-container pt-5 pb-5 container-fluid row">
-            
-            <div className="photo-div col-sm-2 col-md-2">
-              </div>
-    
+            <div className="pb-2 container-fluid row">
+          
                 <div className="col-sm-10 col-md-8">
-                  <h4 className="name">{userData.name}</h4> 
-                  {followButton}
-                  <p className="bio">{userData.bio}</p>
+                  <div className="pl-3 row">
+                    <h4 className="pr-2 all-text name">{userData.name}</h4> 
+                    {followButton}
+                  </div>
+                  <p className="all-text bio">{userData.bio}</p>
                 </div>
       
-                <div className="col-sm-12 col-md-2">
-                  <section>
-                    <p className="stats">Bookshelf {userData.bookshelf.length}</p>
-                  </section>
-                  <section>
-                    <p className="stats">Read {userData.books.length}</p>
-                  </section>
-                  <section>
-                    <p className="stats">Followers {userData.followers.length}</p>
-                  </section>
-                  <section>
-                    <p className="stats">Following {userData.following.length}</p>
-                  </section>
+                <div className="col-sm-12 col-md-4 stats">
+                  <div className="row">
+                    <div className="stats-div">
+                      <p className="all-text stats-num">{userData.bookshelf.length}</p>
+                      <p className="all-text stats-title">BOOKSHELF</p>
+                    </div>
+
+                    <div className="stats-div">
+                      <p className="all-text stats-num">{userData.books.length}</p>
+                      <p className="all-text stats-title">READ</p>
+                    </div>
+
+                    <div className="stats-div">
+                      <p className="all-text stats-num">{userData.followers.length}</p>
+                      <p className="all-text stats-title">FOLLOWERS</p>
+                    </div>
+                
+
+                    <div className="stats-div">
+                      <p className="all-text stats-num">{userData.following.length}</p>
+                      <p className="all-text stats-title">FOLLOWING</p>
+                    </div>
+                  </div>
                 </div>
-    
               </div>
   
           <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>

@@ -37,7 +37,8 @@ export default function SearchResults(props) {
     return(
       <div className="row space-between mb-4 searched-row pb-2">
 
-        <div className="row ">
+        {/* <div className="col-sm-10 col-md-8"></div> */}
+        <div className="col-sm-8 row">
           <div>
             <img className="mr-2 seacrh-image" src={url || defaultImage} alt={book.volumeInfo.title}/>
           </div>
@@ -51,7 +52,7 @@ export default function SearchResults(props) {
           </div>
         </div>
         
-        <div >
+        <div className="col-sm-4">
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="read" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>
