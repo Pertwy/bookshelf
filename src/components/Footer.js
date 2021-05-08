@@ -7,15 +7,15 @@ import "./Footer.css"
 export default function Footer() {
 
     return (
-        <div class="container-fluid footer-container-fluid pb-0 mb-0 text-light ">
+        <div class="container-fluid pb-0 mb-0 pt-3 footer-backgroud">
      <footer>
          <div class="row  justify-content-center py-3">
              <div class="col-11">
                  <div class="row ">
                      
                      <div class="col-xl-8 col-md-4 col-sm-4 col-12 mx-auto a">
-                         <h3 class="text-muted mb-md-0 mb-3 bold-text">BookShelf.</h3>
-                         <h6 class="mt-5 text-muted bold-text"><b>JOHN PERKINS</b></h6><small> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> johnpatrickperkins@gmail.com</small>
+                         <h3 class="text-muted mb-md-0 mb-3 bold-text">Bookshelf.</h3>
+                         <h6 class="mt-5 text-muted bold-text"><b>JOHN PERKINS</b></h6><small className={"all-text"}> johnpatrickperkins@gmail.com</small>
                      </div>
 
                      <div class="col-xl-2 col-md-4 col-sm-4 col-12">

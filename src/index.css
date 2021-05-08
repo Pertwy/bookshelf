@@ -161,8 +161,22 @@ section:hover{
 }
 
 .stats{
-  font-size: small;
+  margin: auto;
 }
+.stats-div{
+  margin-left: 10px;
+  align-items: center;
+  text-align: center;
+}
+.stats-title{
+  font-size: x-small;
+  line-height: 0em;
+}
+.stats-num{
+  font-size: medium;
+  line-height: 0.4em;
+}
+
 
 .card-img-top:hover + .hiddenBlock {
   display: block;
@@ -176,7 +190,6 @@ section:hover{
 .book-row-title{
   font-size:small;
   color: rgb(169, 174, 179);
-  border-bottom: 1px solid rgb(160, 160, 161);
 }
 
 .list-row-title{
@@ -185,8 +198,7 @@ section:hover{
 }
 
 .book-row-div{
-  border-bottom-style: solid;
-  border-width: 3px
+  border-bottom: 1px solid rgb(160, 160, 161);
 }
 
 /* .infoBox{
@@ -258,7 +270,10 @@ button{
 }
 
 .all-text{
-  color: rgb(169, 174, 179);
+  color: #e4e5e6;
+}
+.all-back{
+  background-color: #e4e5e6;
 }
 
 .description{
@@ -266,15 +281,95 @@ button{
   
 }
 
-.seacrh-image{
-  max-height: 150px;
+
+.image-div{
+  width: 100%;
+  max-height: 140px;
+}
+
+.search-image{
+  object-fit: cover;
+  
+  max-height: 140px;
 }
 
 .searched-row{
-
   border-bottom: 1px solid rgb(169, 174, 179);
+  max-height: 150px;
 }
 
 /* .left-search{
   max-width: 50%;
 } */
+
+.main-container{
+  background-color: #2f3031;
+  margin: 0 auto;
+  padding-bottom: 20px;
+}
+
+.mainer-container{
+  background-color: #2f3031;
+  min-height: calc(100vh - 267px);
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .main-container{
+    width: 95%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .main-container{
+    width: 95%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .main-container{
+    width: 800px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .main-container{
+    width: 800px;
+  }
+}
+
+.footer-backgroud{
+  background-color: rgb(29, 29, 29);
+}
+
+/* @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&display=swap');
+
+
+.home-page-heading{
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 4em;
+  text-align: center;
+}
+.home-page-heading-div{
+  text-align: center;
+}
+
+.home-page-bullets{
+  line-height: 0.6;
+}
+
+.nav-background{
+  background-color: rgb(29, 29, 29);
+}
+
+.full-width{
+  width:100%
+}

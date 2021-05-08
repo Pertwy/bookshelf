@@ -40,6 +40,7 @@ router.post('/', async (req, res) => {
         .populate("books")
         .populate("favorites")
         .populate("readList")
+        .populate("bookshelf")
         .populate("lists") 
         .populate({
             path: 'following',
@@ -71,6 +72,7 @@ router.get("/:_id", async (req, res) => {
         .populate("favorites")
         .populate("readList")
         .populate("lists") 
+        .populate("bookshelf")
         .populate("following")
         
         .then(user => res.json(user))
@@ -146,18 +148,22 @@ router.put('/addBookshelf', async (req, res) => {
         await user.save()
         await book.save()
             .then(() => res.json('Added to Bookshelf!'))
+            .catch(err => res.status(400).json('Error: ' + err));
         
     }
     else{
         let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
-        // let newBook = new Book(_.pick(req.body.book, ["title", "author", "image"]))
         newBook = await newBook.save();
+
+        let bookupdate = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+        bookupdate.bookshelf.push(user._id)
+        bookupdate = await bookupdate.save();
         
         user.bookshelf.push(newBook._id)
     
         await user.save()
             .then(() => res.json('New Added to Bookshelf!'))
-           
+            .catch(err => res.status(400).json('Error: ' + err));
     }
 });
 
@@ -171,7 +177,7 @@ router.put('/addReadList', async (req, res) => {
     user.readList.push(newBook._id)
 
     await user.save()
-    .then(() => res.json('Added to Read List'))
+        .then(() => res.json('Added to Read List'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -206,15 +212,40 @@ router.put('/addBookToUser', async (req, res) => {
 
 //Follow another user
 router.post('/follow', async (req, res) => {
-    let follow = await User.findOne({email: req.body.follow})
-    
     let user = await User.findOne({email: req.body.currentUser})
-    user.following.push({_id:follow._id, name:follow.name})
+    user.following.push(req.body.follow)
+
+    let otherUser = await User.findById(req.body.follow)
+    otherUser.followers.push(user._id)
+
+    await otherUser.save()
+    await user.save()
+        .then(() => res.json('Followed'))
+        .catch(err => res.status(400).json('Error: ' + err));
+
+});
+
+//Unfollow another user
+router.post('/unfollow', async (req, res) => {
+    let user = await User.findOne({email: req.body.currentUser})
+
+    index = user.following.indexOf(req.body.unfollow)
+    user.following.splice(index, 1)
+
+
+    let otherUser = await User.findById(req.body.unfollow)
+    otherindex = otherUser.followers.indexOf(req.body.unfollow)
+    otherUser.followers.splice(otherindex, 1)
+    await otherUser.save()
+
 
     await user.save()
-        .then(() => res.json('User updated!'))
+    .then(() => res.json('Unfollowed'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+
+
 
 
 //REmove favorite book from user
@@ -341,7 +372,7 @@ router.post('/addreview', async (req, res) => {
 
     await CurrentBook.save()
     await user.save()
-        .then(() => res.json('review added'))
+        .then(() => res.json('Review added'))
         .catch(err => res.status(400).json('Error: ' + err));
 
 });

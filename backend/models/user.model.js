@@ -30,21 +30,19 @@ const userSchema = new mongoose.Schema({
   },
   givenName: {
     type: String,
-    required: true,
-    default: "default"
+    default: "default Given Name"
   },
   surname: {
     type: String,
-    required: true,
-    default: "default"
+    default: "default Surname"
   },
-  // userName: {
-  //   type: String,
-  //   required: true,
-  //   minlength: 2,
-  //   maxlength: 255,
-  //   unique: true
-  // },
+  userName: {
+    type: String,
+    default: "Default User Name",
+    minlength: 2,
+    maxlength: 255,
+    unique: true
+  },
 
 
 

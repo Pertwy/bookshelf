@@ -34,47 +34,6 @@ export default function HomePage(){
   },[currentUser])
 
 
-  function BookList() {
-
-    return (userData.books.slice(0, listSize).map(currentBook => {
-
-      const {title, author, image,  _id} = currentBook
-      return (
-
-        <section className="book" key={_id} >
-            <Link to={"/book/"+_id}>
-              <img className="card-img-top" src={image} alt={title}></img>
-              {/* <div className="hiddenBlock">alright mate</div> */}
-            </Link>
-        </section>
-      )
-    })
-  )}
-
-
-
-  function AdminLists() {
-    
-      return (userData.books.map(currentBook => {
-
-        const {title, author, image,  _id} = currentBook
-        return (
-
-          <section key={_id} className="book">
-            <div >
-              <img className="card-img-top" src={image} alt={title}></img>
-              <div className="card-body">
-                <h5 className="card-title">{title}</h5>
-                {/* <p className="card-text">{author}</p> */}
-              </div>
-            </div>
-          </section>
-        )
-      })    
-  )
- 
-}
-
 
   function FriendReadList(props) {
 
@@ -132,21 +91,38 @@ export default function HomePage(){
 
 
   return (
-    <div>
+    <div className="pb-4">
 
-      <div className="container ">
       {/* shadow-lg p-4 mb-4 bg-white */}
         <UserDropDown setEmail={setCurrentUser}/>
 
+        <div className={"py-4 home-page-heading-div"}>
+
+          <div className={""}>
+            <h2 className={"all-text home-page-heading"}>The social network for book lovers</h2>
+            <div className={"col"}>
+              <p className={"all-text home-page-bullets"}>View what's on your friends shelves</p>
+              <p className={"all-text home-page-bullets"}>Track books you've read</p>
+              <p className={"all-text home-page-bullets"}>Save the ones you haven't got around to</p>
+              <p className={"all-text home-page-bullets"}>Let friends know what's good</p>
+            </div>
+          </div>
+        </div>
+
         <div className="book-row-section">
-          <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
+          <div className="book-row-div">
+            <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
+          </div>
           <div className="row book-row">
             <FriendReadList type="readlist"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <h2 className="book-row-title">BOOKSHELVES</h2>
+          <div className="book-row-div row space-between">
+            <h2 className="book-row-title">BOOKSHELVES</h2>
+            <Link to={"/followingBookshelves"}><h2 className="book-row-title">ALL</h2></Link>
+          </div>
           <div className="row book-row">
             <FriendBookshelfList/>
           </div>
@@ -154,7 +130,9 @@ export default function HomePage(){
 
 
         <div className="book-row-section">
-          <h2 className="book-row-title">POPULAR LISTS</h2>
+          <div className="book-row-div">
+            <h2 className="book-row-title">POPULAR LISTS</h2>
+          </div>
           
           <div className="row book-row">
             <DisplayList lists={adminLists}/>
@@ -163,8 +141,6 @@ export default function HomePage(){
         </div>
 
         
-
-      </div>
     </div>
   )
 }

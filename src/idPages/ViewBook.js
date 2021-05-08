@@ -6,6 +6,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { InsertDriveFileOutlined } from '@material-ui/icons';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
+import showNotification from "../functions/showNotification"
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -43,7 +44,7 @@ export default function ViewBook(props){
     //console.log(info)  
     
     axios.post('http://localhost:5000/api/users/addreview',info)
-        .then(response => (console.log(response.data)))
+      .then(res => { showNotification(res.data, res.data)})
   }
 
 
@@ -85,10 +86,20 @@ export default function ViewBook(props){
     }
 
 
-    
-  //   let success = book.bookshelf.every(function(val) {
-  //     return userData.following.indexOf(val) !== -1;
-  // });
+
+
+
+  let numberOfFollowingBookshelves = 0
+  var i;
+
+  for (i = 0; i < userData.following.length; i++) {
+
+    let check = userData.following[i].bookshelf.some((book) => {
+      return book._id === props.location.pathname.replace("/book/", "")
+    }) 
+    if(check){numberOfFollowingBookshelves+=1}
+
+  }
 
 
   return (
@@ -102,6 +113,8 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-6 col-md-6">
             <h2>{book.title}</h2>
+            <button onClick={()=>console.log(numberOfFollowingBookshelves)}>test</button>
+            <button onClick={()=>console.log(book)}>test</button>
             <h4 className="mt-3">By {book.author}</h4>
 
             {book.description  &&(
@@ -111,7 +124,8 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-6 col-md-3">
             <h3>Bookshelves</h3>
-            <p>On {book.bookshelf.length} friend's bookshelves</p>
+            <p>On {numberOfFollowingBookshelves} friend's bookshelves</p>
+            <p>On {book.bookshelf.length} bookshelves</p>
             {/* <p>On {success} bookshelves</p> */}
 
             <form onSubmit={handleAddReview}>
@@ -131,14 +145,22 @@ export default function ViewBook(props){
               <Button type="submit">Submit</Button>
             </form>
 
-            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
-            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
+            
           </div>
         </div>
         {/* <h4>Number of reviews {book.reviews.length}</h4> */}
-        
+
+        <span className="row">
+          <div>
+            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
+          </div>
+          <div>
+            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
+            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
+          </div>
+        </span>
+
         <div className="container pt-5 pb-5">
           <div className="row">
             <InfoBox title="PAGE COUNT" info={book.pageCount}/>

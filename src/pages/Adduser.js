@@ -5,11 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import "./addUser.css"
-import { red } from '@material-ui/core/colors';
 
-import ReactNotification from 'react-notifications-component'
-import 'react-notifications-component/dist/theme.css'
-import { store } from 'react-notifications-component';
 
 export default function Adduser(){
   const [email, setEmail] = useState("");
@@ -95,7 +91,7 @@ export default function Adduser(){
         <div className={" login-background background-colour"}>
         <form  noValidate autoComplete="off" onSubmit={handleSignUp}>
             <div className={"text-align"}>
-            <h3 className="sign-text">Sign Into your Account  </h3>  
+            <h3 className="sign-text">Sign Into Your Account  </h3>  
             </div>
             <TextField  variant="outlined" fullWidth className={classes.input} onChange={({ target }) =>     
                   setEmail(target.value)} label="Email" />
