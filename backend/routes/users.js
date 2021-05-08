@@ -72,6 +72,7 @@ router.get("/:_id", async (req, res) => {
         .populate("favorites")
         .populate("readList")
         .populate("lists") 
+        .populate("bookshelf")
         .populate("following")
         
         .then(user => res.json(user))
