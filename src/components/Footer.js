@@ -14,7 +14,7 @@ export default function Footer() {
                  <div class="row ">
                      
                      <div class="col-xl-8 col-md-4 col-sm-4 col-12 mx-auto a">
-                         <h3 class="text-muted mb-md-0 mb-3 bold-text">Bookshelf.</h3>
+                         <h3 class="text-muted mb-md-0 mb-3 bold-text">Bookshelf</h3>
                          <h6 class="mt-5 text-muted bold-text"><b>JOHN PERKINS</b></h6><small className={"all-text"}> johnpatrickperkins@gmail.com</small>
                      </div>
 

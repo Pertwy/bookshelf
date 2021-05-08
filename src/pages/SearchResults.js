@@ -35,7 +35,7 @@ export default function SearchResults(props) {
     const authorArray = book.volumeInfo.authors
     
     return(
-      <div className="row space-between mb-4 searched-row pb-2">
+      <div className="row space-between mb-4 searched-row pb-2 shadow-lg">
 
         {/* <div className="col-sm-10 col-md-8"></div> */}
         <div className="col-sm-3 row">

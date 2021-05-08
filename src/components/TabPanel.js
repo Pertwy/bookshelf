@@ -138,7 +138,7 @@ export default function CustomizedTabs(props) {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example" 
           value={value} onChange={handleChange} 
-          centered
+
          >
           <AntTab label="Profile" {...a11yProps(0)} />
           <AntTab label="Favorites" {...a11yProps(1)} />

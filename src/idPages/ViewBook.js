@@ -31,8 +31,8 @@ export default function ViewBook(props){
     return (book.reviews.map(review => {
       return(
       <div>
-        <h3>{review.author.name}</h3>
-        <p>{review.review}</p>
+        <h3 className="all-text">{review.author.name}</h3>
+        <p className="all-text">{review.review}</p>
       </div>
     )
     }))
@@ -53,8 +53,8 @@ export default function ViewBook(props){
         return(
         <div className="col-sm-2">
           <div className="p1 infoBox text-center">
-            <p className="infoText">{props.title}</p>
-            <p className="infoText">{props.info}</p>
+            <p className="infoText all-text">{props.title}</p>
+            <p className="infoText all-text">{props.info}</p>
           </div>
         </div>
         )
@@ -72,8 +72,8 @@ export default function ViewBook(props){
           <div className="p1 infoBox text-center">
             {props.info.map( info =>(
               <>
-                  <p>{info.type}</p>
-                  <p>{info.identifier}</p>
+                  <p className="infoText all-text">{info.type}</p>
+                  <p className="infoText all-text">{info.identifier}</p>
                   </>
               ))}
           </div>
@@ -103,7 +103,7 @@ export default function ViewBook(props){
 
 
   return (
-    <div className="container shadow-lg p-4 mb-4 bg-white">
+    <div className="container shadow-lg p-4 mb-4 ">
 
       <div className="content">
         <div className="row">
@@ -112,20 +112,20 @@ export default function ViewBook(props){
           </div>
 
           <div className = "col-xs-6 col-sm-6 col-md-6">
-            <h2>{book.title}</h2>
-            <button onClick={()=>console.log(numberOfFollowingBookshelves)}>test</button>
-            <button onClick={()=>console.log(book)}>test</button>
-            <h4 className="mt-3">By {book.author}</h4>
+            <h2 className="all-text">{book.title}</h2>
+            {/* <button onClick={()=>console.log(numberOfFollowingBookshelves)}>test</button>
+            <button onClick={()=>console.log(book)}>test</button> */}
+            <h4 className="mt-3 all-text">By {book.author}</h4>
 
             {book.description  &&(
-            <p className="mt-3" >{book.description}</p>)}
+            <p className="mt-3 all-text" >{book.description}</p>)}
             
           </div>
 
           <div className = "col-xs-6 col-sm-6 col-md-3">
-            <h3>Bookshelves</h3>
-            <p>On {numberOfFollowingBookshelves} friend's bookshelves</p>
-            <p>On {book.bookshelf.length} bookshelves</p>
+            <h3 className="all-text">Bookshelves</h3>
+            <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+            <p className="all-text">On {book.bookshelf.length} bookshelves</p>
             {/* <p>On {success} bookshelves</p> */}
 
             <form onSubmit={handleAddReview}>
@@ -183,7 +183,7 @@ export default function ViewBook(props){
         {book.reviews.length > 0 &&(
           <div>
             <div className="row">
-              <h4> Reviews</h4>
+              <h4 className="all-text"> Reviews</h4>
               {/* <h5> View All </h5> */}
             </div>
             <Reviews/>
