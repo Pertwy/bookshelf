@@ -38,17 +38,20 @@ export default function SearchResults(props) {
       <div className="row space-between mb-4 searched-row pb-2">
 
         {/* <div className="col-sm-10 col-md-8"></div> */}
-        <div className="col-sm-8 row">
+        <div className="col-sm-3 row">
           <div>
-            <img className="mr-2 seacrh-image" src={url || defaultImage} alt={book.volumeInfo.title}/>
+            <div className="image-div">
+              <img className="mr-2 search-image" src={url || defaultImage} alt={book.volumeInfo.title}/>
+            </div>
           </div>
+        </div>
 
+        <div className="col-sm-5 row">
           <div className={"description"}>
             <h5 className={"all-text"}>{book.volumeInfo.title}</h5>
             {authorArray && (
             <p className={"all-text"}>{authorArray.join()}</p>
             )}
-            {/* <p className={"all-text"}>{book.volumeInfo.description}</p> */}
           </div>
         </div>
         
