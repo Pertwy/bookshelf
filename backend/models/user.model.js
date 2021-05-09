@@ -30,15 +30,12 @@ const userSchema = new mongoose.Schema({
   },
   givenName: {
     type: String,
-    default: "default Given Name"
   },
   surname: {
     type: String,
-    default: "default Surname"
   },
   userName: {
     type: String,
-    default: "Default User Name",
     minlength: 2,
     maxlength: 255,
     unique: true

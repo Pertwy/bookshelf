@@ -51,7 +51,7 @@ export default function HomePage(){
 
               <div className="under-card">
                 <Link to={"/user/"+following._id} className="">
-                  <p className="under-card-text">{following.name}</p>
+                  <p className="under-card-text">{following.userName}</p>
                 </Link>
               </div>
         
@@ -76,7 +76,7 @@ export default function HomePage(){
 
               <div className="under-card">
                 <Link to={"/user/"+following._id} className="">
-                  <p className="under-card-text">{following.name}</p>
+                  <p className="under-card-text">{following.userName}</p>
                 </Link>
               </div>
         

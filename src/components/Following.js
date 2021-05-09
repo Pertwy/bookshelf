@@ -51,7 +51,7 @@ export default function Following(props) {
             <Avatar className={classes.large} id={person._id} alt={person.name} src={person.photo} />
             {/* <p className="all-text avatar-name">{person.name}</p> */}
             <Link to={"/user/"+person._id} className="">
-              <p className="all-text avatar-name">{person.name}</p>
+              <p className="all-text avatar-name">{person.userName}</p>
             </Link>
           </div>
         )
