@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "../components/Login"
 import UserDropDown from "../components/UserDropDown"
@@ -121,7 +122,7 @@ export default function HomePage(){
         <div className="book-row-section">
           <div className="book-row-div row space-between">
             <h2 className="book-row-title">BOOKSHELVES</h2>
-            <Link to={"/followingBookshelves"}><h2 className="book-row-title">ALL</h2></Link>
+            <Link to={"/followingBookshelves"}><h2 className="book-row-title">VIEW ALL</h2></Link>
           </div>
           <div className="row book-row">
             <FriendBookshelfList/>

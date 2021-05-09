@@ -52,9 +52,25 @@ export default function User(props){
   })
   let followButton
   if(!doesFollow){
-    followButton = <><button onClick={()=>handleFollow()}>Follow</button> </>
+    followButton = <><Button  style={{
+      borderRadius: 5,
+      borderColor: "#a9aeb3",
+      backgroundColor: "#a9aeb3",
+      color: "black",
+      padding: "3px 3px",
+      fontSize: "8px"
+      }}
+      onClick={()=>handleFollow()}>Follow</Button> </>
   }else {
-    followButton = <><button onClick={()=>handleUnfollow()}>Unfollow</button> </>
+    followButton = <><Button  style={{
+      borderRadius: 5,
+      borderColor: "#a9aeb3",
+      backgroundColor: "#a9aeb3",
+      color: "black",
+      padding: "3px 3px",
+      fontSize: "8px"
+      }}
+      onClick={()=>handleUnfollow()}>Unfollow</Button> </>
   }
 
 
