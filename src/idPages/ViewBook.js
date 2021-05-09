@@ -111,46 +111,27 @@ export default function ViewBook(props){
             <img className="book-image" src={book.image} alt={book.title}></img>
           </div>
 
-          <div className = "col-xs-6 col-sm-6 col-md-6">
-            <h2 className="all-text">{book.title}</h2>
-            {/* <button onClick={()=>console.log(numberOfFollowingBookshelves)}>test</button>
-            <button onClick={()=>console.log(book)}>test</button> */}
-            <h4 className="mt-3 all-text">By {book.author}</h4>
+          <div className = "col-xs-6 col-sm-9 col-md-9">
+            <div className="row">
+              <div className="pl-3">
+                <h2 className="all-text">{book.title}</h2>
+                <h5 className="mt-3 all-text">By {book.author}</h5>
+              </div>
+
+              <div className="pl-4">
+                <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+                <p className="all-text ">On {book.bookshelf.length} bookshelves</p>
+              </div>
+            </div>
 
             {book.description  &&(
-            <p className="mt-3 all-text" >{book.description}</p>)}
-            
-          </div>
-
-          <div className = "col-xs-6 col-sm-6 col-md-3">
-            <h3 className="all-text">Bookshelves</h3>
-            <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
-            <p className="all-text">On {book.bookshelf.length} bookshelves</p>
-            {/* <p>On {success} bookshelves</p> */}
-
-            <form onSubmit={handleAddReview}>
-              {/* <label>Add a review</label> */}
-              <TextField
-              id="outlined-multiline-static"
-              label="Add a review"
-              multiline
-              rows={4}
-              defaultValue=""
-              variant="outlined"
-              fullwidth
-              onChange={({ target }) =>     
-                  setReview(target.value)}
-            />
-              <HalfRating setRating={setRating}/>
-              <Button type="submit">Submit</Button>
-            </form>
-
+            <p className="mt-3 all-text book-description" >{book.description}</p>)}
             
           </div>
         </div>
-        {/* <h4>Number of reviews {book.reviews.length}</h4> */}
 
-        <span className="row">
+
+        <span className="row pl-2">
           <div>
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
             <AdditionButton type="read" currentUser={currentUser} book={book} page="ViewBook"/>
@@ -161,8 +142,10 @@ export default function ViewBook(props){
           </div>
         </span>
 
-        <div className="container pt-5 pb-5">
-          <div className="row">
+        <h4 className="all-text avatar-heading pt-4"> ADDITIONAL INFO</h4>
+
+        <div className=" container mt-2 mb-3">
+          <div className="row mx-auto ">
             <InfoBox title="PAGE COUNT" info={book.pageCount}/>
             <InfoBox title="LANGUAGE" info={book.language}/>
             <InfoBox title="DATE PUBLISHED" info={book.publishedDate}/>
@@ -180,15 +163,32 @@ export default function ViewBook(props){
         
 
 
-        {book.reviews.length > 0 &&(
+        
           <div>
-            <div className="row">
-              <h4 className="all-text"> Reviews</h4>
-              {/* <h5> View All </h5> */}
-            </div>
-            <Reviews/>
+
+            <h4 className="all-text avatar-heading"> REVIEWS</h4>
+
+            <form onSubmit={handleAddReview}>
+                {/* <label>Add a review</label> */}
+                <TextField
+                id="outlined-multiline-static"
+                label="Add a review"
+                multiline
+                rows={4}
+                defaultValue=""
+                variant="outlined"
+                fullwidth
+                onChange={({ target }) =>     
+                    setReview(target.value)}
+              />
+                <HalfRating setRating={setRating}/>
+                <Button type="submit">Submit</Button>
+              </form>
+
+            {book.reviews.length > 0 &&(
+            <Reviews/>)}
           </div>
-        )}
+        
 
       </div>
     </div>

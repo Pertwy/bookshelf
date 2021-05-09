@@ -65,8 +65,8 @@ const AntTab = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    alignContent:'center',
-    alignItems: 'center',
+
+    width:"100%",
   },
   padding: {
     padding: theme.spacing(1),
@@ -135,17 +135,18 @@ export default function CustomizedTabs(props) {
     <div className={classes.root, "pb-4"}>
       <div>
         <AntTabs variant="scrollable"
-          scrollButtons="auto"
+          scrollButtons="on"
+          indicatorColor="primary"
           aria-label="scrollable auto tabs example" 
           value={value} onChange={handleChange} 
 
          >
-          <AntTab label="Profile" {...a11yProps(0)} />
-          <AntTab label="Favorites" {...a11yProps(1)} />
-          <AntTab label="Read list" {...a11yProps(2)}/>
-          <AntTab label="Read" {...a11yProps(3)}/>
-          <AntTab label="Bookshelf" {...a11yProps(4)}/>
-          <AntTab label="Follow" {...a11yProps(5)}/>
+          {/* <AntTab label="Profile" {...a11yProps(0)} /> */}
+          <AntTab label="Bookshelf" {...a11yProps(0)}/>
+          <AntTab label="Read list" {...a11yProps(1)}/>
+          <AntTab label="Read" {...a11yProps(2)}/>
+          <AntTab label="Favorites" {...a11yProps(3)} />
+          <AntTab label="Follow" {...a11yProps(4)}/>
           {/* <AntTab label="Lists" {...a11yProps(6)}/>
           <AntTab label="Reviews" {...a11yProps(7)}/>
           <AntTab label="Dairy" {...a11yProps(8)}/> */}
@@ -158,40 +159,42 @@ export default function CustomizedTabs(props) {
        
       >
 
-        <TabPanel value={value} index={0} dir={theme.direction}>
+        {/* <TabPanel value={value} index={0} dir={theme.direction}>
           <div className="row book-row">
             <h1 className="all-text" >Profile</h1>
           </div>
-        </TabPanel>
+        </TabPanel> */}
 
-        <TabPanel value={value} index={1} dir={theme.direction}>
+        <TabPanel value={value} index={0} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks owner={props.owner} books={props.userData.favorites} type="favorites" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
+        
 
-        <TabPanel value={value} index={2} dir={theme.direction}>
+
+        <TabPanel value={value} index={1} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.readList} type="readingList" userData={props.userData}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={3} dir={theme.direction}>
+        <TabPanel value={value} index={2} dir={theme.direction}>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.books} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
-
-        <TabPanel value={value} index={4} dir={theme.direction}>
+        <TabPanel value={value} index={3} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="read" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.favorites} type="favorites" userData={props.userData}/>
           </div>
         </TabPanel>
+        
 
-        <TabPanel value={value} index={5} dir={theme.direction}>
+        <TabPanel value={value} index={4} dir={theme.direction}>
           <Following userData={props.userData} />
         </TabPanel>
 
@@ -205,10 +208,10 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={7} dir={theme.direction}>
           Item Five
-        </TabPanel> */}
+        </TabPanel> 
 
     
-        {/* <TabPanel value={value} index={8} dir={theme.direction}>
+         <TabPanel value={value} index={8} dir={theme.direction}>
           Diary
         </TabPanel> */}
       </SwipeableViews>

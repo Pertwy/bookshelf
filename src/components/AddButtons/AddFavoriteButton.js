@@ -30,7 +30,7 @@ export default function AdditionButton(props) {
         // backgroundColor: "#21b6ae",
         color: "#e4e5e6",
         padding: "7px 7px",
-        fontSize: "13px"
+        fontSize: "11px"
         }}
         onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>{props.title}</Button>
     )

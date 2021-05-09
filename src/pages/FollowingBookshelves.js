@@ -38,7 +38,7 @@ export default function FollowingBookshelves(){
         return (
            <div className="full-width">
                 <div className="book-row-div row space-between mb-3">
-                    <Link to={"/user/"+following._id} className=""><p className="book-row-title">{following.name}</p></Link>
+                    <Link to={"/user/"+following._id} className=""><p className="book-row-title">{following.userName}</p></Link>
                 </div>
 
                 <div className="row">
@@ -47,13 +47,11 @@ export default function FollowingBookshelves(){
 
                         <section className="d-flex flex-column" key={book._id} >
                             <div className="mt-auto p-2">
-                                <div className="">
-                                
+   
                                 <Link to={"/book/"+book._id}>
                                     <img className="card-img-top" src={book.image} alt={book.title}></img>
                                 </Link>
-                            
-                                </div>
+
                             </div>
                         </section>
                 )})}

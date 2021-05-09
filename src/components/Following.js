@@ -66,33 +66,14 @@ export default function Following(props) {
     <div className="row">
 
 
-      <div className="col-sm-6">
-        <div>
-          <p className="all-text avatar-heading">FOLLOWING</p>
-          <AvatarGroup className=" pb-2">
-            <FollowingList following={props.userData.following}/>
-          </AvatarGroup>
-        </div>
+      <div className="col-sm-12">
 
-        <div>
-          <p className="all-text avatar-heading">FOLLOWERS</p>
-          <AvatarGroup className=" pb-2">
-            <FollowingList following={props.userData.followers}/>
-          </AvatarGroup>
-        </div>
-      </div>
-          
-
-      <div className="col-sm-6">
-        
+      <div className="">
         <h4 className="all-text avatar-heading">FOLLOW ANOTHER USER</h4>
-        
         <div className="row">
-
           <div className="col-sm-6">
             <UserDropDown setEmail={setFollow}/>
           </div>
-
           <div className="col-sm-6">
             <Button style={{
                         borderRadius: 5,
@@ -104,8 +85,29 @@ export default function Following(props) {
                         }}
                     onClick={() => handleFollow()}>Follow</Button>
           </div>
-
         </div>
+
+
+        <div className="full-width mt-5">
+          <p className="all-text avatar-heading">FOLLOWING</p>
+          <div>
+          <AvatarGroup className=" pb-2">
+            <FollowingList following={props.userData.following}/>
+          </AvatarGroup>
+          </div>
+        </div>
+
+        <div>
+          <p className="all-text avatar-heading mt-3">FOLLOWERS</p>
+          <AvatarGroup className=" pb-2">
+            <FollowingList following={props.userData.followers}/>
+          </AvatarGroup>
+        </div>
+
+      </div>
+          
+
+      
       </div>
          
 

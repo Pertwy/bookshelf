@@ -48,9 +48,9 @@ export default function SearchResults(props) {
 
         <div className="col-sm-5 row">
           <div className={"description"}>
-            <h5 className={"all-text"}>{book.volumeInfo.title}</h5>
+            <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
             {authorArray && (
-            <p className={"all-text"}>{authorArray.join()}</p>
+            <p className={"searched-author all-text"}>{authorArray.join()}</p>
             )}
           </div>
         </div>
