@@ -139,6 +139,7 @@ section:hover{
 .under-card-text{
   color: azure;
   padding-left: 5px;
+  font-size: 0.7em;
 }
 
 /* .card-img-top:hover{
@@ -244,7 +245,7 @@ img:hover + .buttonDiv, .buttonDiv:hover {
   
 }
 
-.link:hover + .button, .button:hover {
+.link-div:hover + .button, .button:hover {
   visibility: visible;
 }
 
@@ -297,6 +298,14 @@ button{
   border-bottom: 1px solid rgb(169, 174, 179);
   max-height: 150px;
 }
+
+.searched-title{
+  font-size: 1em;
+}
+.searched-author{
+  font-size: 0.8em;
+}
+
 
 /* .left-search{
   max-width: 50%;
@@ -372,4 +381,32 @@ button{
 
 .full-width{
   width:100%
+}
+
+.avatar-div{
+  align-items: center;
+  text-align: center;
+  padding-right: 5px;
+}
+
+.avatar-name{
+  font-size:x-small;
+}
+
+.avatar-heading{
+  border-bottom: 1px solid #a9aeb3;
+  font-size:x-small;
+}
+
+.following-div{
+  overflow-wrap: break-word;
+}
+
+
+.book-description{
+  font-size: 0.8em;
+}
+
+.book-info-background{
+  background-color: #414242;
 }

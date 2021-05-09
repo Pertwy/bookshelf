@@ -35,10 +35,21 @@ export default function DisplayBooks(props) {
     const {title, author, image,  _id} = currentBook
     return (
 
-      <section className="book" key={_id} >
-        <Link className="link" to={"/book/"+_id}>
-          <img className="card-img-top" src={image} alt={title}></img>
-        </Link>
+      // <section className="book" key={_id} >
+      //   <Link className="link" to={"/book/"+_id}>
+      //     <img className="card-img-top" src={image} alt={title}></img>
+      //   </Link>
+
+
+
+      <section className="book d-flex flex-column" key={_id} >
+        <div className="link-div mt-auto ">
+
+            <Link to={"/book/"+_id}>
+                <img className="card-img-top" src={image} alt={title}></img>
+            </Link>
+
+        </div>
 
 
       {props.owner &&(

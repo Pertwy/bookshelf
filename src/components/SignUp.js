@@ -6,7 +6,7 @@ import * as Yup from 'yup';
 export default function Signup(){
   const validate = Yup.object({
     userName: Yup.string()
-      .max(20, 'Must be 20 characters or less')
+      .max(15, 'Must be 15 characters or less')
       .required('Required'),
     firstName: Yup.string()
       .max(20, 'Must be 20 characters or less')

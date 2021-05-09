@@ -7,16 +7,48 @@ import {handleAddBookFromBookPage} from "../../functions/handleAddBookFromBookPa
 
 export default function AdditionButton(props) {
 
-    let but
-    if (props.type === "favorite" && props.page === "SearchResults"){but = <div><Button onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>+ Favorite</Button></div>}
-    if (props.type === "read" && props.page === "SearchResults"){but = <div><Button onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>+ Read</Button></div>}
-    if (props.type === "readlist" && props.page === "SearchResults"){but = <div><Button onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>+ Read List</Button></div>}
-    if (props.type === "bookshelf" && props.page === "SearchResults"){but = <div><Button onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>+ Bookshelf</Button></div>}
+  function SearchResultButton(props){
 
-    if (props.type === "favorite" && props.page === "ViewBook"){but = <div><Button onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>+ Favorite</Button></div>}
-    if (props.type === "read" && props.page === "ViewBook"){but = <div><Button onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>+ Read</Button></div>}
-    if (props.type === "readlist" && props.page === "ViewBook"){but = <div><Button onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>+ Read List</Button></div>}
-    if (props.type === "bookshelf" && props.page === "ViewBook"){but = <div><Button onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>+ Bookshelf</Button></div>}
+    return(
+      <Button 
+        style={{
+          borderRadius: 5,
+          // backgroundColor: "#21b6ae",
+          color: "#e4e5e6",
+          padding: "5px 7px",
+          fontSize: "13px"
+        }}
+        onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>{props.title}</Button>
+    )
+  }
+
+  function ViewBookButton(props){
+    return(
+      <Button 
+        style={{
+        borderRadius: 5,
+        // backgroundColor: "#21b6ae",
+        color: "#e4e5e6",
+        padding: "7px 7px",
+        fontSize: "11px"
+        }}
+        onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>{props.title}</Button>
+    )
+    }
+
+    
+
+
+    let but
+    if (props.type === "favorite" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Favorite"/></div>}
+    if (props.type === "read" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Read"/></div>}
+    if (props.type === "readlist" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Read List"/></div>}
+    if (props.type === "bookshelf" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Bookhelf"/></div>}
+
+    if (props.type === "favorite" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Favorite"/></div>}
+    if (props.type === "read" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Read"/></div>}
+    if (props.type === "readlist" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Read List"/></div>}
+    if (props.type === "bookshelf" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Bookshelf"/></div>}
 
   return (
     <>{but}</>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
 import TabPanel from "../components/TabPanel"
 
@@ -10,7 +9,7 @@ import TabPanel from "../components/TabPanel"
 export default function Profile(){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
-  const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
+  const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [owner, setOwner] = useState(true)
 
   useEffect(() => {
@@ -37,7 +36,7 @@ export default function Profile(){
           </div> */}
 
           <div className="col-sm-10 col-md-8">
-            <h4 className="all-text name">{userData.name}</h4>
+            <h4 className="all-text name">{userData.givenName} {userData.surname}</h4>
             <p className="all-text bio">{userData.bio}</p>
           </div>
 

@@ -222,7 +222,19 @@ router.post('/follow', async (req, res) => {
     await user.save()
         .then(() => res.json('Followed'))
         .catch(err => res.status(400).json('Error: ' + err));
+});
 
+router.post('/followDropDown', async (req, res) => {
+    let user = await User.findOne({email: req.body.currentUser})
+    let otherUser = await User.findOne({email: req.body.follow})
+
+    user.following.push(otherUser._id)
+    otherUser.followers.push(user._id)
+
+    await otherUser.save()
+    await user.save()
+        .then(() => res.json('Followed'))
+        .catch(err => res.status(400).json('Error: ' + err));
 });
 
 //Unfollow another user

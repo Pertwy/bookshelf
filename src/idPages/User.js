@@ -12,7 +12,7 @@ export default function User(props){
   const [books, setBooks] = useState([])  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [myUserData, setMyUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
-  const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
+  const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [update, setUpdate] = useState(0)
   const [owner, setOwner] = useState(false)
 
@@ -52,9 +52,25 @@ export default function User(props){
   })
   let followButton
   if(!doesFollow){
-    followButton = <><button onClick={()=>handleFollow()}>Follow</button> </>
+    followButton = <><Button  style={{
+      borderRadius: 5,
+      borderColor: "#a9aeb3",
+      backgroundColor: "#a9aeb3",
+      color: "black",
+      padding: "3px 3px",
+      fontSize: "8px"
+      }}
+      onClick={()=>handleFollow()}>Follow</Button> </>
   }else {
-    followButton = <><button onClick={()=>handleUnfollow()}>Unfollow</button> </>
+    followButton = <><Button  style={{
+      borderRadius: 5,
+      borderColor: "#a9aeb3",
+      backgroundColor: "#a9aeb3",
+      color: "black",
+      padding: "3px 3px",
+      fontSize: "8px"
+      }}
+      onClick={()=>handleUnfollow()}>Unfollow</Button> </>
   }
 
 
@@ -68,7 +84,7 @@ export default function User(props){
           
                 <div className="col-sm-10 col-md-8">
                   <div className="pl-3 row">
-                    <h4 className="pr-2 all-text name">{userData.name}</h4> 
+                    <h4 className="pr-2 all-text name">{userData.givenName} {userData.surname}</h4> 
                     {followButton}
                   </div>
                   <p className="all-text bio">{userData.bio}</p>
