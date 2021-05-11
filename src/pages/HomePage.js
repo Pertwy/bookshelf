@@ -41,8 +41,8 @@ export default function HomePage(){
     return (userData.following.map(following => {
       if(following.books[0]){
       return (
-        <section className="d-flex flex-column" key={following.books[following.books.length - 1]._id} >
-          <div className="mt-auto p-2">
+        <section className="the-book d-flex flex-column" key={following.books[following.books.length - 1]._id} >
+          <div className="mt-auto py-2">
             <div className="">
               
               <Link to={"/book/"+following.books[following.books.length - 1]._id}>
@@ -66,8 +66,8 @@ export default function HomePage(){
     return (userData.following.map(following => {
       if(following.bookshelf[0]){
       return (
-        <section className="d-flex flex-column" key={following.bookshelf[following.bookshelf.length - 1]._id} >
-          <div className="mt-auto p-2">
+        <section className="the-book d-flex flex-column" key={following.bookshelf[following.bookshelf.length - 1]._id} >
+          <div className="mt-auto py-2">
             <div className="">
               
               <Link to={"/book/"+following.bookshelf[following.bookshelf.length - 1]._id}>
@@ -124,7 +124,7 @@ export default function HomePage(){
             <h2 className="book-row-title">BOOKSHELVES</h2>
             <Link to={"/followingBookshelves"}><h2 className="book-row-title">VIEW ALL</h2></Link>
           </div>
-          <div className="row book-row">
+          <div className="row">
             <FriendBookshelfList/>
           </div>
         </div>

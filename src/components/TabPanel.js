@@ -195,7 +195,7 @@ export default function CustomizedTabs(props) {
         
 
         <TabPanel value={value} index={4} dir={theme.direction}>
-          <Following userData={props.userData} />
+          <Following userData={props.userData} owner={props.owner}/>
         </TabPanel>
 
 

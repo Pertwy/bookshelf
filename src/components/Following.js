@@ -69,6 +69,8 @@ export default function Following(props) {
       <div className="col-sm-12">
 
       <div className="">
+        {props.owner &&(
+          <>
         <h4 className="all-text avatar-heading">FOLLOW ANOTHER USER</h4>
         <div className="row">
           <div className="col-sm-6">
@@ -85,7 +87,8 @@ export default function Following(props) {
                         }}
                     onClick={() => handleFollow()}>Follow</Button>
           </div>
-        </div>
+          
+        </div></>)}
 
 
         <div className="full-width mt-5">
