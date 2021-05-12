@@ -42,7 +42,7 @@ export default function DisplayBooks(props) {
 
 
 
-      <section className="book d-flex flex-column" key={_id} >
+      <section className="the-book  d-flex flex-column" key={_id} >
         <div className="link-div mt-auto ">
 
             <Link to={"/book/"+_id}>
