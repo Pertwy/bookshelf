@@ -1,4 +1,4 @@
-# bookshelf
+# Bookshelf
 
 ## Purpose
 Log and review books that you've read. Follow Friends and see what they've been reading. Add lists of your favorite books. Join a bookclub. View books that are on your friends actual bookshelf so that you can borrow without having to spend money on a new book
