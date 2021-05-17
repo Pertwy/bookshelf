@@ -30,9 +30,9 @@ export default function ViewBook(props){
   function Reviews(){
     return (book.reviews.map(review => {
       return(
-      <div>
-        <h3 className="all-text">{review.author.name}</h3>
-        <p className="all-text">{review.review}</p>
+      <div className="pb-2">
+        <h6 className="all-text review-name">{review.author.name}</h6>
+        <p className="all-text review-text">{review.review}</p>
       </div>
     )
     }))
@@ -113,12 +113,12 @@ export default function ViewBook(props){
 
           <div className = "col-xs-6 col-sm-9 col-md-9">
             <div className="row">
-              <div className="pl-3">
+              <div className="pl-3 col-sm-6">
                 <h2 className="all-text">{book.title}</h2>
                 <h5 className="mt-3 all-text">By {book.author}</h5>
               </div>
 
-              <div className="pl-4">
+              <div className="pt-1 col-sm-6">
                 <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
                 <p className="all-text ">On {book.bookshelf.length} bookshelves</p>
               </div>
@@ -142,8 +142,9 @@ export default function ViewBook(props){
           </div>
         </span>
 
+        {/* {book.pageCount || book.language || book.publishedDate || book.publisher || book.maturityRating || book.industryIdentifiers  &&(
+        <> */}
         <h4 className="all-text avatar-heading pt-4"> ADDITIONAL INFO</h4>
-
         <div className=" container mt-2 mb-3">
           <div className="row mx-auto ">
             <InfoBox title="PAGE COUNT" info={book.pageCount}/>
@@ -154,6 +155,7 @@ export default function ViewBook(props){
             <ISBNInfoBox title="ISBN" info={book.industryIdentifiers}/>
           </div>
         </div>
+        {/* </>)} */}
 
         {/* <h4>Number of times read {book.numberOfTimesRead}</h4>
         <h4>Number of times favorited {book.numberOfTimesFavorited}</h4>
@@ -168,25 +170,36 @@ export default function ViewBook(props){
 
             <h4 className="all-text avatar-heading"> REVIEWS</h4>
 
-            <form onSubmit={handleAddReview}>
-                {/* <label>Add a review</label> */}
-                <TextField
-                id="outlined-multiline-static"
-                label="Add a review"
-                multiline
-                rows={4}
-                defaultValue=""
-                variant="outlined"
-                fullwidth
-                onChange={({ target }) =>     
-                    setReview(target.value)}
-              />
-                <HalfRating setRating={setRating}/>
-                <Button type="submit">Submit</Button>
-              </form>
+            <div className="row">
+              <div className="col-sm-6">
+                {book.reviews.length > 0 &&(
+                <Reviews/>)}
 
-            {book.reviews.length > 0 &&(
-            <Reviews/>)}
+                {book.reviews.length === 0 &&(
+                <h5 className="all-text">Be the first to review!</h5>
+                )}
+              </div>
+
+              <div className="col-sm-6">
+                <form onSubmit={handleAddReview}>
+                  {/* <label>Add a review</label> */}
+                  <TextField
+                  id="outlined-multiline-static"
+                  label="Add a review"
+                  multiline
+                  rows={4}
+                  defaultValue=""
+                  variant="outlined"
+                  fullwidth
+                  onChange={({ target }) =>     
+                      setReview(target.value)}
+                />
+                  <HalfRating setRating={setRating}/>
+                  <Button type="submit">Submit</Button>
+                </form>
+              </div>
+            </div>
+
           </div>
         
 

@@ -416,3 +416,12 @@ button{
   padding-left: 5px;
   padding-right: 5px;
 }
+
+.review-text{
+  line-height: 0.5em;
+  font-size: 0.9em;
+}
+
+.review-name{
+  font-size: 0.7em;
+}
