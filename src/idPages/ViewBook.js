@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import { InsertDriveFileOutlined } from '@material-ui/icons';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -84,6 +85,28 @@ export default function ViewBook(props){
         return(<></>)
       }
     }
+
+
+    const useStyles = makeStyles((theme) => ({
+      root: {
+        '& > *': {
+          margin: theme.spacing(1),
+          
+  
+        },
+      },
+      input:{
+        '& > *': {
+        display:"block",
+        color: "#cacbcc", 
+        width:"100%",
+        marginTop:"10px",
+        // height:"50px",  
+        }
+      }
+    }));
+  
+    const classes = useStyles();
 
 
 
@@ -184,6 +207,7 @@ export default function ViewBook(props){
                 <form onSubmit={handleAddReview}>
                   {/* <label>Add a review</label> */}
                   <TextField
+                  className={classes.input}
                   id="outlined-multiline-static"
                   label="Add a review"
                   multiline
@@ -195,7 +219,15 @@ export default function ViewBook(props){
                       setReview(target.value)}
                 />
                   <HalfRating setRating={setRating}/>
-                  <Button type="submit">Submit</Button>
+                  <Button type="submit"
+                  style={{
+                    borderRadius: 5,
+                    borderColor: "#a9aeb3",
+                    backgroundColor: "#a9aeb3",
+                    color: "black",
+                    padding: "7px 7px",
+                    fontSize: "12px"
+                    }}>Submit</Button>
                 </form>
               </div>
             </div>
