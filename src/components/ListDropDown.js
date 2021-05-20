@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 
 
-export default function UserDropDown(props) {
+export default function UsersSearch(props) {
   const [lists, setLists] = useState([])
   const [list, setList] = useState("")
 

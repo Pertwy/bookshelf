@@ -111,26 +111,32 @@ export default function HomePage(){
         </div>
 
         <div className="book-row-section">
+
           <div className="book-row-div">
             <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
           </div>
+
           <div className="row book-row">
             <FriendReadList type="readlist"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <div className="book-row-div row space-between">
-            <h2 className="book-row-title">BOOKSHELVES</h2>
+
+          <div className="px-2 book-row-div row space-between">
+            <h2 className="px-2 book-row-title">BOOKSHELVES</h2>
             <Link to={"/followingBookshelves"}><h2 className="book-row-title">VIEW ALL</h2></Link>
           </div>
+
           <div className="row">
             <FriendBookshelfList/>
           </div>
+
         </div>
 
 
         <div className="book-row-section">
+
           <div className="book-row-div">
             <h2 className="book-row-title">POPULAR LISTS</h2>
           </div>
