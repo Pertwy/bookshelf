@@ -65,7 +65,6 @@ const AntTab = withStyles((theme) => ({
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-
     width:"100%",
   },
   padding: {
@@ -156,7 +155,6 @@ export default function CustomizedTabs(props) {
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
-       
       >
 
         {/* <TabPanel value={value} index={0} dir={theme.direction}>

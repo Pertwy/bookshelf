@@ -9,6 +9,7 @@ import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 import { store } from 'react-notifications-component';
+import UserSearch from "../components/UserSearch";
 
 export default function SearchResults(props) {
 
@@ -70,6 +71,14 @@ export default function SearchResults(props) {
   return (
     <div className="container">
         <div className="container center-all">
+
+
+          <div>
+            <UserSearch/>
+          </div>
+
+
+
 
           <div className="result-width center-all mb-3" >
             <div className="space-between">

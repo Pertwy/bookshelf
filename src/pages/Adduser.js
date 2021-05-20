@@ -55,7 +55,7 @@ export default function Adduser(){
     root: {
       '& > *': {
         margin: theme.spacing(1),
-        margin:"10px"
+        margin:"10px",
 
       },
     },
@@ -66,7 +66,7 @@ export default function Adduser(){
       width:"90%",
       marginTop:"10px",
       marginLeft:"5%",
-      height:"50px"     
+      height:"50px",  
       }
     }
   }));
