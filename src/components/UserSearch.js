@@ -5,9 +5,10 @@ import React, {useState, useEffect} from 'react';
 
 export default function UserSearch() {
   const [users, setUsers] = useState([])
+  const [usersSearched, setUsersSearched] = useState([])
 
 
-  
+
   const [user, setUser] = useState("")
   const [search, setSearch] = useState("")
 
@@ -23,7 +24,7 @@ export default function UserSearch() {
 
   function UserList(){
     return(
-    users.map((user) =>{
+      usersSearched.map((user) =>{
       return(
         <>
           <p className="all-text">{user.userName}</p>
@@ -39,7 +40,7 @@ export default function UserSearch() {
       return value.userName.includes(input)
     })
 
-    setUsers(test)
+    setUsersSearched(test)
   }
 
 
