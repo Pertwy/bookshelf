@@ -18,7 +18,7 @@ export default function SearchResults(props) {
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState("")
-  
+  const [searchSwitch, setSearchSwtich] = useState(true)
 
   useEffect(() => {
     
@@ -67,24 +67,33 @@ export default function SearchResults(props) {
     )
   }
 
+  function handleSearchChange(){
+    setSearchSwtich(!searchSwitch)
+  }
+
+  let but
+  if (searchSwitch){but = <><button onClick={()=> handleSearchChange()}>Search Memebers</button></>}
+  else{but = <><button onClick={()=> handleSearchChange()}>Search Books</button></>}
 
   return (
     <div className="container">
         <div className="container center-all">
 
+          {but}
+          <UserDropDown setEmail={setCurrentUser}/>
 
+          {!searchSwitch &&(
           <div>
             <UserSearch/>
-          </div>
+          </div>)}
 
 
 
-
+          {searchSwitch &&(
+            <>
           <div className="result-width center-all mb-3" >
             <div className="space-between">
-            <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
-            
-            <UserDropDown setEmail={setCurrentUser}/>
+              <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
             </div>
 
           </div>
@@ -95,6 +104,7 @@ export default function SearchResults(props) {
                 <SearchedBook book={book}/>
               ))}
           </div>
+          </>)}
 
 
         </div>
@@ -102,29 +112,3 @@ export default function SearchResults(props) {
   );
 }
 
-
-// async function handleAddAuthBook(book){
-
-//   const authorArray = book.volumeInfo.authors
-//   const newBook = { title: book.volumeInfo.title, 
-//     author: authorArray.join(), 
-//     image: book.volumeInfo.imageLinks.thumbnail,
-//     description: book.volumeInfo.description,
-//     categories: book.volumeInfo.categories, 
-//     industryIdentifiers: book.volumeInfo.industryIdentifiers,
-//     infoLink: book.volumeInfo.infoLink,
-//     language: book.volumeInfo.language,
-//     maturityRating: book.volumeInfo.maturityRating,
-//     pageCount: book.volumeInfo.pageCount,
-//     publishedDate: book.volumeInfo.publishedDate,
-//     publisher: book.volumeInfo.publisher,
-//     };
-
-//   let info = {"book":newBook}
-//   try{
-//   axios.post('http://localhost:5000/api/books/addd', info)
-//     .then(res => { console.log(res)});
-//   }catch(e){
-//     console.error(e)
-//   }
-// }
