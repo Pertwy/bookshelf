@@ -3,8 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
-import Button from '@material-ui/core/Button';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
+import {Form, Button } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
 
 import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
@@ -19,6 +20,7 @@ export default function SearchResults(props) {
   const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState("")
   const [searchSwitch, setSearchSwtich] = useState(true)
+  const [search, setSearch] = useState("")
 
   useEffect(() => {
     
@@ -27,6 +29,17 @@ export default function SearchResults(props) {
         setResult(data.data.items)
       })
     },[])
+
+    //Search Google books Api
+  function handleSubmit(e){
+    e.preventDefault()
+
+    axios.get("https://www.googleapis.com/books/v1/volumes?q="+search+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
+      .then(data => {
+        setResult(data.data.items)
+      })
+  }
+  
   
 
 
@@ -70,10 +83,12 @@ export default function SearchResults(props) {
   function handleSearchChange(){
     setSearchSwtich(!searchSwitch)
   }
-
   let but
   if (searchSwitch){but = <><button onClick={()=> handleSearchChange()}>Search Memebers</button></>}
   else{but = <><button onClick={()=> handleSearchChange()}>Search Books</button></>}
+
+
+
 
   return (
     <div className="container">
@@ -95,6 +110,11 @@ export default function SearchResults(props) {
             <div className="space-between">
               <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
             </div>
+
+            <Form inline onSubmit={handleSubmit}>
+              <TextField onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
+              <Button type="submit" variant="outline-success">Search</Button>
+            </Form>
 
           </div>
 

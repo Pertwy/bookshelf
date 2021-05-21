@@ -1,6 +1,6 @@
 import React, {useState, useCallback} from "react";
 import {useHistory} from 'react-router-dom';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import "./Navbar.css"
