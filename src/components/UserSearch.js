@@ -6,12 +6,10 @@ import React, {useState, useEffect} from 'react';
 export default function UserSearch() {
   const [users, setUsers] = useState([])
   const [usersSearched, setUsersSearched] = useState([])
-
-
-
   const [user, setUser] = useState("")
   const [search, setSearch] = useState("")
 
+  
   useEffect(() => {
     axios.get('http://localhost:5000/api/users/all')
       .then(response => 
@@ -27,7 +25,14 @@ export default function UserSearch() {
       usersSearched.map((user) =>{
       return(
         <>
-          <p className="all-text">{user.userName}</p>
+          
+          <tr>
+            <td className="all-text">X</td>
+            <td className="all-text">{user.userName}</td>
+            <td className="all-text">{user.favorites.length}</td>
+            <td className="all-text">{user.books.length}</td>
+            <td className="all-text"><button>+</button></td>
+          </tr>
         </>
       )
     }))
@@ -37,7 +42,7 @@ export default function UserSearch() {
     console.log(input)
 
     let test = users.filter(function(value){
-      return value.userName.includes(input)
+      return value.userName.toLowerCase().includes(input.toLowerCase())
     })
 
     setUsersSearched(test)
@@ -53,8 +58,18 @@ export default function UserSearch() {
         <input onChange={({ target }) => handleFilter(target.value)} label="Search" placeholder="Search User" />
       </>
 
-      <UserList/>
+      <table >
+            <tr>
+              <th className="all-text">Photo</th>
+              <th className="all-text">User Name</th>
+              <th className="all-text">Bookshelf</th>
+              <th className="all-text">Read</th>
+              <th className="all-text">Add</th>
+            </tr>
+            <UserList/>
+      </table>
 
+  
     </div>
   );
 }

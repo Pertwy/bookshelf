@@ -38,7 +38,7 @@ export default function UserDropDown(props) {
                 return( 
                 <option 
                 
-                    value={user._id}>{user.userName}
+                    value={user.email}>{user.email}
                 </option>);
             })
             }

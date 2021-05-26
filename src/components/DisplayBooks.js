@@ -46,7 +46,7 @@ export default function DisplayBooks(props) {
         <div className="link-div mt-auto ">
 
             <Link to={"/book/"+_id}>
-                <img className="card-img-top" src={image} alt={title}></img>
+                <img className="card-img-top card-img-top-bottom" src={image} alt={title}></img>
             </Link>
 
         </div>

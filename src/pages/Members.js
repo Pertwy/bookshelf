@@ -9,16 +9,20 @@ export default function Members() {
 
   const [currentUser, setCurrentUser] = useState("")
 
+
+  function userMap(){
+
+  }
+
+
   return (
     <div className="container">
         <div className="container center-all">
 
           
           <UserDropDown setEmail={setCurrentUser}/>
-
-          <div>
-            <UserSearch/>
-          </div>
+          <UserSearch/>
+          
 
         </div>
       </div>
