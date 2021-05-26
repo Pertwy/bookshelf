@@ -18,6 +18,7 @@ import Nav2 from "./components/Nav2"
 import Footer from './components/Footer';
 import FollowingBookshelves from './pages/FollowingBookshelves';
 import Test from './pages/Test';
+import Members from "./pages/Members"
 
 axios.defaults.withCredentials = true
 
@@ -45,6 +46,7 @@ function App() {
             <Route path="/alllists" component={AllLists} />
             <Route path="/followingBookshelves" component={FollowingBookshelves} />
             <Route path="/signup" component={Test} />
+            <Route path="/members" component={Members} />
 
 
             {/* <Route path="/searchresults/" component={SearchResults} /> */}

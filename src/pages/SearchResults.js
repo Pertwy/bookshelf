@@ -80,41 +80,22 @@ export default function SearchResults(props) {
     )
   }
 
-  function handleSearchChange(){
-    setSearchSwtich(!searchSwitch)
-  }
-  let but
-  if (searchSwitch){but = <><button onClick={()=> handleSearchChange()}>Search Memebers</button></>}
-  else{but = <><button onClick={()=> handleSearchChange()}>Search Books</button></>}
-
-
 
 
   return (
     <div className="container">
         <div className="container center-all">
 
-          {but}
-          <UserDropDown setEmail={setCurrentUser}/>
-
-          {!searchSwitch &&(
-          <div>
-            <UserSearch/>
-          </div>)}
+   
+          
 
 
-
-          {searchSwitch &&(
-            <>
           <div className="result-width center-all mb-3" >
             <div className="space-between">
               <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
             </div>
 
-            <Form inline onSubmit={handleSubmit}>
-              <TextField onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
-              <Button type="submit" variant="outline-success">Search</Button>
-            </Form>
+            <UserDropDown setEmail={setCurrentUser}/>
 
           </div>
 
@@ -124,7 +105,7 @@ export default function SearchResults(props) {
                 <SearchedBook book={book}/>
               ))}
           </div>
-          </>)}
+  
 
 
         </div>

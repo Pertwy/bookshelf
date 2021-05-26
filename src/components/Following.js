@@ -14,13 +14,6 @@ export default function Following(props) {
     const [currentUser, setCurrentUser] = useState("john@gmail.com")
     const [follow, setFollow] = useState("")
 
-
-    function handleFollow(){
-        let info = {"currentUser":currentUser, "follow":follow}
-        axios.post('http://localhost:5000/api/users/followDropDown',info)
-          .then(response => console.log(response))
-    }
-  
   
     const useStyles = makeStyles((theme) => ({
       root: {
@@ -71,27 +64,19 @@ export default function Following(props) {
       <div className="">
         {props.owner &&(
           <>
-        <h4 className="all-text avatar-heading">FOLLOW ANOTHER USER</h4>
         <div className="row">
           <div className="col-sm-6">
-            <UserDropDown setEmail={setFollow}/>
-          </div>
-          <div className="col-sm-6">
-            <Button style={{
-                        borderRadius: 5,
-                        borderColor: "#a9aeb3",
-                        backgroundColor: "#a9aeb3",
-                        color: "black",
-                        padding: "7px 7px",
-                        fontSize: "16px"
-                        }}
-                    onClick={() => handleFollow()}>Follow</Button>
+            <Link to={"/members"}>
+              <div>
+                Find members to follow
+              </div>
+            </Link>
           </div>
           
         </div></>)}
 
 
-        <div className="full-width mt-5">
+        <div className="full-width mt-2">
           <p className="all-text avatar-heading">FOLLOWING</p>
           <div>
           <AvatarGroup className=" pb-2">
@@ -108,14 +93,9 @@ export default function Following(props) {
         </div>
 
       </div>
-          
-
-      
+        
       </div>
-         
 
-
-      
       </div>
   );
 }

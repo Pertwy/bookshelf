@@ -49,7 +49,7 @@ export default function FollowingBookshelves(){
                             <div className="mt-auto p-2">
    
                                 <Link to={"/book/"+book._id}>
-                                    <img className="card-img-top" src={book.image} alt={book.title}></img>
+                                    <img className="card-img-top card-img-top-bottom" src={book.image} alt={book.title}></img>
                                 </Link>
 
                             </div>
@@ -65,11 +65,6 @@ export default function FollowingBookshelves(){
       }
     })
   )}
-
-
-  function FriendBookshelfListTitle(following) {
-    
-  }
 
 
 

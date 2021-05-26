@@ -34,14 +34,12 @@ router.post('/add', async (req, res) => {
   });
 
 
+
 //Return user data with fields populated
 router.post('/', async (req, res) => {
     let user = await User.findOne({email: req.body.email})
-        .populate("books")
-        .populate("favorites")
-        .populate("readList")
-        .populate("bookshelf")
-        .populate("lists") 
+        .select('-__v -password -email')
+        .populate("books favorites readList bookshelf lists -__v -password -email")
         .populate({
             path: 'following',
             populate: { path: 'books'}
@@ -51,29 +49,42 @@ router.post('/', async (req, res) => {
             populate: { path: 'bookshelf'}
             });
 
-    // console.log(user.following)
-
     res.send(user);
-
 });
 
+router.get('/testget', auth, async (req, res) => {
+    console.log(req.user)
+    // let user = await User.findOne({email: req.body.email})
+    //     .select('-__v -password -email')
+    //     .populate("books favorites readList bookshelf lists -__v -password -email")
+    //     .populate({
+    //         path: 'following',
+    //         populate: { path: 'books'}
+    //       })
+    //     .populate({
+    //         path: 'following',
+    //         populate: { path: 'bookshelf'}
+    //         });
+
+    // res.send(user);
+});
 
 //Find all test users - For drop down
 router.get("/all", async (req, res) => {
     User.find()
+        .select('-__v -password -email')
+        // .populate('bookids', '-_id -__v')
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
 })
 
+
 //Get Test user info by id
 router.get("/:_id", async (req, res) => {
     User.findById(req.params._id)
-        .populate("books")
-        .populate("favorites")
-        .populate("readList")
-        .populate("lists") 
-        .populate("bookshelf")
-        .populate("following")
+        .select('-__v -password -email')
+        .populate("books favorites readList bookshelf lists")
+        .populate("following", "-__v -password -email")
         
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
@@ -83,7 +94,7 @@ router.get("/:_id", async (req, res) => {
 router.post('/grablists', async (req, res) => {
     const user = await User.findOne({email: req.body.email})
         .populate("lists") //This is the field name
-        .select("books");
+        .select("books -__v -password -email");
     res.send(user);
 //{email:req.body.user}
 });

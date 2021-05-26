@@ -121,8 +121,10 @@ section:hover{
   border-style: solid;
   border-color: rgb(160, 160, 161);
   border-bottom:rgb(160, 160, 161);
-  /* border-left: rgb(160, 160, 161);
-  border-right: rgb(160, 160, 161); */
+}
+
+.card-img-top-bottom{
+  border-bottom: 2px solid rgb(160, 160, 161) ;
 }
 
 .under-card{
@@ -185,6 +187,8 @@ section:hover{
 
 .book-row-section{
   padding-top: 40px;
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .book-row-title{
@@ -323,12 +327,24 @@ button{
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  .the-book{
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .main-container{
     width: 95%;
+  }
+  .the-book{
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
@@ -337,12 +353,24 @@ button{
   .main-container{
     width: 95%;
   }
+  .the-book{
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .main-container{
     width: 800px;
+  }
+  .the-book{
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%;
+    padding-left: 5px;
+    padding-right: 5px;
   }
 }
 
@@ -410,12 +438,7 @@ button{
   background-color: #414242;
 }
 
-.the-book{
-  flex: 0 0 16.666667%;
-  max-width: 16.666667%;
-  padding-left: 5px;
-  padding-right: 5px;
-}
+
 
 .review-text{
   line-height: 0.5em;
