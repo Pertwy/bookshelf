@@ -50,9 +50,24 @@ router.post('/', async (req, res) => {
             });
 
     res.send(user);
-
 });
 
+router.get('/testget', auth, async (req, res) => {
+    console.log(req.user)
+    // let user = await User.findOne({email: req.body.email})
+    //     .select('-__v -password -email')
+    //     .populate("books favorites readList bookshelf lists -__v -password -email")
+    //     .populate({
+    //         path: 'following',
+    //         populate: { path: 'books'}
+    //       })
+    //     .populate({
+    //         path: 'following',
+    //         populate: { path: 'bookshelf'}
+    //         });
+
+    // res.send(user);
+});
 
 //Find all test users - For drop down
 router.get("/all", async (req, res) => {

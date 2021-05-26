@@ -15,6 +15,8 @@ export default function Profile(){
   useEffect(() => {
     if(currentUser){
       let email = {"email":currentUser}
+      axios.get('http://localhost:5000/api/users/testget')
+    
       axios.post('http://localhost:5000/api/users/',email)
         .then(response => (setUserData(response.data)))
     }

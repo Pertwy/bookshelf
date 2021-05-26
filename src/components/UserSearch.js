@@ -1,7 +1,7 @@
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
-
+import { Link } from 'react-router-dom';
 
 export default function UserSearch() {
   const [users, setUsers] = useState([])
@@ -24,11 +24,13 @@ export default function UserSearch() {
     return(
       usersSearched.map((user) =>{
       return(
-        <>
+        <>     
           
           <tr>
             <td className="all-text">X</td>
-            <td className="all-text">{user.userName}</td>
+            <Link to={"/user/"+user._id} className="">
+              <td className="all-text">{user.userName}</td>
+            </Link>
             <td className="all-text">{user.favorites.length}</td>
             <td className="all-text">{user.books.length}</td>
             <td className="all-text"><button>+</button></td>
@@ -37,6 +39,7 @@ export default function UserSearch() {
       )
     }))
   }
+
 
   function handleFilter(input){
     console.log(input)
