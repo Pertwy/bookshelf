@@ -57,22 +57,34 @@ export default function Nav2() {
                 
                 <ul className="navbar-nav ">
 
-                  <li className="navbar-item">
-                    <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">TestSign</h6></Link>
-                  </li>
+                {!isLoggedIn && (
+                  <>
+                    <li className="navbar-item">
+                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">TestSign</h6></Link>
+                    </li>
+
+                    <li className="navbar-item">
+                      <Link to="/test" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
+                    </li>
+                  </>
+                  )}
                   
-                  <li className="navbar-item">
-                    <Link to="/test" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
-                  </li>
+                  
 
                   <li className="navbar-item">
                     <Link to="/members" className="nav-text nav-link"><h6 className="all-text">Members</h6></Link>
                   </li>
 
                   {isLoggedIn && (
-                  <li className="navbar-item ">
-                    <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Profile</h6></Link>
-                  </li>
+                  <>
+                    <li className="navbar-item ">
+                      <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Profile</h6></Link>
+                    </li>
+
+                    <li className="navbar-item ">
+                      <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Sign Out</h6></Link>
+                    </li>
+                  </>
                   )}
 
 
