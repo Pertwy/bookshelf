@@ -1,16 +1,28 @@
-import React, {useState, useCallback} from "react";
+import React, {useState, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
 import { Navbar, Nav, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import "./Navbar.css"
 import { makeStyles } from '@material-ui/core/styles';
-
+import axios from 'axios';
 
 export default function Nav2() {
 
   const [search, setSearch] = useState("cats")
   const history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+  useEffect(() => {
+
+      axios.get('http://localhost:5000/api/users/currentUser')
+        .then(response => (setIsLoggedIn(response.data)))
+        //.then(response => (setUserData(response.data)))
+
+  },[])
+
+
+
 
   function test(e){    
     history.push("/searchresults/"+search)
@@ -57,9 +69,11 @@ export default function Nav2() {
                     <Link to="/members" className="nav-text nav-link"><h6 className="all-text">Members</h6></Link>
                   </li>
 
+                  {isLoggedIn && (
                   <li className="navbar-item ">
                     <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Profile</h6></Link>
                   </li>
+                  )}
 
 
                   <li className="navbar-item">

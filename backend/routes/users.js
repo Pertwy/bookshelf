@@ -14,6 +14,17 @@ const express = require('express');
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 const auth = require("../middleware/auth")
+const isLoggedin = require("../middleware/isLoggedIn")
+
+router.get('/currentUser', isLoggedin, async (req, res) => {
+    let user = await User.findById(req.user._id)
+    
+    if (user){ 
+        res.send(req.user);
+    } else {res.send(null)}
+});
+
+
 
 //Add user
 router.post('/add', async (req, res) => {
@@ -36,7 +47,7 @@ router.post('/add', async (req, res) => {
 
 
 //Return user data with fields populated
-router.post('/', auth, async (req, res) => {
+router.post('/', async (req, res) => {
     let user = await User.findOne({email: req.body.email})
     //let user = await User.findById(req.user._id)
         .select('-__v -password -email')
@@ -49,7 +60,6 @@ router.post('/', auth, async (req, res) => {
             path: 'following',
             populate: { path: 'bookshelf'}
             });
-
     res.send(user);
 });
 
