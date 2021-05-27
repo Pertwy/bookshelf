@@ -36,8 +36,9 @@ router.post('/add', async (req, res) => {
 
 
 //Return user data with fields populated
-router.post('/', async (req, res) => {
+router.post('/', auth, async (req, res) => {
     let user = await User.findOne({email: req.body.email})
+    //let user = await User.findById(req.user._id)
         .select('-__v -password -email')
         .populate("books favorites readList bookshelf lists -__v -password -email")
         .populate({
@@ -53,20 +54,20 @@ router.post('/', async (req, res) => {
 });
 
 router.get('/testget', auth, async (req, res) => {
-    console.log(req.user)
-    // let user = await User.findOne({email: req.body.email})
-    //     .select('-__v -password -email')
-    //     .populate("books favorites readList bookshelf lists -__v -password -email")
-    //     .populate({
-    //         path: 'following',
-    //         populate: { path: 'books'}
-    //       })
-    //     .populate({
-    //         path: 'following',
-    //         populate: { path: 'bookshelf'}
-    //         });
+    // console.log(req.user._id)
+    let user = await User.findOne({email: req.body.email})
+        .select('-__v -password -email')
+        .populate("books favorites readList bookshelf lists -__v -password -email")
+        .populate({
+            path: 'following',
+            populate: { path: 'books'}
+          })
+        .populate({
+            path: 'following',
+            populate: { path: 'bookshelf'}
+            });
 
-    // res.send(user);
+    res.send(user);
 });
 
 //Find all test users - For drop down
@@ -118,9 +119,9 @@ router.put('/addListToUser', async (req, res) => {
 
 
 //Add book to favorites///////////////////////////////////////////////////////////////////////////////////
-router.put('/addFavorite', async (req, res) => {
+router.put('/addFavorite', auth, async (req, res) => {
 
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
     
     if(book) {
@@ -145,9 +146,9 @@ router.put('/addFavorite', async (req, res) => {
 
 
 //Add book to bookshelf
-router.put('/addBookshelf', async (req, res) => {
+router.put('/addBookshelf', auth, async (req, res) => {
     
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
 
     console.log(user)
@@ -179,12 +180,12 @@ router.put('/addBookshelf', async (req, res) => {
 });
 
 //Add a book to ReadList
-router.put('/addReadList', async (req, res) => {
-    console.log("hello")
+router.put('/addReadList', auth, async (req, res) => {
+    
     let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
     newBook = await newBook.save();
     
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     user.readList.push(newBook._id)
 
     await user.save()
@@ -194,10 +195,10 @@ router.put('/addReadList', async (req, res) => {
 
 
 //Add book to books read
-router.put('/addBookToUser', async (req, res) => {
+router.put('/addBookToUser', auth, async (req, res) => {
     //console.log(req.body)
     
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
     
     if(book) {

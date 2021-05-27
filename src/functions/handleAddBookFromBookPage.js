@@ -5,6 +5,8 @@ import showNotification from "./showNotification"
 
 export async function handleAddBookFromBookPage(book, type, user){
 
+
+
     const newBook = { 
       title: book.title, 
       author: book.author, 
@@ -20,7 +22,7 @@ export async function handleAddBookFromBookPage(book, type, user){
       publisher: book.publisher
       };
 
-    let info = {"book":newBook, "email":user}
+    let info = {"book":newBook}
 
 
     if (type === "favorite"){

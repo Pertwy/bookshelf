@@ -18,9 +18,11 @@ export default function AdditionButton(props) {
           padding: "5px 7px",
           fontSize: "13px"
         }}
-        onClick={() => handleAddBook(props.book, props.type, props.currentUser)}>{props.title}</Button>
+        onClick={() => handleAddBook(props.book, props.type, props.currentUser)}
+        >{props.title}</Button>
     )
   }
+
 
   function ViewBookButton(props){
     return(
@@ -32,23 +34,24 @@ export default function AdditionButton(props) {
         padding: "7px 7px",
         fontSize: "11px"
         }}
-        onClick={() => handleAddBookFromBookPage(props.book, props.type, props.currentUser)}>{props.title}</Button>
+        onClick={() => handleAddBookFromBookPage(props.book, props.type)}
+        >{props.title}</Button>
     )
     }
 
-    
+    //
 
 
     let but
-    if (props.type === "favorite" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Favorite"/></div>}
-    if (props.type === "read" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Read"/></div>}
-    if (props.type === "readlist" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Read List"/></div>}
-    if (props.type === "bookshelf" && props.page === "SearchResults"){but = <div><SearchResultButton title="+ Bookhelf"/></div>}
+    if (props.type === "favorite" && props.page === "SearchResults"){but = <div><SearchResultButton book={props.book} type={props.type} title="+ Favorite"/></div>}
+    if (props.type === "read" && props.page === "SearchResults"){but = <div><SearchResultButton book={props.book} type={props.type} title="+ Read"/></div>}
+    if (props.type === "readlist" && props.page === "SearchResults"){but = <div><SearchResultButton book={props.book} type={props.type} title="+ Read List"/></div>}
+    if (props.type === "bookshelf" && props.page === "SearchResults"){but = <div><SearchResultButton book={props.book} type={props.type} title="+ Bookhelf"/></div>}
 
-    if (props.type === "favorite" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Favorite"/></div>}
-    if (props.type === "read" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Read"/></div>}
-    if (props.type === "readlist" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Read List"/></div>}
-    if (props.type === "bookshelf" && props.page === "ViewBook"){but = <div><ViewBookButton title="+ Bookshelf"/></div>}
+    if (props.type === "favorite" && props.page === "ViewBook"){but = <div><ViewBookButton book={props.book} type={props.type} title="+ Favorite"/></div>}
+    if (props.type === "read" && props.page === "ViewBook"){but = <div><ViewBookButton book={props.book} type={props.type} title="+ Read"/></div>}
+    if (props.type === "readlist" && props.page === "ViewBook"){but = <div><ViewBookButton book={props.book} type={props.type} title="+ Read List"/></div>}
+    if (props.type === "bookshelf" && props.page === "ViewBook"){but = <div><ViewBookButton book={props.book} type={props.type} title="+ Bookshelf"/></div>}
 
   return (
     <>{but}</>

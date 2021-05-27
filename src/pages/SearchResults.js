@@ -27,6 +27,7 @@ export default function SearchResults(props) {
     axios.get("https://www.googleapis.com/books/v1/volumes?q="+props.location.pathname.replace("/searchresults/", "")+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
       .then(data => {
         setResult(data.data.items)
+        //console.log(data.data.items)
       })
     },[])
 
