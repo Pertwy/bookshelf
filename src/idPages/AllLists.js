@@ -15,10 +15,6 @@ export default function AllLists(){
         .then(response => (setUserData(response.data)))
       
     }
-    // else{
-    //   axios.get('http://localhost:5000/api/books/')
-    //     .then(response => (setBooks(response.data)))
-    // }
   },[currentUser, userData])
 
 
