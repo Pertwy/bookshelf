@@ -4,6 +4,7 @@ import showNotification from "./showNotification"
 
 
 export async function handleAddBook(book, type, user){
+  
 
     const authorArray = book.volumeInfo.authors
     const newBook = { title: book.volumeInfo.title, 
@@ -20,7 +21,8 @@ export async function handleAddBook(book, type, user){
       publisher: book.volumeInfo.publisher,
       };
 
-    let info = {"book":newBook, "email":user}
+    let info = {"book":newBook}
+    
 
 
     if (type === "favorite"){

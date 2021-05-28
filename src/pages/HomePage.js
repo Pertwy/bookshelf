@@ -14,8 +14,15 @@ export default function HomePage(){
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [adminLists, setAdminLists] = useState([])
   const [listSize, setListSize] = useState(6)
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+
+
 
   useEffect(() => {
+
+    axios.get('http://localhost:5000/api/users/currentUser')
+        .then(response => (setIsLoggedIn(response.data)))
 
     axios.get("http://localhost:5000/api/lists/admin")
       .then(response => (setAdminLists(response.data)))
@@ -110,6 +117,9 @@ export default function HomePage(){
           </div>
         </div>
 
+
+        {isLoggedIn && (
+          <>
         <div className="book-row-section">
 
           <div className="book-row-div">
@@ -133,6 +143,8 @@ export default function HomePage(){
           </div>
 
         </div>
+        </>
+        )}
 
 
         <div className="book-row-section">
