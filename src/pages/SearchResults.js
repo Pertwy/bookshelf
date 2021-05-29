@@ -14,15 +14,18 @@ import UserSearch from "../components/UserSearch";
 
 export default function SearchResults(props) {
 
-  const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
-  const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState("")
-  const [searchSwitch, setSearchSwtich] = useState(true)
   const [search, setSearch] = useState("")
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+   
+
 
   useEffect(() => {
+    axios.get('http://localhost:5000/api/users/currentUser')
+          .then(response => (setIsLoggedIn(response.data)))
     
     axios.get("https://www.googleapis.com/books/v1/volumes?q="+props.location.pathname.replace("/searchresults/", "")+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
       .then(data => {
@@ -31,17 +34,7 @@ export default function SearchResults(props) {
       })
     },[])
 
-    //Search Google books Api
-  function handleSubmit(e){
-    e.preventDefault()
 
-    axios.get("https://www.googleapis.com/books/v1/volumes?q="+search+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
-      .then(data => {
-        setResult(data.data.items)
-      })
-  }
-  
-  
 
 
  
@@ -61,7 +54,7 @@ export default function SearchResults(props) {
           </div>
         </div>
 
-        <div className="col-sm-5 row">
+        <div className="col-sm-5 ">
           <div className={"description"}>
             <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
             {authorArray && (
@@ -70,12 +63,13 @@ export default function SearchResults(props) {
           </div>
         </div>
         
+        {isLoggedIn &&(<>
         <div className="col-sm-4">
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="read" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="SearchResults"/>
-        </div> 
+        </div> </>)}
 
       </div>
     )

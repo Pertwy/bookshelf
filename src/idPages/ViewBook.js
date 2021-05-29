@@ -15,8 +15,16 @@ export default function ViewBook(props){
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [review, setReview] = useState("")
   const [rating, setRating] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+   
+      
 
   useEffect(() => {
+
+    axios.get('http://localhost:5000/api/users/currentUser')
+          .then(response => (setIsLoggedIn(response.data)))
+
     axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
      
@@ -142,7 +150,11 @@ export default function ViewBook(props){
               </div>
 
               <div className="pt-1 col-sm-6">
-                <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+
+                {isLoggedIn &&(<>
+                  <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+                </>)}
+
                 <p className="all-text ">On {book.bookshelf.length} bookshelves</p>
               </div>
             </div>
@@ -153,7 +165,7 @@ export default function ViewBook(props){
           </div>
         </div>
 
-
+        {isLoggedIn &&(<>
         <span className="row pl-2">
           <div>
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
@@ -163,7 +175,7 @@ export default function ViewBook(props){
             <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
             <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
           </div>
-        </span>
+        </span></>)}
 
         {/* {book.pageCount || book.language || book.publishedDate || book.publisher || book.maturityRating || book.industryIdentifiers  &&(
         <> */}
@@ -198,11 +210,13 @@ export default function ViewBook(props){
                 {book.reviews.length > 0 &&(
                 <Reviews/>)}
 
-                {book.reviews.length === 0 &&(
+                {book.reviews.length === 0 && isLoggedIn &&(
                 <h5 className="all-text">Be the first to review!</h5>
                 )}
               </div>
 
+
+              {isLoggedIn &&(<>
               <div className="col-sm-6">
                 <form onSubmit={handleAddReview}>
                   {/* <label>Add a review</label> */}
@@ -230,6 +244,7 @@ export default function ViewBook(props){
                     }}>Submit</Button>
                 </form>
               </div>
+              </>)}
             </div>
 
           </div>

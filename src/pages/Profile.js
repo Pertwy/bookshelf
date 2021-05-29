@@ -4,6 +4,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-alice-carousel/lib/alice-carousel.css"
 import TabPanel from "../components/TabPanel"
+import { Link } from 'react-router-dom';
 
 
 export default function Profile(){
@@ -11,14 +12,17 @@ export default function Profile(){
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [owner, setOwner] = useState(true)
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
 
   useEffect(() => {
     if(currentUser){
-      let email = {"email":currentUser}
 
       axios.get('http://localhost:5000/api/users/currentUser')
-        .then(response => (console.log(response.data)))
-        //.then(response => (setUserData(response.data)))
+        .then(response => (setIsLoggedIn(response.data)))
+
+      let email = {"email":currentUser}
+
     
       axios.post('http://localhost:5000/api/users/',email)
         .then(response => (setUserData(response.data)))
@@ -32,9 +36,17 @@ export default function Profile(){
 
 
   return (
+    
     <div className=" shadow-lg px-4 pb-4">
-      {/* <UserDropDown setEmail={setCurrentUser}/> */}
 
+      {!isLoggedIn &&(<>
+        <Link to={"/signup"} className="">
+          <h4 className="all-text">Please log in or create an account to view your profile</h4>
+        </Link>
+      </>)}
+
+
+      {isLoggedIn &&(<>
         <div className="pb-2 container-fluid row">
           
           {/* <div className="photo-div col-sm-2 col-md-2">
@@ -76,7 +88,8 @@ export default function Profile(){
         <div>
           <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>
         </div>
-      
+        </>)}
     </div>
+    
   )
 }

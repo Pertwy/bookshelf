@@ -47,9 +47,10 @@ router.post('/add', async (req, res) => {
 
 
 //Return user data with fields populated
-router.post('/', async (req, res) => {
-    let user = await User.findOne({email: req.body.email})
-    //let user = await User.findById(req.user._id)
+router.get('/', auth, async (req, res) => {
+    //let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
+
         .select('-__v -password -email')
         .populate("books favorites readList bookshelf lists -__v -password -email")
         .populate({
