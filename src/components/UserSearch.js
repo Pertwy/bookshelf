@@ -33,7 +33,7 @@ export default function UserSearch() {
             </Link>
             <td className="all-text">{user.favorites.length}</td>
             <td className="all-text">{user.books.length}</td>
-            <td className="all-text"><button>+</button></td>
+
           </tr>
         </>
       )
@@ -54,23 +54,23 @@ export default function UserSearch() {
 
  
   return (
-    <div>
+    <div >
 
       <>
-        <h5 className="all-text">Peoples</h5>
-        <input onChange={({ target }) => handleFilter(target.value)} label="Search" placeholder="Search User" />
-      </>
-
-      <table >
+        <h5 className="all-text">Search Members</h5>
+        <input onChange={({ target }) => handleFilter(target.value)} label="Search" placeholder="Search Members" />
+        <table >
             <tr>
-              <th className="all-text">Photo</th>
-              <th className="all-text">User Name</th>
-              <th className="all-text">Bookshelf</th>
-              <th className="all-text">Read</th>
-              <th className="all-text">Add</th>
+              <th className="pl-3 all-text">Photo</th>
+              <th className="pl-3 all-text">User Name</th>
+              <th className="pl-3 all-text">Bookshelf</th>
+              <th className="pl-3 all-text">Read</th>
             </tr>
             <UserList/>
       </table>
+      </>
+
+      
 
   
     </div>

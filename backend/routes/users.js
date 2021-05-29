@@ -52,7 +52,7 @@ router.get('/', auth, async (req, res) => {
     let user = await User.findById(req.user._id)
 
         .select('-__v -password -email')
-        .populate("books favorites readList bookshelf lists -__v -password -email")
+        .populate("books favorites followers readList bookshelf lists -__v -password -email")
         .populate({
             path: 'following',
             populate: { path: 'books'}
@@ -79,7 +79,7 @@ router.get("/all", async (req, res) => {
 router.get("/:_id", async (req, res) => {
     User.findById(req.params._id)
         .select('-__v -password -email')
-        .populate("books favorites readList bookshelf lists")
+        .populate("books favorites followers readList bookshelf lists")
         .populate("following", "-__v -password -email")
         
         .then(user => res.json(user))
@@ -145,8 +145,6 @@ router.put('/addBookshelf', auth, async (req, res) => {
     let user = await User.findById(req.user._id)
     let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
 
-    console.log(user)
-    console.log(book)
     
     if(book != null) {
         user.bookshelf.push(book._id)
@@ -173,19 +171,39 @@ router.put('/addBookshelf', auth, async (req, res) => {
     }
 });
 
-//Add a book to ReadList
+
+//Add book to bookshelf
 router.put('/addReadList', auth, async (req, res) => {
     
-    let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
-    newBook = await newBook.save();
-    
     let user = await User.findById(req.user._id)
-    user.readList.push(newBook._id)
+    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
 
-    await user.save()
-        .then(() => res.json('Added to Read List'))
-        .catch(err => res.status(400).json('Error: ' + err));
+    
+    if(book != null) {
+        user.readList.push(book._id)
+        book.readList.push(user._id)
+        await user.save()
+        await book.save()
+            .then(() => res.json('Added to Read List!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+        
+    }
+    else{
+        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        newBook = await newBook.save();
+
+        let bookupdate = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+        bookupdate.readList.push(user._id)
+        bookupdate = await bookupdate.save();
+        
+        user.readList.push(newBook._id)
+    
+        await user.save()
+            .then(() => res.json('New Added to Read List!'))
+            .catch(err => res.status(400).json('Error: ' + err));
+    }
 });
+
 
 
 //Add book to books read
