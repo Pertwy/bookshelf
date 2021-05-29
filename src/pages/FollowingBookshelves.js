@@ -7,7 +7,6 @@ import UserDropDown from "../components/UserDropDown"
 
 
 export default function FollowingBookshelves(){
-  const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [listSize, setListSize] = useState(6)
   const [isLoggedIn, setIsLoggedIn] =useState("")
@@ -22,8 +21,7 @@ export default function FollowingBookshelves(){
       .then(response => (setUserData(response.data)))
       //.then(response => (console.log(response.data)))
       
-
-  },[currentUser])
+  },[])
 
 
 
@@ -83,9 +81,6 @@ export default function FollowingBookshelves(){
           </div>
         </div>
       </>)}
-
-
-        
     </div>
   )
 }

@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HalfRating from "../components/Stars"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { InsertDriveFileOutlined } from '@material-ui/icons';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
 import { makeStyles } from '@material-ui/core/styles';
@@ -28,11 +27,10 @@ export default function ViewBook(props){
     axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
      
-    let email = {"email":currentUser}
-    axios.post('http://localhost:5000/api/users/',email)
+
+    axios.get('http://localhost:5000/api/users/')
       .then(response => (setUserData(response.data)))
 
-     console.log(book) 
   },[])
 
 
@@ -49,8 +47,7 @@ export default function ViewBook(props){
 
   function handleAddReview(e){
     e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
-    //console.log(info)  
+    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
     
     axios.post('http://localhost:5000/api/users/addreview',info)
       .then(res => { showNotification(res.data, res.data)})

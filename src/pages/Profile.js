@@ -9,29 +9,22 @@ import { Link } from 'react-router-dom';
 
 export default function Profile(){
   const [books, setBooks] = useState([])  
-  const [currentUser, setCurrentUser] = useState("john@gmail.com")
+
   const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [owner, setOwner] = useState(true)
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
 
   useEffect(() => {
-    if(currentUser){
 
       axios.get('http://localhost:5000/api/users/currentUser')
         .then(response => (setIsLoggedIn(response.data)))
 
-      let email = {"email":currentUser}
-
-    
-      axios.post('http://localhost:5000/api/users/',email)
+   
+      axios.get('http://localhost:5000/api/users/')
         .then(response => (setUserData(response.data)))
-    }
-    else{
-      axios.get('http://localhost:5000/api/books/')
-        .then(response => (setBooks(response.data)))
-    }
-  },[currentUser])
+
+  },[])
 
 
 
@@ -39,11 +32,7 @@ export default function Profile(){
     
     <div className=" shadow-lg px-4 pb-4">
 
-      {!isLoggedIn &&(<>
-        <Link to={"/signup"} className="">
-          <h4 className="all-text">Please log in or create an account to view your profile</h4>
-        </Link>
-      </>)}
+      
 
 
       {isLoggedIn &&(<>
@@ -89,6 +78,15 @@ export default function Profile(){
           <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>
         </div>
         </>)}
+
+        {!isLoggedIn &&(<>
+        <Link to={"/signup"} className="">
+          <h4 className="all-text">Please log in or create an account to view your profile</h4>
+        </Link>
+      </>)}
+
+
+
     </div>
     
   )

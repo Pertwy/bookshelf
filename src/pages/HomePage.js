@@ -27,23 +27,14 @@ export default function HomePage(){
     axios.get("http://localhost:5000/api/lists/admin")
       .then(response => (setAdminLists(response.data)))
 
-    if(currentUser){
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/',email)
+      axios.get('http://localhost:5000/api/users/')
         .then(response => (setUserData(response.data)))
-      
-      // console.log(userData.following)
-    }
-    else{
-      axios.get('http://localhost:5000/api/books/')
-        .then(response => (setUserData(response.data)))
-    }
 
-  },[currentUser])
+  },[])
 
 
 
-  function FriendReadList(props) {
+  function FriendReadList() {
 
     return (userData.following.map(following => {
       if(following.books[0]){
@@ -102,7 +93,7 @@ export default function HomePage(){
     <div className="pb-4">
 
       {/* shadow-lg p-4 mb-4 bg-white */}
-        <UserDropDown setEmail={setCurrentUser}/>
+        {/* <UserDropDown setEmail={setCurrentUser}/> */}
 
         <div className={"py-4 home-page-heading-div"}>
 

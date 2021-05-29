@@ -6,16 +6,13 @@ import DisplayAllLists from '../components/DisplayAllLists';
 
 export default function AllLists(){
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
-  const [currentUser, setCurrentUser] = useState("john@gmail.com")
 
   useEffect(() => {
-    if(currentUser){
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/',email)
+
+      axios.get('http://localhost:5000/api/users/')
         .then(response => (setUserData(response.data)))
-      
-    }
-  },[currentUser, userData])
+
+  },[userData])
 
 
 

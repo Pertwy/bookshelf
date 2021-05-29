@@ -26,25 +26,23 @@ export default function User(props){
 
       axios.get("http://localhost:5000/api/users/"+props.location.pathname.replace("/user/", ""))
       .then(response => (setUserData(response.data)))
-      //.then(response => (console.log(response.data)))
 
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/',email)
+      axios.get('http://localhost:5000/api/users/')
         .then(response => (setMyUserData(response.data)))
 
-  },[currentUser, update, userData])
+  },[update, userData])
  
 
 
   
   function handleFollow(){
-    let info = {"currentUser":currentUser, "follow":props.location.pathname.replace("/user/", "")}
+    let info = {"follow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/follow',info)
       .then(res => { showNotification(res.data, res.data)});
 }
 
   function handleUnfollow(){
-    let info = {"currentUser":currentUser, "unfollow":props.location.pathname.replace("/user/", "")}
+    let info = {"unfollow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/unfollow',info)
       .then(res => { showNotification(res.data, res.data)});
   }

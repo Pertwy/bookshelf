@@ -64,22 +64,6 @@ router.get('/', auth, async (req, res) => {
     res.send(user);
 });
 
-router.get('/testget', auth, async (req, res) => {
-    // console.log(req.user._id)
-    let user = await User.findOne({email: req.body.email})
-        .select('-__v -password -email')
-        .populate("books favorites readList bookshelf lists -__v -password -email")
-        .populate({
-            path: 'following',
-            populate: { path: 'books'}
-          })
-        .populate({
-            path: 'following',
-            populate: { path: 'bookshelf'}
-            });
-
-    res.send(user);
-});
 
 //Find all test users - For drop down
 router.get("/all", async (req, res) => {
@@ -103,19 +87,18 @@ router.get("/:_id", async (req, res) => {
 })
 
 //Find a users lists
-router.post('/grablists', async (req, res) => {
-    const user = await User.findOne({email: req.body.email})
+router.get('/grablists', auth, async (req, res) => {
+    let user = await User.findById(req.user._id)
         .populate("lists") //This is the field name
         .select("books -__v -password -email");
     res.send(user);
-//{email:req.body.user}
 });
 
 
 //Add a list 
 router.put('/addListToUser', async (req, res) => {
 
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     console.log(user)
 
     let newList = new List({title:req.body.title, books:req.body.books, creator:user._id})
@@ -234,8 +217,8 @@ router.put('/addBookToUser', auth, async (req, res) => {
 
 
 //Follow another user
-router.post('/follow', async (req, res) => {
-    let user = await User.findOne({email: req.body.currentUser})
+router.post('/follow', auth,  async (req, res) => {
+    let user = await User.findById(req.user._id)
     user.following.push(req.body.follow)
 
     let otherUser = await User.findById(req.body.follow)
@@ -247,22 +230,10 @@ router.post('/follow', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-router.post('/followDropDown', async (req, res) => {
-    let user = await User.findOne({email: req.body.currentUser})
-    let otherUser = await User.findOne({email: req.body.follow})
-
-    user.following.push(otherUser._id)
-    otherUser.followers.push(user._id)
-
-    await otherUser.save()
-    await user.save()
-        .then(() => res.json('Followed'))
-        .catch(err => res.status(400).json('Error: ' + err));
-});
 
 //Unfollow another user
-router.post('/unfollow', async (req, res) => {
-    let user = await User.findOne({email: req.body.currentUser})
+router.post('/unfollow', auth,  async (req, res) => {
+    let user = await User.findById(req.user._id)
 
     index = user.following.indexOf(req.body.unfollow)
     user.following.splice(index, 1)
@@ -284,9 +255,9 @@ router.post('/unfollow', async (req, res) => {
 
 
 //REmove favorite book from user
-router.post('/removefavorite', async (req, res) => {
+router.post('/removefavorite', auth, async (req, res) => {
     console.log("hello")
-    let user = await User.findOne({email: req.body.currentUser})
+     let user = await User.findById(req.user._id)
     
 
     index = user.favorites.indexOf(req.body.book)
@@ -298,8 +269,8 @@ router.post('/removefavorite', async (req, res) => {
 });
 
 //Remove book from Read
-router.post('/removebook', async (req, res) => {
-    let user = await User.findOne({email: req.body.currentUser})
+router.post('/removebook', auth, async (req, res) => {
+     let user = await User.findById(req.user._id)
 
     index = user.books.indexOf(req.body.book)
     user.books.splice(index, 1)
@@ -309,11 +280,9 @@ router.post('/removebook', async (req, res) => {
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
-
-
 //Remove book from readList 
-router.post('/removereadlist', async (req, res) => {
-    let user = await User.findOne({email: req.body.currentUser})
+router.post('/removereadlist', auth, async (req, res) => {
+    let user = await User.findById(req.user._id)
 
     index = user.readList.indexOf(req.body.book)
     user.readList.splice(index, 1)
@@ -322,6 +291,19 @@ router.post('/removereadlist', async (req, res) => {
         .then(() => res.json('fave deleted!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+
+//Remove book from readList 
+router.post('/removebookshelf', auth, async (req, res) => {
+    let user = await User.findById(req.user._id)
+
+   index = user.bookshelf.indexOf(req.body.book)
+   user.bookshelf.splice(index, 1)
+
+   await user.save()
+       .then(() => res.json('Bookshelf deleted!'))
+       .catch(err => res.status(400).json('Error: ' + err));
+});
+
 
 
 //Delete user by ID
@@ -333,22 +315,13 @@ router.route('/:id').delete((req, res) => {
 
 
 
-router.put('/createBookAndAddToUser', auth, async (req, res) => {
-    let user = await User.findById(req.user._id)
-    user.books.push(req.body.book)
-
-    user.save()
-        .then(() => res.json('User updated!'))
-        .catch(err => res.status(400).json('Error: ' + err));        
-});
-
 
 //Add a review. Includes rating
-router.post('/addreview', async (req, res) => {
+router.post('/addreview', auth, async (req, res) => {
 
 
     //Find user
-    let user = await User.findOne({email: req.body.email})
+    let user = await User.findById(req.user._id)
     
     //Find book
     let CurrentBook =  await Book.findById(req.body._id)
@@ -402,8 +375,6 @@ router.post('/addreview', async (req, res) => {
     if(rating === "5"){
         CurrentBook.rating.ten.push(author)
     }
-
-
 
     await CurrentBook.save()
     await user.save()
