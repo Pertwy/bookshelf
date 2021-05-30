@@ -173,7 +173,9 @@ export default function ViewBook(props){
             </div>
 
             {book.description  &&(
-            <p className="mt-3 all-text book-description" >{book.description}</p>)}
+              <div className="book-description-box">
+                <p className="mt-3 all-text book-description summary" >{book.description}</p>
+              </div>)}
             
           </div>
         </div>

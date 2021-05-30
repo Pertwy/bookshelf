@@ -10,7 +10,7 @@ export default function DisplayList(props) {
     return(
       <div >
         
-          <div className="row space-between pl-4 pr-4 pt-4">
+          <div className="row space-between px-3 pt-4">
             <h4 className="list-row-title">{list.title}</h4>
 
             {/* <div className="row">

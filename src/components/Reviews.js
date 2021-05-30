@@ -11,18 +11,23 @@ export default function Reviews(props) {
     function Reviews(input){
         return (input.reviews.map(review => {
           return(
-            
-            <div className="pb-2">
-              <button onClick={()=>console.log(review)}></button>
-              
-                <Link to={"/book/"+review.book._id}>
-                  <h6 className="all-text review-name">{review.book.title}</h6>
-                </Link> 
+
+            <div className="row mb-2">
+            `  <div>
+                <img className="mr-2 review-image" src={review.book.image} alt={review.book.title}/>
+              </div>
+
+              <div className="pb-2">
                 
-                <p className="all-text review-text">{review.review}</p>
-                {review.rating &&(
-                    <p className="all-text review-text"> -- {review.rating} Stars --</p>
-                )}
+                  <Link to={"/book/"+review.book._id}>
+                    <h6 className="all-text review-name">{review.book.title}</h6>
+                  </Link> 
+                  
+                  <p className="all-text review-text">{review.review}</p>
+                  {review.rating > 0 &&(
+                      <p className="all-text review-text"> -- {review.rating} Stars --</p>
+                  )}
+              </div>`
             </div>
             )
         }))

@@ -4,20 +4,13 @@ import axios from 'axios';
 
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Login from "../components/Login"
-import UserDropDown from "../components/UserDropDown"
 import DisplayList from "../components/DisplayLists"
-import { NavigateBefore } from '@material-ui/icons';
 import {useHistory} from 'react-router-dom';
-import { List } from 'material-ui';
 
 
 export default function HomePage(){
-  const [books, setBooks] = useState([])  
-  const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [adminLists, setAdminLists] = useState([])
-  const [listSize, setListSize] = useState(6)
   const [isLoggedIn, setIsLoggedIn] =useState("")
   const [adminData, setAdminData] = useState({books:[],favorites:[]})
 
@@ -145,7 +138,7 @@ export default function HomePage(){
           <div className="book-row-div">
             <h2 className="book-row-title">POPULAR THIS WEEK</h2>
           </div>
-          <div className="row book-row">
+          <div className="mx-1 row book-row">
             <AdminLists input={adminData.favorites}/>
           </div>
         </div>
@@ -154,7 +147,7 @@ export default function HomePage(){
           <div className="book-row-div">
             <h2 className="book-row-title">STAFF PICKS</h2>
           </div>
-          <div className="row book-row">
+          <div className="mx-1 row book-row">
             <AdminLists input={adminData.books}/>
           </div>
         </div>
@@ -169,18 +162,18 @@ export default function HomePage(){
           <div className="book-row-div">
             <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
           </div>
-          <div className="row book-row">
+          <div className="mx-1 row book-row">
             <FriendReadList type="readlist"/>
           </div>
         </div>
 
         <div className="book-row-section">
-          <div className="px-2 book-row-div row space-between">
-            <h2 className="px-2 book-row-title">BOOKSHELVES</h2>
+          <div className="mx-1 book-row-div row space-between">
+            <h2 className="book-row-title">BOOKSHELVES</h2>
             <Link to={"/followingBookshelves"}><h2 className="book-row-title">VIEW ALL</h2></Link>
           </div>
 
-          <div className="row">
+          <div className="mx-1 row">
             <FriendBookshelfList/>
           </div>
         </div>
@@ -191,7 +184,7 @@ export default function HomePage(){
 
 
 
-        {isLoggedIn && (userData.following.length > 0) && (
+        {isLoggedIn && (userData.following.length == 0) && (
         <>
           <div className=" mt-5 home-page-heading-div">
             <h2 className=" all-text">Add friends to see what they've been reading</h2>
@@ -210,7 +203,7 @@ export default function HomePage(){
             <h2 className="book-row-title">POPULAR LISTS</h2>
           </div>
           
-          <div className="row book-row">
+          <div className="mx-1 row book-row">
             <DisplayList lists={adminLists}/>
           </div>
         </div>

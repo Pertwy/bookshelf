@@ -197,7 +197,7 @@ section:hover{
 
 
 .book-row-section{
-  padding-top: 40px;
+  padding-top: 28px;
   margin-left: 3%;
   margin-right: 3%;
 }
@@ -304,8 +304,11 @@ button{
 
 .search-image{
   object-fit: cover;
-  
   max-height: 140px;
+}
+.review-image{
+  object-fit: cover;
+  max-height: 65px;
 }
 
 .searched-row{
@@ -443,6 +446,14 @@ button{
 
 .book-description{
   font-size: 0.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+}
+
+.book-description-box{
+  overflow: hidden;
+  max-height: 250px;
 }
 
 .book-info-background{
@@ -484,5 +495,7 @@ button{
 }
 .logout-button:hover{
   cursor: pointer;
-
 }
+
+
+
