@@ -448,3 +448,8 @@ button{
 .review-name{
   font-size: 0.7em;
 }
+
+.member-table{
+  align-items: center;
+  margin:auto;
+}

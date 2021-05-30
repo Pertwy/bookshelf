@@ -15,32 +15,34 @@ export default function User(props){
   const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [update, setUpdate] = useState(0)
   const [owner, setOwner] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] =useState("")
 
-
+   
 
   useEffect(() => {
 
+      axios.get('http://localhost:5000/api/users/currentUser')
+          .then(response => (setIsLoggedIn(response.data)))
+
       axios.get("http://localhost:5000/api/users/"+props.location.pathname.replace("/user/", ""))
       .then(response => (setUserData(response.data)))
-      //.then(response => (console.log(response.data)))
 
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/',email)
+      axios.get('http://localhost:5000/api/users/')
         .then(response => (setMyUserData(response.data)))
 
-  },[currentUser, update, userData])
+  },[update, userData])
  
 
 
   
   function handleFollow(){
-    let info = {"currentUser":currentUser, "follow":props.location.pathname.replace("/user/", "")}
+    let info = {"follow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/follow',info)
       .then(res => { showNotification(res.data, res.data)});
 }
 
   function handleUnfollow(){
-    let info = {"currentUser":currentUser, "unfollow":props.location.pathname.replace("/user/", "")}
+    let info = {"unfollow":props.location.pathname.replace("/user/", "")}
     axios.post('http://localhost:5000/api/users/unfollow',info)
       .then(res => { showNotification(res.data, res.data)});
   }
@@ -85,7 +87,13 @@ export default function User(props){
                 <div className="col-sm-10 col-md-8">
                   <div className="pl-3 row">
                     <h4 className="pr-2 all-text name">{userData.givenName} {userData.surname}</h4> 
-                    {followButton}
+
+                    {isLoggedIn &&(
+                      <>
+                      {followButton}
+                      </>
+                    )}
+
                   </div>
                   <p className="all-text bio">{userData.bio}</p>
                 </div>

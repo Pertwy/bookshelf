@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import "./Navbar.css"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
+import { SingleBedOutlined } from "@material-ui/icons";
 
 export default function Nav2() {
 
@@ -21,13 +22,23 @@ export default function Nav2() {
 
   },[])
 
+  
 
+
+  function logout(){
+    axios.get('http://localhost:5000/api/auth/logout_get')
+    .then(console.log("out"))
+ 
+  }
 
 
   function test(e){    
     history.push("/searchresults/"+search)
   }
 
+
+
+  
   const useStyles = makeStyles((theme) => ({
     input:{
       '& > *': {
@@ -60,15 +71,10 @@ export default function Nav2() {
                 {!isLoggedIn && (
                   <>
                     <li className="navbar-item">
-                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">TestSign</h6></Link>
-                    </li>
-
-                    <li className="navbar-item">
-                      <Link to="/test" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
+                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
                     </li>
                   </>
                   )}
-                  
                   
 
                   <li className="navbar-item">
@@ -81,8 +87,11 @@ export default function Nav2() {
                       <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Profile</h6></Link>
                     </li>
 
-                    <li className="navbar-item ">
-                      <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Sign Out</h6></Link>
+                    <li  className="navbar-item ">
+                      <button onClick={()=>logout()}>Log Out</button>
+                      {/* <div >
+                        <h4 className="all-text nav-text nav-link" >Sign Out</h4>
+                      </div> */}
                     </li>
                   </>
                   )}

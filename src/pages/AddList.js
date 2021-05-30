@@ -26,13 +26,9 @@ export default function AddList() {
 
   //Grab all the current users
   useEffect(() => {
-    console.log(currentUser)
-    if(currentUser){
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/grablists',email)
+      axios.get('http://localhost:5000/api/users/grablists')
         .then(response => (setLists(response.data.lists)))
-    }
-  },[currentUser, addModal])
+  },[addModal])
   
 
 
@@ -86,7 +82,7 @@ export default function AddList() {
   //Adds a new List to the Book schema
   async function handleAddList(e){
     e.preventDefault()
-    let info = {"books":listBooks, "email":currentUser, "title":listName}
+    let info = {"books":listBooks, "title":listName}
     let test = {"books":listBooks, "title":listName}
     setLists([...lists, test])
     console.log(lists)

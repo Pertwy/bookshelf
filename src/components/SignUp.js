@@ -2,16 +2,25 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import MyTextField from './MyTextField';
 import * as Yup from 'yup';
+import axios from "axios"
+import {useHistory} from 'react-router-dom';
 
 export default function Signup(){
+  
+    const history = useHistory();
+    function navigateHome(){    
+      history.push("/")
+    }
+
+
   const validate = Yup.object({
     userName: Yup.string()
       .max(15, 'Must be 15 characters or less')
       .required('Required'),
-    firstName: Yup.string()
+    givenName: Yup.string()
       .max(20, 'Must be 20 characters or less')
       .required('Required'),
-    lastName: Yup.string()
+    surname: Yup.string()
       .max(20, 'Must be 20 characters or less')
       .required('Required'),
     email: Yup.string()
@@ -33,8 +42,8 @@ export default function Signup(){
     <Formik
       initialValues={{
         userName: '',
-        firstName: '',
-        lastName: '',
+        givenName: '',
+        surname: '',
         email: '',
         password: '',
         confirmPassword: '',
@@ -44,7 +53,13 @@ export default function Signup(){
       validationSchema={validate}
 
       onSubmit={values => {
-        console.log(values)
+        // console.log(values)
+        try{
+          axios.post('http://localhost:5000/api/users/add', values )
+            .then(()=>navigateHome());
+          }catch(e){
+            console.error(e)
+          }
       }}
     >
 
@@ -54,8 +69,8 @@ export default function Signup(){
           <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
           <Form>
             <MyTextField label="User Name" name="userName" type="text" />
-            <MyTextField label="First Name" name="firstName" type="text" />
-            <MyTextField label="Last Name" name="lastName" type="text" />
+            <MyTextField label="Given Name" name="givenName" type="text" />
+            <MyTextField label="Surname" name="surname" type="text" />
             <MyTextField label="Email" name="email" type="email" />
             <MyTextField label="Password" name="password" type="password" />
             <MyTextField label="Confirm Password" name="confirmPassword" type="password" />

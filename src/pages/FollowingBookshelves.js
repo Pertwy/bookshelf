@@ -7,31 +7,28 @@ import UserDropDown from "../components/UserDropDown"
 
 
 export default function FollowingBookshelves(){
-  const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
   const [listSize, setListSize] = useState(6)
+  const [isLoggedIn, setIsLoggedIn] =useState("")
 
+    
   useEffect(() => {
+    axios.get('http://localhost:5000/api/users/currentUser')
+          .then(response => (setIsLoggedIn(response.data)))
 
-    if(currentUser){
-      let email = {"email":currentUser}
-      axios.post('http://localhost:5000/api/users/',email)
-        .then(response => (setUserData(response.data)))
+
+    axios.get('http://localhost:5000/api/users/')
+      .then(response => (setUserData(response.data)))
+      //.then(response => (console.log(response.data)))
       
-      // console.log(userData.following)
-    }
-    else{
-      axios.get('http://localhost:5000/api/books/')
-        .then(response => (setUserData(response.data)))
-    }
-
-  },[currentUser])
+  },[])
 
 
 
 
   function FriendBookshelfList() {
     return (userData.following.map(following => {
+      console.log(following)
 
         if(following.bookshelf[0]){
             
@@ -71,17 +68,19 @@ export default function FollowingBookshelves(){
 
   return (
     <div className="pb-4">
+      {!isLoggedIn &&(<>
+        <Link to={"/signup"} className="">
+          <h4 className="all-text">Please log in or create an account to view friends bookshelves</h4>
+        </Link>
+      </>)}
 
-        <UserDropDown setEmail={setCurrentUser}/>
-
+      {isLoggedIn &&(<>
          <div className="book-row-section">
           <div className="row book-row">
             <FriendBookshelfList/>
           </div>
         </div>
-
-
-        
+      </>)}
     </div>
   )
 }

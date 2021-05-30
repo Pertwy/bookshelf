@@ -21,11 +21,17 @@ router.post('/', async (req, res) => {
         .cookie("token", token, {
         httpOnly: true
         })
-        .send();
+        .send("logged in");
     } catch (err) {
         console.error(err);
         res.status(500).send();
     }
 });
+
+
+router.get('/logout_get', async (req, res) => {
+    res.cookie("token", "", {maxAge:1})
+    res.redirect("/")
+})
 
 module.exports = router;

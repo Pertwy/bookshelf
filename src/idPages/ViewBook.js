@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import HalfRating from "../components/Stars"
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import { InsertDriveFileOutlined } from '@material-ui/icons';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,16 +14,23 @@ export default function ViewBook(props){
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [review, setReview] = useState("")
   const [rating, setRating] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+   
+      
 
   useEffect(() => {
+
+    axios.get('http://localhost:5000/api/users/currentUser')
+          .then(response => (setIsLoggedIn(response.data)))
+
     axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
       .then(response => (setBook(response.data)))
      
-    let email = {"email":currentUser}
-    axios.post('http://localhost:5000/api/users/',email)
+
+    axios.get('http://localhost:5000/api/users/')
       .then(response => (setUserData(response.data)))
 
-     console.log(book) 
   },[])
 
 
@@ -32,7 +38,7 @@ export default function ViewBook(props){
     return (book.reviews.map(review => {
       return(
       <div className="pb-2">
-        <h6 className="all-text review-name">{review.author.name}</h6>
+        <h6 className="all-text review-name">{review.authorName}</h6>
         <p className="all-text review-text">{review.review}</p>
       </div>
     )
@@ -41,8 +47,7 @@ export default function ViewBook(props){
 
   function handleAddReview(e){
     e.preventDefault();
-    let info = {"email":currentUser, "_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
-    //console.log(info)  
+    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
     
     axios.post('http://localhost:5000/api/users/addreview',info)
       .then(res => { showNotification(res.data, res.data)})
@@ -142,7 +147,11 @@ export default function ViewBook(props){
               </div>
 
               <div className="pt-1 col-sm-6">
-                <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+
+                {isLoggedIn &&(<>
+                  <p className="all-text" >On {numberOfFollowingBookshelves} friend's bookshelves</p>
+                </>)}
+
                 <p className="all-text ">On {book.bookshelf.length} bookshelves</p>
               </div>
             </div>
@@ -153,7 +162,7 @@ export default function ViewBook(props){
           </div>
         </div>
 
-
+        {isLoggedIn &&(<>
         <span className="row pl-2">
           <div>
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="ViewBook"/>
@@ -163,7 +172,7 @@ export default function ViewBook(props){
             <AdditionButton type="readlist" currentUser={currentUser} book={book} page="ViewBook"/>
             <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="ViewBook"/>
           </div>
-        </span>
+        </span></>)}
 
         {/* {book.pageCount || book.language || book.publishedDate || book.publisher || book.maturityRating || book.industryIdentifiers  &&(
         <> */}
@@ -198,11 +207,13 @@ export default function ViewBook(props){
                 {book.reviews.length > 0 &&(
                 <Reviews/>)}
 
-                {book.reviews.length === 0 &&(
+                {book.reviews.length === 0 && isLoggedIn &&(
                 <h5 className="all-text">Be the first to review!</h5>
                 )}
               </div>
 
+
+              {isLoggedIn &&(<>
               <div className="col-sm-6">
                 <form onSubmit={handleAddReview}>
                   {/* <label>Add a review</label> */}
@@ -230,6 +241,7 @@ export default function ViewBook(props){
                     }}>Submit</Button>
                 </form>
               </div>
+              </>)}
             </div>
 
           </div>

@@ -2,8 +2,17 @@ import React from 'react';
 import { Formik, Form } from 'formik';
 import MyTextField from './MyTextField';
 import * as Yup from 'yup';
+import axios from "axios";
+import {useHistory} from 'react-router-dom';
 
 export default function SignIn(){
+
+  const history = useHistory();
+  function navigateHome(){    
+    history.push("/")
+  }
+
+
   const validate = Yup.object({
     email: Yup.string()
       .email('Email is invalid')
@@ -11,21 +20,25 @@ export default function SignIn(){
     password: Yup.string()
       .min(6, 'Password must be at least 6 charaters')
       .required('Password is required'),
-  })
-
+  })  
 
 
   return (
     <Formik
       initialValues={{
-        lastName: '',
         email: '',
+        password: '',
       }}
 
       validationSchema={validate}
 
       onSubmit={values => {
-        console.log(values)
+        try{
+          axios.post('http://localhost:5000/api/auth/', values, {withCredentials: true, credentials: 'include'})
+            .then(()=>navigateHome());
+          }catch(e){
+            console.error(e)
+          }
       }}
     >
 
