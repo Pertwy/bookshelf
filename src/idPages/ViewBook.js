@@ -17,7 +17,22 @@ export default function ViewBook(props){
   const [rating, setRating] = useState(0);
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
-   
+
+
+  function handleAddReview(e){
+    e.preventDefault();
+    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
+
+    axios.post('http://localhost:5000/api/users/addreview',info)
+      .then(res => { showNotification(res.data, res.data)})
+
+    let testBook = book
+    testBook.reviews.push({"review":review, "authorName":isLoggedIn.userName , "author":{"_id":isLoggedIn._id}})
+    setBook(testBook)
+    setReview("")
+    setRating(0)
+    
+  }
       
 
   useEffect(() => {
@@ -32,7 +47,7 @@ export default function ViewBook(props){
     axios.get('http://localhost:5000/api/users/')
       .then(response => (setUserData(response.data)))
 
-  },[])
+  },[book])
 
 
   function Reviews(){
@@ -49,13 +64,10 @@ export default function ViewBook(props){
     }))
   }
 
-  function handleAddReview(e){
-    e.preventDefault();
-    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
-    
-    axios.post('http://localhost:5000/api/users/addreview',info)
-      .then(res => { showNotification(res.data, res.data)})
-  }
+  
+
+
+
 
 
     function InfoBox(props){
