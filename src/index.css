@@ -464,3 +464,14 @@ button{
   background-color:rgb(56, 56, 56);
   cursor: pointer;
 }
+
+
+.logout-button{
+  font-size: 1em;
+  padding-top: 0.5em;
+  padding-left: 0.4em;
+}
+.logout-button:hover{
+  cursor: pointer;
+
+}
