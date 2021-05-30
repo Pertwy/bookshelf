@@ -70,6 +70,21 @@ router.get('/', auth, async (req, res) => {
 });
 
 
+//Return user data with fields populated
+router.get('/popular', async (req, res) => {
+    //let user = await User.findOne({email: req.body.email})
+    let user = await User.findById("60b25ffd76132833d8eaa9e7")
+        //.select('-__v -password -email')
+        .select('favorites books')
+        .populate("favorites books")
+
+    res.send(user);
+});
+
+
+
+
+
 //Find all test users - For drop down
 router.get("/all", async (req, res) => {
     User.find()
