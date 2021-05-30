@@ -28,6 +28,8 @@ export default function Nav2() {
     history.push("/searchresults/"+search)
   }
 
+
+  
   const useStyles = makeStyles((theme) => ({
     input:{
       '& > *': {
@@ -60,15 +62,10 @@ export default function Nav2() {
                 {!isLoggedIn && (
                   <>
                     <li className="navbar-item">
-                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">TestSign</h6></Link>
-                    </li>
-
-                    <li className="navbar-item">
-                      <Link to="/test" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
+                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
                     </li>
                   </>
                   )}
-                  
                   
 
                   <li className="navbar-item">

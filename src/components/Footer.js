@@ -25,13 +25,10 @@ export default function Footer() {
                                 <Link to="/" className="footer-link">Home</Link>
                             </li>
 
-                            <li className="navbar-item">
-                                <Link to="/test" className="footer-link" >Sign In/Up</Link>
+                            <li>
+                                <Link to="/members" className="footer-link">Members</Link>
                             </li>
-        
-                            <li className="navbar-item ">
-                                <Link to="/profile" className="footer-link">Profile</Link>
-                            </li>
+
                          </ul>
                      </div>
 

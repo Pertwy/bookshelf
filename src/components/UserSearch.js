@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 export default function UserSearch() {
   const [users, setUsers] = useState([])
   const [usersSearched, setUsersSearched] = useState([])
-  const [user, setUser] = useState("")
-  const [search, setSearch] = useState("")
 
   
   useEffect(() => {
@@ -22,7 +20,8 @@ export default function UserSearch() {
 
   function UserList(){
     return(
-      usersSearched.map((user) =>{
+      users.map((user) =>{
+      //usersSearched.map((user) =>{
       return(
         <>     
           
@@ -48,7 +47,8 @@ export default function UserSearch() {
       return value.userName.toLowerCase().includes(input.toLowerCase())
     })
 
-    setUsersSearched(test)
+    setUsers(test)
+    //setUsersSearched(test)
   }
 
 

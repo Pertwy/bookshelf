@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import React from 'react';
 import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
-
+import showNotification from '../functions/showNotification';
 
 //Feed me your lists aand i'll show them for you
 export default function DisplayBooks(props) {
@@ -14,22 +14,23 @@ export default function DisplayBooks(props) {
 
     if(listtype === "favorites"){
       axios.post('http://localhost:5000/api/users/removefavorite', info)
-          .then(response => (console.log(response.data)))
+          //.then(response => (console.log(response.data)))
+          .then(res => { showNotification(res.data, res.data)});
     }
 
     if(listtype === "read"){
       axios.post('http://localhost:5000/api/users/removebook', info)
-          .then(response => (console.log(response.data)))
+          .then(res => { showNotification(res.data, res.data)});
     }
 
     if(listtype === "readingList"){
       axios.post('http://localhost:5000/api/users/removereadlist', info)
-          .then(response => (console.log(response.data)))
+          .then(res => { showNotification(res.data, res.data)});
     }
 
     if(listtype === "bookshelf"){
       axios.post('http://localhost:5000/api/users/removebookshelf', info)
-          .then(response => (console.log(response.data)))
+          .then(res => { showNotification(res.data, res.data)});
     }
   }
 

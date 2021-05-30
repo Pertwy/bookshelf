@@ -28,6 +28,7 @@ router.get('/currentUser', isLoggedin, async (req, res) => {
 
 //Add user
 router.post('/add', async (req, res) => {
+    // console.log(req.body)
  
     let user = await User.findOne({email: req.body.email})
     if (user) return res.status(400).send("User already registered")
@@ -41,7 +42,7 @@ router.post('/add', async (req, res) => {
     
     await newUser.save()
         .then(() => res.cookie("token", token, {httpOnly: true}).send(_.pick(newUser, ["_id", "email", "userName"])))
-        .catch(err => res.status(400).json("Error " + err))
+        // .catch(err => res.status(400).json("Error " + err))
   });
 
 
@@ -282,7 +283,7 @@ router.post('/removefavorite', auth, async (req, res) => {
     user.favorites.splice(index, 1)
 
     await user.save()
-        .then(() => res.json('fave deleted!'))
+        .then(() => res.json('Deleted from Favorites'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -294,7 +295,7 @@ router.post('/removebook', auth, async (req, res) => {
     user.books.splice(index, 1)
 
     await user.save()
-        .then(() => res.json('fave deleted!'))
+        .then(() => res.json('Deleted from Books Read!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -306,7 +307,7 @@ router.post('/removereadlist', auth, async (req, res) => {
     user.readList.splice(index, 1)
 
     await user.save()
-        .then(() => res.json('fave deleted!'))
+        .then(() => res.json('Deleted from Read List'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 
@@ -318,7 +319,7 @@ router.post('/removebookshelf', auth, async (req, res) => {
    user.bookshelf.splice(index, 1)
 
    await user.save()
-       .then(() => res.json('Bookshelf deleted!'))
+       .then(() => res.json('Deleted from bookshelf'))
        .catch(err => res.status(400).json('Error: ' + err));
 });
 
