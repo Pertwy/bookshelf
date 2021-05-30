@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -38,7 +39,10 @@ export default function ViewBook(props){
     return (book.reviews.map(review => {
       return(
       <div className="pb-2">
-        <h6 className="all-text review-name">{review.authorName}</h6>
+        <Link to={"/user/"+review.author._id}>
+          <h6 className="all-text review-name">{review.authorName}</h6>
+        </Link>
+        
         <p className="all-text review-text">{review.review}</p>
       </div>
     )

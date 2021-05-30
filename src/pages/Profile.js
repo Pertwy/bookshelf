@@ -21,6 +21,7 @@ export default function Profile(){
 
    
       axios.get('http://localhost:5000/api/users/')
+        //.then(response => (console.log(response.data)))
         .then(response => (setUserData(response.data)))
 
       // axios.get('http://localhost:5000/api/users/')

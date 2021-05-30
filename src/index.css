@@ -453,3 +453,14 @@ button{
   align-items: center;
   margin:auto;
 }
+
+.search-members-button{
+  background-color:black;
+  width:25%;
+  margin: auto;
+  border-radius: 2px;
+}
+.search-members-button:hover{
+  background-color:rgb(56, 56, 56);
+  cursor: pointer;
+}

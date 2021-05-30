@@ -162,7 +162,7 @@ export default function HomePage(){
 
 
 
-        {isLoggedIn && (userData.following.length === 0) && (
+        {isLoggedIn && (userData.following.length > 0) && (
           <>
 
         <div className="book-row-section">
@@ -189,13 +189,20 @@ export default function HomePage(){
 
 
 
+
+
         {isLoggedIn && (userData.following.length > 0) && (
         <>
           <div className=" mt-5 home-page-heading-div">
             <h2 className=" all-text">Add friends to see what they've been reading</h2>
-            <div onClick={()=>memberNavigate()}><h5 className="all-text">Search members</h5></div>
+            <div onClick={()=>memberNavigate()} className="search-members-button">
+              <h5 className="all-text py-2">Search members</h5>
+            </div>
           </div>
         </>)}
+
+
+
 
 
         <div className="book-row-section">
