@@ -36,7 +36,7 @@ export default function HomePage(){
 
   function FriendReadList() {
 
-    return (userData.following.map(following => {
+    return (userData.following.slice(0, 6).map(following => {
       if(following.books[0]){
       return (
         <section className="the-book d-flex flex-column" key={following.books[following.books.length - 1]._id} >
@@ -61,7 +61,7 @@ export default function HomePage(){
   )}
 
   function FriendBookshelfList() {
-    return (userData.following.map(following => {
+    return (userData.following.slice(0, 6).map(following => {
       if(following.bookshelf[0]){
       return (
         <section className="the-book d-flex flex-column" key={following.bookshelf[following.bookshelf.length - 1]._id} >

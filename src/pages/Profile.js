@@ -8,11 +8,10 @@ import { Link } from 'react-router-dom';
 
 
 export default function Profile(){
-  const [books, setBooks] = useState([])  
-
-  const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
+  const [userData, setUserData] = useState({photo:"", givenName:"", surname:"", reviews:[], books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [owner, setOwner] = useState(true)
   const [isLoggedIn, setIsLoggedIn] =useState("")
+  const [update, setUpdate] = useState(0)
 
 
   useEffect(() => {
@@ -24,17 +23,23 @@ export default function Profile(){
       axios.get('http://localhost:5000/api/users/')
         .then(response => (setUserData(response.data)))
 
-  },[])
+      // axios.get('http://localhost:5000/api/users/')
+      //   .then(response => (console.log(response.data)))
 
+  },[update])
+
+
+  function updateProfile(){
+    setUpdate(update + 1)
+    console.log(update)
+  }
 
 
   return (
     
     <div className=" shadow-lg px-4 pb-4">
 
-      
-
-
+    
       {isLoggedIn &&(<>
         <div className="pb-2 container-fluid row">
           
@@ -75,7 +80,7 @@ export default function Profile(){
         </div>
 
         <div>
-          <TabPanel setUserData={setUserData} userData={userData} owner={owner}/>
+          <TabPanel setUserData={setUserData} userData={userData} owner={owner} updateProfile={updateProfile}/>
         </div>
         </>)}
 

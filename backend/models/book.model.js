@@ -16,12 +16,19 @@ const bookSchema = new Schema({
     pageCount: {type:Number},
     publishedDate: {type: String},
     publisher: {type: String},
+
     numberOfTimesRead:{type:Number, default:0},
     numberOfTimesFavorited:{type:Number, default:0},
     bookshelf:[ {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User" //This is the Schema name
     }],
+    readList:[ {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User" //This is the Schema name
+    }],
+
+
     reviews:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review" //This is the Schema name

@@ -90,8 +90,6 @@ export default function SearchResults(props) {
               <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
             </div>
 
-            <UserDropDown setEmail={setCurrentUser}/>
-
           </div>
 
 

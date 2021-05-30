@@ -11,27 +11,36 @@ export default function UserSearch() {
   useEffect(() => {
     axios.get('http://localhost:5000/api/users/all')
       .then(response => 
-          {setUsers(response.data)})
+          {setAllData(response.data)})
       .catch((error) => {
         console.log(error);
       })
   },[])
 
 
+  function setAllData(response){
+    
+    setUsersSearched(response)
+    setUsers(response)
+  }
+
+
   function UserList(){
     return(
-      users.map((user) =>{
+      usersSearched.slice(0, 30).map((user) =>{
       //usersSearched.map((user) =>{
       return(
         <>     
           
           <tr>
-            <td className="all-text">X</td>
+            <td className="pl-5 all-text">X</td>
             <Link to={"/user/"+user._id} className="">
-              <td className="all-text">{user.userName}</td>
+              <td className="pl-5 all-text">{user.userName}</td>
             </Link>
-            <td className="all-text">{user.favorites.length}</td>
-            <td className="all-text">{user.books.length}</td>
+            <td className="pl-5 all-text">{user.givenName} {user.surname}</td>
+            <td className="pl-5 all-text">{user.favorites.length}</td>
+            <td className="pl-5 all-text">{user.books.length}</td>
+            <td className="pl-5 all-text">{user.reviews.length}</td>
 
           </tr>
         </>
@@ -47,8 +56,8 @@ export default function UserSearch() {
       return value.userName.toLowerCase().includes(input.toLowerCase())
     })
 
-    setUsers(test)
-    //setUsersSearched(test)
+    //setUsers(test)
+    setUsersSearched(test)
   }
 
 
@@ -59,15 +68,19 @@ export default function UserSearch() {
       <>
         <h5 className="all-text">Search Members</h5>
         <input onChange={({ target }) => handleFilter(target.value)} label="Search" placeholder="Search Members" />
-        <table >
-            <tr>
-              <th className="pl-3 all-text">Photo</th>
-              <th className="pl-3 all-text">User Name</th>
-              <th className="pl-3 all-text">Bookshelf</th>
-              <th className="pl-3 all-text">Read</th>
-            </tr>
-            <UserList/>
-      </table>
+        <div>
+          <table className="member-table">
+              <tr>
+                <th className="pl-5 all-text">Photo</th>
+                <th className="pl-5 all-text">User Name</th>
+                <th className="pl-5 all-text">Name</th>
+                <th className="pl-5 all-text">Bookshelf</th>
+                <th className="pl-5 all-text">Read</th>
+                <th className="pl-5 all-text">Reviews</th>
+              </tr>
+              <UserList/>
+          </table>
+        </div>
       </>
 
       

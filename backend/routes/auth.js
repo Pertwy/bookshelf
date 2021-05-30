@@ -28,4 +28,10 @@ router.post('/', async (req, res) => {
     }
 });
 
+
+router.get('/logout_get', async (req, res) => {
+    res.cookie("token", "", {maxAge:1})
+    res.redirect("/")
+})
+
 module.exports = router;

@@ -12,6 +12,7 @@ const reviewSchema = new Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: "User" //This is the Schema name
     },  
+    authorName:String,
     review:String,
     rating:Number,
     likes:{

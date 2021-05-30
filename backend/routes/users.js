@@ -61,7 +61,11 @@ router.get('/', auth, async (req, res) => {
         .populate({
             path: 'following',
             populate: { path: 'bookshelf'}
-            });
+            })
+        .populate({
+            path: 'reviews',
+            populate: { path: 'book'}
+            })
     res.send(user);
 });
 
@@ -275,9 +279,7 @@ router.post('/unfollow', auth,  async (req, res) => {
 
 //REmove favorite book from user
 router.post('/removefavorite', auth, async (req, res) => {
-    console.log("hello")
-     let user = await User.findById(req.user._id)
-    
+    let user = await User.findById(req.user._id)
 
     index = user.favorites.indexOf(req.body.book)
     user.favorites.splice(index, 1)
@@ -348,6 +350,7 @@ router.post('/addreview', auth, async (req, res) => {
     //New Review
     const book = req.body._id;
     const author = user._id;
+    const authorName = user.userName
     const review = req.body.review;
     const rating = req.body.rating;
 
@@ -355,7 +358,8 @@ router.post('/addreview', auth, async (req, res) => {
         book,
         author,
         review,
-        rating
+        rating,
+        authorName
     });
     await newReview.save()
 

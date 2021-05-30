@@ -11,6 +11,7 @@ import DisplayBooks from "./DisplayBooks"
 import DisplayAllLists from "./DisplayAllLists"
 import Following from "../components/Following"
 import { AutoComplete } from 'material-ui';
+import Reviews from './Reviews';
 
 
 const AntTabs = withStyles({
@@ -146,6 +147,7 @@ export default function CustomizedTabs(props) {
           <AntTab label="Read" {...a11yProps(2)}/>
           <AntTab label="Favorites" {...a11yProps(3)} />
           <AntTab label="Follow" {...a11yProps(4)}/>
+          <AntTab label="Reviews" {...a11yProps(5)}/>
           {/* <AntTab label="Lists" {...a11yProps(6)}/>
           <AntTab label="Reviews" {...a11yProps(7)}/>
           <AntTab label="Dairy" {...a11yProps(8)}/> */}
@@ -165,12 +167,9 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={0} dir={theme.direction}>
           <div className="row book-row">
-            <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="read" userData={props.userData}/>
+            <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="bookshelf" userData={props.userData} />
           </div>
         </TabPanel>
-
-        
-
 
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div className="row book-row">
@@ -195,6 +194,10 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={4} dir={theme.direction}>
           <Following userData={props.userData} owner={props.owner}/>
         </TabPanel>
+
+        <TabPanel value={value} index={5} dir={theme.direction}>
+          <Reviews userData={props.userData} owner={props.owner}/>
+        </TabPanel> 
 
 
         {/* <TabPanel value={value} index={6} dir={theme.direction}>

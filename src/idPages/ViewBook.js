@@ -38,7 +38,7 @@ export default function ViewBook(props){
     return (book.reviews.map(review => {
       return(
       <div className="pb-2">
-        <h6 className="all-text review-name">{review.author.name}</h6>
+        <h6 className="all-text review-name">{review.authorName}</h6>
         <p className="all-text review-text">{review.review}</p>
       </div>
     )
