@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
 
 
 export default function FollowingBookshelves(){
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
-  const [listSize, setListSize] = useState(6)
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
     

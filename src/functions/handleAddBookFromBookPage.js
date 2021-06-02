@@ -5,8 +5,6 @@ import showNotification from "./showNotification"
 
 export async function handleAddBookFromBookPage(book, type, user){
 
-
-
     const newBook = { 
       title: book.title, 
       author: book.author, 

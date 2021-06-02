@@ -1,7 +1,6 @@
 import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-alice-carousel/lib/alice-carousel.css"
-import { ControlsStrategy } from 'react-alice-carousel/lib/types';
 import { Link } from 'react-router-dom';
 
 

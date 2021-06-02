@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-// import '../components/HomePage.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
-
 
 export default function ViewBookClub(props){
   const [bookclub, setBookclub] = useState({})  
@@ -12,8 +9,6 @@ export default function ViewBookClub(props){
     axios.get("http://localhost:5000/api/bookclub/"+props.location.pathname.replace("/api/bookclub/", ""))
       .then(response => (setBookclub(response.data)))
   },[])
-
-
 
 
   return (

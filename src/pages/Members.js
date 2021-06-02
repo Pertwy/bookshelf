@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import 'react-notifications-component/dist/theme.css'
 import UserSearch from "../components/UserSearch";
 

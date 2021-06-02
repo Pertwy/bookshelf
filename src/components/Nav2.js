@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import "./Navbar.css"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import { SingleBedOutlined } from "@material-ui/icons";
+
 
 export default function Nav2() {
 

@@ -1,6 +1,6 @@
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 
@@ -9,7 +9,6 @@ export default function AddBook() {
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
-  const [users, setUsers] = useState([])
   const [currentUser, setCurrentUser] = useState("")
   
 
@@ -35,21 +34,6 @@ export default function AddBook() {
     let info = {"book":newBook, "email":currentUser}
     try{
     axios.put('http://localhost:5000/api/users/addBookToUser', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
-  }
-
-
-  async function handleAddAuthBook(book){
-
-    const authorArray = book.volumeInfo.authors
-    const newBook = { title: book.volumeInfo.title, author: authorArray.join(), image: book.volumeInfo.imageLinks.thumbnail};
-
-    let info = {"book":newBook}
-    try{
-    axios.post('http://localhost:5000/books/addd', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)
