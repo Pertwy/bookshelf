@@ -1,18 +1,13 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
-import UserDropDown from "../components/UserDropDown"
 import "react-alice-carousel/lib/alice-carousel.css"
 import Avatar from '@material-ui/core/Avatar';
 import AvatarGroup from '@material-ui/lab/AvatarGroup';
 import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
 
 //Feed me your lists aand i'll show them for you
 export default function Following(props) {
-    const [currentUser, setCurrentUser] = useState("john@gmail.com")
-    const [follow, setFollow] = useState("")
 
   
     const useStyles = makeStyles((theme) => ({

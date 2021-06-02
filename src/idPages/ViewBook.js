@@ -7,6 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
 import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 export default function ViewBook(props){
   const [book, setBook] = useState({bookshelf:[], reviews:[]})  
@@ -16,7 +17,22 @@ export default function ViewBook(props){
   const [rating, setRating] = useState(0);
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
-   
+
+
+  function handleAddReview(e){
+    e.preventDefault();
+    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
+
+    axios.post('http://localhost:5000/api/users/addreview',info)
+      .then(res => { showNotification(res.data, res.data)})
+
+    let testBook = book
+    testBook.reviews.push({"review":review, "authorName":isLoggedIn.userName , "author":{"_id":isLoggedIn._id}})
+    setBook(testBook)
+    setReview("")
+    setRating(0)
+    
+  }
       
 
   useEffect(() => {
@@ -31,27 +47,27 @@ export default function ViewBook(props){
     axios.get('http://localhost:5000/api/users/')
       .then(response => (setUserData(response.data)))
 
-  },[])
+  },[book])
 
 
   function Reviews(){
     return (book.reviews.map(review => {
       return(
       <div className="pb-2">
-        <h6 className="all-text review-name">{review.authorName}</h6>
+        <Link to={"/user/"+review.author._id}>
+          <h6 className="all-text review-name">{review.authorName}</h6>
+        </Link>
+        
         <p className="all-text review-text">{review.review}</p>
       </div>
     )
     }))
   }
 
-  function handleAddReview(e){
-    e.preventDefault();
-    let info = {"_id":props.location.pathname.replace("/book/", ""), "review":review, "rating":rating}
-    
-    axios.post('http://localhost:5000/api/users/addreview',info)
-      .then(res => { showNotification(res.data, res.data)})
-  }
+  
+
+
+
 
 
     function InfoBox(props){
@@ -157,7 +173,9 @@ export default function ViewBook(props){
             </div>
 
             {book.description  &&(
-            <p className="mt-3 all-text book-description" >{book.description}</p>)}
+              <div className="book-description-box">
+                <p className="mt-3 all-text book-description summary" >{book.description}</p>
+              </div>)}
             
           </div>
         </div>

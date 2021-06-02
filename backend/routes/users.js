@@ -101,6 +101,10 @@ router.get("/:_id", async (req, res) => {
         .select('-__v -password -email')
         .populate("books favorites followers readList bookshelf lists")
         .populate("following", "-__v -password -email")
+        .populate({
+            path: 'reviews',
+            populate: { path: 'book'}
+            })
         
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))

@@ -2,22 +2,15 @@ import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
-import UserDropDown from "../components/UserDropDown"
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
-import {Form, Button } from 'react-bootstrap';
-import TextField from '@material-ui/core/TextField';
-
-import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
-import { store } from 'react-notifications-component';
-import UserSearch from "../components/UserSearch";
+
 
 export default function SearchResults(props) {
 
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   const [currentUser, setCurrentUser] = useState("")
-  const [search, setSearch] = useState("")
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
    
@@ -65,6 +58,7 @@ export default function SearchResults(props) {
         
         {isLoggedIn &&(<>
         <div className="col-sm-4">
+          <button onClick={()=> console.log(book)}>???</button>
             <AdditionButton type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="read" currentUser={currentUser} book={book} page="SearchResults"/>
             <AdditionButton type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>

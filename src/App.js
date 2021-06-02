@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios"
 
-import Navbar from "./components/Navbar"
+
 import HomePage from "./pages/HomePage"
 import Adduser from "./pages/Adduser"
 import Profile from "./pages/Profile"
@@ -12,7 +12,6 @@ import ViewBook from "./idPages/ViewBook"
 import User from "./idPages/User"
 import SearchResults from "./pages/SearchResults"
 import AllLists from './idPages/AllLists';
-// import FireAuth from "./components/fireAuth"
 import Nav2 from "./components/Nav2"
 import Footer from './components/Footer';
 import FollowingBookshelves from './pages/FollowingBookshelves';
@@ -24,9 +23,6 @@ axios.defaults.withCredentials = true
 function App() {
   return (
     <Router>
-      {/* <div >
-        <Navbar />
-      </div> */}
 
       <div className={"nav-background"}>
         <Nav2 />

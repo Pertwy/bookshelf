@@ -9,12 +9,10 @@ import "./addUser.css"
 
 export default function Adduser(){
   const [email, setEmail] = useState("");
-  const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [userName, setUserName] = useState("");
   const [givenName, setGivenName] = useState("");
   const [surname, setSurname] = useState("")
-  const [pronoun, setPronoun] = useState("")
   const [password, setPassword] = useState("")
   const [secondPassword, setSecondPassword] = useState("")
   

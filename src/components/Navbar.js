@@ -1,5 +1,5 @@
 import React, {useState, useCallback} from 'react';
-import {withRouter, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css"

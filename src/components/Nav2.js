@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import "./Navbar.css"
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios';
-import { SingleBedOutlined } from "@material-ui/icons";
+
 
 export default function Nav2() {
 
@@ -88,10 +88,8 @@ export default function Nav2() {
                     </li>
 
                     <li  className="navbar-item ">
-                      <button onClick={()=>logout()}>Log Out</button>
-                      {/* <div >
-                        <h4 className="all-text nav-text nav-link" >Sign Out</h4>
-                      </div> */}
+                      {/* <button onClick={()=>logout()}>Log Out</button> */}
+                      <h4 onClick={()=>logout()} className="all-text  logout-button" >Sign Out</h4>
                     </li>
                   </>
                   )}

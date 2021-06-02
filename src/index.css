@@ -117,15 +117,26 @@ section:hover{
   border-radius: 2px;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  border-width: 2px;
+  border-width: 3px;
   border-style: solid;
   border-color: rgb(160, 160, 161);
   border-bottom:rgb(160, 160, 161);
 }
 
-.card-img-top-bottom{
-  border-bottom: 2px solid rgb(160, 160, 161) ;
+.card-img-top:hover{
+  border-color: rgb(73, 212, 103);
+  border-bottom:rgb(160, 160, 161);
+  border-width: 3px;
 }
+
+.card-img-top-bottom{
+  border-bottom: 3px solid rgb(160, 160, 161) ;
+}
+
+.card-img-top-bottom:hover{
+  border-bottom:3px solid rgb(73, 212, 103) ;
+}
+
 
 .under-card{
   background-color:rgb(138, 147, 153);
@@ -186,7 +197,7 @@ section:hover{
 
 
 .book-row-section{
-  padding-top: 40px;
+  padding-top: 28px;
   margin-left: 3%;
   margin-right: 3%;
 }
@@ -293,8 +304,11 @@ button{
 
 .search-image{
   object-fit: cover;
-  
   max-height: 140px;
+}
+.review-image{
+  object-fit: cover;
+  max-height: 65px;
 }
 
 .searched-row{
@@ -432,6 +446,14 @@ button{
 
 .book-description{
   font-size: 0.8em;
+  display: -webkit-box;
+  -webkit-line-clamp: 7;
+  -webkit-box-orient: vertical;
+}
+
+.book-description-box{
+  overflow: hidden;
+  max-height: 250px;
 }
 
 .book-info-background{
@@ -453,3 +475,27 @@ button{
   align-items: center;
   margin:auto;
 }
+
+.search-members-button{
+  background-color:black;
+  width:25%;
+  margin: auto;
+  border-radius: 2px;
+}
+.search-members-button:hover{
+  background-color:rgb(56, 56, 56);
+  cursor: pointer;
+}
+
+
+.logout-button{
+  font-size: 1em;
+  padding-top: 0.5em;
+  padding-left: 0.4em;
+}
+.logout-button:hover{
+  cursor: pointer;
+}
+
+
+
