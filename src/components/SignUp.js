@@ -10,6 +10,7 @@ export default function Signup(){
     const history = useHistory();
     function navigateHome(){    
       history.push("/")
+      window.location.reload();
     }
 
 
