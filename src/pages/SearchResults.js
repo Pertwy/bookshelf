@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import 'react-notifications-component/dist/theme.css'
-
+import { Link, useLocation } from 'react-router-dom';
 
 export default function SearchResults(props) {
 
@@ -28,8 +28,6 @@ export default function SearchResults(props) {
     },[])
 
 
-
-
  
   const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
@@ -42,7 +40,14 @@ export default function SearchResults(props) {
         <div className="col-sm-3 row">
           <div>
             <div className="image-div">
+            <Link   to={
+                    {     
+                      pathname: '/book/'+ book.id,
+                      state: book.volumeInfo
+                      }
+                }>               
               <img className="mr-2 search-image" src={url || defaultImage} alt={book.volumeInfo.title}/>
+              </Link>
             </div>
           </div>
         </div>

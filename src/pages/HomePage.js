@@ -21,6 +21,10 @@ export default function HomePage(){
     }
 
 
+
+
+
+
   useEffect(() => {
 
     axios.get('http://localhost:5000/api/users/currentUser')
@@ -137,6 +141,7 @@ export default function HomePage(){
         <div className="book-row-section">
           <div className="book-row-div">
             <h2 className="book-row-title">POPULAR THIS WEEK</h2>
+            
           </div>
           <div className="mx-1 row book-row">
             <AdminLists input={adminData.favorites}/>

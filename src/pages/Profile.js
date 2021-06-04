@@ -4,7 +4,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-alice-carousel/lib/alice-carousel.css"
 import TabPanel from "../components/TabPanel"
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 
 export default function Profile(){
@@ -12,6 +12,8 @@ export default function Profile(){
   const [owner, setOwner] = useState(true)
   const [isLoggedIn, setIsLoggedIn] =useState("")
   const [update, setUpdate] = useState(0)
+
+  let location = useLocation();
 
 
   useEffect(() => {

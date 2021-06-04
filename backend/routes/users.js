@@ -136,6 +136,35 @@ router.put('/addListToUser', async (req, res) => {
 });
 
 
+//Add Check if book is in the DB///////////////////////////////////////////////////////////////////////////////////
+router.get('/checkBook/:_id', async (req, res) => {
+    let book = await Book.findById(req.params._id)
+    .populate({
+        path: 'reviews',
+        populate: { path: 'author' }
+    })
+    .catch(err => res.status(400).json("Error " + err))
+    
+    if(book) {
+        res.send(book);
+    }
+    else{
+        res.send(false)
+    }
+});
+//Add book to the Database  
+router.put('/addBookToDB', async (req, res) => {
+    //console.log(req.body)
+
+    let newBook = new Book(_.pick(req.body.book, ["_id", "title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+    await newBook.save()
+        .then(() => res.json('Book added to DB'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
+
+
+
+
 //Add book to favorites///////////////////////////////////////////////////////////////////////////////////
 router.put('/addFavorite', auth, async (req, res) => {
 

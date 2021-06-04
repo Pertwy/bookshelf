@@ -46,11 +46,13 @@ const userSchema = new mongoose.Schema({
 
   followers:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User" //This is the Schema name
+    ref: "User", //This is the Schema name
+    default: ["60b25ffd76132833d8eaa9e7"]
   }],
   following:[{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User" //This is the Schema name
+    ref: "User", //This is the Schema name
+    default: ["60b25ffd76132833d8eaa9e7"]
   }],
 
 

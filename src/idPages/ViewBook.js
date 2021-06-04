@@ -7,15 +7,18 @@ import TextField from '@material-ui/core/TextField';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import showNotification from "../functions/showNotification"
 import { makeStyles } from '@material-ui/core/styles';
-import { Link } from 'react-router-dom';
+import {Link, useLocation} from "react-router-dom";
 
 export default function ViewBook(props){
-  const [book, setBook] = useState({bookshelf:[], reviews:[]})  
+  const [book, setBook] = useState({ bookshelf:[], reviews:[]})  
   const [currentUser, setCurrentUser] = useState("john@gmail.com")
   const [userData, setUserData] = useState({photo:"", books:[],favorites:[],readList:[],lists:[], following:[], followers:[], bookshelf:[]})
   const [review, setReview] = useState("")
   const [rating, setRating] = useState(0);
   const [isLoggedIn, setIsLoggedIn] =useState("")
+
+
+  let location = useLocation()
 
 
 
@@ -37,17 +40,50 @@ export default function ViewBook(props){
 
   useEffect(() => {
 
+    axios.get('http://localhost:5000/api/users/checkBook/'+props.location.pathname.replace("/book/", ""))
+          .then(response => (handleSetInfo(response.data)))
+
     axios.get('http://localhost:5000/api/users/currentUser')
           .then(response => (setIsLoggedIn(response.data)))
-
-    axios.get("http://localhost:5000/api/books/"+props.location.pathname.replace("/book/", ""))
-      .then(response => (setBook(response.data)))
-     
 
     axios.get('http://localhost:5000/api/users/')
       .then(response => (setUserData(response.data)))
 
-  },[book])
+  },[])
+
+
+  function handleSetInfo(input){
+
+    if (input){
+      setBook(input)
+    }
+    else {
+      let authorArray = location.state.authors
+
+      let newBook = {
+      _id: props.location.pathname.replace("/book/", ""),
+      title: location.state.title, 
+      author: authorArray.join(),  
+      image: location.state.imageLinks.thumbnail,
+      description: location.state.description,
+      categories: location.state.categories, 
+      industryIdentifiers: location.state.industryIdentifiers,
+      infoLink: location.state.infoLink,
+      language: location.state.language,
+      maturityRating: location.state.maturityRating,
+      pageCount: location.state.pageCount,
+      publishedDate: location.state.publishedDate,
+      publisher: location.state.publisher,
+      bookshelf:[], 
+      reviews:[]}
+      setBook(newBook)
+
+      let info = {"book":newBook}
+
+      axios.put('http://localhost:5000/api/users/addBookToDB', info)
+    }
+  }
+
 
 
   function Reviews(){
@@ -153,6 +189,7 @@ export default function ViewBook(props){
         <div className="row">
           <div className = "col-xs-6 col-sm-6 col-md-3">
             <img className="book-image" src={book.image} alt={book.title}></img>
+            {/* <img className="book-image" src="https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/lrg/9781/8695/9781869539078.jpg" alt={book.title}></img> */}
           </div>
 
           <div className = "col-xs-6 col-sm-9 col-md-9">
