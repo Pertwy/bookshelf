@@ -36,23 +36,21 @@ export default function SearchResults(props) {
     return(
       <div className="row space-between mb-4 searched-row pb-2 shadow-lg">
 
-        {/* <div className="col-sm-10 col-md-8"></div> */}
-        <div className="col-sm-3 row">
-          <div>
-            <div className="image-div">
+ 
+        
+        <div className="search-results-image">
             <Link   to={
                     {     
                       pathname: '/book/'+ book.id,
                       state: book.volumeInfo
                       }
                 }>               
-              <img className="mr-2 search-image" src={url || defaultImage} alt={book.volumeInfo.title}/>
+              <img className="mr-2 search-image " src={url || defaultImage} alt={book.volumeInfo.title}/>
               </Link>
-            </div>
-          </div>
         </div>
 
-        <div className="col-sm-5 ">
+
+        <div className="search-results-text">
           <div className={"description"}>
             <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
             {authorArray && (
@@ -61,13 +59,18 @@ export default function SearchResults(props) {
           </div>
         </div>
         
+
+
+
+
         {isLoggedIn &&(<>
-        <div className="col-sm-4">
-          <button onClick={()=> console.log(book)}>???</button>
-            <AdditionButton type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
-            <AdditionButton type="read" currentUser={currentUser} book={book} page="SearchResults"/>
-            <AdditionButton type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>
-            <AdditionButton type="bookshelf" currentUser={currentUser} book={book} page="SearchResults"/>
+        <div className="search-results-buttons">
+            <div className="testDiv">
+            <AdditionButton  type="favorite" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton  type="read" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton  type="readlist" currentUser={currentUser} book={book} page="SearchResults"/>
+            <AdditionButton  type="bookshelf" currentUser={currentUser} book={book} page="SearchResults"/>
+            </div>
         </div> </>)}
 
       </div>
