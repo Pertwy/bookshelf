@@ -45,12 +45,12 @@ export default function SearchResults(props) {
                       state: book.volumeInfo
                       }
                 }>               
-              <img className="mr-2 search-image " src={url || defaultImage} alt={book.volumeInfo.title}/>
+              <img className="search-image " src={url || defaultImage} alt={book.volumeInfo.title}/>
               </Link>
         </div>
 
 
-        <div className="search-results-text">
+        <div className="ml-3 search-results-text">
           <div className={"description"}>
             <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
             {authorArray && (

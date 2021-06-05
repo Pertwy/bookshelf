@@ -91,16 +91,7 @@ html{
 .test-width{
   width:50px
 }
-/* .card-img-top:hover {
-  border-color: #61dafb;
-  border-width: thick;
-  /* background-color: yellow; */
-/* }
 
-section:hover{
-  border-color: #61dafb;
-  border-width: thick;
-}  */
 
 .frame {
   height: 250px;
@@ -518,7 +509,7 @@ button{
   .search-results-image-and-text{max-width: 75%;}
   .search-results-image{max-width: 41.66%;}
   .search-results-text{max-width: 33.33%;}
-  .search-results-buttons{max-width: 100%; margin-left: auto; margin-right: 0;}
+  .search-results-buttons{max-width: 100%; margin-left: auto; margin-right: auto; padding-top: 7px;}
   .search-results-button{max-width: 25%;}
 }
 
@@ -540,11 +531,21 @@ button{
   .search-results-button{max-width: 100%; }
 }
 
+.search-results-image{
+  border-color: rgb(61, 61, 61);
+  border-width: 3px;
+  border-style: solid;
+}
+.search-results-image:hover{
+  border-color: rgb(73, 212, 103);
+  border-width: 3px;
+  border-style: solid;
+}
+
+
 .searched-row{
   border-bottom: 1px solid rgb(169, 174, 179);
-  /* display: flex;
-  justify-content:space-between; */
-  display: inline-block
+  
 }
 
 .searched-title{
@@ -554,15 +555,6 @@ button{
   font-size: 0.8em;
 }
 
-.image-div{
-  /* width: 100%; */
-  max-height: 140px;
-  
-}
-
-.test-div{width:100%}
-
 .search-image{
-  /* object-fit: cover; */
   max-height: 140px;
 }
