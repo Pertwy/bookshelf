@@ -13,7 +13,9 @@ export default function Reviews(props) {
 
             <div className="row mb-2">
             `  <div>
-                <img className="mr-2 review-image" src={review.book.image} alt={review.book.title}/>
+                <Link to={"/book/"+review.book._id}>
+                  <img className="mr-2 review-image" src={review.book.image} alt={review.book.title}/>
+                </Link>
               </div>
 
               <div className="pb-2">

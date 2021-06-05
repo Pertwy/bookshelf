@@ -336,7 +336,7 @@ button{
 
 .mainer-container{
   background-color: #2f3031;
-  min-height: calc(100vh - 267px);
+  min-height: calc(100vh - 114.91px - 60px); 
 }
 
 /* Extra small devices (phones, 600px and down) */

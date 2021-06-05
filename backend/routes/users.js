@@ -35,6 +35,12 @@ router.post('/add', async (req, res) => {
 
     let newUser = new User(_.pick(req.body, [ "email", "userName", "givenName", "surname", "password", "bio"]));
     
+    let tom = await User.findById("60b25ffd76132833d8eaa9e7")
+    tom.followers.push(newUser._id)
+    tom.following.push(newUser._id)
+    await tom.save()
+
+
     let salt = await bcrypt.genSalt(10)
     newUser.password = await bcrypt.hash(newUser.password, salt)
 
