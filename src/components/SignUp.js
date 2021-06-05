@@ -10,6 +10,7 @@ export default function Signup(){
     const history = useHistory();
     function navigateHome(){    
       history.push("/")
+      window.location.reload();
     }
 
 
@@ -65,7 +66,7 @@ export default function Signup(){
 
 
       {formik => (
-        <div>
+        <div >
           <h1 className="my-4 font-weight-bold .display-4">Sign Up</h1>
           <Form>
             <MyTextField label="User Name" name="userName" type="text" />
@@ -75,8 +76,8 @@ export default function Signup(){
             <MyTextField label="Password" name="password" type="password" />
             <MyTextField label="Confirm Password" name="confirmPassword" type="password" />
             <MyTextField label="Bio" name="bio" type="text" />
-            <button className="btn btn-dark mt-3" type="submit">Register</button>
-            <button className="btn btn-danger mt-3 ml-3" type="reset">Reset</button>
+            <button className="btn btn-dark mt-3 my-3" type="submit">Register</button>
+            <button className="btn btn-danger my-3 ml-3" type="reset">Reset</button>
           </Form>
         </div>
       )}

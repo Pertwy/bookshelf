@@ -1,18 +1,112 @@
-.Bookshelf {
-    color:"white"
-}
 
-.space-between{
-    display: flex;
-    justify-content: space-between;
-}
+  nav{
+    background:rgb(22, 22, 22);
+    height: 60px;
+    width: 100%;
+    padding:10px;
+  }
+    .logo{
+    color: white;
+    font-size: 35px;
+    line-height: 80px;
+    padding: 0 100px;
+    font-weight: bold;
+  }
+  nav .nav-drop-down{
+    float: right;
+    margin-right: 20px;
+  }
+  nav .nav-drop-down li{
+    display: inline-block;
+    line-height: 50px;
+    margin: 0 5px;
+  }
+  nav .nav-drop-down li a{
+    color: white;
+    font-size: 17px;
+    padding: 7px 13px;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
 
-.listBook{
-    width:100px;
-    
-}
 
-.listDiv{
-    width:50px;
-}
+  .flot-right{
+    float: right;
+  }
 
+
+  .checkbtn{
+    font-size: 30px;
+    color: white;
+    line-height: 40px;
+    margin-right: 40px;
+    cursor: pointer;
+  }
+
+  .checkbtn-menu{
+    font-size: 30px;
+    color: white;
+    line-height: 40px;
+    margin-right: 40px;
+    cursor: pointer;
+    display: none;
+    z-index: 100;
+  }
+  .checkbtn-menu-item{
+    font-size: 15px;
+    color: white;
+    line-height: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+    /* display: none; */
+    z-index: 100;
+  }
+
+
+  #check{
+    display: none;
+  }
+  @media (max-width: 952px){
+    .logo{
+      font-size: 30px;
+      padding-left: 50px;
+    }
+    nav .nav-drop-down li a{
+      font-size: 16px;
+    }
+  }
+  @media (max-width: 858px){
+    .checkbtn-menu{
+      display: block;
+    }
+    .nav-drop-down{
+      position:absolute;
+      width: 100%;
+      height: 100vh;
+      background: #222222;
+      top: 54px;
+      left: -100%;
+      text-align: center;
+      transition: all .5s;
+      z-index: 100;
+    }
+    nav .nav-drop-down li{
+      display: block;
+      margin: 15px 0;
+      line-height: 15px;
+    }
+    nav .nav-drop-down li a{
+      font-size: 20px;
+    }
+
+    #check:checked ~ .nav-drop-down{
+      left: 0;
+    }
+  }
+
+  @media (max-width: 430px){
+    .logo{  
+        visibility: hidden;
+    }
+  }
+  

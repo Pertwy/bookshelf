@@ -17,15 +17,20 @@ import Footer from './components/Footer';
 import FollowingBookshelves from './pages/FollowingBookshelves';
 import Test from './pages/Test';
 import Members from "./pages/Members"
+import Navbar from "./components/Navbar"
 
 axios.defaults.withCredentials = true
 
 function App() {
+
   return (
     <Router>
 
-      <div className={"nav-background"}>
+      {/* <div className={"nav-background"}>
         <Nav2 />
+      </div> */}
+      <div>
+        <Navbar />
       </div>
 
       <div className={"mainer-container"}>

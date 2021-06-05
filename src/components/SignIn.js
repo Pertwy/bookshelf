@@ -10,6 +10,7 @@ export default function SignIn(){
   const history = useHistory();
   function navigateHome(){    
     history.push("/")
+    window.location.reload();
   }
 
 
@@ -49,7 +50,7 @@ export default function SignIn(){
           <Form>
             <MyTextField label="Email" name="email" type="email" />
             <MyTextField label="Password" name="password" type="password" />
-            <button className="btn btn-dark mt-3" type="submit">Register</button>
+            <button className="btn btn-dark mt-3" type="submit">Sign In</button>
             <button className="btn btn-danger mt-3 ml-3" type="reset">Reset</button>
           </Form>
         </div>

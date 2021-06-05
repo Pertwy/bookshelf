@@ -1,92 +1,147 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css"
+import {  Form, Button } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
+import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
 
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
 
 export default function Navbar() {
 
-  const [search, setSearch] = useState("")
+  const [search, setSearch] = useState("cats")
+  const history = useHistory();
+  const [isLoggedIn, setIsLoggedIn] =useState("")
+
+  useEffect(() => {
+
+      axios.get('http://localhost:5000/api/users/currentUser')
+        .then(response => (setIsLoggedIn(response.data)))
+        //.then(response => (setUserData(response.data)))
+
+  },[])
+
+  function logout(){
+    axios.get('http://localhost:5000/api/auth/logout_get')
+    .then(navigateHome())
+ 
+  }
+
+  function navigateHome(){    
+    history.push("/")
+    window.location.reload();
+  }
+  function navigateMembers(){    
+    history.push("/members")
+  }
+  function navigateProfile(){    
+    history.push("/profile")
+  }
+  function navigateSignIn(){    
+    history.push("/signup")
+  }
+
+
+  function handleSearch(){    
+    history.push("/searchresults/"+search)
+  }
+
+
+
 
   const useStyles = makeStyles((theme) => ({
-    root: {
-      padding: '2px 4px',
-      display: 'flex',
-      alignItems: 'center',
-      width: 400,
-    },
-    input: {
-      marginLeft: theme.spacing(1),
-      flex: 1,
-    },
-    iconButton: {
-      padding: 10,
-    },
-    divider: {
-      height: 28,
-      margin: 4,
-    },
+    input:{
+      '& > *': {
+ 
+      color: "#e4e5e6",   
+      width: "100px",
+      paddingLeft: "10px",
+      paddingRight: "10px", 
+      marginLeft: "10px",
+      marginRight: "10px", 
+      }
+    }
   }));
 
   const classes = useStyles();
 
 
 
-  const history = useHistory();
-  const handleSearch = useCallback(() => history.push("/searchresults/"+search), [history]);
+
+
 
     return (
       <div className= "container-fullwidth">
-      <nav className= "space-between navrow navbar navbar-dark bg-dark navbar-expand-lg">
+     
+      <nav>
 
         
-        <div className="collpase navbar-collapse">
-          <Link to="/" className="navbar-brand">Bookshelf</Link>
-          <ul className="navbar-nav ml-auto">
-            
-            <li className="navbar-item">
-            <Link to="/test" className="nav-link">Sign In/Up</Link>
-            </li>
-
-            {/* <li className="navbar-item">
-            <Link to="/booksearch" className="nav-link">Book Search</Link>
-            </li> */}
-
-            {/* <li className="navbar-item">
-            <Link to="/lists" className="nav-link">Lists</Link>
-            </li> */}
-
-            <li className="navbar-item">
-            <Link to="/profile" className="nav-link">Profile</Link>
-            </li>
-
-            <Link to={"/searchresults/"+search}>Search</Link>
+          <input type="checkbox" id="check"/>
+          <label for="check" class="checkbtn-menu flot-right">
+            <i className="">MENU</i>
+          </label>
+      
 
 
+       
+          <input type="checkbox" id="check"/>
+          <label for="check" class="checkbtn ">
+            <i onClick={()=>navigateHome()}>Bookshelf</i>
+          </label>
+       
+       
 
-          <Paper component="form" className={classes.root} onSubmit={()=> handleSearch()} >
-            <InputBase
-              className={classes.input}
-              placeholder="Search"
-              inputProps={{ 'aria-label': 'search' }}
-              onChange={({ target }) =>     
-                  setSearch(target.value)}
-            />
-            <IconButton type="submit" className={classes.iconButton} aria-label="search">
-              <SearchIcon />
-            </IconButton>
-           </Paper>
+        <ul className="nav-drop-down">
 
-          </ul>
-        </div>
-   
+                {!isLoggedIn && (
+                  <>
+                    <li className="navbar-item">
+                      <input type="checkbox" id="check"/>
+                      <label for="check" class="checkbtn-menu-item">
+                        <i onClick={()=>navigateSignIn()}>Sign In/UP</i>
+                      </label>
+                    </li>
+                  </>
+                  )}
+
+
+                  <li className="navbar-item">
+                    <input type="checkbox" id="check"/>
+                    <label for="check" class="checkbtn-menu-item">
+                      <i onClick={()=>navigateMembers()}>MEMBERS</i>
+                    </label>
+                  </li>
+
+                  {isLoggedIn && (
+                  <>
+
+                    <li className="navbar-item">
+                      <input type="checkbox" id="check"/>
+                      <label for="check" class="checkbtn-menu-item">
+                        <i onClick={()=>navigateProfile()}>PROFILE</i>
+                      </label>
+                    </li>
+
+                    <li  className="navbar-item ">
+                      <h4 onClick={()=>logout()} className="all-text  logout-button" >SIGN OUT</h4>
+                    </li>
+                  </>
+                  )}
+
+
+                  <li className="navbar-item">
+                    <Form inline onSubmit={handleSearch}>
+                      <TextField className={classes.input} onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
+                      <Button type="submit" variant="outline-success">Search</Button>
+                    </Form>
+                  </li>
+                 
+                 </ul>
       </nav>
+   
+     
       </div>
     );
 

@@ -27,12 +27,16 @@ export default function Nav2() {
 
   function logout(){
     axios.get('http://localhost:5000/api/auth/logout_get')
-    .then(console.log("out"))
+    .then(navigateHome())
  
   }
 
+  function navigateHome(){    
+    history.push("/")
+    window.location.reload();
+  }
 
-  function test(e){    
+  function handleSearch(){    
     history.push("/searchresults/"+search)
   }
 
@@ -96,7 +100,7 @@ export default function Nav2() {
 
 
                   <li className="navbar-item">
-                    <Form inline onSubmit={test}>
+                    <Form inline onSubmit={handleSearch}>
                       <TextField className={classes.input} onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
                       <Button type="submit" variant="outline-success">Search</Button>
                     </Form>

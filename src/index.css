@@ -15,6 +15,7 @@ code {
 
 html{
   background-color:#2f3031;
+  font-size:12px;
 }
 
 *{
@@ -91,16 +92,7 @@ html{
 .test-width{
   width:50px
 }
-/* .card-img-top:hover {
-  border-color: #61dafb;
-  border-width: thick;
-  /* background-color: yellow; */
-/* }
 
-section:hover{
-  border-color: #61dafb;
-  border-width: thick;
-}  */
 
 .frame {
   height: 250px;
@@ -297,31 +289,15 @@ button{
 }
 
 
-.image-div{
-  width: 100%;
-  max-height: 140px;
-}
 
-.search-image{
-  object-fit: cover;
-  max-height: 140px;
-}
+
+
 .review-image{
   object-fit: cover;
   max-height: 65px;
 }
 
-.searched-row{
-  border-bottom: 1px solid rgb(169, 174, 179);
-  max-height: 150px;
-}
 
-.searched-title{
-  font-size: 1em;
-}
-.searched-author{
-  font-size: 0.8em;
-}
 
 
 /* .left-search{
@@ -336,7 +312,7 @@ button{
 
 .mainer-container{
   background-color: #2f3031;
-  min-height: calc(100vh - 267px);
+  min-height: calc(100vh - 114.91px - 60px); 
 }
 
 /* Extra small devices (phones, 600px and down) */
@@ -405,7 +381,7 @@ button{
 
 .home-page-heading{
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 4em;
+  font-size: 4rem;
   text-align: center;
 }
 .home-page-heading-div{
@@ -497,5 +473,99 @@ button{
   cursor: pointer;
 }
 
+.column-1 {width: 8.33%;}
+.column-2 {width: 16.66%;}
+.column-3 {width: 25%;}
+.column-4 {width: 33.33%;}
+.column-5 {width: 41.66%;}
+.column-6 {width: 50%;}
+.column-7 {width: 58.33%;}
+.column-8 {width: 66.66%;}
+.column-9 {width: 75%;}
+.column-10 {width: 83.33%;}
+.column-11 {width: 91.66%;}
+.column-12 {width: 100%;}
 
 
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .search-results-image-and-text{max-width: 100%;}
+  .search-results-image{max-width: 41.66%;}
+  .search-results-text{max-width: 66.66%;}
+  .search-results-buttons{max-width: 100%;}
+  .search-results-button{max-width: 25%;}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .search-results-image-and-text{max-width: 100%;}
+  .search-results-image{max-width: 41.66%;}
+  .search-results-text{max-width: 66.66%;}
+  .search-results-buttons{max-width: 100%;}
+  .search-results-button{max-width: 25%;}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .search-results-image-and-text{max-width: 75%;}
+  .search-results-image{max-width: 41.66%;}
+  .search-results-text{max-width: 33.33%;}
+  .search-results-buttons{max-width: 100%; margin-left: auto; margin-right: auto; padding-top: 7px;}
+  .search-results-button{max-width: 25%;}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .search-results-image-and-text{max-width: 66.66%;}
+  .search-results-image{max-width: 33.33%;}
+  .search-results-text{max-width: 33.33%;}
+  .search-results-buttons{max-width: 33.33%; margin-left: auto; margin-right: 0;}
+  .search-results-button{max-width: 100%; }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .search-results-image-and-text{max-width: 66.66%;}
+  .search-results-image{max-width: 33.33%;}
+  .search-results-text{max-width: 33.33%;}
+  .search-results-buttons{max-width: 33.33%; margin-left: auto; margin-right: 0;}
+  .search-results-button{max-width: 100%; }
+}
+
+.search-results-image{
+  border-color: rgb(61, 61, 61);
+  border-width: 3px;
+  border-style: solid;
+}
+.search-results-image:hover{
+  border-color: rgb(73, 212, 103);
+  border-width: 3px;
+  border-style: solid;
+}
+.review-image{
+  border-color: rgb(61, 61, 61);
+  border-width: 2px;
+  border-style: solid;
+}
+.review-image:hover{
+  border-color: rgb(73, 212, 103);
+  border-width: 2px;
+  border-style: solid;
+}
+
+
+.searched-row{
+  border-bottom: 1px solid rgb(169, 174, 179);
+  
+}
+
+.searched-title{
+  font-size: 1em;
+}
+.searched-author{
+  font-size: 0.8em;
+}
+
+.search-image{
+  max-height: 140px;
+}
