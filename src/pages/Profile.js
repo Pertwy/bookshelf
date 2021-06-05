@@ -44,7 +44,7 @@ export default function Profile(){
 
     
       {isLoggedIn &&(<>
-        <div className="pb-2 container-fluid row">
+        <div className="py-4 container-fluid row">
           
           {/* <div className="photo-div col-sm-2 col-md-2">
           </div> */}

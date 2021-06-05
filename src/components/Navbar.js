@@ -33,6 +33,16 @@ export default function Navbar() {
     history.push("/")
     window.location.reload();
   }
+  function navigateMembers(){    
+    history.push("/members")
+  }
+  function navigateProfile(){    
+    history.push("/profile")
+  }
+  function navigateSignIn(){    
+    history.push("/signup")
+  }
+
 
   function handleSearch(){    
     history.push("/searchresults/"+search)
@@ -66,34 +76,55 @@ export default function Navbar() {
       <div className= "container-fullwidth">
      
       <nav>
-        <input type="checkbox" id="check"/>
-        <label for="check" class="checkbtn">
-          <i >MENU</i>
-        </label>
-        <Link to="/" className="logo all-text nav-text navbar-brand"><h2 className="all-text">Bookshelf</h2></Link>
+
+        
+          <input type="checkbox" id="check"/>
+          <label for="check" class="checkbtn-menu flot-right">
+            <i className="">MENU</i>
+          </label>
+      
+
+
+       
+          <input type="checkbox" id="check"/>
+          <label for="check" class="checkbtn ">
+            <i onClick={()=>navigateHome()}>Bookshelf</i>
+          </label>
+       
+       
+
         <ul className="nav-drop-down">
 
                 {!isLoggedIn && (
                   <>
                     <li className="navbar-item">
-                      <Link to="/signup" className="nav-text nav-link"><h6 className="all-text">Sign In/Up</h6></Link>
+                      <input type="checkbox" id="check"/>
+                      <label for="check" class="checkbtn-menu-item">
+                        <i onClick={()=>navigateSignIn()}>Sign In/UP</i>
+                      </label>
                     </li>
                   </>
                   )}
-                  
+
 
                   <li className="navbar-item">
-                    <Link to="/members" className="nav-text nav-link"><h6 className="all-text">Members</h6></Link>
+                    <input type="checkbox" id="check"/>
+                    <label for="check" class="checkbtn-menu-item">
+                      <i onClick={()=>navigateMembers()}>MEMBERS</i>
+                    </label>
                   </li>
 
                   {isLoggedIn && (
                   <>
-                    <li className=" ">
-                      <Link to="/profile" className="nav-text nav-link"><h6 className="all-text">Profile</h6></Link>
+
+                    <li className="navbar-item">
+                      <input type="checkbox" id="check"/>
+                      <label for="check" class="checkbtn-menu-item">
+                        <i onClick={()=>navigateProfile()}>PROFILE</i>
+                      </label>
                     </li>
 
                     <li  className="navbar-item ">
-                      {/* <button onClick={()=>logout()}>Log Out</button> */}
                       <h4 onClick={()=>logout()} className="all-text  logout-button" >SIGN OUT</h4>
                     </li>
                   </>

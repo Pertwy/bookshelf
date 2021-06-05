@@ -15,6 +15,7 @@ code {
 
 html{
   background-color:#2f3031;
+  font-size:12px;
 }
 
 *{
@@ -380,7 +381,7 @@ button{
 
 .home-page-heading{
   font-family: 'IBM Plex Mono', monospace;
-  font-size: 4em;
+  font-size: 4rem;
   text-align: center;
 }
 .home-page-heading-div{
@@ -539,6 +540,16 @@ button{
 .search-results-image:hover{
   border-color: rgb(73, 212, 103);
   border-width: 3px;
+  border-style: solid;
+}
+.review-image{
+  border-color: rgb(61, 61, 61);
+  border-width: 2px;
+  border-style: solid;
+}
+.review-image:hover{
+  border-color: rgb(73, 212, 103);
+  border-width: 2px;
   border-style: solid;
 }
 
