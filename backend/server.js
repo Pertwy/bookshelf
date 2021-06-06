@@ -29,6 +29,7 @@ connection.once('open', () => {
     console.log("MongoDB database connection established successfully")
 })
 
+require('./startup/prod')(app)
 
 const booksRouter = require('./routes/books')
 const usersRouter = require('./routes/users')

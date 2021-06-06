@@ -104,8 +104,16 @@
     }
   }
 
+  .home-btn{
+    display: inline;
+  }
+
+  .home-btn:hover{
+    cursor: pointer;
+  }
+
   @media (max-width: 430px){
-    .logo{  
+    .home-btn{  
         visibility: hidden;
     }
   }

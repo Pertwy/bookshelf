@@ -22,7 +22,9 @@ export default function HomePage(){
 
 
 
-
+    // function handleTest(){
+    //   console.log(isLoggedIn)
+    // }
 
 
   useEffect(() => {
@@ -133,6 +135,7 @@ export default function HomePage(){
               <p className={"all-text home-page-bullets"}>Track books you've read</p>
               <p className={"all-text home-page-bullets"}>Save the ones you haven't got around to</p>
               <p className={"all-text home-page-bullets"}>Let friends know what's good</p>
+              {/* <button onClick={()=>handleTest()}>test</button> */}
             </div>
           </div>
         </div>
@@ -198,6 +201,7 @@ export default function HomePage(){
             </div>
           </div>
         </>)}
+        
 
 
 
