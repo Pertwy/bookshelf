@@ -82,14 +82,15 @@ export default function Navbar() {
           <label for="check" class="checkbtn-menu flot-right">
             <i className="">MENU</i>
           </label>
-      
 
-
+          <span>
+            <h3 className="all-text home-btn" onClick={()=>navigateHome()}>Bookshelf</h3>
+          </span>
        
-          <input type="checkbox" id="check"/>
-          <label for="check" class="checkbtn ">
+          {/* <input type="checkbox" id="check"/>
+          <label for="check" class="checkbtn">
             <i onClick={()=>navigateHome()}>Bookshelf</i>
-          </label>
+          </label> */}
        
        
 
