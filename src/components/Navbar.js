@@ -84,7 +84,7 @@ export default function Navbar() {
           </label>
 
           <span>
-            <h3 className="all-text home-btn" onClick={()=>navigateHome()}>Bookshelf</h3>
+            <h4 className="all-text home-btn" onClick={()=>navigateHome()}>Bookshelf</h4>
           </span>
        
           {/* <input type="checkbox" id="check"/>
@@ -98,7 +98,7 @@ export default function Navbar() {
 
                 {!isLoggedIn && (
                   <>
-                    <li className="navbar-item">
+                    <li>
                       <input type="checkbox" id="check"/>
                       <label for="check" class="checkbtn-menu-item">
                         <i onClick={()=>navigateSignIn()}>Sign In/UP</i>
@@ -107,8 +107,15 @@ export default function Navbar() {
                   </>
                   )}
 
+                  <li>
+                    <input type="checkbox" id="check"/>
+                    <label for="check" class="checkbtn-menu-item-home">
+                      <i onClick={()=>navigateHome()}>HOME</i>
+                    </label>
+                  </li>
 
-                  <li className="navbar-item">
+
+                  <li>
                     <input type="checkbox" id="check"/>
                     <label for="check" class="checkbtn-menu-item">
                       <i onClick={()=>navigateMembers()}>MEMBERS</i>
@@ -118,21 +125,21 @@ export default function Navbar() {
                   {isLoggedIn && (
                   <>
 
-                    <li className="navbar-item">
+                    <li>
                       <input type="checkbox" id="check"/>
                       <label for="check" class="checkbtn-menu-item">
                         <i onClick={()=>navigateProfile()}>PROFILE</i>
                       </label>
                     </li>
 
-                    <li  className="navbar-item ">
-                      <h4 onClick={()=>logout()} className="all-text  logout-button" >SIGN OUT</h4>
+                    <li>
+                      <i onClick={()=>logout()} className=" checkbtn-menu-item logout-button" >SIGN OUT</i>
                     </li>
                   </>
                   )}
 
 
-                  <li className="navbar-item">
+                  <li className="navbar-item-search">
                     <Form inline onSubmit={handleSearch}>
                       <TextField className={classes.input} onChange={({ target }) => setSearch(target.value)} placeholder="Search"/>
                       <Button type="submit" variant="outline-success">Search</Button>

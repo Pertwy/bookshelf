@@ -8,7 +8,7 @@ export default function DisplayList(props) {
 
   const UsersExistingLists = ({list}) => {
     return(
-      <div >
+      <div className="container-fluid">
         
           <div className="row space-between px-3 pt-4">
             <h4 className="list-row-title">{list.title}</h4>

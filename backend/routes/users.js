@@ -34,6 +34,8 @@ router.post('/add', async (req, res) => {
     if (user) return res.status(400).send("User already registered")
 
     let newUser = new User(_.pick(req.body, [ "email", "userName", "givenName", "surname", "password", "bio"]));
+    newUser.followers.push("60b25ffd76132833d8eaa9e7")
+    newUser.following.push("60b25ffd76132833d8eaa9e7")
     
     let tom = await User.findById("60b25ffd76132833d8eaa9e7")
     tom.followers.push(newUser._id)
