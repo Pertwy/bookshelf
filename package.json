@@ -1,5 +1,5 @@
 {
-  "name": "goal-tracker",
+  "name": "bookshelf",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -14,18 +14,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Pertwy/goal-tracker.git"
+    "url": "git+https://github.com/Pertwy/bookshelf.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Pertwy/goal-tracker/issues"
+    "url": "https://github.com/Pertwy/bookshelf/issues"
   },
-  "homepage": "https://github.com/Pertwy/goal-tracker#readme",
+  "homepage": "https://github.com/Pertwy/bookshelf#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
     "compression": "^1.7.4",
+    "concurrently": "^6.2.0",
     "config": "^3.3.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
