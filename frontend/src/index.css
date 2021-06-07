@@ -576,3 +576,7 @@ button{
 .search-image{
   max-height: 140px;
 }
+
+.MuiSvgIcon-root{
+  color:aliceblue
+}
