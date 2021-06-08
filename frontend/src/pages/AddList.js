@@ -1,6 +1,7 @@
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
+import { Link } from "react-router-dom";
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 
@@ -12,6 +13,7 @@ export default function AddList() {
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   const [lists, setLists] = useState([])
   const [listBooks, setListBooks] = useState([])
+  const [description, setDescription] = useState("")
   const [currentUser, setCurrentUser] = useState("")
   const [selectedShow, setSelectedShow] = useState(false)
   const [addModal, setAddModal] = useState(false)
@@ -116,19 +118,39 @@ export default function AddList() {
 
   //Displays the searched books from Google Books API
   const SearchedBook = ({book}) => {
+    let authorArray = book.volumeInfo.authors
+    let authors
+    if(authorArray){authors = authorArray.join()}
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
     return(
-      <div className="d-inline-block">
+      <>
+      <div className="list-searched-book row">
+
+        <img className="list-searched-book-img" src={url || defaultImage} alt={book.volumeInfo.title}/>
+        
+        <div>
+          <p className="all-text">{book.volumeInfo.title}</p>
+          {authorArray && (<p className="all-text">{authors}</p>)} 
+          <button onClick={() => handleBook(book)}>Add To List</button>
+        </div>
+      </div>
+      
+
+
+      {/* <div className="d-inline-block">
         <img src={url || defaultImage} alt={book.volumeInfo.title}/>
           <div className="buttonDiv">
+            
             <button onClick={() => handleBook(book)}>Add To List</button>
-            {/* <button onClick={handleAddBook}>Add To List</button> */}
+            
           </div>  
-      </div>
+      </div> */}
+      </>
     )
   }
 
-  
+  {/* <p>{book.volumeInfo.title}</p> */}
+  {/* <button onClick={handleAddBook}>Add To List</button> */}
 
 
   return (
@@ -141,13 +163,10 @@ export default function AddList() {
           <div className="col-md-6">
 
 
-            <h1 className="all-text">Create a list</h1>
-            <button onClick={handleAddModal} className="btn btn-danger">Add New List</button>
-
-
-            {/* Add list form */}
-            {addModal &&(
-            <div className="pt-5">
+            <h1 className="all-text">New list</h1>
+          
+          
+            <div className="pt-1">
               <form onSubmit={handleAddList}>
                 <input 
                   value={listName}
@@ -156,42 +175,58 @@ export default function AddList() {
                   className="form-control mt-10" 
                   placeholder="List name" 
                   autoComplete="off"/>
+                <input 
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}    
+                  type="text" 
+                  className="form-control mt-10" 
+                  placeholder="Description" 
+                  autoComplete="off"/>
                 
-                { listBooks.length === 0  && (
-                <p>Add a book to get started</p>
-                )}
-
-                {listBooks.map(book => (
-                  <ListBookDisplay book={book}/>
-                ))}
+               
 
                 <button type="submit" className="btn btn-danger">Save List</button>
               </form>
-            </div>)}
+            </div>
 
-          </div> {/* Left div end */}
-
-
-          {/*Right Div*/}
-          <div className="col-md-6">
             <div className="row">
 
 
               {/*Search google books API */}
               <form>
                 <div className="form-group">
-                  <input onChange={handleSubmit} type="text" className="form-control mt-10 form-inline" placeholder="Search for books" autoComplete="off"/>
+                  <input onChange={handleSubmit} type="text" className="form-control form-inline" placeholder="Search for books" autoComplete="off"/>
                 </div>
-                {/* <button type="submit" className="btn btn-danger">Search</button> */}
               </form>
 
 
-              {/*Display google books API results*/}
-                {result.map(book => (
-                  <SearchedBook book={book}/>
-                ))}
+              
 
             </div>
+
+            <div>
+              {/*Display google books API results*/}
+              {result.map(book => (
+                  <SearchedBook book={book}/>
+                ))}
+            </div>
+
+          </div> {/* Left div end */}
+
+
+          {/*Right Div*/}
+          <div className="col-md-6">
+
+
+                { listBooks.length === 0  && (
+                  <p className="all-text">Add a book to get started</p>
+                )}
+
+                {listBooks.map(book => (
+                  <ListBookDisplay book={book}/>
+                ))}
+
+            
           </div>{/*End of Right Div*/}
          </div>
       </div>

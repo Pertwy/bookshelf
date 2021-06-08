@@ -568,7 +568,7 @@ button{
   max-height: 140px;
 }
 
-.MuiSvgIcon-root{
+.MuiSvgIcon-fontSizeSmall{
   color:aliceblue
 }
 
@@ -640,4 +640,12 @@ button{
 
 .btn-img:hover img {
   opacity: 0.8;
+}
+
+.list-searched-book{
+  max-height: 70px;
+  margin-bottom: 10px;
+}
+.list-searched-book-img{
+  max-height: 70px;
 }

@@ -13,7 +13,8 @@ export default function HomePage(){
   const [adminLists, setAdminLists] = useState([])
   const [isLoggedIn, setIsLoggedIn] =useState("")
   const [adminData, setAdminData] = useState({books:[],favorites:[]})
-
+  const [friendsBookshelf, setFriendsBookshelf] = useState(true)
+  const [friendsLatest, setFriendsLatest] = useState(true)
   
     const history = useHistory();
     function memberNavigate(){    
@@ -28,6 +29,7 @@ export default function HomePage(){
 
 
   useEffect(() => {
+    
 
     axios.get('/api/users/currentUser')
         .then(response => (setIsLoggedIn(response.data)))
@@ -40,9 +42,23 @@ export default function HomePage(){
 
     axios.get('/api/users/popular')
       .then(response => (setAdminData(response.data)))
-      //
 
   },[])
+
+
+function TestSet(){
+
+  for (let i = 0; i < userData.following.length; i++) {
+  
+    if (userData.following[i].bookshelf.length > 0){
+      console.log("shelves")
+      setFriendsBookshelf(true)
+    }
+    if (userData.following[i].books.length > 0){
+      setFriendsLatest(true)
+      console.log("books")
+    }}
+}
 
 
   function AdminLists(props) {
@@ -64,7 +80,18 @@ export default function HomePage(){
   )
 }
 
-
+function FriendCheck(){
+for (let i = 0; i < userData.following.length; i++) {
+  
+  if (userData.following[i].bookshelf.length > 0){
+    console.log("tick")
+    setFriendsBookshelf(true)
+  }
+  if (userData.following[i].books.length > 0){
+    setFriendsLatest(true)
+    console.log("tick")
+  }
+}}
 
 
   function FriendReadList() {
@@ -166,6 +193,7 @@ export default function HomePage(){
         {isLoggedIn && (userData.following.length > 0) && (
           <>
 
+        {friendsLatest && (
         <div className="book-row-section">
           <div className="book-row-div">
             <h2 className="book-row-title">LATEST FROM FRIENDS</h2>
@@ -173,8 +201,9 @@ export default function HomePage(){
           <div className="mx-1 row book-row">
             <FriendReadList type="readlist"/>
           </div>
-        </div>
+        </div>)}
 
+        {friendsBookshelf && (
         <div className="book-row-section">
           <div className="mx-1 book-row-div row space-between">
             <h2 className="book-row-title">BOOKSHELVES</h2>
@@ -184,7 +213,7 @@ export default function HomePage(){
           <div className="mx-1 row">
             <FriendBookshelfList/>
           </div>
-        </div>
+        </div>)}
 
         </>)}
 
