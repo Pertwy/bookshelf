@@ -8,13 +8,13 @@ export default function Members() {
 
   
   return (
-    <div className="container">
-        <div className="container center-all">
+
+        <div className="member-width center-all">
 
           <UserSearch/>
           
         </div>
-      </div>
+
   );
 }
 

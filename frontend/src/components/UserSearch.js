@@ -2,6 +2,9 @@ import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
+import Avatar from '@material-ui/core/Avatar';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 export default function UserSearch() {
   const [users, setUsers] = useState([])
@@ -24,6 +27,28 @@ export default function UserSearch() {
     setUsers(response)
   }
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      display: 'flex',
+      '& > *': {
+        margin: theme.spacing(0),
+      },
+    },
+    small: {
+      width: theme.spacing(3),
+      height: theme.spacing(3),
+    },
+    large: {
+      width: theme.spacing(7),
+      height: theme.spacing(7),
+    },
+  }));
+
+  const classes = useStyles();
+
+
+
+
 
   function UserList(){
     return(
@@ -31,18 +56,32 @@ export default function UserSearch() {
       //usersSearched.map((user) =>{
       return(
         <>     
+
+          <div className="member-card">
+        
+              <div className="member-card-photo">
+                <Avatar className={classes.large} id={user._id} alt={user.userName} src={user.photo} />
+              </div>
+
+
+              <div className="member-card-info">
+                <Link to={"/user/"+user._id} >
+                  <h4 className="member-card-text-username">{user.userName}</h4>
+                </Link>
+                <h5 className="member-card-text">{user.givenName} {user.surname}</h5>
+                <p className="member-card-text">{user.reviews.length} reviews</p>
+              </div>
+
+          </div>
           
-          <tr>
+          {/* <tr>
             <td className="pl-5 all-text">X</td>
-            <Link to={"/user/"+user._id} className="">
-              <td className="pl-5 all-text">{user.userName}</td>
-            </Link>
-            <td className="pl-5 all-text">{user.givenName} {user.surname}</td>
+            
             <td className="pl-5 all-text">{user.favorites.length}</td>
             <td className="pl-5 all-text">{user.books.length}</td>
             <td className="pl-5 all-text">{user.reviews.length}</td>
 
-          </tr>
+          </tr> */}
         </>
       )
     }))
@@ -66,26 +105,17 @@ export default function UserSearch() {
     <div >
 
       <>
-        <h5 className="all-text">Search Members</h5>
+
+        <h4 className="all-text members-title-text">Book Lovers, Critics, and Friends - Find Bookshelf members </h4>
+
+
         <input onChange={({ target }) => handleFilter(target.value)} label="Search" placeholder="Search Members" />
-        <div>
-          <table className="member-table">
-              <tr>
-                <th className="pl-5 all-text">Photo</th>
-                <th className="pl-5 all-text">User Name</th>
-                <th className="pl-5 all-text">Name</th>
-                <th className="pl-5 all-text">Bookshelf</th>
-                <th className="pl-5 all-text">Read</th>
-                <th className="pl-5 all-text">Reviews</th>
-              </tr>
-              <UserList/>
-          </table>
+        <div className="member-row">
+          <UserList/>
         </div>
       </>
 
-      
-
-  
+        
     </div>
   );
 }

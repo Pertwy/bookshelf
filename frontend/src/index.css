@@ -575,3 +575,54 @@ button{
 .listBook{
   width:10%
 }
+
+
+.member-row{
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  display: flex;
+  flex-direction: row;
+  flex-flow:  wrap;
+}
+
+.member-width{
+  width: 80%;
+}
+.member-card{
+  background-color: aliceblue;
+  text-align: start;
+  width:45%;
+  /* padding: 0.6rem; */
+  margin: 0.6rem;
+  display: flex;
+  flex-direction: row;
+  
+}
+@media only screen and (max-width: 600px) {
+  .member-card{
+    width:100%;
+  }
+}
+
+.member-card-photo{
+  padding: 0.7rem;
+}
+
+.member-card-info{
+  padding-top: 0.7rem;
+}
+
+.member-card-text{
+  line-height: 1rem;
+}
+.member-card-text-username{
+  line-height: 1.6rem;
+}
+
+.members-title-text{
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  font-size: 1.7rem;
+  font-family:monospace
+
+}
