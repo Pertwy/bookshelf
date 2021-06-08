@@ -649,3 +649,11 @@ button{
 .list-searched-book-img{
   max-height: 70px;
 }
+
+.book-to-be-added-to-list{
+  max-width: 25%;
+}
+.book-to-be-added-to-list-img{
+  max-width: 100%;
+}
+

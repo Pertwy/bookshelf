@@ -167,7 +167,7 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={0} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">Let People know what's on your bookshelf!</h4>
           </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="bookshelf" userData={props.userData} />
@@ -176,7 +176,7 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">What have you always wanted to read?</h4>
           </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.readList} type="readingList" userData={props.userData}/>
@@ -186,7 +186,7 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={2} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">Share every book you've ever read!</h4>
           </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.books} type="read" userData={props.userData}/>
@@ -195,7 +195,7 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={3} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">Desert island books</h4>
           </div>
 
           <div className="row book-row">
@@ -206,14 +206,14 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={4} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">Follow other Bookshelf users to get inspiration</h4>
           </div>
           <Following userData={props.userData} owner={props.owner}/>
         </TabPanel>
 
         <TabPanel value={value} index={5} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text">Everyone's a critic...</h4>
           </div>
           <Reviews userData={props.userData} owner={props.owner}/>
         </TabPanel> 

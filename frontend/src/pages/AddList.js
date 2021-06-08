@@ -105,8 +105,8 @@ export default function AddList() {
   //Displays the current list of selected books
   const ListBookDisplay = ({book}) => {
     return(
-      <div className="d-inline-block">
-        <img src={book.image} alt={book.title}/>
+      <div className="book-to-be-added-to-list d-inline-block">
+        <img className="book-to-be-added-to-list-img" src={book.image} alt={book.title}/>
         <div className="buttonDiv">
           <button onClick={() => handleBook(book)}>Remove</button>
         </div>  
@@ -159,13 +159,9 @@ export default function AddList() {
         
         <div className="row">
 
-          {/* Left div */}
           <div className="col-md-6">
 
-
             <h1 className="all-text">New list</h1>
-          
-          
             <div className="pt-1">
               <form onSubmit={handleAddList}>
                 <input 
@@ -183,51 +179,41 @@ export default function AddList() {
                   placeholder="Description" 
                   autoComplete="off"/>
                 
-               
-
                 <button type="submit" className="btn btn-danger">Save List</button>
               </form>
             </div>
 
+
             <div className="row">
-
-
-              {/*Search google books API */}
               <form>
                 <div className="form-group">
                   <input onChange={handleSubmit} type="text" className="form-control form-inline" placeholder="Search for books" autoComplete="off"/>
                 </div>
               </form>
-
-
-              
-
             </div>
 
+
             <div>
-              {/*Display google books API results*/}
               {result.map(book => (
                   <SearchedBook book={book}/>
                 ))}
             </div>
 
-          </div> {/* Left div end */}
+          </div>
 
 
-          {/*Right Div*/}
+
           <div className="col-md-6">
+            { listBooks.length === 0  && (
+              <p className="all-text">Add a book to get started</p>
+            )}
+
+            {listBooks.map(book => (
+              <ListBookDisplay book={book}/>
+            ))}
+          </div>
 
 
-                { listBooks.length === 0  && (
-                  <p className="all-text">Add a book to get started</p>
-                )}
-
-                {listBooks.map(book => (
-                  <ListBookDisplay book={book}/>
-                ))}
-
-            
-          </div>{/*End of Right Div*/}
          </div>
       </div>
   );

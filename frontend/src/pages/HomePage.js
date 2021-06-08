@@ -46,7 +46,7 @@ export default function HomePage(){
   },[])
 
 
-function TestSet(){
+function TestSet(data){
 
   for (let i = 0; i < userData.following.length; i++) {
   
