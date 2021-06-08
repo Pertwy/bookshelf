@@ -73,15 +73,7 @@ export default function UserSearch() {
               </div>
 
           </div>
-          
-          {/* <tr>
-            <td className="pl-5 all-text">X</td>
-            
-            <td className="pl-5 all-text">{user.favorites.length}</td>
-            <td className="pl-5 all-text">{user.books.length}</td>
-            <td className="pl-5 all-text">{user.reviews.length}</td>
-
-          </tr> */}
+        
         </>
       )
     }))

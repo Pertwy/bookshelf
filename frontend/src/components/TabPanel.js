@@ -148,8 +148,8 @@ export default function CustomizedTabs(props) {
           <AntTab label="Favorites" {...a11yProps(3)} />
           <AntTab label="Follow" {...a11yProps(4)}/>
           <AntTab label="Reviews" {...a11yProps(5)}/>
-          {/* <AntTab label="Lists" {...a11yProps(6)}/>
-          <AntTab label="Reviews" {...a11yProps(7)}/>
+          <AntTab label="Lists" {...a11yProps(6)}/>
+          {/* <AntTab label="Reviews" {...a11yProps(7)}/>
           <AntTab label="Dairy" {...a11yProps(8)}/> */}
         </AntTabs>
         <Typography className={classes.padding} />
@@ -166,12 +166,18 @@ export default function CustomizedTabs(props) {
         </TabPanel> */}
 
         <TabPanel value={value} index={0} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="bookshelf" userData={props.userData} />
           </div>
         </TabPanel>
 
         <TabPanel value={value} index={1} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.readList} type="readingList" userData={props.userData}/>
           </div>
@@ -179,12 +185,19 @@ export default function CustomizedTabs(props) {
 
 
         <TabPanel value={value} index={2} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.books} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
 
         <TabPanel value={value} index={3} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
+
           <div className="row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.favorites} type="favorites" userData={props.userData}/>
           </div>
@@ -192,22 +205,28 @@ export default function CustomizedTabs(props) {
         
 
         <TabPanel value={value} index={4} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <Following userData={props.userData} owner={props.owner}/>
         </TabPanel>
 
         <TabPanel value={value} index={5} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <Reviews userData={props.userData} owner={props.owner}/>
         </TabPanel> 
 
 
-        {/* <TabPanel value={value} index={6} dir={theme.direction}>
+        <TabPanel value={value} index={6} dir={theme.direction}>
           <div className="row book-row">
             <DisplayAllLists lists={props.userData.lists}/>
           </div>
         </TabPanel>
 
 
-        <TabPanel value={value} index={7} dir={theme.direction}>
+        {/* <TabPanel value={value} index={7} dir={theme.direction}>
           Item Five
         </TabPanel> 
 

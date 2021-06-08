@@ -3,7 +3,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
-import DisplayList from "../components/DisplayLists"
 
 
 export default function AddList() {
@@ -39,8 +38,8 @@ export default function AddList() {
     const book = e.target.value
       setBook(book.trim())
 
-    axios.get("https://www.googleapis.com/books/v1/volumes?q="+book+ "&key="+apiKey+"&maxResults=40")
-      .then(data => {
+    axios.get("https://www.googleapis.com/books/v1/volumes?q="+book+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
+    .then(data => {
         setResult(data.data.items)
       })
   }
@@ -100,19 +99,6 @@ export default function AddList() {
   }
 
 
-//Displays users existing lists
-const UsersExistingLists = ({list}) => {
-  return(
-    <div >
-      <h2>{list.title}</h2>
-      {list.books.map((book) => (
-        <img src={book.image} alt={book.title}/>
-      ))}
-    </div>
-  )
-}
-
-
 
   //Displays the current list of selected books
   const ListBookDisplay = ({book}) => {
@@ -155,15 +141,13 @@ const UsersExistingLists = ({list}) => {
           <div className="col-md-6">
 
 
-            <h1>Add/Edit Lists</h1>
-            <UserDropDown setEmail={setCurrentUser}/>
+            <h1 className="all-text">Create a list</h1>
             <button onClick={handleAddModal} className="btn btn-danger">Add New List</button>
 
 
             {/* Add list form */}
             {addModal &&(
             <div className="pt-5">
-              <h3>Add new list</h3>
               <form onSubmit={handleAddList}>
                 <input 
                   value={listName}
@@ -185,14 +169,6 @@ const UsersExistingLists = ({list}) => {
               </form>
             </div>)}
 
-
-
-            {/*Display users lists*/}
-            <div className="pt-5">
-              <h2>Your Lists</h2>
-              
-              <DisplayList lists={lists}/>
-            </div>
           </div> {/* Left div end */}
 
 

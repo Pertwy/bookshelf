@@ -624,5 +624,20 @@ button{
   padding-bottom: 2.5rem;
   font-size: 1.7rem;
   font-family:monospace
+}
+.profile-title-text{
+  padding-top: 0.5rem;
+  padding-bottom: 3.5rem;
+  font-size: 1.7rem;
+  font-family:monospace
+}
 
+
+
+.btn-img {
+  cursor: pointer;
+}
+
+.btn-img:hover img {
+  opacity: 0.8;
 }
