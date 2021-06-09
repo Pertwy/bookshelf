@@ -488,6 +488,7 @@ button{
   .search-results-buttons{max-width: 100%;}
   .search-results-button{max-width: 25%;}
   .home-page-heading{font-size: 2.5rem}
+  .list-search-results{max-width: 66.66%;}
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -498,6 +499,7 @@ button{
   .search-results-buttons{max-width: 100%;}
   .search-results-button{max-width: 25%;}
   .home-page-heading{font-size: 3rem}
+  .list-search-results{max-width: 66.66%;}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -508,6 +510,7 @@ button{
   .search-results-buttons{max-width: 100%; margin-left: auto; margin-right: auto; padding-top: 7px;}
   .search-results-button{max-width: 25%;}
   .home-page-heading{font-size: 4rem}
+  .list-search-results{max-width: 66.66%;}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -518,6 +521,7 @@ button{
   .search-results-buttons{max-width: 33.33%; margin-left: auto; margin-right: 0;}
   .search-results-button{max-width: 100%; }
   .home-page-heading{font-size: 4rem}
+  .list-search-results{max-width: 66.66%;}
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -528,6 +532,7 @@ button{
   .search-results-buttons{max-width: 33.33%; margin-left: auto; margin-right: 0;}
   .search-results-button{max-width: 100%; }
   .home-page-heading{font-size: 4rem}
+  .list-search-results{max-width: 66.66%;}
 }
 
 .search-results-image{
@@ -645,9 +650,11 @@ button{
 .list-searched-book{
   max-height: 70px;
   margin-bottom: 10px;
+  border-bottom: black 2px solid;
 }
 .list-searched-book-img{
   max-height: 70px;
+  padding-bottom: 5px;
 }
 
 .book-to-be-added-to-list{
@@ -655,5 +662,11 @@ button{
 }
 .book-to-be-added-to-list-img{
   max-width: 100%;
+}
+.list-searched-title{
+  font-size: 1.3rem;
+  line-height: 0.6rem;
+  font-weight: 500;
+  padding-top: 0.3rem;
 }
 

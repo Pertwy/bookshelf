@@ -72,6 +72,10 @@ export default function FollowingBookshelves(){
       </>)}
 
       {isLoggedIn &&(<>
+        <div className=" center-all">
+          <h4 className="mt-5 all-text profile-title-text">View the libraries the people you follow have created</h4>
+        </div>
+
          <div className="book-row-section">
           <div className="row book-row">
             <FriendBookshelfList/>

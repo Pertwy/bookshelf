@@ -128,13 +128,30 @@ export default function AddList() {
 
         <img className="list-searched-book-img" src={url || defaultImage} alt={book.volumeInfo.title}/>
         
-        <div>
-          <p className="all-text">{book.volumeInfo.title}</p>
-          {authorArray && (<p className="all-text">{authors}</p>)} 
-          <button onClick={() => handleBook(book)}>Add To List</button>
+        {/* <div className="ml-2">
+          <div>
+            <p className="all-text list-searched-title">{book.volumeInfo.title}</p>
+          </div>
+          {authorArray && (<p className="all-text list-searched-authors">{authors}</p>)} 
+          
+        </div> */}
+
+
+        <div className="ml-3 list-search-results">
+          <div className={"description"}>
+            <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
+            {authorArray && (
+            <p className={"searched-author all-text"}>{authorArray.join()}</p>
+            )}
+          </div>
         </div>
+
+        <button onClick={() => handleBook(book)}>+</button>
+
+
+
       </div>
-      
+      {/* <button onClick={() => handleBook(book)}>Add To List</button> */}
 
 
       {/* <div className="d-inline-block">
