@@ -13,8 +13,6 @@ export default function SearchResults(props) {
   const [currentUser, setCurrentUser] = useState("")
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
-   
-
 
   useEffect(() => {
     axios.get('/api/users/currentUser')
@@ -35,20 +33,16 @@ export default function SearchResults(props) {
     
     return(
       <div className="row space-between mb-4 searched-row pb-2 shadow-lg">
-
- 
-        
         <div className="search-results-image">
-            <Link   to={
-                    {     
-                      pathname: '/book/'+ book.id,
-                      state: book.volumeInfo
-                      }
-                }>               
-              <img className="search-image " src={url || defaultImage} alt={book.volumeInfo.title}/>
-              </Link>
+          <Link   to={
+                  {     
+                    pathname: '/book/'+ book.id,
+                    state: book.volumeInfo
+                    }
+              }>               
+            <img className="search-image " src={url || defaultImage} alt={book.volumeInfo.title}/>
+            </Link>
         </div>
-
 
         <div className="ml-3 search-results-text">
           <div className={"description"}>
@@ -59,9 +53,6 @@ export default function SearchResults(props) {
           </div>
         </div>
         
-
-
-
 
         {isLoggedIn &&(<>
         <div className="search-results-buttons">
@@ -83,25 +74,17 @@ export default function SearchResults(props) {
     <div className="container">
         <div className="container center-all">
 
-   
-          
-
-
           <div className="result-width center-all mb-3" >
             <div className="space-between">
               <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
             </div>
-
           </div>
-
 
           <div className="result-width center-all"> 
             {result.map(book => (
                 <SearchedBook book={book}/>
               ))}
           </div>
-  
-
 
         </div>
       </div>

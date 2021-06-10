@@ -1,11 +1,7 @@
 import axios from "axios"
 import "bootstrap/dist/css/bootstrap.min.css";
 import React, {useState, useEffect} from 'react';
-import { Link } from "react-router-dom";
 import defaultImage from '../assets/default-image.png';
-import UserDropDown from "../components/UserDropDown"
-
-
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import { makeStyles } from '@material-ui/core/styles';
@@ -19,7 +15,7 @@ export default function AddList() {
   const [listBooks, setListBooks] = useState([])
   const [description, setDescription] = useState("")
   const [listName, setListName] = useState("")
-
+  const [listOfBookIDs, setListOfBookIDs] = useState([])
 
 
   const useStyles = makeStyles((theme) => ({
@@ -31,6 +27,42 @@ export default function AddList() {
     },
   }));
   const classes = useStyles();
+
+
+  
+
+  function handleSetInfo(input, Book){
+
+    console.log(input)
+
+    if (!input){
+      let authorArray = Book.volumeInfo.authors
+      let authors =""
+      if(authorArray){authors = authorArray.join()}
+      // else{authors=""}
+
+      let newBook = {
+      _id: Book.id,
+      title: Book.volumeInfo.title, 
+      author: authors,  
+      image: Book.volumeInfo.imageLinks.thumbnail,
+      description: Book.volumeInfo.description,
+      categories: Book.volumeInfo.categories, 
+      industryIdentifiers: Book.volumeInfo.industryIdentifiers,
+      infoLink: Book.volumeInfo.infoLink,
+      language: Book.volumeInfo.language,
+      maturityRating: Book.volumeInfo.maturityRating,
+      pageCount: Book.volumeInfo.pageCount,
+      publishedDate: Book.volumeInfo.publishedDate,
+      publisher: Book.volumeInfo.publisher,
+      bookshelf:[], 
+      reviews:[]}
+
+      let info = {"book":newBook}
+      axios.put('/api/users/addBookToDB', info)
+        .then(response => (console.log(response.data)))
+    }
+  }
 
 
 
@@ -49,11 +81,22 @@ export default function AddList() {
   }
 
 
+
+
   //Adds a book to the temporary list
   function handleAddBookToList(Book){
-    const authorArray = Book.volumeInfo.authors
-    const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
+    let authorArray = Book.volumeInfo.authors
+    let authors
+    if(authorArray){authors = authorArray.join()}
+    else{authors=""}
+
+    const newBook = { title: Book.volumeInfo.title, author: authors, image: Book.volumeInfo.imageLinks.thumbnail};
     setListBooks([...listBooks, newBook])
+    setListOfBookIDs([...listOfBookIDs, Book.id])
+
+    axios.get('/api/users/checkBookForLists/'+Book.id)
+      .then(response => (handleSetInfo(response.data, Book)))
+
   }
 
 

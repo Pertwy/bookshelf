@@ -144,15 +144,31 @@ router.put('/addListToUser', async (req, res) => {
 
 //Add Check if book is in the DB///////////////////////////////////////////////////////////////////////////////////
 router.get('/checkBook/:_id', async (req, res) => {
+    console.log(req.params._id)
     let book = await Book.findById(req.params._id)
     .populate({
         path: 'reviews',
         populate: { path: 'author' }
     })
     .catch(err => res.status(400).json("Error " + err))
+
+    console.log(book)
     
     if(book) {
         res.send(book);
+    }
+    else{
+        res.send(false)
+    }
+});
+//Add Check if book is in the DB for Lists specificall///////////////////////////////////////////////////////////////////////////////////
+router.get('/checkBookForLists/:_id', async (req, res) => {
+    console.log(req.params._id)
+    let book = await Book.findById(req.params._id)
+    console.log(book)
+
+    if(book) {
+        res.send(true);
     }
     else{
         res.send(false)
@@ -165,7 +181,7 @@ router.put('/addBookToDB', async (req, res) => {
     let newBook = new Book(_.pick(req.body.book, ["_id", "title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
     await newBook.save()
         .then(() => res.json('Book added to DB'))
-        .catch(err => res.status(400).json('Error: ' + err));
+        // .catch(err => res.status(400).json('Error: ' + err));
 });
 
 

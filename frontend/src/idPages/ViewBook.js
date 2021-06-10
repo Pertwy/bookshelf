@@ -42,6 +42,7 @@ export default function ViewBook(props){
 
     axios.get('/api/users/checkBook/'+props.location.pathname.replace("/book/", ""))
           .then(response => (handleSetInfo(response.data)))
+          //.then(response => (console.log(response.data)))
 
     axios.get('/api/users/currentUser')
           .then(response => (setIsLoggedIn(response.data)))
