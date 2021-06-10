@@ -129,13 +129,20 @@ router.get('/grablists', auth, async (req, res) => {
 });
 
 
+router.get("/getList/:_id", async (req, res) => {
+    let list = await List.findById(req.params._id)
+        .populate("books") //This is the field name
+        .populate("author")
+        
+    res.send(list);
+})
 //Add a list 
 router.put('/addListToUser', async (req, res) => {
 
     let user = await User.findById(req.user._id)
     console.log(user)
 
-    let newList = new List({title:req.body.title, books:req.body.books, creator:user._id})
+    let newList = new List({title:req.body.title, books:req.body.books, author:user._id})
     newList = await newList.save();
     
     user.lists.push(newList._id)
@@ -149,7 +156,7 @@ router.put('/addListByID', auth, async (req, res) => {
 
     let user = await User.findById(req.user._id)
 
-    let newList = new List({title:req.body.title, books:req.body.books, creator:req.user._id, description:req.body.description})
+    let newList = new List({title:req.body.title, books:req.body.books, author:req.user._id, description:req.body.description})
     
     console.log(newList)
     newList = await newList.save();
@@ -157,7 +164,7 @@ router.put('/addListByID', auth, async (req, res) => {
     user.lists.push(newList._id)
 
     await user.save()
-        .then(() => res.json('User updated!'))
+        .then(() => res.json({listID: newList._id, note:'List Added!'}))
         .catch(err => res.status(400).json('Error: ' + err));
 });
 

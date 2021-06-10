@@ -1,7 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from 'react';
 import { Link } from "react-router-dom";
-import AddList from "../pages/AddList";
 import "./Navbar.css"
 
 //Feed me your lists aand i'll show them for you
@@ -13,13 +12,9 @@ export default function DisplayAllLists(props) {
       <div className="pb-4" >
         
           <div className="row space-between px-4 ">
-            
-            <h4 className="list-title">{list.title}</h4>
-
-            {/* <div className="row">
-              <button>Edit</button>
-              <button>Delete</button>
-            </div> */}
+            <Link to={"/list/"+list._id}>
+              <h4 className="list-title">{list.title}</h4>
+            </Link>
           </div>
 
           {list.books.slice(0, 10).map((book) => (

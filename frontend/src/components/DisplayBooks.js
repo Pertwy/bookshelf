@@ -40,23 +40,17 @@ export default function DisplayBooks(props) {
     const {title, author, image,  _id} = currentBook
     return (
 
-
       <section className="the-book  d-flex flex-column" key={_id} >
         <div className="link-div mt-auto ">
-
             <Link to={"/book/"+_id}>
                 <img className="card-img-top card-img-top-bottom" src={image} alt={title}></img>
             </Link>
-
         </div>
-
 
       {props.owner &&(
         <div className="button">
           <button onClick={() => handleDeleteBook(_id, props.type)}>Remove</button>
         </div> )}
-
-
 
       </section>
     )

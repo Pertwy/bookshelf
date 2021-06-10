@@ -18,7 +18,6 @@ router.route("/").get((req, res) => {
 
 router.route("/:_id").get((req, res) => {
     Book.findById(req.params._id)
-        // .populate("reviews")
         .populate({
             path: 'reviews',
             populate: { path: 'author' }

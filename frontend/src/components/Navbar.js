@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from "react";
 import {useHistory} from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./Navbar.css"
 import {  Form, Button } from 'react-bootstrap';

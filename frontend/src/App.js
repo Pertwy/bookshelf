@@ -18,6 +18,7 @@ import FollowingBookshelves from './pages/FollowingBookshelves';
 import Test from './pages/Test';
 import Members from "./pages/Members"
 import Navbar from "./components/Navbar"
+import ViewList from './idPages/ViewList';
 
 axios.defaults.withCredentials = true
 
@@ -41,6 +42,7 @@ function App() {
             <Route path="/lists" component={AddList} />
             <Route path="/profile" component={Profile} />
             <Route path="/book/:id" component={ViewBook} />
+            <Route path="/list/:id" component={ViewList} />
             <Route path="/user/:id" component={User} />
             <Route path="/alllists" component={AllLists} />
             <Route path="/followingBookshelves" component={FollowingBookshelves} />

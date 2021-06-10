@@ -5,6 +5,8 @@ import defaultImage from '../assets/default-image.png';
 import IconButton from '@material-ui/core/IconButton';
 import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
 import { makeStyles } from '@material-ui/core/styles';
+import showNotification from "../functions/showNotification"
+import {useHistory} from 'react-router-dom';
 
 
 export default function AddList() {
@@ -16,7 +18,7 @@ export default function AddList() {
   const [description, setDescription] = useState("")
   const [listName, setListName] = useState("")
   const [listOfBookIDs, setListOfBookIDs] = useState([])
-
+  const history = useHistory();
 
   const useStyles = makeStyles((theme) => ({
     margin: {
@@ -27,6 +29,9 @@ export default function AddList() {
     },
   }));
   const classes = useStyles();
+
+
+
 
 
   
@@ -81,6 +86,10 @@ export default function AddList() {
   }
 
 
+  function handleRemoveBook(input){
+    setListBooks(listBooks.filter(item => item._id !== input._id))
+    setListOfBookIDs(listOfBookIDs.filter(item => item !== input._id))
+  }
 
 
   //Adds a book to the temporary list
@@ -90,7 +99,7 @@ export default function AddList() {
     if(authorArray){authors = authorArray.join()}
     else{authors=""}
 
-    const newBook = { title: Book.volumeInfo.title, author: authors, image: Book.volumeInfo.imageLinks.thumbnail};
+    const newBook = { title: Book.volumeInfo.title, author: authors, image: Book.volumeInfo.imageLinks.thumbnail, _id: Book.id};
     setListBooks([...listBooks, newBook])
     setListOfBookIDs([...listOfBookIDs, Book.id])
 
@@ -107,29 +116,32 @@ export default function AddList() {
     
     try{
     axios.put('/api/users/addListByID', info)
-      .then(res => { console.log(res)});
+      .then(res => { afterListHasBeenSaved(res.data)});
     }catch(e){
       console.error(e)
     }
-
-    //Navigate to the new list
   }
 
+
+  function afterListHasBeenSaved(data){
+    showNotification(data.note, data.note)
+    history.push("/list/"+data.listID)
+  }
+  
 
 
   //Displays the current list of selected books
   const ListBookDisplay = ({book}) => {
     return(
-      <div className="book-to-be-added-to-list d-inline-block">
+      <div key={book._id} className="book-to-be-added-to-list d-inline-block">
         <img className="book-to-be-added-to-list-img" src={book.image} alt={book.title}/>
         <div className="buttonDiv">
-          <button onClick={() => handleAddBookToList(book)}>Remove</button>
+          <button onClick={() => handleRemoveBook(book)}>Remove</button>
         </div>  
       </div>
     )
   }
 
-  
 
 
 
@@ -238,6 +250,7 @@ export default function AddList() {
               {listBooks.map(book => (
                 <ListBookDisplay book={book}/>
               ))}
+  
 
             </div>
           </div>

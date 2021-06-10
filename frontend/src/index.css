@@ -740,3 +740,32 @@ button{
 .save-list-button{
   width:50%;
 }
+
+
+
+.list-title-text{
+  font-size: 2rem;
+}
+.list-container{
+  width:85%;
+  margin: auto;
+}
+.list-row{
+  display: flex;
+  flex-direction: row;
+}
+@media only screen and (max-width: 600px) {
+  .list-container{
+    width:95%;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .list-container{
+    width:90%;
+  }
+}
+
+
+.sub-text{
+  color: #a8a8a8;
+}

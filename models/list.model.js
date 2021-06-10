@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema;
 
-const bookSchema = new Schema({
+const listSchema = new Schema({
     title:{type: String, required: true},
     description:String,
     books:[{
@@ -29,6 +29,6 @@ const bookSchema = new Schema({
     timestamps: true
 })
 
-const List = mongoose.model('List', bookSchema)
+const List = mongoose.model('List', listSchema)
 
 exports.List = List;
