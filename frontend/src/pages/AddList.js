@@ -103,10 +103,10 @@ export default function AddList() {
   //Adds a new List to the Book schema
   async function handleSaveList(e){
     e.preventDefault()
-    let info = {"books":listBooks, "title":listName}
+    let info = {"books":listOfBookIDs, "title":listName, "description":description}
     
     try{
-    axios.put('/api/users/addListToUser', info)
+    axios.put('/api/users/addListByID', info)
       .then(res => { console.log(res)});
     }catch(e){
       console.error(e)

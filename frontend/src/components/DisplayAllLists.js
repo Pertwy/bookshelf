@@ -22,7 +22,7 @@ export default function DisplayAllLists(props) {
             </div> */}
           </div>
 
-          {list.books.map((book) => (
+          {list.books.slice(0, 10).map((book) => (
             <span className="listDiv">
               <Link to={"/book/"+book._id}>
               <span class="btn-img">
@@ -42,10 +42,7 @@ export default function DisplayAllLists(props) {
   return (
 
     <div>
-        <div className=" center-all">
-          <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
-        </div>
-
+        
         {props.lists.map(list => (
             <UsersExistingLists list={list}/>
           ))}

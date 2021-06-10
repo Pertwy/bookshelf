@@ -59,7 +59,7 @@ router.get('/', auth, async (req, res) => {
     let user = await User.findById(req.user._id)
 
         .select('-__v -password -email')
-        .populate("books favorites followers readList bookshelf lists -__v -password -email")
+        .populate("books favorites followers readList bookshelf -__v -password -email")
         .populate({
             path: 'following',
             populate: { path: 'books'}
@@ -71,6 +71,10 @@ router.get('/', auth, async (req, res) => {
         .populate({
             path: 'reviews',
             populate: { path: 'book'}
+            })
+        .populate({
+            path: 'lists',
+            populate: { path: 'books'}
             })
     res.send(user);
 });
@@ -140,19 +144,32 @@ router.put('/addListToUser', async (req, res) => {
         .then(() => res.json('User updated!'))
         .catch(err => res.status(400).json('Error: ' + err));
 });
+//Add a list 
+router.put('/addListByID', auth, async (req, res) => {
+
+    let user = await User.findById(req.user._id)
+
+    let newList = new List({title:req.body.title, books:req.body.books, creator:req.user._id, description:req.body.description})
+    
+    console.log(newList)
+    newList = await newList.save();
+    
+    user.lists.push(newList._id)
+
+    await user.save()
+        .then(() => res.json('User updated!'))
+        .catch(err => res.status(400).json('Error: ' + err));
+});
 
 
 //Add Check if book is in the DB///////////////////////////////////////////////////////////////////////////////////
 router.get('/checkBook/:_id', async (req, res) => {
-    console.log(req.params._id)
     let book = await Book.findById(req.params._id)
     .populate({
         path: 'reviews',
         populate: { path: 'author' }
     })
     .catch(err => res.status(400).json("Error " + err))
-
-    console.log(book)
     
     if(book) {
         res.send(book);
@@ -163,9 +180,7 @@ router.get('/checkBook/:_id', async (req, res) => {
 });
 //Add Check if book is in the DB for Lists specificall///////////////////////////////////////////////////////////////////////////////////
 router.get('/checkBookForLists/:_id', async (req, res) => {
-    console.log(req.params._id)
     let book = await Book.findById(req.params._id)
-    console.log(book)
 
     if(book) {
         res.send(true);

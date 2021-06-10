@@ -220,6 +220,9 @@ export default function CustomizedTabs(props) {
 
 
         <TabPanel value={value} index={6} dir={theme.direction}>
+          <div className=" center-all">
+            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+          </div>
           <div className="row book-row">
             <DisplayAllLists lists={props.userData.lists}/>
           </div>
