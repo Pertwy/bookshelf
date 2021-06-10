@@ -601,7 +601,6 @@ button{
   margin: 0.6rem;
   display: flex;
   flex-direction: row;
-  
 }
 @media only screen and (max-width: 600px) {
   .member-card{
@@ -650,16 +649,21 @@ button{
 .list-searched-book{
   max-height: 70px;
   margin-bottom: 10px;
-  border-bottom: black 2px solid;
+  border-bottom: #a9aeb3 2px solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 .list-searched-book-img{
   max-height: 70px;
   padding-bottom: 5px;
 }
-
-.book-to-be-added-to-list{
-  max-width: 25%;
+.list-searched-book-left{
+  display: flex;
+  flex-direction: row;
 }
+
+
 .book-to-be-added-to-list-img{
   max-width: 100%;
 }
@@ -670,3 +674,69 @@ button{
   padding-top: 0.3rem;
 }
 
+
+
+/* Add lists //////////////////////////////////////*/
+
+.add-list-container{
+  display: flex;
+  flex-direction: row;
+}
+.add-list-container-left{
+  width:50%;
+}
+.add-list-container-right{
+  width:50%;
+  
+}
+.books-test{
+  border: #a9aeb3 3px solid;
+  border-radius: 10px;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
+  
+}
+.start-a-list-text{
+  text-align: center;
+  margin: auto;
+}
+.add-list-container-hidden{
+  display: none;
+}
+.book-to-be-added-to-list{
+  max-width: 24%;
+  padding-left: 1px;
+    margin-right:1px
+}
+
+@media only screen and (max-width: 600px) {
+  .add-list-container-left{
+    width:100%;
+  }
+  .add-list-container-right{
+    display: none;
+  }
+  .add-list-container-hidden{
+    display: inline-block;
+    width:100%;
+  }
+  .book-to-be-added-to-list{
+    max-width: 19%;
+    
+  }
+  
+}
+
+
+
+.save-list-container{
+  display: flex;
+  flex-direction: row;
+}
+.book-search-input{
+  width:50%;
+}
+.save-list-button{
+  width:50%;
+}

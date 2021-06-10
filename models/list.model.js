@@ -5,7 +5,10 @@ const Schema = mongoose.Schema;
 const bookSchema = new Schema({
     title:{type: String, required: true},
     description:String,
-    books:[],
+    books:[{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Book" //This is the Schema name
+    }],
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User" //This is the Schema name

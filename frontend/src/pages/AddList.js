@@ -6,35 +6,37 @@ import defaultImage from '../assets/default-image.png';
 import UserDropDown from "../components/UserDropDown"
 
 
+import IconButton from '@material-ui/core/IconButton';
+import AddCircleOutlineRoundedIcon from '@material-ui/icons/AddCircleOutlineRounded';
+import { makeStyles } from '@material-ui/core/styles';
+
+
 export default function AddList() {
 
   const [book, setBook] = useState("")
   const [result, setResult] = useState([])
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
-  const [lists, setLists] = useState([])
   const [listBooks, setListBooks] = useState([])
   const [description, setDescription] = useState("")
-  const [currentUser, setCurrentUser] = useState("")
-  const [selectedShow, setSelectedShow] = useState(false)
-  const [addModal, setAddModal] = useState(false)
   const [listName, setListName] = useState("")
-  const [selectedBook, setSelectedBook] = useState({
-    title:"",
-    author:"",
-    image:""
-  })
 
 
-  //Grab all the current users
-  useEffect(() => {
-      axios.get('/api/users/grablists')
-        .then(response => (setLists(response.data.lists)))
-  },[addModal])
-  
+
+  const useStyles = makeStyles((theme) => ({
+    margin: {
+      color:"white",
+    },
+    extendedIcon: {
+      marginRight: theme.spacing(1),
+    },
+  }));
+  const classes = useStyles();
 
 
-  //Search Google books Api
-  function handleSubmit(e){
+
+
+  //Search Google books API
+  function handleSearch(e){
     e.preventDefault()
 
     const book = e.target.value
@@ -47,46 +49,18 @@ export default function AddList() {
   }
 
 
-
-  //Open the add new list form
-  function handleAddModal(){
-    setAddModal(true)
-  }
-
-
-
   //Adds a book to the temporary list
-  function handleBook(Book){
+  function handleAddBookToList(Book){
     const authorArray = Book.volumeInfo.authors
     const newBook = { title: Book.volumeInfo.title, author: authorArray.join(), image: Book.volumeInfo.imageLinks.thumbnail};
     setListBooks([...listBooks, newBook])
-    // console.log(listBooks)
   }
-
-
-
-  //Adds a new Book to the Book schema
-  async function handleAddBook(){
-    let info = {"book":selectedBook, "email":currentUser}
-    
-    try{
-    axios.put('/api/users/addBookToUser', info)
-      .then(res => { console.log(res)});
-    }catch(e){
-      console.error(e)
-    }
-    setSelectedShow(false)
-  }
-
 
 
   //Adds a new List to the Book schema
-  async function handleAddList(e){
+  async function handleSaveList(e){
     e.preventDefault()
     let info = {"books":listBooks, "title":listName}
-    let test = {"books":listBooks, "title":listName}
-    setLists([...lists, test])
-    console.log(lists)
     
     try{
     axios.put('/api/users/addListToUser', info)
@@ -95,9 +69,7 @@ export default function AddList() {
       console.error(e)
     }
 
-    setAddModal(false)
-    setListBooks([])
-    setListName("")
+    //Navigate to the new list
   }
 
 
@@ -108,126 +80,123 @@ export default function AddList() {
       <div className="book-to-be-added-to-list d-inline-block">
         <img className="book-to-be-added-to-list-img" src={book.image} alt={book.title}/>
         <div className="buttonDiv">
-          <button onClick={() => handleBook(book)}>Remove</button>
+          <button onClick={() => handleAddBookToList(book)}>Remove</button>
         </div>  
       </div>
     )
   }
 
+  
+
 
 
   //Displays the searched books from Google Books API
   const SearchedBook = ({book}) => {
+
     let authorArray = book.volumeInfo.authors
     let authors
     if(authorArray){authors = authorArray.join()}
+    else{authors=""}
+
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
     return(
       <>
-      <div className="list-searched-book row">
-
-        <img className="list-searched-book-img" src={url || defaultImage} alt={book.volumeInfo.title}/>
+      <div className="list-searched-book">
+        <div className="list-searched-book-left">
+          <img className="list-searched-book-img" src={url || defaultImage} alt={book.volumeInfo.title}/>
         
-        {/* <div className="ml-2">
-          <div>
-            <p className="all-text list-searched-title">{book.volumeInfo.title}</p>
-          </div>
-          {authorArray && (<p className="all-text list-searched-authors">{authors}</p>)} 
-          
-        </div> */}
-
-
-        <div className="ml-3 list-search-results">
-          <div className={"description"}>
-            <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
-            {authorArray && (
-            <p className={"searched-author all-text"}>{authorArray.join()}</p>
-            )}
+          <div className="ml-3 list-search-results">
+            <div className={"description"}>
+              <h5 className={"searched-title all-text"}>{book.volumeInfo.title}</h5>
+              {authorArray && (
+              <p className={"searched-author all-text"}>{authors}</p>
+              )}
+            </div>
           </div>
         </div>
-
-        <button onClick={() => handleBook(book)}>+</button>
-
-
+        
+        <IconButton onClick={() => handleAddBookToList(book)} aria-label="edit" className="">
+          <AddCircleOutlineRoundedIcon className={classes.margin}/>
+        </IconButton>
 
       </div>
-      {/* <button onClick={() => handleBook(book)}>Add To List</button> */}
-
-
-      {/* <div className="d-inline-block">
-        <img src={url || defaultImage} alt={book.volumeInfo.title}/>
-          <div className="buttonDiv">
-            
-            <button onClick={() => handleBook(book)}>Add To List</button>
-            
-          </div>  
-      </div> */}
       </>
     )
   }
 
-  {/* <p>{book.volumeInfo.title}</p> */}
-  {/* <button onClick={handleAddBook}>Add To List</button> */}
-
 
   return (
     <div className="container-fluid">
-
-        
-        <div className="row">
-
-          <div className="col-md-6">
+        <div className="add-list-container">
+          <div className="add-list-container-left px-2">
 
             <h1 className="all-text">New list</h1>
             <div className="pt-1">
-              <form onSubmit={handleAddList}>
+              <form onSubmit={handleSaveList}>
                 <input 
                   value={listName}
                   onChange={(e) => setListName(e.target.value)}    
                   type="text" 
-                  className="form-control mt-10" 
+                  className="form-control mt-1" 
                   placeholder="List name" 
                   autoComplete="off"/>
-                <input 
+                <textarea 
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}    
                   type="text" 
-                  className="form-control mt-10" 
+                  className="form-control mt-1 mb-3" 
                   placeholder="Description" 
-                  autoComplete="off"/>
-                
-                <button type="submit" className="btn btn-danger">Save List</button>
-              </form>
-            </div>
+                  autoComplete="off" 
+                  name="Text1" 
+                  cols="40" 
+                  rows="5"/>
 
+  
+                <div className="books-test add-list-container-hidden">
+                  { listBooks.length === 0  && (
+                    <div className="start-a-list-text">
+                      <p className="all-text pb-3">Add a book to get started</p>
+                    </div>
+                  )}
 
-            <div className="row">
-              <form>
-                <div className="form-group">
-                  <input onChange={handleSubmit} type="text" className="form-control form-inline" placeholder="Search for books" autoComplete="off"/>
+                  {listBooks.map(book => (
+                    <ListBookDisplay book={book}/>
+                  ))}
+                </div>
+
+                <div className="save-list-container my-4">
+                  <input onChange={handleSearch} type="text" className="form-control  book-search-input mr-4" placeholder="Search for books" autoComplete="off"/>
+                  <button type="submit" className="btn btn-danger save-list-button">Save List</button>
                 </div>
               </form>
             </div>
 
-
+            
             <div>
               {result.map(book => (
                   <SearchedBook book={book}/>
                 ))}
             </div>
 
+
           </div>
 
 
 
-          <div className="col-md-6">
-            { listBooks.length === 0  && (
-              <p className="all-text">Add a book to get started</p>
-            )}
+          <div className="add-list-container-right px-4">
+            <div className="books-test">
 
-            {listBooks.map(book => (
-              <ListBookDisplay book={book}/>
-            ))}
+              { listBooks.length === 0  && (
+                <div className="start-a-list-text">
+                  <p className="all-text pb-3">Add a book to get started</p>
+                </div>
+              )}
+
+              {listBooks.map(book => (
+                <ListBookDisplay book={book}/>
+              ))}
+
+            </div>
           </div>
 
 
