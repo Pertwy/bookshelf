@@ -6,7 +6,7 @@ import axios from 'axios';
 import "bootstrap/dist/css/bootstrap.min.css";
 import DisplayList from "../components/DisplayLists"
 import {useHistory} from 'react-router-dom';
-
+import DisplayAllLists from "../components/DisplayAllLists"
 
 export default function HomePage(){
   const [userData, setUserData] = useState({books:[],favorites:[],readList:[],lists:[], following:[]})
@@ -21,11 +21,6 @@ export default function HomePage(){
       history.push("/members")
     }
 
-
-
-    // function handleTest(){
-    //   console.log(isLoggedIn)
-    // }
 
 
   useEffect(() => {
@@ -237,12 +232,12 @@ for (let i = 0; i < userData.following.length; i++) {
 
 
         <div className="book-row-section">
-          <div className="book-row-div">
+          <div className="mb-3 book-row-div">
             <h2 className="book-row-title">POPULAR LISTS</h2>
           </div>
           
           <div className="mx-1 row book-row">
-            <DisplayList lists={adminLists}/>
+            <DisplayAllLists lists={adminLists}/>
           </div>
         </div>
 

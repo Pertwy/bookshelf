@@ -17,8 +17,16 @@ const bookSchema = new Schema({
     publishedDate: {type: String},
     publisher: {type: String},
 
-    numberOfTimesRead:{type:Number, default:0},
-    numberOfTimesFavorited:{type:Number, default:0},
+
+
+    numberOfTimesRead:[ {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User" //This is the Schema name
+    }],
+    numberOfTimesFavorited:[ {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User" //This is the Schema name
+    }],
     bookshelf:[ {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User" //This is the Schema name
@@ -29,6 +37,8 @@ const bookSchema = new Schema({
     }],
 
 
+
+    
     reviews:[ {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review" //This is the Schema name

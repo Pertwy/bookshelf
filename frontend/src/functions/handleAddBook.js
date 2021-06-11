@@ -9,6 +9,7 @@ export async function handleAddBook(book, type, user){
     const authorArray = book.volumeInfo.authors
     const newBook = { title: book.volumeInfo.title, 
       author: authorArray.join(), 
+      _id: book.id,
       image: book.volumeInfo.imageLinks.thumbnail,
       description: book.volumeInfo.description,
       categories: book.volumeInfo.categories, 
@@ -22,8 +23,6 @@ export async function handleAddBook(book, type, user){
       };
 
     let info = {"book":newBook}
-    
-
 
     if (type === "favorite"){
         try{

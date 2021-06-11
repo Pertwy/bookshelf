@@ -8,7 +8,8 @@ const mongoose = require("mongoose")
 
 router.route("/admin").get((req, res) => {
     List.find({isAdmin:true})
-        .populate("creator")
+        .populate("author")
+        .populate("books")
         .then(lists => res.json(lists))
         .catch(err => res.status(400).json("Error " + err))
 })

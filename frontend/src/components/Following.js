@@ -57,20 +57,7 @@ export default function Following(props) {
       <div className="col-sm-12">
 
       <div className="">
-        {props.owner &&(
-          <>
-        <div className="row">
-          <div className="col-sm-6">
-            <Link to={"/members"}>
-              <div>
-                Find members to follow
-              </div>
-            </Link>
-          </div>
-          
-        </div></>)}
-
-
+      
         <div className="full-width mt-2">
           <p className="all-text avatar-heading">FOLLOWING</p>
           <div>

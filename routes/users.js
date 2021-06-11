@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
 
     let newUser = new User(_.pick(req.body, [ "email", "userName", "givenName", "surname", "password", "bio"]));
     
-    let tom = await User.findById("60b25ffd76132833d8eaa9e7")
+    let tom = await User.findById("60c36b6af354781c60550759")
     tom.followers.push(newUser._id)
     tom.following.push(newUser._id)
     await tom.save()
@@ -83,7 +83,7 @@ router.get('/', auth, async (req, res) => {
 //Return user data with fields populated
 router.get('/popular', async (req, res) => {
     //let user = await User.findOne({email: req.body.email})
-    let user = await User.findById("60b25ffd76132833d8eaa9e7")
+    let user = await User.findById("60c36b6af354781c60550759")
         //.select('-__v -password -email')
         .select('favorites books')
         .populate("favorites books")
@@ -213,18 +213,19 @@ router.put('/addBookToDB', async (req, res) => {
 router.put('/addFavorite', auth, async (req, res) => {
 
     let user = await User.findById(req.user._id)
-    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
+    let book = await Book.findById(req.body.book._id)
     
     if(book) {
         user.favorites.push(book._id)
-        book.numberOfTimesFavorited += 1
+        book.numberOfTimesFavorited.push(user._id)
         await user.save()
         await book.save()
             .then(() => res.json('Favourite Added!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        let newBook = new Book(_.pick(req.body.book, ["_id","title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        newBook.numberOfTimesFavorited.push(user._id)
         newBook = await newBook.save();
         
         user.favorites.push(newBook._id)
@@ -240,8 +241,7 @@ router.put('/addFavorite', auth, async (req, res) => {
 router.put('/addBookshelf', auth, async (req, res) => {
     
     let user = await User.findById(req.user._id)
-    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
-
+    let book = await Book.findById(req.body.book._id)
     
     if(book != null) {
         user.bookshelf.push(book._id)
@@ -253,12 +253,9 @@ router.put('/addBookshelf', auth, async (req, res) => {
         
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        let newBook = new Book(_.pick(req.body.book, ["_id","title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        newBook.bookshelf.push(user._id)
         newBook = await newBook.save();
-
-        let bookupdate = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
-        bookupdate.bookshelf.push(user._id)
-        bookupdate = await bookupdate.save();
         
         user.bookshelf.push(newBook._id)
     
@@ -273,8 +270,7 @@ router.put('/addBookshelf', auth, async (req, res) => {
 router.put('/addReadList', auth, async (req, res) => {
     
     let user = await User.findById(req.user._id)
-    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
-
+    let book = await Book.findById(req.body.book._id)
     
     if(book != null) {
         user.readList.push(book._id)
@@ -286,12 +282,9 @@ router.put('/addReadList', auth, async (req, res) => {
         
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        let newBook = new Book(_.pick(req.body.book, ["_id","title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        newBook.readList.push(user._id)
         newBook = await newBook.save();
-
-        let bookupdate = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
-        bookupdate.readList.push(user._id)
-        bookupdate = await bookupdate.save();
         
         user.readList.push(newBook._id)
     
@@ -308,22 +301,23 @@ router.put('/addBookToUser', auth, async (req, res) => {
     //console.log(req.body)
     
     let user = await User.findById(req.user._id)
-    let book = await Book.findOne({author: req.body.book.author, title: req.body.book.title, image: req.body.book.image })
-    
+    let book = await Book.findById(req.body.book._id)
+
     if(book) {
         user.books.push(book._id)
-        book.numberOfTimesRead += 1
+        book.numberOfTimesRead.push(user._id)
         await user.save()
         await book.save()
             .then(() => res.json('Book updated!'))
             .catch(err => res.status(400).json('Error: ' + err));
     }
     else{
-        let newBook = new Book(_.pick(req.body.book, ["title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
-        newBook.numberOfTimesRead += 1
+        let newBook = new Book(_.pick(req.body.book, ["_id","title", "author", "image", "description", "categories", "industryIdentifiers", "infoLink", "language", "maturityRating","pageCount", "publishedDate", "publisher"]))
+        newBook.numberOfTimesRead.push(user._id)
         newBook = await newBook.save();
         
         user.books.push(newBook._id)
+
         await user.save()
             .then(() => res.json('New Book updated!'))
             .catch(err => res.status(400).json('Error: ' + err));

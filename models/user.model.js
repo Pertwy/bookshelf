@@ -41,19 +41,28 @@ const userSchema = new mongoose.Schema({
     unique: true
   },
 
-
-
-
   followers:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", //This is the Schema name
-    default: ["60b25ffd76132833d8eaa9e7"]
+    // default: ["60c36b6af354781c60550759"]
   }],
   following:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", //This is the Schema name
-    default: ["60b25ffd76132833d8eaa9e7"]
+    // default: ["60c36b6af354781c60550759"]
   }],
+
+
+  // followers:[{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User", //This is the Schema name
+  //   default: ["60c36b6af354781c60550759"]
+  // }],
+  // following:[{
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: "User", //This is the Schema name
+  //   default: ["60c36b6af354781c60550759"]
+  // }],
 
 
 

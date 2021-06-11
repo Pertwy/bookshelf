@@ -20,9 +20,9 @@ export default function DisplayAllLists(props) {
           {list.books.slice(0, 10).map((book) => (
             <span className="listDiv">
               <Link to={"/book/"+book._id}>
-              <span class="btn-img">
-                <img className="listBook" src={book.image} alt={book.title}/>
-              </span>
+                <span class="btn-img">
+                  <img className="listBook" src={book.image} alt={book.title}/>
+                </span>
               </Link>
               
     

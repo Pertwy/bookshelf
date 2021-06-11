@@ -10,9 +10,8 @@ import Box from '@material-ui/core/Box';
 import DisplayBooks from "./DisplayBooks"
 import DisplayAllLists from "./DisplayAllLists"
 import Following from "../components/Following"
-import { AutoComplete } from 'material-ui';
 import Reviews from './Reviews';
-
+import {useHistory} from 'react-router-dom';
 
 const AntTabs = withStyles({
   root: {
@@ -83,7 +82,7 @@ export default function CustomizedTabs(props) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
-
+  const history = useHistory();
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -93,7 +92,12 @@ export default function CustomizedTabs(props) {
     setValue(index);
   };
 
-
+  function addListNavigate(){    
+    history.push("/lists/")
+  }
+  function MemberNavigate(){    
+    history.push("/members/")
+  }
 
 
   function TabPanel(props) {
@@ -206,7 +210,10 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={4} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Follow other Bookshelf users to get inspiration</h4>
+            <h4 className="all-text profile-title-text-list">Follow other Bookshelf users to get inspiration</h4>
+            <div onClick={()=>MemberNavigate()} className="search-members-button">
+              <h5 className="all-text p-2">Find Members To Follow</h5>
+            </div>
           </div>
           <Following userData={props.userData} owner={props.owner}/>
         </TabPanel>
@@ -221,7 +228,10 @@ export default function CustomizedTabs(props) {
 
         <TabPanel value={value} index={6} dir={theme.direction}>
           <div className=" center-all">
-            <h4 className="all-text profile-title-text">Create lists to share with your friends</h4>
+            <h4 className="all-text profile-title-text-list">Create lists to share with your friends</h4>
+            <div onClick={()=>addListNavigate()} className="search-members-button">
+              <h5 className="all-text p-2">Add List</h5>
+            </div>
           </div>
           <div className="row book-row">
             <DisplayAllLists lists={props.userData.lists}/>

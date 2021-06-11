@@ -17,7 +17,8 @@ export async function handleAddBookFromBookPage(book, type, user){
       maturityRating: book.maturityRating,
       pageCount: book.pageCount,
       publishedDate: book.publishedDate,
-      publisher: book.publisher
+      publisher: book.publisher,
+      _id:book._id
       };
 
     let info = {"book":newBook}

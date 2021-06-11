@@ -36,6 +36,7 @@ export default function AdditionButton(props) {
         padding: "7px 7px",
         fontSize: "11px"
         }}
+        //onClick={()=>console.log(props.book)}
         onClick={() => handleAddBookFromBookPage(props.book, props.type)}
         >{props.title}</Button>
     )

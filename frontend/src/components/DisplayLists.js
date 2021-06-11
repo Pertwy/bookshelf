@@ -12,11 +12,6 @@ export default function DisplayList(props) {
         
           <div className="row space-between px-3 pt-4">
             <h4 className="list-row-title">{list.title}</h4>
-
-            {/* <div className="row">
-              <button>Edit</button>
-              <button>Delete</button>
-            </div> */}
           </div>
 
           {list.books.map((book) => (

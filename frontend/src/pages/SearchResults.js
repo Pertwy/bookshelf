@@ -54,6 +54,7 @@ export default function SearchResults(props) {
         </div>
         
 
+
         {isLoggedIn &&(<>
         <div className="search-results-buttons">
             <div className="testDiv">

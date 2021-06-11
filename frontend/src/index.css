@@ -264,6 +264,7 @@ button{
 
 .list-title{
   color: rgb(169, 174, 179);
+  font-size: 1.3rem;
 }
 
 
@@ -632,6 +633,12 @@ button{
 .profile-title-text{
   padding-top: 0.5rem;
   padding-bottom: 3.5rem;
+  font-size: 1.7rem;
+  font-family:monospace
+}
+.profile-title-text-list{
+  padding-top: 0.5rem;
+  padding-bottom: 1rem;
   font-size: 1.7rem;
   font-family:monospace
 }
