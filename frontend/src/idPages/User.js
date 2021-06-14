@@ -14,7 +14,6 @@ export default function User(props){
   const [isLoggedIn, setIsLoggedIn] =useState("")
 
    
-
   useEffect(() => {
 
       axios.get('/api/users/currentUser')

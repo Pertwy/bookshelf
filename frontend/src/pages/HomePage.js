@@ -2,9 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import DisplayList from "../components/DisplayLists"
 import {useHistory} from 'react-router-dom';
 import DisplayAllLists from "../components/DisplayAllLists"
 
@@ -214,8 +212,6 @@ for (let i = 0; i < userData.following.length; i++) {
 
 
 
-
-
         {isLoggedIn && (userData.following.length == 0) && (
         <>
           <div className=" mt-5 home-page-heading-div">
@@ -226,9 +222,6 @@ for (let i = 0; i < userData.following.length; i++) {
           </div>
         </>)}
         
-
-
-
 
 
         <div className="book-row-section">

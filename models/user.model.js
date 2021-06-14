@@ -44,25 +44,13 @@ const userSchema = new mongoose.Schema({
   followers:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", //This is the Schema name
-    // default: ["60c36b6af354781c60550759"]
+    default: ["60c7649f1b7b140015f8c383"]
   }],
   following:[{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User", //This is the Schema name
-    // default: ["60c36b6af354781c60550759"]
+    default: ["60c7649f1b7b140015f8c383"]
   }],
-
-
-  // followers:[{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User", //This is the Schema name
-  //   default: ["60c36b6af354781c60550759"]
-  // }],
-  // following:[{
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   ref: "User", //This is the Schema name
-  //   default: ["60c36b6af354781c60550759"]
-  // }],
 
 
 

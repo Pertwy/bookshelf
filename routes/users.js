@@ -35,7 +35,7 @@ router.post('/add', async (req, res) => {
 
     let newUser = new User(_.pick(req.body, [ "email", "userName", "givenName", "surname", "password", "bio"]));
     
-    let tom = await User.findById("60c36b6af354781c60550759")
+    let tom = await User.findById("60c7649f1b7b140015f8c383")
     tom.followers.push(newUser._id)
     tom.following.push(newUser._id)
     await tom.save()
@@ -109,12 +109,17 @@ router.get("/all", async (req, res) => {
 router.get("/:_id", async (req, res) => {
     User.findById(req.params._id)
         .select('-__v -password -email')
-        .populate("books favorites followers readList bookshelf lists")
+        .populate("books favorites followers readList bookshelf")
         .populate("following", "-__v -password -email")
         .populate({
             path: 'reviews',
             populate: { path: 'book'}
             })
+        .populate({
+            path: 'lists',
+            populate: { path: 'books'}
+            })
+
         
         .then(user => res.json(user))
         .catch(err => res.status(400).json("Error " + err))
