@@ -11,9 +11,9 @@ export default function HomePageHeading(props) {
     <div className={""}>
       <h2 className={"all-text home-page-heading"}>The social network for book lovers</h2>
       <div className={"col"}>
-        <p className={"all-text home-page-bullets"}>View what's on your friends shelves</p>
+        <p className={"all-text home-page-bullets"}>View what's on your friends bookshelves</p>
         <p className={"all-text home-page-bullets"}>Track books you've read</p>
-        <p className={"all-text home-page-bullets"}>Save the ones you haven't got around to</p>
+        <p className={"all-text home-page-bullets"}>Save the books you haven't got around to reading</p>
         <p className={"all-text home-page-bullets"}>Let friends know what's good</p>
       </div>
     </div>
