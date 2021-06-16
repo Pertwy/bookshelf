@@ -9,7 +9,6 @@ import AddList from "./pages/AddList"
 import ViewBook from "./idPages/ViewBook"
 import User from "./idPages/User"
 import SearchResults from "./pages/SearchResults"
-import AllLists from './idPages/AllLists';
 import Footer from './components/Footer';
 import FollowingBookshelves from './pages/FollowingBookshelves';
 import LogInSignIn from './pages/LogInSignIn';
@@ -37,7 +36,6 @@ function App() {
             <Route path="/book/:id" component={ViewBook} />
             <Route path="/list/:id" component={ViewList} />
             <Route path="/user/:id" component={User} />
-            <Route path="/alllists" component={AllLists} />
             <Route path="/followingBookshelves" component={FollowingBookshelves} />
             <Route path="/signup" component={LogInSignIn} />
             <Route path="/members" component={Members} />
