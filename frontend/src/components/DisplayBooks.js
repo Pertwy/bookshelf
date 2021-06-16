@@ -14,7 +14,6 @@ export default function DisplayBooks(props) {
 
     if(listtype === "favorites"){
       axios.post('/api/users/removefavorite', info)
-          //.then(response => (console.log(response.data)))
           .then(res => { showNotification(res.data, res.data)});
     }
 

@@ -21,23 +21,6 @@ export default function Footer() {
                          <h6 class="  text-muted bold-text"><b>BY JOHN PERKINS</b></h6><small className={"all-text"}> johnpatrickperkins@gmail.com</small>
                      </div>
 
-                     {/* <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                         <h6 class="mb-3 mb-lg-4 bold-text "><b>MENU</b></h6>
-                         <ul class="list-unstyled">
-                            <li>
-                                <Link to="/" className="footer-link">Home</Link>
-                            </li>
-
-                            <li>
-                                <Link to="/members" className="footer-link">Members</Link>
-                            </li>
-
-                         </ul>
-                     </div> */}
-
-                     {/* <div class="col-xl-2 col-md-4 col-sm-4 col-12">
-                        <h6 class="mt-55 mt-2 text-muted bold-text"><b>JOHN PERKINS</b></h6><small> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> johnpatrickperkins@gmail.com</small>
-                     </div> */}
                  </div>
              </div>
          </div>

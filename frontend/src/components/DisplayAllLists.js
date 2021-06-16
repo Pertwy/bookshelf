@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import "./Navbar.css"
 
-//Feed me your lists aand i'll show them for you
 export default function DisplayAllLists(props) {
   
 
@@ -24,8 +23,6 @@ export default function DisplayAllLists(props) {
                   <img className="listBook" src={book.image} alt={book.title}/>
                 </span>
               </Link>
-              
-    
             </span>
           ))}
         
