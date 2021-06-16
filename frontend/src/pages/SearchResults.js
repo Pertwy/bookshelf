@@ -4,7 +4,7 @@ import React, {useState, useEffect} from 'react';
 import defaultImage from '../assets/default-image.png';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import 'react-notifications-component/dist/theme.css'
-import { Link, useLocation } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 export default function SearchResults(props) {
 
@@ -21,13 +21,12 @@ export default function SearchResults(props) {
     axios.get("https://www.googleapis.com/books/v1/volumes?q="+props.location.pathname.replace("/searchresults/", "")+ "&key="+apiKey+"&maxResults=40", {withCredentials: false})
       .then(data => {
         setResult(data.data.items)
-        //console.log(data.data.items)
       })
     },[])
 
 
  
-  const SearchedBook = ({book}) => {
+    const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
     const authorArray = book.volumeInfo.authors
     

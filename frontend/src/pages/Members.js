@@ -6,15 +6,10 @@ import UserSearch from "../components/UserSearch";
 
 export default function Members() {
 
-  
   return (
-
-        <div className="member-width center-all">
-
-          <UserSearch/>
-          
-        </div>
-
+    <div className="member-width center-all">
+      <UserSearch/>
+    </div>
   );
 }
 

@@ -20,10 +20,8 @@ export default function HomePage(){
     }
 
 
-
   useEffect(() => {
     
-
     axios.get('/api/users/currentUser')
         .then(response => (setIsLoggedIn(response.data)))
 
@@ -38,20 +36,6 @@ export default function HomePage(){
 
   },[])
 
-
-function TestSet(data){
-
-  for (let i = 0; i < userData.following.length; i++) {
-  
-    if (userData.following[i].bookshelf.length > 0){
-      console.log("shelves")
-      setFriendsBookshelf(true)
-    }
-    if (userData.following[i].books.length > 0){
-      setFriendsLatest(true)
-      console.log("books")
-    }}
-}
 
 
   function AdminLists(props) {
@@ -72,19 +56,6 @@ function TestSet(data){
     })
   )
 }
-
-function FriendCheck(){
-for (let i = 0; i < userData.following.length; i++) {
-  
-  if (userData.following[i].bookshelf.length > 0){
-    console.log("tick")
-    setFriendsBookshelf(true)
-  }
-  if (userData.following[i].books.length > 0){
-    setFriendsLatest(true)
-    console.log("tick")
-  }
-}}
 
 
   function FriendReadList() {
@@ -155,7 +126,6 @@ for (let i = 0; i < userData.following.length; i++) {
               <p className={"all-text home-page-bullets"}>Track books you've read</p>
               <p className={"all-text home-page-bullets"}>Save the books you haven't got around to reading</p>
               <p className={"all-text home-page-bullets"}>Let friends know what's good</p>
-              {/* <button onClick={()=>handleTest()}>test</button> */}
             </div>
           </div>
         </div>
