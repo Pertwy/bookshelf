@@ -5,6 +5,10 @@ import defaultImage from '../assets/default-image.png';
 import AdditionButton from "../components/AddButtons/AddFavoriteButton"
 import 'react-notifications-component/dist/theme.css'
 import {Link} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
+import {  Form, Button } from 'react-bootstrap';
+import TextField from '@material-ui/core/TextField';
+import { makeStyles } from '@material-ui/core/styles';
 
 export default function SearchResults(props) {
 
@@ -12,7 +16,21 @@ export default function SearchResults(props) {
   const [apiKey, setapiKey] = useState("AIzaSyDz2I7ZkOYGa4ZAkMrVE_aT7HBpapeuIII")
   const [currentUser, setCurrentUser] = useState("")
   const [isLoggedIn, setIsLoggedIn] =useState("")
+  const history = useHistory();
+  const [search, setSearch] = useState("cats")
 
+  const useStyles = makeStyles((theme) => ({
+    input:{
+      '& > *': {
+
+      color: "#DFE0E1",   
+      width: "100px",
+      padding: "auto",
+      }
+    }
+  }));
+
+  const classes = useStyles();
 
   useEffect(() => {
     axios.get('/api/users/currentUser')
@@ -24,7 +42,9 @@ export default function SearchResults(props) {
       })
     },[])
 
-
+    function handleSearch(){    
+      history.push("/searchresults/"+search)
+    }
  
     const SearchedBook = ({book}) => {
     const url = book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.thumbnail
@@ -77,6 +97,12 @@ export default function SearchResults(props) {
           <div className="result-width center-all mb-3" >
             <div className="space-between">
               <p className={"all-text"}>SHOWING RESULTS FOR {props.location.pathname.replace("/searchresults/", "")}</p>
+            </div>
+            <div className="search-box" >
+              <Form onSubmit={handleSearch}>
+                <TextField className={classes.input} onChange={({ target }) => setSearch(target.value)} placeholder="Search All Books"/>
+                {/* <Button type="submit" variant="outline-success">Search</Button> */}
+              </Form>
             </div>
           </div>
 

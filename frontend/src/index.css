@@ -632,7 +632,7 @@ button{
 }
 .profile-title-text{
   padding-top: 0.5rem;
-  padding-bottom: 3.5rem;
+  padding-bottom: 0.5rem;
   font-size: 1.7rem;
   font-family:monospace
 }
@@ -776,4 +776,8 @@ button{
 
 .sub-text{
   color: #a8a8a8;
+}
+
+.search-box{
+  margin-left: calc(50%-50px);
 }

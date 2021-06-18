@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { makeStyles, withStyles, useTheme } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -83,6 +83,7 @@ export default function CustomizedTabs(props) {
   const [value, setValue] = React.useState(0);
   const theme = useTheme();
   const history = useHistory();
+  const [search, setSearch] = useState("cats")
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -97,6 +98,10 @@ export default function CustomizedTabs(props) {
   }
   function MemberNavigate(){    
     history.push("/members/")
+  }
+
+  function handleSearch(){    
+    history.push("/searchresults/"+"books")
   }
 
 
@@ -172,8 +177,11 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={0} dir={theme.direction}>
           <div className=" center-all">
             <h4 className="all-text profile-title-text">Let People know what's on your bookshelf!</h4>
+            <div onClick={()=>handleSearch()} className="search-members-button">
+              <h5 className="all-text p-2">Search for books - Add to Bookshelf</h5>
+            </div>
           </div>
-          <div className="row book-row">
+          <div className="pt-3 row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.bookshelf} type="bookshelf" userData={props.userData} />
           </div>
         </TabPanel>
@@ -181,8 +189,11 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={1} dir={theme.direction}>
           <div className=" center-all">
             <h4 className="all-text profile-title-text">What have you always wanted to read?</h4>
+            <div onClick={()=>handleSearch()} className="search-members-button">
+              <h5 className="all-text p-2">Search for books - Add to Read Lsit</h5>
+            </div>
           </div>
-          <div className="row book-row">
+          <div className="pt-3 row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.readList} type="readingList" userData={props.userData}/>
           </div>
         </TabPanel>
@@ -191,8 +202,11 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={2} dir={theme.direction}>
           <div className=" center-all">
             <h4 className="all-text profile-title-text">Share every book you've ever read!</h4>
+            <div onClick={()=>handleSearch()} className="search-members-button">
+              <h5 className="all-text p-2">Search for books - Add to books you have read</h5>
+            </div>
           </div>
-          <div className="row book-row">
+          <div className="pt-3 row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.books} type="read" userData={props.userData}/>
           </div>
         </TabPanel>
@@ -200,9 +214,12 @@ export default function CustomizedTabs(props) {
         <TabPanel value={value} index={3} dir={theme.direction}>
           <div className=" center-all">
             <h4 className="all-text profile-title-text">Desert island books</h4>
+            <div onClick={()=>handleSearch()} className="search-members-button">
+              <h5 className="all-text p-2">Search for books - Add Favorite</h5>
+            </div>
           </div>
 
-          <div className="row book-row">
+          <div className="pt-3 row book-row">
             <DisplayBooks owner={props.owner} books={props.userData.favorites} type="favorites" userData={props.userData}/>
           </div>
         </TabPanel>
@@ -237,6 +254,7 @@ export default function CustomizedTabs(props) {
             <DisplayAllLists lists={props.userData.lists}/>
           </div>
         </TabPanel>
+
 
 
         {/* <TabPanel value={value} index={7} dir={theme.direction}>
