@@ -11,14 +11,14 @@ export default function Reviews(props) {
         return (input.reviews.map(review => {
           return(
 
-            <div className="row mb-2">
-            `  <div>
+            <div className="review-container mb-2">
+            ` <div className="review-image-containter">
                 <Link to={"/book/"+review.book._id}>
-                  <img className="review-image mr-2 review-image" src={review.book.image} alt={review.book.title}/>
+                  <img className="review-image mr-2" src={review.book.image} alt={review.book.title}/>
                 </Link>
               </div>
 
-              <div className="pb-2">
+              <div className="pb-2 review-review-container">
                 
                   <Link to={"/book/"+review.book._id}>
                     <h6 className="all-text review-name">{review.book.title}</h6>

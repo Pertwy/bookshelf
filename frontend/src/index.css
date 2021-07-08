@@ -293,14 +293,25 @@ button{
 
 
 
+.review-container{
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  width: 100%;
+}
 
+.review-image-container{
+  max-width: 20%;
+}
 
 .review-image{
   object-fit: cover;
-  max-height: 65px;
+  max-height: 80px;
 }
 
-
+.review-review-container{
+  max-width: 80%;
+}
 
 
 /* .left-search{
@@ -442,7 +453,7 @@ button{
 
 
 .review-text{
-  line-height: 0.5em;
+  /* line-height: 0.5em; */
   font-size: 0.9em;
 }
 
